@@ -5,7 +5,6 @@ import com.example.tuancan.model.Answer;
 import com.example.tuancan.service.AnswerService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +37,21 @@ public class TuancanApplicationTests {
 		System.out.println(objects);
 
 		List<Answer> answers = mapper.selectAll();
-
-
 		Answer a = answers.get(0);
 
 		System.out.println(a);
 
-
 	}
 
+	@Test
+	public void  getAll(){
+		List<Answer> answers = mapper.getAll();
+		System.out.print(answers);
+	}
+	@Test
+	public void  getone(){
+		Answer answer = mapper.getone(1);
+		System.out.print(answer);
+		//new GroupMealStaffMapper().selectByPrimaryKey()
+	}
 }
