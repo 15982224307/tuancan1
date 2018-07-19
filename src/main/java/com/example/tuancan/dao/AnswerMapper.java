@@ -9,4 +9,5 @@ public interface AnswerMapper {
 
     @Select("select * from answer where answer_id=#{id}")
     public Answer selectOne(Integer id);
+
 }
