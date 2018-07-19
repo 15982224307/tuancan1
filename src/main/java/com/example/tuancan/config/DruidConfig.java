@@ -17,6 +17,7 @@ import java.util.HashMap;
 @Configuration
 public class DruidConfig {
 
+
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource dataSource(){
