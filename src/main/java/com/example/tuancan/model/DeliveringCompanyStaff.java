@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class DeliveringCompanyStaff  implements Serializable {
 
     private Integer dCompanyStaffId ;              // int not null auto_increment comment '团餐机构员工编号',
-    private Integer deliveringCompanyNo;            //int comment '公司编号',
+    private DeliveringCompany deliveringCompanyNo;            //int comment '公司,  获取公司编号',
     private String dCompanyStaffLoginname;           // varchar(32) comment '登录账号',
     private String dCompanyStaffPassword;         // varchar(32) comment '登录密码',
     private String dCompanyStaffMobile;           // varchar(11) comment '手机号',

@@ -18,9 +18,9 @@ public class TomorrowMenuMaster {
      */
     private Integer tomorrowMenuMasterId;
     /**
-     *  用餐单位编号
+     *  用餐单位,获取编号
      */
-    private Integer troupMealUnitId;
+    private ThreadGroup groupMealUnitId;
     /**
      *  使用日期
      */

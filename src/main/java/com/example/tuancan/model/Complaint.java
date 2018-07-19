@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 public class Complaint  implements Serializable {
 
     private Integer complaintId ;       // int not null auto_increment comment '投诉编号',
-    private Integer managerId;         //  int comment '管理员编号',
+    private Manager managerId;         //  int comment '管理员',  获取管理员id
     private String complainter ;         //varchar(256) comment '投诉人',
     private String complaintContent;    //varchar(1024) comment '投诉内容',
     private Timestamp complaintDate;    //   timestamp comment '投诉日期',

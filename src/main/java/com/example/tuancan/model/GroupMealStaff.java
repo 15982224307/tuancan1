@@ -16,8 +16,8 @@ public class GroupMealStaff {
     /*  用餐员工编号  */
     private Integer gMStaffId;
 
-    /*  用餐单位编号  */
-    private Integer groupMealUnitId;
+    /*  用餐单位,获取编号  */
+    private GroupMealUnit groupMealUnitId;
 
     /*  手机号  */
     private String gMStafMobile;

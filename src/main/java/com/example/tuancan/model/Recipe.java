@@ -14,14 +14,14 @@ import java.sql.Date;
 @AllArgsConstructor
 public class Recipe {
 
-    /*  食谱编号  */
-    private Integer recipeId;
+    /*  食谱,获取编号  */
+    private Recipe recipeId;
 
     /*  食谱分类编号  */
     private Integer recipeTypeId;
 
-    /*  公司编号  */
-    private Integer deliveringCompanyNo;
+    /*  公司,获取编号  */
+    private DeliveringCompany deliveringCompanyNo;
 
     /*  食谱名称  */
     private String recipeName;

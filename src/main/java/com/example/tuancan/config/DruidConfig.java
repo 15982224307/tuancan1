@@ -24,6 +24,8 @@ public class DruidConfig {
         return new DruidDataSource();
     }
 
+
+
     @Bean
     public ServletRegistrationBean staRegistrationBean(){
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");

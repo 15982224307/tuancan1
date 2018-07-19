@@ -17,8 +17,8 @@ import java.sql.Timestamp;
 public class DeliveringMaster  implements Serializable {
 
     private Integer deliveringMaster_id;              //  int not null auto_increment comment '配送单编号',
-    private Integer groupMealUnit_id ;                //  int comment '用餐单位编号',
-    private Integer deliveringCompany_no ;             // int comment '公司编号',
+    private  GroupMealUnit groupMealUnit_id ;                //  int comment '用餐单位，获取单位编号',
+    private DeliveringCompany deliveringCompany_no ;             // int comment '团餐机构公司，获取编号',
     private Timestamp deliveringMaster_delivedate;        // timestamp comment '配送日期',
     private BigDecimal deliveringMaster_price ;            //decimal(8,2) comment '单价',
     private Integer deliveringMaster_amount;            // int comment '份数',

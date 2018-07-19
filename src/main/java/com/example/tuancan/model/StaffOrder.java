@@ -16,11 +16,11 @@ public class StaffOrder {
     /* 点餐编号 */
     private Integer staffOrderId;
 
-    /*  用餐员工编号 */
-    private Integer gMStaffId;
+    /*  用餐员工,获取编号 */
+    private GroupMealStaff gMStaffId;
 
-    /*   食谱编号  */
-    private Integer recipeId;
+    /*   食谱,获取编号  */
+    private Recipe recipeId;
 
     /*   所属日期   */
     private Date staffOrderUsedate;

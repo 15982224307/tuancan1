@@ -16,13 +16,13 @@ public class TomorrowMenudetail {
      */
     private Integer tomorrowMenuId;
     /**
-     * 用餐单位编号
+     * 用餐单位,获取编号
      */
-    private Integer groupMealUnitId;
+    private GroupMealUnit groupMealUnitId;
     /**
-     * 明日菜单编号
+     * 明日菜单,获取编号
      */
-    private Integer tomorrowMenuMasterId;
+    private TomorrowMenuMaster tomorrowMenuMasterId;
     /**
      * 是否推荐
      */

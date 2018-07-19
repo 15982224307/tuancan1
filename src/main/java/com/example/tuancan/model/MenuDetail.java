@@ -12,11 +12,11 @@ import lombok.ToString;
 
 public class MenuDetail {
 
-    /*  团餐菜单编号  */
-    private Integer groupMealMenumasterId;
+    /*  团餐菜单,获取编号  */
+    private GroupMealMenumaster groupMealMenumasterId;
 
-    /*  食谱编号  */
-    private Integer recipeId;
+    /*  食谱,获取食谱编号  */
+    private Recipe recipeId;
 
     /*  菜单序号  */
     private Integer menuDetailNo;

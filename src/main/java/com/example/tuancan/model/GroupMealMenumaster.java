@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class GroupMealMenumaster  implements Serializable {
 
     private  Integer groupMealMenumasterId ;       //int not null auto_increment comment '团餐菜单编号',
-    private  Integer groupMealUnitId ;             // int comment '用餐单位编号',
+    private  GroupMealUnit groupMealUnitId ;             // int comment '用餐单位,获取单位编号',
     private  String groupMealMenumasterName;        /// varchar(64) comment '名称',
     private Timestamp groupMealMenumasterCreatedate;        // timestamp comment '创建日期',
 }

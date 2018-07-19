@@ -16,8 +16,8 @@ import java.sql.Timestamp;
 public class GroupMealContract  implements Serializable {
 
     private  Integer gMContractId;        //int not null auto_increment comment '合同编号',
-    private  Integer standardId ;         //int comment '餐标编号',
-    private  Integer groupMealUnitId;      //int comment '用餐单位编号',
+    private  DiningStandard standardId ;         //int comment '餐标,获取餐标编号',
+    private  GroupMealUnit groupMealUnitId;      //int comment '用餐单位,获取单位编号',
     private  String gMlContractName;     //varchar(128) comment '合同名称',
     private  String gMlContractDisc;       //varchar(2048) comment '合同描述',
     private Timestamp gMlContractExpirydate;  // timestamp comment '合同有效期',

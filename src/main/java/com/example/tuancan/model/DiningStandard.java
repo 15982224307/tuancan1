@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 public class DiningStandard  implements Serializable {
 
     private Integer standardId;            //  int not null auto_increment comment '餐标编号',
-    private Integer deliveringCompany_no;       // int comment '公司编号',
+    private DeliveringCompany deliveringCompany_no;       // int comment '团餐公司，获取编号',
     private String standardName;              //varchar(64) comment '名称',
     private int standardMeatnumber;          //  smallint comment '荤菜个数',
     private int standardVegetablenumber;       // smallint comment '素菜个数',
