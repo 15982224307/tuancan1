@@ -14,6 +14,7 @@ public class AnswerServiceImpl implements AnswerService{
 
     @Override
     public Answer selectOne(Integer id) {
+
         return answerMapper.selectOne(id);
     }
 }
