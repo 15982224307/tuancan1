@@ -1,6 +1,7 @@
 package com.example.tuancan;
 
 import com.example.tuancan.dao.AnswerMapper;
+import com.example.tuancan.model.Answer;
 import com.example.tuancan.service.AnswerService;
 import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import org.junit.Test;
@@ -19,7 +20,12 @@ public class TuancanApplicationTests {
 	private  AnswerMapper mapper;
 	@Test
 	public void contextLoads() {
+		 
 		System.out.println(mapper.selectOne(2));
+
+
+
+
 	}
 
 }

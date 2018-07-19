@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface AnswerMapper {
+public interface AnswerMapper  {
 
     @Select("select * from answer where answer_id=#{id}")
     public Answer selectOne(Integer id);
