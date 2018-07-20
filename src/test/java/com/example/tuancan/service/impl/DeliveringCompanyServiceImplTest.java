@@ -42,6 +42,7 @@ public class DeliveringCompanyServiceImplTest {
         //deliveringCompany.setDeliveringCompanyReviewDate();
 
         service.insertOne(deliveringCompany);
+        System.out.println(deliveringCompany);
     }
 
     @Test

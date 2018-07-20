@@ -3,7 +3,6 @@ package com.example.tuancan.service.impl;
 import com.example.tuancan.model.GroupMealStaff;
 import com.example.tuancan.model.GroupMealUnit;
 import com.example.tuancan.service.GroupMealStaffService;
-import com.example.tuancan.service.ManagerService;
 import com.example.tuancan.utils.JsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -105,7 +102,7 @@ public class GroupMealStaffServiceImplTest {
     public void insertOne() throws Exception {
         GroupMealStaff groupMealStaff = new GroupMealStaff();
         GroupMealUnit groupMealUnit = new GroupMealUnit();
-        groupMealUnit.setGroupMealUnitId(2);
+        groupMealUnit.setGroupMealUnitId(1);
         groupMealStaff.setGroupMealUnitId(groupMealUnit);
         int i = groupMealStaffService.insertOne(groupMealStaff);
         System.out.println(i);

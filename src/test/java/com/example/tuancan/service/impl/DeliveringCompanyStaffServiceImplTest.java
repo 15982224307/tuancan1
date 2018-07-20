@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DeliveringCompanyStaffServiceImplTest {
@@ -20,13 +22,17 @@ public class DeliveringCompanyStaffServiceImplTest {
     @Test
     public void selectByIdWithCompany() throws Exception {
         DeliveringCompanyStaff deliveringCompanyStaff=new DeliveringCompanyStaff();
-        deliveringCompanyStaff.setDCompanyStaffId(1);
+        deliveringCompanyStaff.setDCompanyStaffId(2);
         DeliveringCompanyStaff deliveringCompanyStaff1 = staffService.selectByIdWithCompany(deliveringCompanyStaff);
         System.out.println(JsonUtil.toJson(deliveringCompanyStaff1));
     }
 
     @Test
     public void selectAllByCompanyNo() throws Exception {
+        DeliveringCompany company = new DeliveringCompany();
+        company.setDeliveringCompanyNo(1);
+        List<DeliveringCompanyStaff> deliveringCompanyStaffs = staffService.selectAllByCompanyNo(company);
+        System.out.println(JsonUtil.toJson(deliveringCompanyStaffs));
     }
 
     @Test
@@ -34,14 +40,14 @@ public class DeliveringCompanyStaffServiceImplTest {
         DeliveringCompanyStaff deliveringCompanyStaff = new DeliveringCompanyStaff();
 
         DeliveringCompany company = new DeliveringCompany();
-        company.setDeliveringCompanyNo(2);
+        company.setDeliveringCompanyNo(1);
 
-        deliveringCompanyStaff.setDCompanyStaffId(1);
+        deliveringCompanyStaff.setDCompanyStaffId(2);
 
         deliveringCompanyStaff.setDeliveringCompany(company);
         deliveringCompanyStaff.setDCompanyStaffMobile("123");
-        deliveringCompanyStaff.setDCompanyStaffPosition("dadada");
-        deliveringCompanyStaff.setDCompanyStaffAuthority("wu");
+        deliveringCompanyStaff.setDCompanyStaffPosition("zhuguan");
+        deliveringCompanyStaff.setDCompanyStaffAuthority("dadaddada");
         deliveringCompanyStaff.setDCompanyStaffStatus(1);
         deliveringCompanyStaff.setDCompanyStaffDefault(0);
         int i = staffService.updateOneById(deliveringCompanyStaff);
@@ -53,12 +59,12 @@ public class DeliveringCompanyStaffServiceImplTest {
         DeliveringCompanyStaff deliveringCompanyStaff = new DeliveringCompanyStaff();
 
         DeliveringCompany company = new DeliveringCompany();
-        company.setDeliveringCompanyNo(2);
+        company.setDeliveringCompanyNo(1);
 
         deliveringCompanyStaff.setDeliveringCompany(company);
-        deliveringCompanyStaff.setDCompanyStaffMobile("123");
-        deliveringCompanyStaff.setDCompanyStaffPosition("gren");
-        deliveringCompanyStaff.setDCompanyStaffAuthority("maimaiami");
+        deliveringCompanyStaff.setDCompanyStaffMobile("456");
+        deliveringCompanyStaff.setDCompanyStaffPosition("dada");
+        deliveringCompanyStaff.setDCompanyStaffAuthority("wu");
         deliveringCompanyStaff.setDCompanyStaffStatus(1);
         deliveringCompanyStaff.setDCompanyStaffDefault(0);
 

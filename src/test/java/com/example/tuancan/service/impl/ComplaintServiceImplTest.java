@@ -38,6 +38,24 @@ public class ComplaintServiceImplTest {
     }
 
     @Test
+    public void selectAllByManagerId() throws Exception {
+        List<Complaint> complaints = complaintService.selectAllByManagerId(1);
+        System.out.println(JsonUtil.toJson(complaints));
+    }
+
+    @Test
+    public void selectAllBByComplaintSettleOrderBySettleDate() throws Exception {
+        List<Complaint> complaints = complaintService.selectAllBByComplaintSettleOrderBySettleDate("0");
+        System.out.println(JsonUtil.toJson(complaints));
+    }
+
+    @Test
+    public void selectOneByIdWithManager() throws Exception {
+        Complaint complaint = complaintService.selectOneByIdWithManager(1);
+        System.out.println(JsonUtil.toJson(complaint));
+    }
+
+    @Test
     public void insertOne() throws Exception {
         Complaint complaint = new Complaint();
         Manager manager=new Manager();
@@ -45,7 +63,7 @@ public class ComplaintServiceImplTest {
         complaint.setManager(manager);
         complaint.setComplaintContent("傻瓜");
         //complaint.setComplaintDate(new Date());
-        complaint.setComplaintSettle("0");
+        complaint.setComplaintSettle("000");
         complaint.setComplainter("bbb");
         int i = complaintService.insertOne(complaint);
         System.out.println(JsonUtil.toJson(complaint));

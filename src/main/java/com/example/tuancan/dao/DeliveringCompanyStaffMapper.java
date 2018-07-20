@@ -37,7 +37,7 @@ public interface DeliveringCompanyStaffMapper extends Mapper<DeliveringCompanySt
      */
     @Update({"update deliveringcompanystaff set DeliveringCompany_no=#{deliveringCompany.deliveringCompanyNo},DCompanyStaff_loginname=#{dCompanyStaffLoginname}," +
             "DCompanyStaff_password=#{dCompanyStaffPassword},DCompanyStaff_mobile=#{dCompanyStaffMobile},DCompanyStaff_position=#{dCompanyStaffPosition},DCompanyStaff_default=#{dCompanyStaffDefault}," +
-            "DCompanyStaff_authority=#{dCompanyStaffAuthority},DCompanyStaff_status=#{dCompanyStaffStatus}"})
+            "DCompanyStaff_authority=#{dCompanyStaffAuthority},DCompanyStaff_status=#{dCompanyStaffStatus} where DCompanyStaff_id=#{dCompanyStaffId}"})
     @Options(useGeneratedKeys = true,keyColumn = "DCompanyStaff_id",keyProperty = "dCompanyStaffId")
     public int updateOneById(DeliveringCompanyStaff deliveringCompanyStaff);
 

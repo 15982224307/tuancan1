@@ -9,6 +9,12 @@ public interface ComplaintService {
 
     public List<Complaint> selectAllOrderByComplaintDate(Example example);
 
+    public List<Complaint> selectAllByManagerId(Integer managerId);
+
+    public List<Complaint> selectAllBByComplaintSettleOrderBySettleDate(String complaintSettle);
+
+    public Complaint selectOneByIdWithManager(Integer complaintId);
+
     public Complaint selectById(Integer id);
 
     public int insertOne(Complaint complaint);

@@ -1,21 +1,43 @@
 package com.example.tuancan.dao;
 
 import com.example.tuancan.model.Complaint;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Update;
+import com.example.tuancan.model.Manager;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 @Repository
 public interface ComplaintMapper extends Mapper<Complaint>{
 
-   /* @Select("")
-    @Results(id = "",value = {
-            @Result(column = "",property = "")
+    /**
+     * 根据管理员id查询所有投诉
+     * @param managerId
+     * @return
+     */
+    @Select({"select * from complaint where manager_id=#{managerId}"})
+    @Results(id = "selectByManagerId",value = {
+            @Result(column = "manager_id",property = "manager",javaType = Manager.class,
+            one=@One(select = "com.example.tuancan.dao.ManagerMapper.selectByPrimaryKey"))
     })
-    public List<Complaint> selectByManagerId();*/
+    public List<Complaint> selectAllByManagerId(Integer managerId);
 
+    /**
+     * 根据id查询一条数据
+     * @param complaintId
+     * @return
+     */
+    @Select({"select * from complaint where Complaint_id=#{complaintId}"})
+    @ResultMap(value = "selectByManagerId")
+    public Complaint selectOneByIdWithManager(Integer complaintId);
+    /**
+     * 根据处理结果查询
+     * @param complaintSettle
+     * @return
+     */
+    @Select({"select * from complaint where Complaint_settle like '%${value}%' order by Complaint_settledate desc"})
+    public List<Complaint> selectAllBByComplaintSettleOrderBySettleDate(String complaintSettle);
     /**
      * 插入一条投诉数据
      * @param complaint

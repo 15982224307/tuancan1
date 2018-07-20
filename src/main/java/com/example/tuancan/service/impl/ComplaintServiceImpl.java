@@ -32,6 +32,35 @@ public class ComplaintServiceImpl implements ComplaintService{
     }
 
     /**
+     * 根据管理员id查询所有投诉
+     * @param managerId
+     * @return
+     */
+    @Override
+    public List<Complaint> selectAllByManagerId(Integer managerId) {
+        return complaintMapper.selectAllByManagerId(managerId);
+    }
+    /**
+     * 根据处理结果查询
+     * @param complaintSettle
+     * @return
+     */
+    @Override
+    public List<Complaint> selectAllBByComplaintSettleOrderBySettleDate(String complaintSettle) {
+        return complaintMapper.selectAllBByComplaintSettleOrderBySettleDate(complaintSettle);
+    }
+
+    /**
+     * 根据id查询一条数据 you外键属性Manager
+     * @param complaintId
+     * @return
+     */
+    @Override
+    public Complaint selectOneByIdWithManager(Integer complaintId) {
+        return complaintMapper.selectOneByIdWithManager(complaintId);
+    }
+
+    /**
      * 通过id查询 但其外键属性Manager类为空
      * @param id
      * @return

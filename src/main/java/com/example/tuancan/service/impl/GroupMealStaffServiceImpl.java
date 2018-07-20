@@ -72,20 +72,17 @@ public class GroupMealStaffServiceImpl implements GroupMealStaffService {
     /*插入数据*/
     @Override
     public int insertOne(GroupMealStaff groupMealStaff) {
-        groupMealStaffMapper.insertOne(groupMealStaff);
-        return 1;
+        return groupMealStaffMapper.insertOne(groupMealStaff);
     }
     /*删除数据*/
     @Override
     public int deleteOne(Integer id) {
-            groupMealStaffMapper.deleteOneById(id);
-            return 1;
+        return  groupMealStaffMapper.deleteOneById(id);
 
     }
     /*更新数据*/
     @Override
     public int updateOne(GroupMealStaff groupMealStaff) {
-        groupMealStaffMapper.updateOne(groupMealStaff);
-        return 1;
+        return groupMealStaffMapper.updateOne(groupMealStaff);
     }
 }

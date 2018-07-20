@@ -71,21 +71,21 @@ public interface GroupMealStaffMapper extends Mapper<GroupMealStaff>{
     public List<GroupMealStaff> selcetOrderByCreateTimeDESC();
 
     /*增加数据*/
-    @Select("insert into groupmealstaff values(null,#{groupMealUnitId.groupMealUnitId},#{gMStafMobile},#{gMStaffName}" +
+    @Insert("insert into groupmealstaff values(null,#{groupMealUnitId.groupMealUnitId},#{gMStafMobile},#{gMStaffName}" +
             ",#{gMStaffStatus},#{gMStaffSex},#{gMStafIsdefualt},#{gMStafLoginname}," +
             "#{gMStafPassword},#{unitTickerId},#{gMStaffOpenId},#{gMStafCreateDate})")
 
-    public void insertOne(GroupMealStaff groupMealStaff);
+    public int insertOne(GroupMealStaff groupMealStaff);
 
     /*删除数据*/
-    @Select("delete  from groupmealstaff where GMStaff_id = #{id} ")
-    public void deleteOneById(Integer id);
+    @Delete("delete  from groupmealstaff where GMStaff_id = #{id} ")
+    public int deleteOneById(Integer id);
 
 
     /*更新数据*/
-    @Select("update  groupmealstaff set GroupMealUnit_id = #{groupMealUnitId.groupMealUnitId},GMStaf_Mobile = #{gMStafMobile},GMStaff_name = #{gMStaffName}" +
+    @Update("update  groupmealstaff set GroupMealUnit_id = #{groupMealUnitId.groupMealUnitId},GMStaf_Mobile = #{gMStafMobile},GMStaff_name = #{gMStaffName}" +
             ",GMStaff_status = #{gMStaffStatus},GMStaff_sex = #{gMStaffSex},GMStaf_isdefualt = #{gMStafIsdefualt},GMStaff_sex= #{gMStaffSex},GMStaf_isdefualt = #{gMStafIsdefualt}," +
             "GMStaf_loginname = #{gMStafLoginname},GMStaf_password = #{gMStafPassword},Unit_ticker_id = #{unitTickerId},GMStaff_OpenId = #{gMStaffOpenId} where GMStaff_id = #{gMStaffId}")
 
-    public void updateOne(GroupMealStaff groupMealStaff);
+    public int updateOne(GroupMealStaff groupMealStaff);
 }
