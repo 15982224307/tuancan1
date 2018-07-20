@@ -23,7 +23,7 @@ public class GroupMealStaff {
     private Integer gMStaffId;
 
     /*  用餐单位,获取编号  */
-    //@Column(name = "GroupMealUnit_id")
+    //  @Column(name = "GroupMealUnit_id")
     private GroupMealUnit groupMealUnitId;
 
     /*  手机号  */

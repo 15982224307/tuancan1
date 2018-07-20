@@ -23,7 +23,6 @@ public class Answer implements Serializable{
 
     @Id
     private Integer answerId ;          //ints not null auto_increment comment '回答编号',
-    @OneToOne
     private GroupMealStaff gMStaffId  ;         //int comment '用餐员工', 用于获取用餐员工id
     private QuestionNaire questionnaireId;     //int comment '问卷', 用于获取问卷id
     private String answerText  ;        //varchar(512) comment '回答',
