@@ -43,15 +43,12 @@ public class TuancanApplicationTests {
 
 	}
 
-	@Test
-	public void  getAll(){
-		List<Answer> answers = mapper.getAll();
-		System.out.print(answers);
-	}
+	/*测试根据员工id 查询*/
 	@Test
 	public void  getone(){
-		Answer answer = mapper.getone(1);
-		System.out.print(answer);
-		//new GroupMealStaffMapper().selectByPrimaryKey()
+		Answer answer = mapper.getone(3);
+		System.out.println(answer);
+		System.out.println(answer.getGMStaffId().getGMStaffId());
 	}
+
 }

@@ -18,12 +18,15 @@ public class QuestionNaire {
 
     /*  问卷编号  */
     @Id
+    @Column(name = "questionnaire_id")
     private Integer questionnaireId;
 
     /*  问题描述  */
+    @Column(name = "questionnaire_disc")
     private String questionnaireDisc;
 
     /*  类型（1：单选，2：多选，3：主管题） */
+    @Column(name = "questionnaire_type")
     private int questionnaireType;
 
     /*  选择A  */

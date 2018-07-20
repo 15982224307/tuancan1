@@ -3,10 +3,7 @@ package com.example.tuancan.dao;
 import com.example.tuancan.model.Answer;
 import com.example.tuancan.model.GroupMealStaff;
 import com.example.tuancan.model.QuestionNaire;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -23,7 +20,8 @@ public interface AnswerMapper extends Mapper<Answer>{
      * ,questionnaireId=QuestionNaire(questionnaireId=1, questionnaireDisc=sdgasgasdsf, questionnaireType=0, questionnaireChoiceA=A, questionnaireChoiceB=B, questionnaireChoiceC=C, questionnaireChoiceD=D),
      * answerText=nnishishabi, answerDate=2018-07-19 21:50:04.0)2018-07-20 00:06:09.454  INFO 8716 --- [       Thread-3] o.s.w.c.s.GenericWebApplicationContext
      */
-    @Select({"select * from answer where answer_id =#{id}"})
+    /*  根据id 查询单个结果*/
+    @Select("select * from answer where answer_id =#{id}")
     @Results(id="getone",value = {
             @Result(column = "GMStaff_id",property = "gMStaffId",javaType = GroupMealStaff.class,
                     one = @One(select = "com.example.tuancan.dao.GroupMealStaffMapper.selectByPrimaryKey")),
@@ -32,7 +30,6 @@ public interface AnswerMapper extends Mapper<Answer>{
     })
     public Answer getone(Integer id);
 
-    //@Select("SELECT a.*,g.*,q.* FROM answer a LEFT JOIN groupmealstaff g ON a.GMStaff_id=g.GMStaff_id LEFT JOIN questionnaire q ON a.questionnaire_id=q.questionnaire_id")
-    public List<Answer> getAll();
+
 
 }
