@@ -2,7 +2,9 @@ package com.example.tuancan;
 
 import com.example.tuancan.dao.AnswerMapper;
 import com.example.tuancan.model.Answer;
+import com.example.tuancan.model.QuestionNaire;
 import com.example.tuancan.service.AnswerService;
+import com.example.tuancan.utils.JsonUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.junit.Test;
@@ -48,7 +50,15 @@ public class TuancanApplicationTests {
 	public void  getone(){
 		Answer answer = mapper.getone(3);
 		System.out.println(answer);
-		System.out.println(answer.getGMStaffId().getGMStaffId());
+		System.out.println(answer.getGMStaff().getGMStaffId());
 	}
 
+	/*测试根据员工id 查询*/
+	@Test
+	public void  selectAnswerByQues_idOrderByAnswer_date(){
+		QuestionNaire questionNaire = new QuestionNaire();
+		questionNaire.setQuestionnaireId(1);
+		List<Answer> answers = mapper.selectAnswerByQues_idOrderByAnswer_date(questionNaire);
+		System.out.println(JsonUtil.toJson(answers));
+	}
 }

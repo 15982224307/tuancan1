@@ -31,5 +31,29 @@ public interface AnswerMapper extends Mapper<Answer>{
     public Answer getone(Integer id);
 
 
+    /**
+     *根据问卷编号查询所有问答情况 并时间排序
+     * @return
+     */
+    @Select("select * from answer where questionnaire_id =#{questionnaireId} order by Answer_date desc")
+    @ResultMap(value = "getone")
+    public List<Answer> selectAnswerByQues_idOrderByAnswer_date(QuestionNaire questionNaire);
+
+    /**
+     *根据该员工编号查询其所属问答情况 并时间排序
+     * @return
+     */
+    @Select("select * from answer where GMStaff_id =#{gMStaffId} order by Answer_date desc")
+    @ResultMap(value = "getone")
+    public List<Answer> selectAnswerByGMStaff_idOrderByAnswer_date(GroupMealStaff groupMealStaff);
+
+    /**
+     * 插入一条问答数据
+     * @param answer
+     * @return
+     */
+    @Insert({"insert into answer(GMStaff_id,questionnaire_id,Answer_text) values(#{gMStaff.gMStaffId},#{questionnaire.questionnaireId},#{answerText}) "})
+    @Options(useGeneratedKeys = true,keyColumn = "Answer_id",keyProperty = "answerId")
+    public int insertAnswer(Answer answer);
 
 }

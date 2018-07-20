@@ -5,8 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.sql.Date;
 
+/**
+ * 平台管理员
+ */
 @Data
 @ToString
 @NoArgsConstructor
@@ -14,6 +19,8 @@ import java.sql.Date;
 public class Manager {
 
     /*  管理员编号  */
+    @Id
+    //@Column(name = "")
     private Integer managerId;
 
     /*   登录名  */
@@ -32,6 +39,7 @@ public class Manager {
     private String managerMobile;
 
     /*  创建日期 */
+    @Column(name = "manager_createDate")
     private Date managerCreateDate;
 
 
