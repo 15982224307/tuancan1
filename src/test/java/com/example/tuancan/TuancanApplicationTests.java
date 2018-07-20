@@ -1,7 +1,9 @@
 package com.example.tuancan;
 
 import com.example.tuancan.dao.AnswerMapper;
+import com.example.tuancan.dao.GroupMealUnitMapper;
 import com.example.tuancan.model.Answer;
+import com.example.tuancan.model.GroupMealUnit;
 import com.example.tuancan.service.AnswerService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -19,6 +21,8 @@ public class TuancanApplicationTests {
 
 	@Autowired
 	private AnswerService answerService;
+	@Autowired
+	private GroupMealUnitMapper groupMealUnitMapper;
 	@Autowired
 	private  AnswerMapper mapper;
 
@@ -46,9 +50,8 @@ public class TuancanApplicationTests {
 	/*测试根据员工id 查询*/
 	@Test
 	public void  getone(){
-		Answer answer = mapper.getone(3);
-		System.out.println(answer);
-		System.out.println(answer.getGMStaffId().getGMStaffId());
+		GroupMealUnit groupMealUnit = groupMealUnitMapper.selectByPrimaryKey(2);
+		System.out.println(groupMealUnit);
 	}
 
 }

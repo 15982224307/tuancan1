@@ -41,4 +41,27 @@ public class QuestionNaireServiceImpl implements QuestionNaireService {
         List <QuestionNaire> questionNaireList = questionNaireMapper.selectAll();
         return questionNaireList;
     }
+
+    /*插入一条数据*/
+    @Override
+    public int insertOne(QuestionNaire questionNaire) {
+        int insert = questionNaireMapper.insert(questionNaire);
+        return insert;
+    }
+
+    /*删除一条数据*/
+
+    @Override
+    public int deleteOne(Integer id) {
+        int i = questionNaireMapper.deleteByPrimaryKey(id);
+        return i;
+    }
+
+    /*修改一条数据*/
+    @Override
+    public int updateOne(QuestionNaire questionNaire) {
+        int i = questionNaireMapper.updateByPrimaryKeySelective(questionNaire);
+        return i;
+    }
+
 }
