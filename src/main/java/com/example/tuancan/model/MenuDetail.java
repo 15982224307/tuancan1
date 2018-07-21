@@ -21,12 +21,12 @@ public class MenuDetail implements Serializable{
     /*  团餐菜单,获取编号  */
 
 
-    private GroupMealMenumaster groupMealMenumasterId;
+    private GroupMealMenumaster groupMealMenumaster;
 
     /*  食谱,获取食谱编号  */
 
 
-    private Recipe recipeId;
+    private Recipe recipe;
 
     /*  菜单序号  */
     @Column(name = "MenuDetail_no")

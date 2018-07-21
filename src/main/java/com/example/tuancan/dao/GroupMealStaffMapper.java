@@ -22,52 +22,52 @@ public interface GroupMealStaffMapper extends Mapper<GroupMealStaff>{
 
     /*查询所有员工*/
     @Select("select * from groupmealstaff ")
-   @ResultMap(value = "getone")
+    @ResultMap(value = "getone")
     public List<GroupMealStaff> gettAll();
 
     /*查询公司对应的所有员工*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff where GroupMealUnit_id = #{id}")
+    @ResultMap(value = "getone")
     public List<GroupMealStaff> selectByUnitId(Integer id);
 
     /*根据name查询*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff where GMStaff_name = #{name}")
+    @ResultMap(value = "getone")
     public GroupMealStaff selectByName(String name);
 
     /*根据状态查询*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff where GMStaff_status = #{status}")
+    @ResultMap(value = "getone")
     public List<GroupMealStaff> selectByStatus(int status);
 
     /*查询是默认账号*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff where GMStaf_isdefualt = #{isdefault}")
+    @ResultMap(value = "getone")
     public List<GroupMealStaff> selectByIsDefault(int isdefault);
 
     /*根据登陆账号查询*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff where GMStaf_loginname = #{loginName}")
+    @ResultMap(value = "getone")
     public GroupMealStaff selectByLoginName(String loginName);
 
     /*根据openid查询*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff where GMStaff_OpenId = #{openid}")
+    @ResultMap(value = "getone")
     public GroupMealStaff selectByOpenid(String openid);
 
     /*根据ticket查询*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff where Unit_ticker_id = #{ticket}")
+    @ResultMap(value = "getone")
     public GroupMealStaff selectByTicket(String ticket);
 
     /*创建时间正序*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff order by GMStaf_createDate ASC")
+    @ResultMap(value = "getone")
     public List<GroupMealStaff> selcetOrderByCreateTimeASC();
 
     /*创建时间逆序*/
-    @ResultMap(value = "getone")
     @Select("select * from groupmealstaff order by GMStaf_createDate DESC")
+    @ResultMap(value = "getone")
     public List<GroupMealStaff> selcetOrderByCreateTimeDESC();
 
     /*增加数据*/

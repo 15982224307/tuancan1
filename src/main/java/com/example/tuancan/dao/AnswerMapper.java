@@ -23,6 +23,7 @@ public interface AnswerMapper extends Mapper<Answer>{
     /*  根据id 查询单个结果*/
     @Select("select * from answer where answer_id =#{id}")
     @Results(id="getone",value = {
+
             @Result(column = "GMStaff_id",property = "gMStaff",javaType = GroupMealStaff.class,
                     one = @One(select = "com.example.tuancan.dao.GroupMealStaffMapper.selectByPrimaryKey")),
             @Result(column = "questionnaire_id",property = "questionnaire",javaType = QuestionNaire.class,

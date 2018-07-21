@@ -26,8 +26,7 @@ public class AnswerServiceImplTest {
     @Test
     public void selectOne() throws Exception {
         Answer answer = answerService.selectOne(3);
-        System.out.println(answer);
-        System.out.println(answer.getGMStaff().getGMStaffId());
+        System.out.println(JsonUtil.toJson(answer));
     }
 
     @Test

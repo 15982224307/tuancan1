@@ -13,14 +13,14 @@ import java.util.List;
 public class GroupMealMenumasterServiceImpl implements GroupMealMenumasterService {
 
     @Autowired
-    private GroupMealMenumasterMapper groupMealMenumasterMapper;
+    private GroupMealMenumasterMapper groupMealMenuMasterMapper;
 
     /**
      * 根据id 查询
      */
     @Override
     public GroupMealMenumaster selectOneById(Integer id) {
-        return groupMealMenumasterMapper.selectOneById(id);
+        return groupMealMenuMasterMapper.selectOneById(id);
     }
 
     /**
@@ -30,7 +30,7 @@ public class GroupMealMenumasterServiceImpl implements GroupMealMenumasterServic
      */
     @Override
     public List<GroupMealMenumaster> selectByName(String name) {
-        return groupMealMenumasterMapper.selectByName(name);
+        return groupMealMenuMasterMapper.selectByName(name);
     }
 
     /**
@@ -38,7 +38,7 @@ public class GroupMealMenumasterServiceImpl implements GroupMealMenumasterServic
      */
     @Override
     public List<GroupMealMenumaster> selectAllWithUnit() {
-        return groupMealMenumasterMapper.selectAllWithUnit();
+        return groupMealMenuMasterMapper.selectAllWithUnit();
     }
     /**
      * 更新数据
@@ -48,7 +48,7 @@ public class GroupMealMenumasterServiceImpl implements GroupMealMenumasterServic
     @Override
     @Transactional
     public int UpdateOne(GroupMealMenumaster groupMealMenumaster) {
-        return groupMealMenumasterMapper.UpdateOne(groupMealMenumaster);
+        return groupMealMenuMasterMapper.UpdateOne(groupMealMenumaster);
     }
 
     /**
@@ -59,6 +59,6 @@ public class GroupMealMenumasterServiceImpl implements GroupMealMenumasterServic
     @Override
     @Transactional
     public int InsertOne(GroupMealMenumaster groupMealMenumaster) {
-        return groupMealMenumasterMapper.InsertOne(groupMealMenumaster);
+        return groupMealMenuMasterMapper.InsertOne(groupMealMenumaster);
     }
 }
