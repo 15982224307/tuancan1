@@ -26,7 +26,7 @@ public class DeliveringMasterServiceImplTest {
     @Test
     public void selectOneById() throws Exception {
         DeliveringMaster deliveringMaster = new DeliveringMaster();
-        deliveringMaster.setDeliveringMaster_id(1);
+        deliveringMaster.setDeliveringMasterId(1);
         DeliveringMaster deliveringMaster1 = service.selectOneById(deliveringMaster);
         log.info(JsonUtil.toJson(deliveringMaster1));
         System.out.println(deliveringMaster1);
@@ -49,16 +49,16 @@ public class DeliveringMasterServiceImplTest {
         GroupMealUnit groupMealUnit = new GroupMealUnit();
         groupMealUnit.setGroupMealUnitId(1);
 
-        deliveringMaster.setDeliveringMaster_id(1);
+        deliveringMaster.setDeliveringMasterId(1);
         deliveringMaster.setDeliveringCompany(deliveringCompany);
         deliveringMaster.setGroupMealUnit(groupMealUnit);
-        deliveringMaster.setDeliveringMaster_amount(15);
-        deliveringMaster.setDeliveringMaster_price(new BigDecimal(12.55));
-        deliveringMaster.setDeliveringMaster_confirmer("xiao");
-        deliveringMaster.setDeliveringMaster_creater("wang");
-        deliveringMaster.setDeliveringMaster_isEmergency(1);
-        deliveringMaster.setDeliveringMaster_memo("jiandandian");
-        deliveringMaster.setDeliveringMaster_status(1);
+        deliveringMaster.setDeliveringMasterAmount(15);
+        deliveringMaster.setDeliveringMasterPrice(new BigDecimal(12.55));
+        deliveringMaster.setDeliveringMasterConfirmer("xiao");
+        deliveringMaster.setDeliveringMasterCreater("wang");
+        deliveringMaster.setDeliveringMasterIsEmergency(1);
+        deliveringMaster.setDeliveringMasterMemo("jiandandian");
+        deliveringMaster.setDeliveringMasterStatus(1);
 
         int i = service.updateOne(deliveringMaster);
         System.out.println(i);
@@ -77,14 +77,13 @@ public class DeliveringMasterServiceImplTest {
 
         deliveringMaster.setDeliveringCompany(deliveringCompany);
         deliveringMaster.setGroupMealUnit(groupMealUnit);
-        deliveringMaster.setDeliveringMaster_amount(10);
-        deliveringMaster.setDeliveringMaster_price(new BigDecimal(12.50));
-        deliveringMaster.setDeliveringMaster_confirmer("xiao");
-        deliveringMaster.setDeliveringMaster_creater("wang");
-        deliveringMaster.setDeliveringMaster_isEmergency(0);
-        deliveringMaster.setDeliveringMaster_memo("jiandandian");
-        deliveringMaster.setDeliveringMaster_status(0);
-
+        deliveringMaster.setDeliveringMasterAmount(10);
+        deliveringMaster.setDeliveringMasterPrice(new BigDecimal(12));
+        deliveringMaster.setDeliveringMasterConfirmer("xiao");
+        deliveringMaster.setDeliveringMasterCreater("wang");
+        deliveringMaster.setDeliveringMasterIsEmergency(1);
+        deliveringMaster.setDeliveringMasterMemo("jiandandian");
+        deliveringMaster.setDeliveringMasterStatus(1);
 
         int i = service.insertOne(deliveringMaster);
         System.out.println(i);

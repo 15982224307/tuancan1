@@ -10,6 +10,8 @@ public interface DeliveringMasterService {
 
     public List<DeliveringMaster> selectAllWithDeliverComAndMealUnit();
 
+    public List<DeliveringMaster> slectByIsEmergency(DeliveringMaster deliveringMaster);
+
     public int updateOne(DeliveringMaster deliveringMaster);
 
     public int insertOne(DeliveringMaster deliveringMaster);
