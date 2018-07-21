@@ -23,19 +23,12 @@ public interface StaffOrderMapper extends Mapper<StaffOrder> {
 
     /*员工编号查询*/
     @Select("select * from stafforder where GMStaff_id =#{id}")
-    @Results(id="getone1",value = {
-             @Result(column = "recipe_id",property = "recipe",javaType = Recipe.class,
-                    one = @One(select = "com.example.tuancan.dao.RecipeMapper.selectByPrimaryKey"))
-    })
+    @ResultMap(value = "getone")
     public List<StaffOrder> selectOneByStaffId(Integer id);
 
     /*菜谱编号查询*/
     @Select("select * from stafforder where StaffOrder_id =#{id}")
-    @Results(id="getone2",value = {
-            @Result(column = "GMStaff_id",property = "gMStaff",javaType = GroupMealStaff.class,
-                    one = @One(select = "com.example.tuancan.dao.GroupMealStaffMapper.selectByPrimaryKey")),
-
-    })
+    @ResultMap(value = "getone")
     public List<StaffOrder> selectOneByRecipeId(Integer id);
 
     /*所有数据*/

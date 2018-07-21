@@ -23,18 +23,12 @@ public interface RecipeMapper extends Mapper<Recipe>{
 
     /*分类编号查询*/
     @Select("select * from recipe where RecipeType_id = #{typeid}")
-    @Results(id="getone1",value = {
-            @Result(column = "DeliveringCompany_no",property = "deliveringCompanyNo",javaType = DeliveringCompany.class,
-                    one = @One(select = "com.example.tuancan.dao.DeliveringCompanyMapper.selectByPrimaryKey"))
-    })
+    @ResultMap(value = "getone")
     public List<Recipe> selectByTypeId(Integer id);
 
     /*公司编号查询*/
     @Select("select * from recipe where DeliveringCompany_no = #{companyid}")
-    @Results(id="getone2",value = {
-            @Result(column = "RecipeType_id",property = "recipeTypeId",javaType = RecipeType.class,
-                    one = @One(select = "com.example.tuancan.dao.RecipeTypeMapper.selectByPrimaryKey")),
-            })
+    @ResultMap(value = "getone")
     public List<Recipe> selectByCompanyId(Integer companyid);
 
     /*食谱名称模糊查询*/
