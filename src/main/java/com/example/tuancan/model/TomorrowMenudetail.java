@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class TomorrowMenudetail {
+public class TomorrowMenudetail implements Serializable{
 
     /**
      * 明日菜单明细编号

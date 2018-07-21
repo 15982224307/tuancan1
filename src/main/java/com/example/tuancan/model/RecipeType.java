@@ -8,14 +8,15 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "recipetype")
-public class RecipeType {
+public class RecipeType implements Serializable{
 
     /*  食谱分类编号  */
     @Id

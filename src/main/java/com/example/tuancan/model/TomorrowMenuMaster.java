@@ -5,13 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
+
 
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class TomorrowMenuMaster {
+public class TomorrowMenuMaster implements Serializable{
 
     /**
      * 明日菜单编号

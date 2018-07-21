@@ -8,14 +8,15 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "groupmealstaff")
-public class GroupMealStaff {
+public class GroupMealStaff implements Serializable{
 
     /*  用餐员工编号  Unknown column 'g_m_staff_id' in 'field list'*/
     @Id

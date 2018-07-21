@@ -85,7 +85,7 @@ public interface GroupMealStaffMapper extends Mapper<GroupMealStaff>{
     /*更新数据*/
     @Update("update  groupmealstaff set GroupMealUnit_id = #{groupMealUnitId.groupMealUnitId},GMStaf_Mobile = #{gMStafMobile},GMStaff_name = #{gMStaffName}" +
             ",GMStaff_status = #{gMStaffStatus},GMStaff_sex = #{gMStaffSex},GMStaf_isdefualt = #{gMStafIsdefualt},GMStaff_sex= #{gMStaffSex},GMStaf_isdefualt = #{gMStafIsdefualt}," +
-            "GMStaf_loginname = #{gMStafLoginname},GMStaf_password = #{gMStafPassword},Unit_ticker_id = #{unitTickerId},GMStaff_OpenId = #{gMStaffOpenId} where GMStaff_id = #{gMStaffId}")
+            "GMStaf_loginname = #{gMStafLoginname},GMStaf_password = #{gMStafPassword},Unit_ticker_id = #{unitTickerId},GMStaff_OpenId = #{gMStaffOpenId},GMStaf_createDate = #{gMStafCreateDate} where GMStaff_id = #{gMStaffId}")
 
     public int updateOne(GroupMealStaff groupMealStaff);
 }

@@ -6,7 +6,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * 餐标
@@ -25,5 +25,5 @@ public class DiningStandard  implements Serializable {
     private int standardIsFreeSoup;            //  smallint comment '是否赠送汤菜(0:否，1：是)',
     private int standardIsFreeDessert ;          //smallint comment '是否赠送甜点(0:否，1：是)',
     private int standardIsFreeFruit ;         //smallint comment '是否赠送水果(0:否，1：是)',
-    private Timestamp standardCreateDate ;               // timestamp comment '创建日期',
+    private Date standardCreateDate ;               // timestamp comment '创建日期',
 }

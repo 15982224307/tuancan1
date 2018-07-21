@@ -8,13 +8,14 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "questionnaire")
-public class QuestionNaire {
+public class QuestionNaire implements Serializable{
 
     /*  问卷编号  */
     @Id

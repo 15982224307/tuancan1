@@ -112,15 +112,16 @@ public class GroupMealStaffServiceImplTest {
     @Test
     public void deleteOne() throws Exception {
 
-        System.out.println(groupMealStaffService.deleteOne(9));
+        System.out.println(groupMealStaffService.deleteOne(12));
 
     }
 
     /*测试更新*/
     @Test
     public void updateOne() throws Exception {
-        GroupMealStaff groupMealStaff = groupMealStaffService.selectOneById(10);
-        groupMealStaff.setGMStaffSex("nan");
+        GroupMealStaff groupMealStaff = groupMealStaffService.selectOneById(11);
+        groupMealStaff.setGMStaffName("ds1a");
+        groupMealStaff.setGMStaffSex("nv");
         int i = groupMealStaffService.updateOne(groupMealStaff);
         System.out.println(i);
     }

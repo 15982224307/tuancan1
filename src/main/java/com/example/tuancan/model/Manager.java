@@ -7,7 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 平台管理员
@@ -16,7 +17,7 @@ import java.sql.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Manager {
+public class Manager implements Serializable{
 
     /*  管理员编号  */
     @Id
