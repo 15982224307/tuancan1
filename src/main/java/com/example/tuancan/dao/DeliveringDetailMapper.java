@@ -23,7 +23,7 @@ public interface DeliveringDetailMapper extends Mapper<DeliveringDetail>{
             @Result(column = "recipe_id",property = "recipe",javaType = Recipe.class,
             one = @One(select = "com.example.tuancan.dao.RecipeMapper.selectByPrimaryKey"))
     })
-    public DeliveringDetail selectByDeliveringDetailNo(Integer deliveringDetailNo);
+    public DeliveringDetail selectByDeliveringDetailNo(String deliveringDetailNo);
 
     /**
      * 根据配送单id查询 其该包含的所有配送明细信息

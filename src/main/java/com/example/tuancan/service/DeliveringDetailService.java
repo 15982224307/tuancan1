@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DeliveringDetailService {
 
-    public DeliveringDetail selectByDeliveringDetailNo(Integer deliveringDetailNo);
+    public DeliveringDetail selectByDeliveringDetailNo(String deliveringDetailNo);
 
     public List<DeliveringDetail> selectByDeliveringMasterId(Integer deliveringMasterId);
 

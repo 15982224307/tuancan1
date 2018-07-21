@@ -20,7 +20,7 @@ public class DeliveringDetailServiceImpl implements DeliveringDetailService {
      * @return
      */
     @Override
-    public DeliveringDetail selectByDeliveringDetailNo(Integer deliveringDetailNo) {
+    public DeliveringDetail selectByDeliveringDetailNo(String deliveringDetailNo) {
         return deliveringDetailMapper.selectByDeliveringDetailNo(deliveringDetailNo);
     }
 
