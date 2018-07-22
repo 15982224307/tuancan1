@@ -1,6 +1,6 @@
 package com.example.tuancan.service;
 
-import com.example.tuancan.model.GroupMealUnit;
+import com.example.tuancan.model.Recipe;
 import com.example.tuancan.model.TomorrowMenuMaster;
 import com.example.tuancan.model.TomorrowMenudetail;
 import com.example.tuancan.utils.JsonUtil;
@@ -11,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,10 +26,10 @@ public class TomorrowMenuDetailServiceTest {
         System.out.println(JsonUtil.toJson(tomorrowMenudetail));
     }
 
-    /*测试单位编号查询*/
+    /*测试食谱编号查询*/
     @Test
     public void selectByUnitId() throws Exception {
-        List<TomorrowMenudetail> tomorrowMenudetails = tomorrowMenuDetailService.selectByUnitId(1);
+        List<TomorrowMenudetail> tomorrowMenudetails = tomorrowMenuDetailService.selectByRecipeId(1);
         System.out.println(JsonUtil.toJson(tomorrowMenudetails));
     }
 
@@ -59,13 +57,13 @@ public class TomorrowMenuDetailServiceTest {
     /*插入数据*/
     @Test
     public void insertOne() throws Exception {
-        GroupMealUnit groupMealUnit = new GroupMealUnit();
-        groupMealUnit.setGroupMealUnitId(1);
+        Recipe recipe = new Recipe();
+        recipe.setRecipeId(1);
         TomorrowMenuMaster tomorrowMenuMaster = new TomorrowMenuMaster();
         tomorrowMenuMaster.setTomorrowMenuMasterId(1);
 
         TomorrowMenudetail tomorrowMenudetail = new TomorrowMenudetail();
-        tomorrowMenudetail.setGroupMealUnit(groupMealUnit);
+        tomorrowMenudetail.setRecipe(recipe);
         tomorrowMenudetail.setTomorrowMenuMaster(tomorrowMenuMaster);
         int i = tomorrowMenuDetailService.insertOne(tomorrowMenudetail);
         System.out.println(i);

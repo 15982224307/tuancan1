@@ -1,9 +1,6 @@
 package com.example.tuancan.service;
 
-import com.example.tuancan.model.GroupMealUnit;
-import com.example.tuancan.model.TomorrowMenuMaster;
 import com.example.tuancan.model.TomorrowMenudetail;
-import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -14,7 +11,7 @@ public interface TomorrowMenuDetailService {
 
     /**
      * 根据用餐单位查询*/
-    public List<TomorrowMenudetail> selectByUnitId(Integer id);
+    public List<TomorrowMenudetail> selectByRecipeId(Integer id);
 
     /**
      * 根据菜单编号查询*/

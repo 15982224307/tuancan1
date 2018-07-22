@@ -1,9 +1,11 @@
 package com.example.tuancan.controller;
 
 import com.example.tuancan.model.GroupMealStaff;
+import com.example.tuancan.model.TomorrowMenuMaster;
 import com.example.tuancan.model.TomorrowMenudetail;
 import com.example.tuancan.service.GroupMealStaffService;
 import com.example.tuancan.service.TomorrowMenuDetailService;
+import com.example.tuancan.service.TomorrowMenuMasterService;
 import com.example.tuancan.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -29,6 +31,8 @@ public class OrderController {
     @Autowired
     private TomorrowMenuDetailService tomorrowMenuDetailService;
 
+    @Autowired
+    private TomorrowMenuMasterService tomorrowMenuMasterService;
     /*@Autowired
     private GroupMealMenumasterService groupMealMenumasterService;*/
 
@@ -42,11 +46,15 @@ public class OrderController {
             //没有openid 重新授权
             return "redirect:http://95ti4r.natappfree.cc/wechat/authorize";
         }
-
+        //查公司
         GroupMealStaff groupMealStaff = groupMealStaffService.selectByOpenid(openId);
         Integer unitId = groupMealStaff.getGroupMealUnitId().getGroupMealUnitId();
 
-        List<TomorrowMenudetail> tomorrowMenudetails = tomorrowMenuDetailService.selectByUnitId(unitId);
+        //查明日菜单主表
+        List<TomorrowMenuMaster> tomorrowMenuMasters = tomorrowMenuMasterService.selectByUnitId(unitId);
+
+        //通过主表id 查明日菜单明细表
+        List<TomorrowMenudetail> tomorrowMenudetails = tomorrowMenuDetailService.selectByMenuMasterId(12);
 
         log.info("明日菜单明细");
         log.info(JsonUtil.toJson(tomorrowMenudetails));

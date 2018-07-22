@@ -24,9 +24,9 @@ public class TomorrowMenudetail implements Serializable{
     @Column(name = "TomorrowMenu_id")
     private Integer tomorrowMenuId;
     /**
-     * 用餐单位,获取编号
+     * 食谱,获取编号
      */
-    private GroupMealUnit groupMealUnit;
+    private Recipe recipe;
     /**
      * 明日菜单,获取编号
      */

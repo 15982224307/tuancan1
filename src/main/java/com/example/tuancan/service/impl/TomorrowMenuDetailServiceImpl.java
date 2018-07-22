@@ -30,8 +30,8 @@ public class TomorrowMenuDetailServiceImpl implements TomorrowMenuDetailService 
      * @param id
      */
     @Override
-    public List<TomorrowMenudetail> selectByUnitId(Integer id) {
-        return tomorrowMenuDetailMapper.selectByUnitId(id);
+    public List<TomorrowMenudetail> selectByRecipeId(Integer id) {
+        return tomorrowMenuDetailMapper.selectByRecipeId(id);
     }
 
     /**

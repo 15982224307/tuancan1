@@ -13,21 +13,24 @@ public interface TomorrowMenuDetailMapper extends Mapper<TomorrowMenudetail>{
     /*  根据id 查询单个结果*/
     @Select("select * from tomorrowmenudetail where TomorrowMenu_id =#{id}")
     @Results(id="getone",value = {
-            @Result(column = "GroupMealUnit_id",property = "groupMealUnit",javaType = GroupMealUnit.class,
-                    one = @One(select = "com.example.tuancan.dao.GroupMealUnitMapper.selectByPrimaryKey")),
+            @Result(column = "recipe_id",property = "recipe",javaType = Recipe.class,
+                    one = @One(select = "com.example.tuancan.dao.RecipeMapper.selectByPrimaryKey")),
             @Result(column = "TomorrowMenuMaster_id",property = "tomorrowMenuMaster",javaType = TomorrowMenuMaster.class,
                     one = @One(select = "com.example.tuancan.dao.TomorrowMenuMasterMapper.selectByPrimaryKey"))
     })
     public TomorrowMenudetail selectOneById(Integer id);
 
-    /*根据用餐单位查询*/
-    @Select("select * from tomorrowmenudetail where GroupMealUnit_id =#{id}")
+    /*根据食谱id查询*/
+    @Select("select * from tomorrowmenudetail where recipe_id =#{id}")
     @ResultMap(value = "getone")
-    public List<TomorrowMenudetail> selectByUnitId(Integer id);
+    public List<TomorrowMenudetail> selectByRecipeId(Integer id);
 
-    /*根据菜单编号查询*/
+    /*根据菜单编号查询 已经不需要明日菜单主表id*/
     @Select("select * from tomorrowmenudetail where TomorrowMenuMaster_id =#{id}")
-    @ResultMap(value = "getone")
+    @Results(id="selectByMenuMasterId",value = {
+            @Result(column = "recipe_id",property = "recipe",javaType = Recipe.class,
+                    one = @One(select = "com.example.tuancan.dao.RecipeMapper.selectByPrimaryKey")),
+    })
     public List<TomorrowMenudetail> selectByMenuMasterId(Integer id);
 
     /*是否推荐*/
@@ -41,7 +44,7 @@ public interface TomorrowMenuDetailMapper extends Mapper<TomorrowMenudetail>{
     public List<TomorrowMenudetail> getAll();
 
     /*插入数据*/
-    @Insert("insert into  tomorrowmenudetail values(null,#{groupMealUnit.groupMealUnitId},#{tomorrowMenuMaster.tomorrowMenuMasterId}" +
+    @Insert("insert into  tomorrowmenudetail values(null,#{recipe.recipeId},#{tomorrowMenuMaster.tomorrowMenuMasterId}" +
             ",#{tomorrowMenuIsRecommend},#{tomorrowMenuMemo})")
     public int insertOne(TomorrowMenudetail tomorrowMenudetail);
 
@@ -50,7 +53,7 @@ public interface TomorrowMenuDetailMapper extends Mapper<TomorrowMenudetail>{
     public int deleteOne(Integer id);
 
     /*更新数据*/
-    @Update("update tomorrowmenudetail set GroupMealUnit_id =#{groupMealUnit.groupMealUnitId},TomorrowMenuMaster_id = #{tomorrowMenuMaster.tomorrowMenuMasterId}," +
+    @Update("update tomorrowmenudetail set GroupMealUnit_id =#{recipe.recipeId},TomorrowMenuMaster_id = #{tomorrowMenuMaster.tomorrowMenuMasterId}," +
             " TomorrowMenu_IsRecommend = #{tomorrowMenuIsRecommend},TomorrowMenu_memo = #{tomorrowMenuMemo} where TomorrowMenu_id =#{tomorrowMenuId}")
     public int updateOne(TomorrowMenudetail tomorrowMenudetail);
 }
