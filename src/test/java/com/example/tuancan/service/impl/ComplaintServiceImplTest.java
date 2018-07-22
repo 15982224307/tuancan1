@@ -17,6 +17,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ComplaintServiceImplTest {
+
     @Autowired
     private ComplaintService complaintService;
 
@@ -72,7 +73,7 @@ public class ComplaintServiceImplTest {
     @Test
     public void updateOne() throws Exception {
         Complaint complaint=new Complaint();
-        complaint.setComplaintId(1);
+        complaint.setComplaintId(3);
         complaint.setComplaintSettle("1");
         complaint.setComplaintSettledate(new Date());
         Manager manager=new Manager();
@@ -81,6 +82,13 @@ public class ComplaintServiceImplTest {
         int i = complaintService.updateOne(complaint);
         System.out.println(i);
         System.out.println(JsonUtil.toJson(complaint));
+    }
+
+    @Test
+    public void deleteOne() throws Exception {
+
+        int i = complaintService.deleteOne(3);
+        System.out.println(i);
     }
 
 }

@@ -86,7 +86,7 @@ public class GroupMealUnitServiceTest {
     /*测试删除一条数据*/
     @Test
     public void deleteOne() throws Exception {
-        int i = groupMealUnitService.deleteOne(7);
+        int i = groupMealUnitService.deleteOne(8);
         System.out.println(i);
     }
 
@@ -110,7 +110,7 @@ public class GroupMealUnitServiceTest {
     /*测试修改数据*/
     @Test
     public void updateOne() throws Exception {
-        GroupMealUnit groupMealUnit = groupMealUnitService.selectOneById(7);
+        GroupMealUnit groupMealUnit = groupMealUnitService.selectOneById(8);
         groupMealUnit.setGroupMealUnitName("wangchao");
         int i = groupMealUnitService.updateOne(groupMealUnit);
         System.out.println(i);

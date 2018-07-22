@@ -67,7 +67,7 @@ public class QuestionNaireTests {
     /*测试删除数据*/
     @Test
     public void deleteOne(){
-        int i = questionNaireService.deleteOne(3);
+        int i = questionNaireService.deleteOne(5);
         System.out.println(i);
     }
 
@@ -78,7 +78,7 @@ public class QuestionNaireTests {
         questionNaire.setQuestionnaireChoiceA("a");
         questionNaire.setQuestionnaireChoiceB("b");
         questionNaire.setQuestionnaireChoiceC("c");
-        questionNaire.setQuestionnaireChoiceD("d");
+        questionNaire.setQuestionnaireChoiceD("ddd");
         int i = questionNaireService.updateOne(questionNaire);
         System.out.println(i);
     }

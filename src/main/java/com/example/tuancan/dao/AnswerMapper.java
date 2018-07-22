@@ -48,6 +48,12 @@ public interface AnswerMapper extends Mapper<Answer>{
     @ResultMap(value = "getone")
     public List<Answer> selectAnswerByGMStaff_idOrderByAnswer_date(GroupMealStaff groupMealStaff);
 
+
+    @Update("update answer set gMStaff_id = #{gMStaff.gMStaffId},questionnaire_id = #{questionnaire.questionnaireId},answer_text = #{answerText},answer_date = #{answerDate} where Answer_id = #{answerId}")
+    @ResultMap(value = "getone")
+    public int updateOne(Answer answer);
+
+
     /**
      * 插入一条问答数据
      * @param answer
@@ -56,5 +62,6 @@ public interface AnswerMapper extends Mapper<Answer>{
     @Insert({"insert into answer(GMStaff_id,questionnaire_id,Answer_text) values(#{gMStaff.gMStaffId},#{questionnaire.questionnaireId},#{answerText}) "})
     @Options(useGeneratedKeys = true,keyColumn = "Answer_id",keyProperty = "answerId")
     public int insertAnswer(Answer answer);
+
 
 }

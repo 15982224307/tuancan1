@@ -37,6 +37,11 @@ public class CompanyGradeServiceImpl implements CompanyGradeService {
         return companyGradeMapper.insert(companyGrade);
     }
 
+    @Override
+    public int updataOne(CompanyGrade companyGrade) {
+        return companyGradeMapper.updateByPrimaryKey(companyGrade);
+    }
+
     /**
      * 查询一条数据
      * @param id

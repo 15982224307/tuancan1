@@ -62,7 +62,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     /*根据状态查询*/
     @Override
-    public Manager selectOneByStatus(int status) {
+    public List<Manager> selectOneByStatus(int status) {
         return managerMapper.selectOneByStatus(status);
     }
 }

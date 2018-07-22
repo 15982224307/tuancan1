@@ -20,7 +20,7 @@ public class CompanyGradeServiceImplTest {
 
     @Test
     public void deleteById() throws Exception {
-        int i = companyGradeService.deleteById(3);
+        int i = companyGradeService.deleteById(4);
         System.out.println(i);
     }
 
@@ -32,6 +32,14 @@ public class CompanyGradeServiceImplTest {
         int insert = companyGradeService.insert(companyGrade);
         System.out.println(insert);
     }
+    @Test
+    public void updateOne() throws Exception {
+        CompanyGrade companyGrade = companyGradeService.selectById(2);
+        companyGrade.setCompanyGradeAuthority("update");
+        int i = companyGradeService.updataOne(companyGrade);
+        System.out.println(i);
+    }
+
 
     @Test
     public void selectById() throws Exception {

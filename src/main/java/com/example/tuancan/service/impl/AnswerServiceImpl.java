@@ -23,6 +23,12 @@ public class AnswerServiceImpl implements AnswerService{
         //return answerMapper.selectOne(id);
         return  answerMapper.getone(id);
     }
+
+    @Override
+    public int updateOne(Answer answer) {
+        return answerMapper.updateOne(answer);
+    }
+
     /**
      *根据问卷编号查询所有问答情况 并时间排序
      * @return
