@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 @Repository
 public interface ManagerMapper extends Mapper<Manager>{
 
@@ -19,5 +21,5 @@ public interface ManagerMapper extends Mapper<Manager>{
 
     /*根据状态查询*/
     @Select("select * from manager where manager_status =#{status} ")
-    public Manager selectOneByStatus(int status);
+    public List<Manager> selectOneByStatus(int status);
 }

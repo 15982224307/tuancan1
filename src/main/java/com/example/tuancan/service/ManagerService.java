@@ -26,7 +26,7 @@ public interface ManagerService {
     public Manager selectOneByLoginName(String loginName);
 
     /*根据状态查询*/
-    public Manager selectOneByStatus(int status);
+    public List<Manager> selectOneByStatus(int status);
 
     /*得到所有数据*/
     public List<Manager> selectAll();

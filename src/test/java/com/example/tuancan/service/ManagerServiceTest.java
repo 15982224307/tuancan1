@@ -22,7 +22,7 @@ public class ManagerServiceTest {
     /*测试删除数据*/
     @Test
     public void deleteOne() throws Exception {
-        int i = managerService.deleteOne(2);
+        int i = managerService.deleteOne(3);
         System.out.println(i);
     }
 
@@ -42,7 +42,7 @@ public class ManagerServiceTest {
     @Test
     public void updateOne() throws Exception {
 
-        Manager manager = managerService.selectOneByid(2);
+        Manager manager = managerService.selectOneByid(3);
         manager.setManagerLoginname("chao");
         int i = managerService.updateOne(manager);
         System.out.println(i);
@@ -81,8 +81,8 @@ public class ManagerServiceTest {
     @Test
     public void selectOneByStatus() throws Exception {
 
-        Manager manager = managerService.selectOneByStatus(1);
-        System.out.println(JsonUtil.toJson(manager));
+        List<Manager> managers = managerService.selectOneByStatus(1);
+        System.out.println(JsonUtil.toJson(managers));
     }
 
 }

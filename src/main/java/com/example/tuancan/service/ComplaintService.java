@@ -21,5 +21,7 @@ public interface ComplaintService {
 
     public int updateOne(Complaint complaint);
 
+    public int deleteOne(Integer id);
+
 
 }

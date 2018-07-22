@@ -31,6 +31,11 @@ public class ComplaintServiceImpl implements ComplaintService{
         return complaintMapper.selectByExample(example);
     }
 
+    @Override
+    public int deleteOne(Integer id) {
+        return complaintMapper.deleteByPrimaryKey(id);
+    }
+
     /**
      * 根据管理员id查询所有投诉
      * @param managerId

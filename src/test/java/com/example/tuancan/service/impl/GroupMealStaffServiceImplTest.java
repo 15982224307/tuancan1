@@ -112,7 +112,7 @@ public class GroupMealStaffServiceImplTest {
     @Test
     public void deleteOne() throws Exception {
 
-        System.out.println(groupMealStaffService.deleteOne(12));
+        System.out.println(groupMealStaffService.deleteOne(13));
 
     }
 
@@ -121,7 +121,7 @@ public class GroupMealStaffServiceImplTest {
     public void updateOne() throws Exception {
         GroupMealStaff groupMealStaff = groupMealStaffService.selectOneById(11);
         groupMealStaff.setGMStaffName("ds1a");
-        groupMealStaff.setGMStaffSex("nv");
+        groupMealStaff.setGMStaffSex("nv111111");
         int i = groupMealStaffService.updateOne(groupMealStaff);
         System.out.println(i);
     }

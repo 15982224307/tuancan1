@@ -13,4 +13,6 @@ public interface CompanyGradeService {
     public  CompanyGrade selectById(Integer id);
 
     public List<CompanyGrade> selectAll();
+
+    public int updataOne(CompanyGrade companyGrade);
 }

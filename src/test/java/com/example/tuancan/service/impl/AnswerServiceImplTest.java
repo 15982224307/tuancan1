@@ -58,12 +58,21 @@ public class AnswerServiceImplTest {
         answer.setQuestionnaire(questionNaire);
         int insert = answerService.insertAnswer(answer);
 
-        System.out.println(answer.getAnswerId());
+        System.out.println(insert);
+    }
+
+    @Test
+    public void updateOne()throws Exception{
+        Answer answer = answerService.selectOne(13);
+        answer.setAnswerText("dsda");
+        int i = answerService.updateOne(answer);
+        System.out.println(i);
+
     }
 
     @Test
     public void deleteOne() throws Exception {
-        int delete = answerService.deleteOne(10);
+        int delete = answerService.deleteOne(13);
         System.out.println(delete);
     }
 }
