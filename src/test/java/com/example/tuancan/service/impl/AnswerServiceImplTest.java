@@ -26,7 +26,7 @@ public class AnswerServiceImplTest {
     @Test
     public void selectOne() throws Exception {
         Answer answer = answerService.selectOne(3);
-        System.out.println(JsonUtil.toJson(answer));
+        System.out.println(answer);
     }
 
     @Test

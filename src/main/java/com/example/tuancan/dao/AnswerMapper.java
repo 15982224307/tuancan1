@@ -40,6 +40,11 @@ public interface AnswerMapper extends Mapper<Answer>{
     @ResultMap(value = "getone")
     public List<Answer> selectAnswerByQues_idOrderByAnswer_date(QuestionNaire questionNaire);
 
+    @Update("update answer set gMStaff_id = #{gMStaff.gMStaffId},questionnaire_id = #{questionnaire.questionnaireId},answer_text = #{answerText},answer_date = #{answerDate} where Answer_id = #{answerId}")
+    @ResultMap(value = "getone")
+    public int updateOne(Answer answer);
+
+
     /**
      *根据该员工编号查询其所属问答情况 并时间排序
      * @return
@@ -48,12 +53,7 @@ public interface AnswerMapper extends Mapper<Answer>{
     @ResultMap(value = "getone")
     public List<Answer> selectAnswerByGMStaff_idOrderByAnswer_date(GroupMealStaff groupMealStaff);
 
-
-    @Update("update answer set gMStaff_id = #{gMStaff.gMStaffId},questionnaire_id = #{questionnaire.questionnaireId},answer_text = #{answerText},answer_date = #{answerDate} where Answer_id = #{answerId}")
-    @ResultMap(value = "getone")
-    public int updateOne(Answer answer);
-
-
+    @Update("update answer set")
     /**
      * 插入一条问答数据
      * @param answer
