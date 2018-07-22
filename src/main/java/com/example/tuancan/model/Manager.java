@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +35,7 @@ public class Manager implements Serializable{
     private String managerName;
 
     /*  状态（0：停用，1启用）  */
-    private int managerStatus;
+    private int managerStatus= StatusEnum.StatusUP.getCode();
 
     /*  电话  */
     private String managerMobile;

@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,15 +49,15 @@ public class Recipe implements Serializable {
 
     /*  荤素标志（1：荤菜，2：素菜））  */
     @Column(name = "recipe_Meat_or_vegetable")
-    private int recipeMeatOrVegetable;
+    private int recipeMeatOrVegetable= StatusEnum.Meat.getCode();
 
     /*  菜品类型（1：炒菜，2：凉菜，3：汤菜，4：蒸菜，5：烧菜） */
     @Column(name = "recipe_type")
-    private int recipeType;
+    private int recipeType=StatusEnum.recipeTypeChaoCai.getCode();
 
     /*  是否糕点（0：不是,1：是）  */
     @Column(name = "recipe_IsCakes")
-    private int recipeIsCakes;
+    private int recipeIsCakes=StatusEnum.NotCakes.getCode();
 
     /*  菜品特色  */
     @Column(name = "recipe_character")
@@ -76,7 +77,7 @@ public class Recipe implements Serializable {
 
     /*  食谱状态(0：不可用，1：可用)  */
     @Column(name = "recipe_status")
-    private int recipeStatus;
+    private int recipeStatus=StatusEnum.StatusUP.getCode();
 
     /*  创建者   */
     @Column(name = "recipe_owner")

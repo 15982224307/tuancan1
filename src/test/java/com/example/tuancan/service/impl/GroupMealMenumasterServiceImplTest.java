@@ -41,6 +41,13 @@ public class GroupMealMenumasterServiceImplTest {
                 service.selectAllWithUnit();
         System.out.println(JsonUtil.toJson(groupMealMenumasters));
     }
+    @Test
+    public void selectByUnitId() throws Exception {
+
+        List<GroupMealMenumaster> groupMealMenumasters =
+                service.selectByUnitId(3);
+        System.out.println(JsonUtil.toJson(groupMealMenumasters));
+    }
 
     @Test
     public void updateOne() throws Exception {

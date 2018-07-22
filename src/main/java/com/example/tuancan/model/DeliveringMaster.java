@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,10 +44,10 @@ public class DeliveringMaster  implements Serializable {
     private String deliveringMasterMemo ;              //varchar(256) comment '备注',
 
     @Column(name = "DeliveringMaster_status")
-    private int deliveringMasterStatus ;           //smallint comment '状态（0：新建，1：确认，2：已支付）',
+    private int deliveringMasterStatus = StatusEnum.MasterStatusNEW.getCode();           //smallint comment '状态（0：新建，1：确认，2：已支付）',
 
     @Column(name = "DeliveringMaster_isEmergency")
-    private int deliveringMasterIsEmergency;         //smallint comment '是否应急配送（0：不是，1：是）',
+    private int deliveringMasterIsEmergency=StatusEnum.NotEmergency.getCode();         //smallint comment '是否应急配送（0：不是，1：是）',
 
     @Column(name = "DeliveringMaster_createdate")
     private Date deliveringMasterCreatedate ;         //timestamp comment '创建日期',

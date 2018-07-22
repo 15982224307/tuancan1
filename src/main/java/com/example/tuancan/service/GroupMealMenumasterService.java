@@ -12,6 +12,8 @@ public interface GroupMealMenumasterService {
 
     public List<GroupMealMenumaster> selectAllWithUnit();
 
+    public  List<GroupMealMenumaster> selectByUnitId(Integer groupMealUnitId);
+
     public  int UpdateOne(GroupMealMenumaster groupMealMenumaster);
 
     public  int InsertOne(GroupMealMenumaster groupMealMenumaster);

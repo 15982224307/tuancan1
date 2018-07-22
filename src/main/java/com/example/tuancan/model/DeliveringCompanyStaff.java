@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,13 +41,13 @@ public class DeliveringCompanyStaff  implements Serializable {
     private String dCompanyStaffPosition;         // varchar(32) comment '职务',
 
     @Column(name = "DCompanyStaff_default")
-    private int dCompanyStaffDefault;          // smallint comment '是否默认账号（0：不是，1：是）',
+    private int dCompanyStaffDefault= StatusEnum.NotDefaultAccount.getCode();// smallint comment '是否默认账号（0：不是，1：是）',
 
     @Column(name = "DCompanyStaff_authority")
     private String dCompanyStaffAuthority;        // varchar(256) comment '权限',
 
     @Column(name = "DCompanyStaff_status")
-    private int dCompanyStaffStatus;           // smallint comment '状态（0：停用，1：启用）',
+    private int dCompanyStaffStatus=StatusEnum.StatusUP.getCode();  // smallint comment '状态（0：停用，1：启用）',
 
     @Column(name = "DCompanyStaff_createdate")
     private Date dCompanyStaffCreatedate;           // timestamp comment '创建日期',

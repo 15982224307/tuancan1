@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,7 +55,7 @@ public class GroupMealContract  implements Serializable {
 
     /*合同状态*/
     @Column(name = "GMlContract_status")
-    private  int gMlContractStatus;         ///smallint comment '',
+    private  int gMlContractStatus= StatusEnum.StatusDOWN.getCode();         ///smallint comment '',
 
     /*签订日期*/
     @Column(name = "GMContract_signdate")

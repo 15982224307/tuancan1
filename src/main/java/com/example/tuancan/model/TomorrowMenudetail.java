@@ -34,12 +34,12 @@ public class TomorrowMenudetail implements Serializable{
     /**
      * 是否推荐
      */
-    @Column(name = "TomorrowMenu_id")
+    @Column(name = "TomorrowMenu_IsRecommend")
     private int tomorrowMenuIsRecommend;
     /**
      * 备注
      */
-    @Column(name = "TomorrowMenu_id")
+    @Column(name = "TomorrowMenu_memo")
     private String tomorrowMenuMemo;
 
     

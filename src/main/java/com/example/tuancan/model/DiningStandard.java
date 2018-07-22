@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,15 +49,15 @@ public class DiningStandard  implements Serializable {
 
     /*是否赠送汤菜*/
     @Column(name = "Standard_IsFreeSoup")
-    private int standardIsFreeSoup;            //  smallint (0:否，1：是)',
+    private int standardIsFreeSoup= StatusEnum.NotFree.getCode();            //  smallint (0:否，1：是)',
 
     /*是否赠送甜点*/
     @Column(name = "Standard_IsFreeDessert")
-    private int standardIsFreeDessert ;          //smallint  '(0:否，1：是)',
+    private int standardIsFreeDessert= StatusEnum.NotFree.getCode();        //smallint  '(0:否，1：是)',
 
     /*是否赠送水果*/
     @Column(name = "Standard_isFreeFruit")
-    private int standardIsFreeFruit ;         //smallint comment '(0:否，1：是)',
+    private int standardIsFreeFruit=StatusEnum.NotFree.getCode() ;     //smallint comment '(0:否，1：是)',
 
     /*创建日期*/
     @Column(name = "Standard_CreateDate")

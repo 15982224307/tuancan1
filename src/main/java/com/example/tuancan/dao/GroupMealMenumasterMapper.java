@@ -20,6 +20,11 @@ public interface GroupMealMenumasterMapper extends Mapper<GroupMealMenumaster> {
     @ResultMap(value = "selectOneById")
     public List<GroupMealMenumaster> selectByName(String name);
 
+    /**
+     * 根据用餐单位ID查询
+     */
+    @Select({"select * from groupmealmenumaster where GroupMealUnit_id=#{groupMealUnitId}"})
+    public  List<GroupMealMenumaster> selectByUnitId(Integer groupMealUnitId);
 
     /**
      *  查询所有

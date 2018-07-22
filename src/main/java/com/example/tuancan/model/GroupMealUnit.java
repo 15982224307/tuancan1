@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,7 +54,7 @@ public class GroupMealUnit implements Serializable{
 
     /*  状态(1：停用，1：启用) */
     @Column(name = "GroupMealUnit_status")
-    private int groupMealUnitStatus;
+    private int groupMealUnitStatus= StatusEnum.StatusUP.getCode();
 
     /*  办公电话  */
     @Column(name = "GroupMealUnit_officetel")

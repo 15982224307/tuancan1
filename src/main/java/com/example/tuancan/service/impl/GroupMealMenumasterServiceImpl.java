@@ -40,6 +40,15 @@ public class GroupMealMenumasterServiceImpl implements GroupMealMenumasterServic
     public List<GroupMealMenumaster> selectAllWithUnit() {
         return groupMealMenuMasterMapper.selectAllWithUnit();
     }
+
+    /**
+     * 根据用餐单位ID查询
+     */
+    @Override
+    public List<GroupMealMenumaster> selectByUnitId(Integer groupMealUnitId) {
+        return groupMealMenuMasterMapper.selectByUnitId(groupMealUnitId);
+    }
+
     /**
      * 更新数据
      * @param groupMealMenumaster

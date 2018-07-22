@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,7 +44,7 @@ public class DeliveringCompany  implements Serializable {
     private String deliveringCompanyAddress;              //varchar(128) comment '地址',
 
     @Column(name = "DeliveringCompany_status")
-    private int deliveringCompanyStatus;              // smallint comment '状态（0：停用，1：启用）',
+    private int deliveringCompanyStatus= StatusEnum.StatusUP.getCode();        // smallint comment '状态（0：停用，1：启用）',
 
     @Column(name = "DeliveringCompany_bank")
     private String deliveringCompanyBank;             // varchar(64) comment '开户行',

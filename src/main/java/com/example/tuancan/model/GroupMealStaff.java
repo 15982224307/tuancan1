@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,7 +38,7 @@ public class GroupMealStaff implements Serializable{
 
     /*  状态(0：停用，1：启用)  */
     @Column(name = "GMStaff_status")
-    private int gMStaffStatus;
+    private int gMStaffStatus= StatusEnum.StatusUP.getCode();
 
     /*  性别  */
     @Column(name = "GMStaff_sex")
@@ -45,7 +46,7 @@ public class GroupMealStaff implements Serializable{
 
     /*  是否默认账号（0：不是,1：是）  */
     @Column(name = "GMStaf_isdefualt")
-    private int gMStafIsdefualt;
+    private int gMStafIsdefualt=StatusEnum.NotDefaultAccount.getCode();
 
     /*  登录账号  */
     @Column(name = "GMStaf_loginname")

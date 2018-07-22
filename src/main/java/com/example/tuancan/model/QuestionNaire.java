@@ -1,5 +1,6 @@
 package com.example.tuancan.model;
 
+import com.example.tuancan.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class QuestionNaire implements Serializable{
 
     /*  类型（1：单选，2：多选，3：主管题） */
     @Column(name = "questionnaire_type")
-    private int questionnaireType;
+    private int questionnaireType= StatusEnum.QuestionnaireTypeDANXUAN.getCode();
 
     /*  选择A  */
     @Column(name = "questionnaire_ChoiceA")

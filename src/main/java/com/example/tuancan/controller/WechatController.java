@@ -1,23 +1,23 @@
 package com.example.tuancan.controller;
 
-import com.example.tuancan.utils.Constants;
 import com.example.tuancan.dto.Scan;
+import com.example.tuancan.utils.Constants;
 import com.example.tuancan.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class WechatController {
         WxMenuButton button1 = new WxMenuButton();
         button1.setType("view");
         button1.setName("点餐");
-        button1.setUrl("http://95ti4r.natappfree.cc/index");
+        button1.setUrl("http://95ti4r.natappfree.cc/wechat/authorize");
         //一级菜单
         WxMenuButton button2 = new WxMenuButton();
         button2.setName("个人管理");
@@ -144,5 +144,38 @@ public class WechatController {
             log.info(JsonUtil.toJson(scan));
         }
         return "";
+    }
+
+    /**
+     * 微信授权
+     * @param
+     * @return
+     */
+    @GetMapping("/wechat/authorize")
+    public String authorize() {
+        //1. 配置
+        //2. 调用方法
+        String returnUrl="http://95ti4r.natappfree.cc/order";
+        //回调url
+        String url ="http://95ti4r.natappfree.cc/wechat/userInfo";
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
+        log.info("redirectUrl={}",redirectUrl);
+        return "redirect:" + redirectUrl;
+    }
+    @GetMapping("/wechat/userInfo")
+    public String userInfo(@RequestParam("code") String code,
+                           @RequestParam("state") String returnUrl) {
+        WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
+        try {
+            wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+        } catch (WxErrorException e) {
+            log.error("【微信网页授权】{}", e);
+           // throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
+        }
+
+        String openId = wxMpOAuth2AccessToken.getOpenId();
+
+        log.info("returnUrl={},openid={}",returnUrl,openId);
+        return "redirect:" + returnUrl+"/"+openId;
     }
 }
