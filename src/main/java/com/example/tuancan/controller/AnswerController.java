@@ -19,4 +19,11 @@ public class AnswerController {
         Answer answer = answerService.selectOne(2);
         return answer;
     }
+
+
+    @RequestMapping("/order")
+    public  String order(){
+        return "/webhtml/order";
+    }
+
 }
