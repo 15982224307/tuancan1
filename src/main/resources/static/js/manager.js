@@ -1,15 +1,21 @@
 $(function(){
     var index = 10;
     $('.sidenav li').click(function(){
-        if(index != $(this).index()){
-            $(this).siblings('li').removeClass('now');
-            $(this).addClass('now');
-            index = $(this).index();
-        }else{
-            if($(this).hasClass("now")){
-                $(this).removeClass('now');
-            }else {
-                $(this).addClass("now");
+
+        if($(this).parent().hasClass("erji")){
+            return false;
+        }else {
+            if (index != $(this).index()) {
+                $(this).siblings('li').removeClass('now');
+                $(this).addClass('now');
+                index = $(this).index();3
+
+            } else {
+                if ($(this).hasClass("now")) {
+                    $(this).removeClass('now');
+                } else {
+                    $(this).addClass("now");
+                }
             }
         }
     });
