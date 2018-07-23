@@ -8,6 +8,10 @@ public interface Constants {
 
     public static class Public{
 
+        public static final Integer RECOMMEND=1;
+        public static final Integer MEAL=1;
+        public static final Integer VEGETABLES=2;
+
     }
     /**
      * 微信所用常量

@@ -11,18 +11,18 @@ public class Scan {
     private Integer id;
 
     /*开发者微信号*/
-    @XmlElement(name="ToUserName")
+    @XmlElement(name="ToUserName",required = false)
     private String toUserName;
 
     /*发送方帐号（一个OpenID）*/
-    @XmlElement(name="FromUserName")
+    @XmlElement(name="FromUserName",required = false)
     private String fromUserName;
 
-    @XmlElement(name="CreateTime")
+    @XmlElement(name="CreateTime",required = false)
     private Integer createTime;
 
     /*消息类型，event */
-    @XmlElement(name="MsgType")
+    @XmlElement(name="MsgType",required = false)
     private String msgType;
 
     /* 事件类型
@@ -30,30 +30,30 @@ public class Scan {
     扫描带参数二维码事件 关注subscribe, 已经关注SCAN，
     自定义菜单事件 CLICK
     上报地理位置事件 LOCATION*/
-    @XmlElement(name="Event")
+    @XmlElement(name="Event",required = false)
     private String event;
 
     /*
     上报地理位置事件 无
     自定义菜单事件 事件KEY值，与自定义菜单接口中KEY值对应
     点击菜单跳转链接时的事件推送 VIEW*/
-    @XmlElement(name="EventKey")
+    @XmlElement(name="EventKey",required = false)
     private String eventKey;
 
     /*二维码的ticket 用户关注或未关注 扫描二维码进公众号会发送*/
-    @XmlElement(name="Ticket")
+    @XmlElement(name="Ticket",required = false)
     private String ticket;
 
     /*地理位置纬度*/
-    @XmlElement(name="Latitude")
+    @XmlElement(name="Latitude",required = false)
     private String latitude;
 
     /*地理位置经度*/
-    @XmlElement(name="Longitude")
+    @XmlElement(name="Longitude",required = false)
     private String longitude;
 
     /*地理位置精度*/
-    @XmlElement(name="Precision")
+    @XmlElement(name="Precision",required = false)
     private String precision;
 
 

@@ -46,8 +46,8 @@
 
                 $li.removeClass();
                 $this.addClass('current');
-                $ul.css('display','none');
-                $ul.eq($t).css('display','block');
+                //$ul.css('display','none');
+               // $ul.eq($t).css('display','block');
             })
         }
     })

@@ -35,6 +35,11 @@ public class TomorrowMenuMasterServiceImpl implements TomorrowMenuMasterService 
         return tomorrowMenuMasterMapper.selectByUnitId(id);
     }
 
+    @Override
+    public List<TomorrowMenuMaster> selectByUnitIdAndUseDateAndExpireDate(Integer unitid) {
+        return tomorrowMenuMasterMapper.selectByUnitIdAndUseDateAndExpireDate(unitid);
+    }
+
     /**
      * 根据状态查询
      *

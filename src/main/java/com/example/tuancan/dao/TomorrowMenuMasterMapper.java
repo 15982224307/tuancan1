@@ -22,7 +22,12 @@ public interface TomorrowMenuMasterMapper extends Mapper<TomorrowMenuMaster> {
     /*根据用餐单位查询*/
     @Select("select * from tomorrowmenumaster where GroupMealUnit_id = #{unitid}")
     @ResultMap(value = "getone")
-    public List<TomorrowMenuMaster> selectByUnitId(Integer id);
+    public List<TomorrowMenuMaster> selectByUnitId(Integer unitid);
+
+    /*根据用餐单位,使用期限，有效期查询唯一菜单主表查询*/
+    @Select("select * from tomorrowmenumaster where GroupMealUnit_id = #{unitid} and " +
+            "DATE_ADD(CURDATE(),INTERVAL 1 DAY) <= TomorrowMenuMaster_usedate and now() < TomorrowMenuMaster_expiredate")
+    public List<TomorrowMenuMaster> selectByUnitIdAndUseDateAndExpireDate(Integer unitid);
 
     /*根据状态查询*/
     @Select("select * from tomorrowmenumaster where TomorrowMenuMaster_status = #{status}")

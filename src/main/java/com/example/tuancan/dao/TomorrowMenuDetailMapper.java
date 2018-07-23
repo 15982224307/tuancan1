@@ -33,9 +33,10 @@ public interface TomorrowMenuDetailMapper extends Mapper<TomorrowMenudetail>{
     })
     public List<TomorrowMenudetail> selectByMenuMasterId(Integer id);
 
+
     /*是否推荐*/
     @Select("select * from tomorrowmenudetail where TomorrowMenu_IsRecommend =#{recommend}")
-    @ResultMap(value = "getone")
+    @ResultMap(value = "selectByMenuMasterId")
     public List<TomorrowMenudetail> selectByRecommend(int recommend);
 
     /*所有数据*/

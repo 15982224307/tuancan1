@@ -1,5 +1,6 @@
 package com.example.tuancan.controller;
 
+import com.example.tuancan.config.ProjectUrlConfig;
 import com.example.tuancan.dto.Scan;
 import com.example.tuancan.utils.Constants;
 import com.example.tuancan.utils.JsonUtil;
@@ -29,6 +30,9 @@ public class WechatController {
     @Autowired
     private WxMpService wxMpService;
 
+    @Autowired
+    private ProjectUrlConfig projectUrlConfig;
+
     @RequestMapping(value = "/wechat",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String index(HttpServletRequest request,@RequestBody Scan scan){
@@ -52,7 +56,7 @@ public class WechatController {
         WxMenuButton button1 = new WxMenuButton();
         button1.setType("view");
         button1.setName("点餐");
-        button1.setUrl("http://95ti4r.natappfree.cc/wechat/authorize");
+        button1.setUrl(projectUrlConfig.getWhchatAuthorize()+"/wechat/authorize");
         //一级菜单
         WxMenuButton button2 = new WxMenuButton();
         button2.setName("个人管理");
@@ -155,16 +159,16 @@ public class WechatController {
     public String authorize() {
         //1. 配置
         //2. 调用方法
-        String returnUrl="http://95ti4r.natappfree.cc/order";
+        String returnUrl=projectUrlConfig.getWhchatAuthorize()+"/order/get";
         //回调url
-        String url ="http://95ti4r.natappfree.cc/wechat/userInfo";
+        String url =projectUrlConfig.getWhchatAuthorize()+"/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         log.info("redirectUrl={}",redirectUrl);
         return "redirect:" + redirectUrl;
     }
     @GetMapping("/wechat/userInfo")
     public String userInfo(@RequestParam("code") String code,
-                           @RequestParam("state") String returnUrl) {
+                           @RequestParam("state") String returnUrl,HttpServletRequest request) {
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
         try {
             wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
@@ -174,8 +178,9 @@ public class WechatController {
         }
 
         String openId = wxMpOAuth2AccessToken.getOpenId();
-
+        //设置session
+        request.getSession(true).setAttribute("openId",openId);
         log.info("returnUrl={},openid={}",returnUrl,openId);
-        return "redirect:" + returnUrl+"/"+openId;
+        return "redirect:" + returnUrl;
     }
 }

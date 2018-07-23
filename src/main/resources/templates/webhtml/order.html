@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0047)http://yanshi.sucaihuo.com/modals/18/1890/demo/ -->
-<html class="js cssanimations">
+<html class="js cssanimations"  xmlns:th="http://www.thymeleaf.org">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
 		<meta name="description" content="">
@@ -21,18 +21,17 @@
 	<header data-am-widget="header" class="am-header am-header-default sq-head  am-no-layout">
 		 	<div class="top_title">
 				<div class="unit">
-					<i class="unit_name">西华一食堂</i>
-					<i class="unit_phone">15988888888</i>
+					<i class="unit_name" th:text="${cmv.Unitname}"></i>
+					<i class="unit_phone" th:text="'办公电话：'+${cmv.tel}"></i>
 
 				</div>
 
 				<div class="unit_location">
-					<img src="icon/location.png">
-					<i class="unit_address">四川成都西华大学</i>
+					<img src="/icon/location.png">
+					<i class="unit_address" th:text="${cmv.address}"></i>
 				</div>
 				<div class="staff">
-					<i class="staff_unit">416软件开发</i>
-					<i class="staff_id">3120150905208</i>
+					<i class="staff_unit" th:text="'所在公司：'+${cmv.staffName}"></i>
 				</div>
 
 			</div>
@@ -44,18 +43,19 @@
 
 		<div class="content-list" id="outer">
 	    	<div class="list-left" id="tab">
-	    		<li class="current"><a style="position: relative;">明日推荐<i class="num">8</i></a></li>
-	    		<li><a>荤菜</a></li>
-	    		<li><a>素菜</a></li>
+	    		<li class="current"><a style="position: relative;" href="#tuijian">明日推荐<i class="num">8</i></a></li>
+	    		<li><a href="#huncai">荤菜</a></li>
+	    		<li><a href="#sucai">素菜</a></li>
 
 	    	</div>
 	    	<div class="list-right" id="content"  >
 	    		<ul class="list-pro" style="display: block;"  >
-			    	<li>
+					<li><a href="#"  name="tuijian">明日推荐</a></li>
+			    	<li th:each="t : ${cmv.commends}">
 			    		<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
 			    		<div class="shop-list-mid">
-		                	<div class="tit"><a href="#" >法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-		                	<div class="am-gallery-desc">￥52</div>
+		                	<div class="tit"><a href="#" th:text="${t.recipeName}">青椒肉丝</a></div>
+		                	<div class="am-gallery-desc" th:text="${t.recipeType == 1}? '炒菜' : (${t.recipeType == 2}? '凉菜' : (${t.recipeType == 3}? '汤菜' : (${t.recipeType == 4}? '蒸菜' : '烧菜')))">￥52</div>
 		                </div>
 		                <div class="list-cart">
 			                <div class="d-stock ">
@@ -65,115 +65,38 @@
 							</div>
 		                </div> 
 			    	</li>
-					<li>
+
+					<li ><a href="#" name="huncai" >荤菜</a></li>
+					<li th:each="t : ${cmv.meals}">
 						<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
 						<div class="shop-list-mid">
-							<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-							<div class="am-gallery-desc">￥52</div>
+							<div class="tit"><a href="#" th:text="${t.recipeName}">青椒肉丝</a></div>
+							<div class="am-gallery-desc" th:text="${t.recipeType == 1}? '炒菜' : (${t.recipeType == 2}? '凉菜' : (${t.recipeType == 3}? '汤菜' : (${t.recipeType == 4}? '蒸菜' : '烧菜')))">￥52</div>
 						</div>
 						<div class="list-cart">
 							<div class="d-stock ">
-								<a class="add_to_cart" href="#">
+								<a class="add_to_cart" href="#" onclick="deleteOne('wang')">
 									<img  src="/icon/add.png" style="width:25px;height:25px"  >
 								</a>
 							</div>
 						</div>
 					</li>
-					<li>
+
+					<li><a href="#"  name="sucai">素菜</a></li>
+					<li th:each="t : ${cmv.veges}">
 						<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
 						<div class="shop-list-mid">
-							<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-							<div class="am-gallery-desc">￥52</div>
+							<div class="tit"><a href="#" th:text="${t.recipeName}">青椒肉丝</a></div>
+							<div class="am-gallery-desc" th:text="${t.recipeType == 1}? '炒菜' : (${t.recipeType == 2}? '凉菜' : (${t.recipeType == 3}? '汤菜' : (${t.recipeType == 4}? '蒸菜' : '烧菜')))">炒菜</div>
 						</div>
 						<div class="list-cart">
 							<div class="d-stock ">
-								<a class="add_to_cart" href="#">
+								<a class="add_to_cart" href="#" onclick="deleteOne('wang')">
 									<img  src="/icon/add.png" style="width:25px;height:25px"  >
 								</a>
 							</div>
 						</div>
 					</li>
-					<li>
-						<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
-						<div class="shop-list-mid">
-							<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-							<div class="am-gallery-desc">￥52</div>
-						</div>
-						<div class="list-cart">
-							<div class="d-stock ">
-								<a class="add_to_cart" href="#">
-									<img  src="/icon/add.png" style="width:25px;height:25px"  >
-								</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
-						<div class="shop-list-mid">
-							<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-							<div class="am-gallery-desc">￥52</div>
-						</div>
-						<div class="list-cart">
-							<div class="d-stock ">
-								<a class="add_to_cart" href="#">
-									<img  src="/icon/add.png" style="width:25px;height:25px"  >
-								</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
-						<div class="shop-list-mid">
-							<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-							<div class="am-gallery-desc">￥52</div>
-						</div>
-						<div class="list-cart">
-							<div class="d-stock ">
-								<a class="add_to_cart" href="#">
-									<img  src="/icon/add.png" style="width:25px;height:25px"  >
-								</a>
-							</div>
-						</div>
-					</li><li>
-					<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
-					<div class="shop-list-mid">
-						<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-						<div class="am-gallery-desc">￥52</div>
-					</div>
-					<div class="list-cart">
-						<div class="d-stock ">
-							<a class="add_to_cart" href="#">
-								<img  src="/icon/add.png" style="width:25px;height:25px"  >
-							</a>
-						</div>
-					</div>
-				</li><li>
-					<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
-					<div class="shop-list-mid">
-						<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-						<div class="am-gallery-desc">￥52</div>
-					</div>
-					<div class="list-cart">
-						<div class="d-stock ">
-							<a class="add_to_cart" href="#">
-								<img  src="/icon/add.png" style="width:25px;height:25px"  >
-							</a>
-						</div>
-					</div>
-				</li><li>
-					<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
-					<div class="shop-list-mid">
-						<div class="tit"><a href="#">法国加力果12个装 进口新鲜水果 嘎啦苹果 包邮</a></div>
-						<div class="am-gallery-desc">￥52</div>
-					</div>
-					<div class="list-cart">
-						<div class="d-stock ">
-							<a class="add_to_cart" href="#">
-								<img  src="/icon/add.png" style="width:25px;height:25px"  >
-							</a>
-						</div>
-					</div>
-				</li>
 
 	            </ul>
 	    	</div>
