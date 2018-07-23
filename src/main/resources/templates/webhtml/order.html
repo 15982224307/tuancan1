@@ -50,7 +50,8 @@
 	    	</div>
 	    	<div class="list-right" id="content"  >
 	    		<ul class="list-pro" style="display: block;"  >
-					<li><a href="#"  name="tuijian">明日推荐</a></li>
+					<a class="target-fix" name="tuijian"></a>
+					<li><i href="#" style="color: dodgerblue" >明日推荐</i></li>
 			    	<li th:each="t : ${cmv.commends}">
 			    		<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
 			    		<div class="shop-list-mid">
@@ -66,7 +67,8 @@
 		                </div> 
 			    	</li>
 
-					<li ><a href="#" name="huncai" >荤菜</a></li>
+					<a class="target-fix" name="huncai"></a>
+					<li ><i href="#"  style="color: dodgerblue">荤菜</i></li>
 					<li th:each="t : ${cmv.meals}">
 						<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
 						<div class="shop-list-mid">
@@ -82,7 +84,8 @@
 						</div>
 					</li>
 
-					<li><a href="#"  name="sucai">素菜</a></li>
+					<a class="target-fix" name="tuijian"></a>
+					<li><i href="#"   style="color: dodgerblue" >素菜</i></li>
 					<li th:each="t : ${cmv.veges}">
 						<a href="#"><img src="/img/greentea.png" class="list-pic"></a>
 						<div class="shop-list-mid">

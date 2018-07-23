@@ -21,8 +21,9 @@ public class AnswerController {
     }
 
 
-    @RequestMapping("/order")
-    public  String order(){
+    @RequestMapping("/order2")
+    public  String order2(){
+
         return "/webhtml/order";
     }
 
