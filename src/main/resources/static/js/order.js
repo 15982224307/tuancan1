@@ -50,5 +50,5 @@
                // $ul.eq($t).css('display','block');
             })
         }
-    })
+    });
 

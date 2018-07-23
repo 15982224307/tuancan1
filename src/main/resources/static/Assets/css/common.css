@@ -5,6 +5,15 @@ body{
 	color:#656565;
 	background:#E9E9E9;
 }
+html,body{
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
 a{
 	color:#656565;
 }
