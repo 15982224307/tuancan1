@@ -1,14 +1,22 @@
 package com.example.tuancan.controller;
 
+import com.example.tuancan.model.DeliveringCompany;
+import com.example.tuancan.service.DeliveringCompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/frame")
 public class ManagerController {
 
-    @RequestMapping("/{area}")
+    @Autowired
+    private DeliveringCompanyService deliveringCompanyService;
+
+    @RequestMapping("/frame/{area}")
     public String getTop(@PathVariable(name = "area") String area){
         //顶部
         if (area.equals("top")){
@@ -18,13 +26,20 @@ public class ManagerController {
 
             return "/manager/left";
         //默认的中间
-        }else if (area.equals("hy_list")){
+        }else if (area.equals("rjsj")){
 
-            return "/manager/hy_list";
+            return "/manager/rjsj";
         }
 
         return "";
     }
 
+    @RequestMapping("/tuancan_list")
+    public String dclist(Model model){
+
+        List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllWithGrade();
+        model.addAttribute("dclist",deliveringCompanies);
+        return "/manager/hy_list";
+    }
 
 }

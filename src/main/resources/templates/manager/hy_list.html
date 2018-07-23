@@ -6,7 +6,9 @@
 <link rel="stylesheet" type="text/css" href="/Assets/css/reset.css" th:href="@{/Assets/css/reset.css}" />
 <link rel="stylesheet" type="text/css" href="/Assets/css/common.css" th:href="@{/Assets/css/common.css}"/>
 <link rel="stylesheet" type="text/css" href="/Assets/css/thems.css" th:href="@{/Assets/css/thems.css}">
-<script type="text/javascript" src="/Assets/js/jquery-1.8.3.min.js" th:src="@{/Assets/js/jquery-1.8.3.min.js}"></script>
+<!--<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.1/css/bootstrap.css" th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap.css}">-->
+
+<script src="/webjars/jquery/3.3.0/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	//自适应屏幕宽度
@@ -17,7 +19,7 @@ $(function(){
 	
 	var search_w = $(window).width()-40;
 	$('.search').css('width',search_w+'px');
-	//$('.list_hy').css('width',search_w+'px');
+	$('.list_hy').css('width',search_w+'px');
 });
 </script>
 <!--框架高度设置-->
@@ -29,7 +31,7 @@ $(function(){
 		<!--会议列表-->
         <div class="hy_list">
         	<div class="box_t">
-            	<span class="name">会议列表</span>
+            	<span class="name">团餐机构列表</span>
                 <!--当前位置-->
                 <div class="position">
                 	<a href=""><img src="/Assets/images/icon5.png" alt=""/></a>
@@ -43,7 +45,7 @@ $(function(){
             </div>
             <!--查询-->
             <div class="search">
-            	<span>按会议名称查询：</span>
+            	<span>按团餐机构名称查询：</span>
                 <div class="s_text"><input name="" type="text"></div>
                 <a href="" class="btn">查询</a>
             </div>
@@ -51,78 +53,35 @@ $(function(){
             <div class="space_hx">&nbsp;</div>
             <!--列表-->
             <form action="" method="post">
-            <table cellpadding="0" cellspacing="0" class="list_hy">
-              <tr>
-                <th class="xz" scope="col">选择</th>
-                <th scope="col"><div>会议名称/号码<a href="" class="up">&nbsp;</a><a href="" class="down">&nbsp;</a></div></th>
-                <th class="zt" scope="col"><div>状态<a href="" class="up">&nbsp;</a><a href="" class="down">&nbsp;</a></div></th>
-                <th scope="col">开始时间</th>
-                <th scope="col">时长</th>
-                <th scope="col">与会终端数</th>
-                <th scope="col">会议类型</th>
-                <th scope="col">会议容量</th>
-              </tr>
-              <tr>
-                <td class="xz"><input name="" type="checkbox" value=""></td>
-                <td>ip64/1</td>
-                <td class="zt">-</td>
-                <td>2012-10-11 13:28</td>
-                <td>永久会议</td>
-                <td>-</td>
-                <td>主会议</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="xz"><input name="" type="checkbox" value=""></td>
-                <td>ip64/1</td>
-                <td class="zt">-</td>
-                <td>2012-10-11 13:28</td>
-                <td>永久会议</td>
-                <td>-</td>
-                <td>主会议</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="xz"><input name="" type="checkbox" value=""></td>
-                <td>ip64/1</td>
-                <td class="zt">-</td>
-                <td>2012-10-11 13:28</td>
-                <td>永久会议</td>
-                <td>-</td>
-                <td>主会议</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="xz"><input name="" type="checkbox" value=""></td>
-                <td>ip64/1</td>
-                <td class="zt">-</td>
-                <td>2012-10-11 13:28</td>
-                <td>永久会议</td>
-                <td>-</td>
-                <td>主会议</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="xz"><input name="" type="checkbox" value=""></td>
-                <td>ip64/1</td>
-                <td class="zt">-</td>
-                <td>2012-10-11 13:28</td>
-                <td>永久会议</td>
-                <td>-</td>
-                <td>主会议</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="xz"><input name="" type="checkbox" value=""></td>
-                <td>ip64/1</td>
-                <td class="zt">-</td>
-                <td>2012-10-11 13:28</td>
-                <td>永久会议</td>
-                <td>-</td>
-                <td>主会议</td>
-                <td>-</td>
-              </tr>
-            </table>
+
+
+                <table cellpadding="0" cellspacing="0" class="list_hy">
+                    <tr>
+                        <th scope="col">编号</th>
+                        <th  scope="col">公司名称</th>
+                        <th scope="">联系人</th>
+                        <th scope="">开户行</th>
+                        <th scope="">开户账号</th>
+                        <th scope="">办公电话</th>
+                        <th scope="">状态</th>
+
+                    </tr>
+
+                    <tr th:each="dc : ${dclist}">
+                        <td th:text="${dc.deliveringCompanyNo}">xxx</td>
+                        <td th:text="${dc.deliveringCompanyName}" class="zt">公司名称</td>
+                        <td th:text="${dc.deliveringCompanyContact}">公司联系人</td>
+                        <td th:text="${dc.deliveringCompanyBank}">开户行</td>
+                        <td th:text="${dc.deliveringCompanyAccount}">开户账号</td>
+                        <td th:text="${dc.deliveringCompanyTel}">办公电话</td>
+                        <td th:text="${dc.deliveringCompanyStatus}">状态</td>
+                    </tr>
+                </table>
+
+
+
+
+            <!--<li th:include="~{manager/left :: copy}"></li>-->
             <!--列表-->
             <!--右边底部-->
             <div class="r_foot">
