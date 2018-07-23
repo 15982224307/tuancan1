@@ -24,6 +24,25 @@ public class ManagerController {
         }
 
         return "";
+
+
+    }
+    @RequestMapping("/group/{grouparea}")
+    public String getGroupTop(@PathVariable(name = "grouparea") String grouparea) {
+        //顶部
+        if (grouparea.equals("top")) {
+            return "/groupmanager/top";
+            //左边
+        } else if (grouparea.equals("left")) {
+
+            return "/groupmanager/left";
+            //默认的中间
+        } else if (grouparea.equals("hy_list")) {
+
+            return "/manager/hy_list";
+        }
+
+        return "";
     }
 
 
