@@ -26,6 +26,12 @@ public class AnswerController {
         return "/manager/index";
     }
 
+    @RequestMapping("/groupmanager")
+    public  String getGroupManager(){
+
+        return "/groupmanager/index";
+    }
+
     @RequestMapping("/order2")
     public  String order2(){
 
