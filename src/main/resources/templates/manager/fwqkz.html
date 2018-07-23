@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" >
+<title>流服务器控制</title>
+<link rel="stylesheet" type="text/css" href="Assets/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="Assets/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="Assets/css/thems.css">
+<script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//自适应屏幕宽度
+	window.onresize=function(){ location=location }; 
+	
+	var main_h = $(window).height();
+	$('.hy_list').css('height',main_h-45+'px');
+	
+	var search_w = $(window).width()-40;
+	$('.search').css('width',search_w+'px');
+	//$('.list_hy').css('width',search_w+'px');
+});
+</script>
+<!--框架高度设置-->
+</head>
+
+<body onLoad="Resize();">
+<div id="right_ctn">
+	<div class="right_m">
+		<!--会议列表-->
+        <div class="hy_list">
+        	<div class="box_t">
+            	<span class="name">流媒体服务器控制</span>
+                <!--当前位置-->
+                <div class="position">
+                	<a href=""><img src="Assets/images/icon5.png" alt=""/></a>
+                    <a href="">首页</a>
+                    <span><img src="Assets/images/icon3.png" alt=""/></span>
+                    <a href="">流服务器</a>
+                    <span><img src="Assets/images/icon3.png" alt=""/></span>
+                    <a href="">流媒体服务器控制</a>
+                </div>
+                <!--当前位置-->
+            </div>
+            <div class="space_hx">&nbsp;</div>
+            <!--列表-->
+            <form action="" method="post">
+            <table cellpadding="0" cellspacing="0" class="list_hy">
+              <tr>
+                <th scope="col">流服务器名</th>
+                <th scope="col">IP地址</th>
+                <th scope="col">存储空间 （G bytes）</th>
+                <th scope="col">已使用空间（G bytes）</th>
+                <th scope="col">状态</th>
+              </tr>
+              <tr>
+                <td>ip64/1</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>ip64/1</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>ip64/1</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>ip64/1</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>ip64/1</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </table>
+            <!--列表-->
+            </form>
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+</body>
+</html>

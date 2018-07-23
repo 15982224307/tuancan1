@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" >
+<title>软件升级</title>
+<link rel="stylesheet" type="text/css" href="Assets/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="Assets/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="Assets/css/thems.css">
+<script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//自适应屏幕宽度
+	window.onresize=function(){ location=location }; 
+	
+	var main_h = $(window).height();
+	$('.hy_list').css('height',main_h-45+'px');
+	
+	var main_w = $(window).width();
+	$('.xjhy').css('width',main_w-40+'px');
+	
+	
+});
+</script>
+</head>
+
+<body onLoad="Resize();">
+<div id="right_ctn">
+	<div class="right_m">
+		<!--会议列表-->
+        <div class="hy_list">
+        	<div class="box_t">
+            	<span class="name">软件升级</span>
+                <!--当前位置-->
+                <div class="position">
+                	<a href=""><img src="Assets/images/icon5.png" alt=""/></a>
+                    <a href="">首页</a>
+                    <span><img src="Assets/images/icon3.png" alt=""/></span>
+                    <a href="">系统维护</a>
+                    <span><img src="Assets/images/icon3.png" alt=""/></span>
+                    <a href="">软件升级</a>
+                </div>
+                <!--当前位置-->
+            </div>
+            <div class="space_hx">&nbsp;</div>
+            <!--终端列表-->
+            <form action="" method="post">
+            <div class="xjhy">
+            <!--基本配置-->
+            	<p>友情提示：</p>
+                <ul class="hfsz">
+                	<li>系统当前模式为正常模式时只能升级安全模式程序。</li>
+                    <li>系统当前模式为安全模式时只能升级正常模式程序。</li>
+                    <li>点击’升级安全模式程序‘按钮，系统将升级安全模式程序。。</li>
+                    <li>点击’升级正常模式程序‘按钮，系统在重启后进入安全模式进行软件升级，稍后请重新登入。。</li>
+                    <li>软件服务器地址只在升级安全模式程序时必须填写。</li>
+                </ul>
+                <ul class="hypz" style="border-top:1px solid #dedede; margin-top:30px;">
+                	<li class="clearfix">
+                        <span class="title">登录名：</span>
+                        <div class="li_r">
+                            <input name="" type="text">
+                            <i>*</i>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <span class="title">密码：</span>
+                        <div class="li_r">
+                            <input name="" type="password">
+                            <i>*</i>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <span class="title">软件服务器地址：</span>
+                        <div class="li_r">
+                            <input name="" type="text">
+                        </div>
+                    </li>
+                    <li style="height:60px;">
+                    	<p>正确的软件服务器地址形式： http://10.16.10.27:80/M800Upgrade/或http://10.16.10.27/M800Uprade/ （默认端口：80）</p>
+                    </li>
+                    <li class="tj_btn">
+                        <a href="" class="back">升级正常模式程序</a>
+                        <a href="" class="back">升级安全模式程序</a>
+                    </li>
+                </ul>
+            <!--基本配置-->
+            </div>
+            </form>
+            <!--终端列表-->
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+</body>
+</html>

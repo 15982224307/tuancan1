@@ -13,13 +13,18 @@ public class AnswerController {
     @Autowired
     private AnswerService answerService;
 
-    @RequestMapping("/index")
+    @RequestMapping("/index1")
     @ResponseBody
     public  Answer getAnswer(){
         Answer answer = answerService.selectOne(2);
         return answer;
     }
 
+    @RequestMapping("/index")
+    public  String getMana(){
+
+        return "/manager/index";
+    }
 
     @RequestMapping("/order")
     public  String order(){
