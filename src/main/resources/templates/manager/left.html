@@ -6,23 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/Assets/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="/Assets/css/common.css"/>
 <script type="text/javascript" src="/Assets/js/jquery-1.8.3.min.js"></script>
-<!--框架高度设置-->
-<script type="text/javascript">
-$(function(){
-	$('.sidenav li').click(function(){
-		$(this).siblings('li').removeClass('now');
-		$(this).addClass('now');
-	});
+<script src="/js/manager.js" type="text/javascript"></script>
 
-	$('.erji li').click(function(){
-		$(this).siblings('li').removeClass('now_li');
-		$(this).addClass('now_li');
-	});
-	
-	var main_h = $(window).height();
-	$('.sidenav').css('height',main_h+'px');
-})
-</script>
 <!--框架高度设置-->
 </head>
 
@@ -63,12 +48,12 @@ $(function(){
         </li>
         <li>
             <div class="nav_m">
-                <span><a>定义菜系</a></span>
+                <span><a>菜系分类管理</a></span>
                 <i>&nbsp;</i>
             </div>
             <ul class="erji">
                 <li>
-                    <span><a href="lfpz.html" target="main">菜谱列表</a></span>
+                    <span><a href="lfpz.html" target="main">菜谱类型列表</a></span>
                 </li>
                 <li>
                     <span><a href="fwqkz.html" target="main">原材料分类管理</a></span>
