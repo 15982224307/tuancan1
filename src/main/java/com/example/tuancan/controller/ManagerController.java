@@ -35,7 +35,7 @@ public class ManagerController {
 
 
     }
-    @RequestMapping("/group/{grouparea}")
+    @RequestMapping("/frame/group/{grouparea}")
     public String getGroupTop(@PathVariable(name = "grouparea") String grouparea) {
         //顶部
         if (grouparea.equals("top")) {
