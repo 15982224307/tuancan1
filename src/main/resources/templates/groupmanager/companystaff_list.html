@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" >
+<title>会议列表</title>
+<link rel="stylesheet" type="text/css" href="/Assets/css/reset.css" th:href="@{/Assets/css/reset.css}" />
+<link rel="stylesheet" type="text/css" href="/Assets/css/common.css" th:href="@{/Assets/css/common.css}"/>
+<link rel="stylesheet" type="text/css" href="/Assets/css/thems.css" th:href="@{/Assets/css/thems.css}">
+<script src="/webjars/jquery/3.3.0/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	//自适应屏幕宽度
+	window.onresize=function(){ location=location }; 
+	
+	var main_h = $(window).height();
+	$('.hy_list').css('height',main_h-45+'px');
+	
+	var search_w = $(window).width()-40;
+	$('.search').css('width',search_w+'px');
+	$('.list_hy').css('width',search_w+'px');
+});
+</script>
+<!--框架高度设置-->
+</head>
+
+<body onLoad="Resize();">
+<div id="right_ctn">
+	<div class="right_m">
+		<!--会议列表-->
+        <div class="hy_list">
+        	<div class="box_t">
+            	<span class="name">员工管理与授权</span>
+                <!--当前位置-->
+                <div class="position">
+                	<a href=""><img src="/Assets/images/icon5.png" alt=""/></a>
+                    <a href="">首页</a>
+                    <span><img src="/Assets/images/icon3.png" alt=""/></span>
+                    <a href="">管理与授权</a>
+                </div>
+                <!--当前位置-->
+            </div>
+            <!--查询-->
+            <div class="search">
+            	<span>按团餐机构名称查询：</span>
+                <div class="s_text"><input name="" type="text"></div>
+                <a href="" class="btn">查询</a>
+            </div>
+            <!--查询-->
+            <div class="space_hx">&nbsp;</div>
+            <!--列表-->
+            <form action="" method="post">
+
+
+                <table cellpadding="0" cellspacing="0" class="list_hy" >
+                    <tr>
+                        <th style="width: 150px">序号</th>
+                        <th >账号</th>
+                        <th >手机号</th>
+                        <th >职务</th>
+                        <th style="width: 150px">默认账号</th>
+                        <th style="width: 150px">状态</th>
+                        <th style="width: 150px">操作</th>
+
+                    </tr>
+
+                    <tr th:each="staff,cout: ${staff_list}">
+                        <td th:text="${cout.count}">1</td>
+                        <td ><a th:text="${staff.dCompanyStaffLoginname}" style="color: #2AB8FF;"  ></a></td>
+                        <td th:text="${staff.dCompanyStaffMobile}" >手机号</td>
+                        <td th:text="${staff.dCompanyStaffPosition}">职务</td>
+                        <td >
+                            <i th:text="是" class="text-danger" th:if="${staff.dCompanyStaffDefault==0}"></i>
+                            <i th:text="否" class="text-primary" th:if="${staff.dCompanyStaffDefault==1}"></i>
+                        </td>
+                        <td >
+                            <i th:text="停用" th:class="text-danger" th:if="${staff.dCompanyStaffStatus==0}"></i>
+                            <i th:text="启用" th:class="text-primary" th:if="${staff.dCompanyStaffStatus==1}"></i>
+                        </td>
+                        <td>
+                            <a th:text="授权"  th:href="@{/companystaff/authorization(dCompanyStaffId=${staff.dCompanyStaffId})}" target="main"></a>
+                        </td>
+                    </tr>
+                </table>
+
+            <!--<li th:include="~{manager/left :: copy}"></li>-->
+            <!--列表-->
+            <!--右边底部-->
+            <div class="r_foot">
+            	<div class="r_foot_m">
+            	<span>
+                	<!--<input name="" type="checkbox" value="">-->
+                    <!--<em>全部选中</em>-->
+                </span>
+                <!--<a href="" class="btn">删除</a>-->
+                <a href="" class="btn  .glyphicon .glyphicon-repeat">刷新</a>
+                
+                <!--分页-->
+                <div class="page">
+                	<a href="" class="prev"><img src="/Assets/images/icon7.png" alt=""/></a>
+                    <a class="now">1</a>
+                    <a href="">2</a>
+                    <a href="">3</a>
+                    <a href="">4</a>
+                    <a href="">5</a>
+                    <a href="">6</a>
+                    <a href="" class="next"><img src="/Assets/images/icon8.png" alt=""/></a>
+                </div>
+                <!--分页-->
+                </div>
+            </div>
+            </form>
+            <!--右边底部-->
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+</body>
+</html>

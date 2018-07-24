@@ -30,8 +30,7 @@ public class DeliveringCompanyStaffServiceImplTest {
     @Test
     public void selectAllByCompanyNo() throws Exception {
         DeliveringCompany company = new DeliveringCompany();
-        company.setDeliveringCompanyNo(1);
-        List<DeliveringCompanyStaff> deliveringCompanyStaffs = staffService.selectAllByCompanyNo(company);
+        List<DeliveringCompanyStaff> deliveringCompanyStaffs = staffService.selectAllByCompanyNo(1);
         System.out.println(JsonUtil.toJson(deliveringCompanyStaffs));
     }
 

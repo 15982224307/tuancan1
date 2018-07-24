@@ -22,8 +22,8 @@ public class DeliveringCompanyStaffServiceImpl implements DeliveringCompanyStaff
     }
 
     @Override
-    public List<DeliveringCompanyStaff> selectAllByCompanyNo(DeliveringCompany deliveringCompany) {
-        return dCStaffmapper.selectAllByCompanyNo(deliveringCompany);
+    public List<DeliveringCompanyStaff> selectAllByCompanyNo(Integer companyId) {
+        return dCStaffmapper.selectAllByCompanyNo(companyId);
     }
 
     @Override

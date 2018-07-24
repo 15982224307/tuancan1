@@ -26,9 +26,9 @@ public interface DeliveringCompanyStaffMapper extends Mapper<DeliveringCompanySt
      * @param
      * @return
      */
-    @Select({"select * from deliveringcompanystaff where DeliveringCompany_no=#{deliveringCompanyNo}"})
+    @Select({"select * from deliveringcompanystaff where DeliveringCompany_no=#{companyId}"})
     @ResultMap(value = "selectByIdWithCompany")
-    public List<DeliveringCompanyStaff> selectAllByCompanyNo(DeliveringCompany deliveringCompany);
+    public List<DeliveringCompanyStaff> selectAllByCompanyNo(Integer companyId);
 
     /**
      * 根据id修改员工信息

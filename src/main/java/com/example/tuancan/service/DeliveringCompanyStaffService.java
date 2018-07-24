@@ -9,7 +9,7 @@ public interface DeliveringCompanyStaffService {
 
     public DeliveringCompanyStaff selectByIdWithCompany(DeliveringCompanyStaff deliveringCompanyStaff);
 
-    public List<DeliveringCompanyStaff> selectAllByCompanyNo(DeliveringCompany deliveringCompany);
+    public List<DeliveringCompanyStaff> selectAllByCompanyNo(Integer companyId);
 
     public int updateOneById(DeliveringCompanyStaff deliveringCompanyStaff);
 
