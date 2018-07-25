@@ -2,6 +2,9 @@ package com.example.tuancan.service;
 
 import com.example.tuancan.model.DeliveringCompany;
 import com.example.tuancan.model.DeliveringCompanyStaff;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -14,5 +17,9 @@ public interface DeliveringCompanyStaffService {
     public int updateOneById(DeliveringCompanyStaff deliveringCompanyStaff);
 
     public  int insertOne(DeliveringCompanyStaff deliveringCompanyStaff);
+
+   public List<DeliveringCompanyStaff> selecyStaffByLikeName(Integer id,String value);
+
+
 
 }

@@ -75,7 +75,7 @@ public class DeliveringCompanyServiceImplTest {
         DeliveringCompany deliveringCompany = new DeliveringCompany();
         deliveringCompany.setDeliveringCompanyNo(2);
 
-        DeliveringCompany deliveringCompany1 = service.selectByIdWithGrade(deliveringCompany);
+        DeliveringCompany deliveringCompany1 = service.selectByIdWithGrade(deliveringCompany.getDeliveringCompanyNo());
         System.out.println(JsonUtil.toJson(deliveringCompany1));
     }
 

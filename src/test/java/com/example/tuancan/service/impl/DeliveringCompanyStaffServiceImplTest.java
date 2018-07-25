@@ -35,6 +35,13 @@ public class DeliveringCompanyStaffServiceImplTest {
     }
 
     @Test
+    public void selectStaffByLikeName() throws Exception {
+        DeliveringCompany company = new DeliveringCompany();
+        List<DeliveringCompanyStaff> deliveringCompanyStaffs = staffService.selecyStaffByLikeName(2,"1");
+        System.out.println(JsonUtil.toJson(deliveringCompanyStaffs));
+    }
+
+    @Test
     public void updateOneById() throws Exception {
         DeliveringCompanyStaff deliveringCompanyStaff = new DeliveringCompanyStaff();
 
