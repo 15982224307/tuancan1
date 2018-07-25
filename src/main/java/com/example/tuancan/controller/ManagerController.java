@@ -1,22 +1,14 @@
 package com.example.tuancan.controller;
 
-import com.example.tuancan.model.DeliveringCompany;
-import com.example.tuancan.service.DeliveringCompanyService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Slf4j
 @Controller
 public class ManagerController {
 
-    @Autowired
-    private DeliveringCompanyService deliveringCompanyService;
 
     @RequestMapping("/frame/{area}")
     public String getTop(@PathVariable(name = "area") String area){
@@ -55,27 +47,5 @@ public class ManagerController {
         return "";
     }
 
-    @RequestMapping("/tuancan_list")
-    public String dclist(Model model){
 
-        List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllWithGrade();
-        model.addAttribute("dclist",deliveringCompanies);
-        return "/manager/hy_list";
-    }
-
-    @RequestMapping("/get/dc_details")
-    public String dc_details(Model model,DeliveringCompany deliveringCompany){
-
-        if (deliveringCompany.getDeliveringCompanyNo()==null){
-
-            return "/manager/xjhy";
-
-        }
-        log.info("dcid:"+deliveringCompany.getDeliveringCompanyNo());
-        DeliveringCompany company = deliveringCompanyService.selectByIdWithGrade(deliveringCompany);
-
-        model.addAttribute("dc",company);
-
-        return "/manager/xjhy";
-    }
 }

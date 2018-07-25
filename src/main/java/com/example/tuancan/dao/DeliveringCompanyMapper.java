@@ -16,10 +16,11 @@ public interface DeliveringCompanyMapper extends Mapper<DeliveringCompany>{
      * @param deliveringCompany
      * @return
      */
-    @Insert({"insert into deliveringcompany values(null,#{companyGrade.companyGradeId},#{deliveringCompanyName}," +
+    @Insert({"insert into deliveringcompany(CompanyGrade_id,DeliveringCompany_name,DeliveringCompany_contact,DeliveringCompany_Mobile,DeliveringCompany_license," +
+            "DeliveringCompany_address,DeliveringCompany_status,DeliveringCompany_bank,DeliveringCompany_account,DeliveringCompany_disc,DeliveringCompany_tel) values(#{companyGrade.companyGradeId},#{deliveringCompanyName}," +
             "#{deliveringCompanyContact},#{deliveringCompanyMobile},#{deliveringCompanyLicense}," +
             "#{deliveringCompanyAddress},#{deliveringCompanyStatus},#{deliveringCompanyBank}," +
-            "#{deliveringCompanyAccount},#{deliveringCompanyDisc},#{deliveringCompanyTel},null,null)"})
+            "#{deliveringCompanyAccount},#{deliveringCompanyDisc},#{deliveringCompanyTel})"})
     @Options(useGeneratedKeys = true,keyProperty = "deliveringCompanyNo",keyColumn = "DeliveringCompany_no")
     public int insertOne(DeliveringCompany deliveringCompany);
 
@@ -33,8 +34,21 @@ public interface DeliveringCompanyMapper extends Mapper<DeliveringCompany>{
             "DeliveringCompany_address=#{deliveringCompanyAddress},DeliveringCompany_status=#{deliveringCompanyStatus},DeliveringCompany_bank=#{deliveringCompanyBank}," +
             "DeliveringCompany_account=#{deliveringCompanyAccount},DeliveringCompany_disc=#{deliveringCompanyDisc},DeliveringCompany_tel=#{deliveringCompanyTel}," +
             "DeliveringCompany_reviewDate=#{deliveringCompanyReviewDate} where DeliveringCompany_no=#{deliveringCompanyNo}"})
-    @Options(useGeneratedKeys = true,keyProperty = "deliveringCompanyNo",keyColumn = "DeliveringCompany_no")
     public int updateOne(DeliveringCompany deliveringCompany);
+
+    /**
+     * 通过 名称团餐机构的数据
+     * @return
+     */
+    @Select({"select * from deliveringcompany where DeliveringCompany_name like '%${value}%' order by DeliveringCompany_name "})
+    public List<DeliveringCompany> selectAllByName(String name);
+
+    /**
+     * 通过 状态团餐机构的数据
+     * @return
+     */
+    @Select({"select * from deliveringcompany where  DeliveringCompany_status=#{status} order by DeliveringCompany_name "})
+    public List<DeliveringCompany> selectAllByStatus(Integer status);
 
     /**
      * 查询一个团餐机构的数据 并且伴随其等级
@@ -45,13 +59,13 @@ public interface DeliveringCompanyMapper extends Mapper<DeliveringCompany>{
             @Result(column = "CompanyGrade_id",property = "companyGrade",javaType = CompanyGrade.class,
                     one = @One(select = "com.example.tuancan.dao.CompanyGradeMapper.selectByPrimaryKey"))
     })
-    public DeliveringCompany selectByIdWithGrade(DeliveringCompany deliveringCompany);
+    public DeliveringCompany selectByIdWithGrade(Integer deliveringCompany);
 
     /**
      * cha询所有团餐机构的数据 并且伴随其等级
      * @return
      */
-    @Select({"select * from deliveringcompany order by DeliveringCompany_name"})
+    @Select({"select * from deliveringcompany  order by DeliveringCompany_name "})
     @ResultMap(value = "selectByIdWithGrade")
     public List<DeliveringCompany> selectAllWithGrade();
 

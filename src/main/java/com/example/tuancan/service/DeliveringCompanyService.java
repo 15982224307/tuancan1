@@ -11,9 +11,13 @@ public interface DeliveringCompanyService {
 
     public int updateOne(DeliveringCompany deliveringCompany);
 
-    public DeliveringCompany selectByIdWithGrade(DeliveringCompany deliveringCompany);
+    public DeliveringCompany selectByIdWithGrade(Integer deliveringCompany);
 
     public List<DeliveringCompany> selectAllWithGrade();
+
+    public List<DeliveringCompany> selectAllByName(String name);
+
+    public List<DeliveringCompany> selectAllByStatus(Integer status);
 
     public List<DeliveringCompany> findByExample(Example example);
 

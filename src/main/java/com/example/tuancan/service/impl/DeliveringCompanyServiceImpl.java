@@ -44,7 +44,7 @@ public class DeliveringCompanyServiceImpl implements DeliveringCompanyService {
      * @return
      */
     @Override
-    public DeliveringCompany selectByIdWithGrade(DeliveringCompany deliveringCompany) {
+    public DeliveringCompany selectByIdWithGrade(Integer deliveringCompany) {
         return deliveringCompanyMapper.selectByIdWithGrade(deliveringCompany);
     }
 
@@ -55,6 +55,16 @@ public class DeliveringCompanyServiceImpl implements DeliveringCompanyService {
     @Override
     public List<DeliveringCompany> selectAllWithGrade() {
         return deliveringCompanyMapper.selectAllWithGrade();
+    }
+
+    @Override
+    public List<DeliveringCompany> selectAllByName(String name) {
+        return deliveringCompanyMapper.selectAllByName(name);
+    }
+
+    @Override
+    public List<DeliveringCompany> selectAllByStatus(Integer status) {
+        return deliveringCompanyMapper.selectAllByStatus(status);
     }
 
     @Override

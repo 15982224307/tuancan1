@@ -3,7 +3,9 @@ package com.example.tuancan.enums;
 public enum StatusEnum {
 
     StatusDOWN(0,"停用，不可用"),
-    StatusUP(1,"启用，可用"),
+    StatusNew(1,"刚注册"),
+    StatusWait(2,"完善信息后待审核"),
+    StatusUP(3,"审核通过，可用"),
 
     IsDefaultAcoount(0,"不是默认账号"),
     NotDefaultAccount(1,"默认账号"),

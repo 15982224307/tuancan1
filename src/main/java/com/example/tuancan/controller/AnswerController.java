@@ -3,7 +3,6 @@ package com.example.tuancan.controller;
 import com.example.tuancan.model.Answer;
 import com.example.tuancan.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,12 +22,27 @@ public class AnswerController {
         return answer;
     }
 
-    @RequestMapping("/index")
-    public  String getMana(){
+    @RequestMapping("/empty")
+    public  String empty(){
 
-        return "/manager/index";
+        return "/manager/empty";
     }
 
+    @RequestMapping("/panel")
+    public  String panel(){
+
+        return "/manager/tab-panel";
+    }
+    @RequestMapping("/ui")
+    public  String ui(){
+
+        return "/manager/ui-elements";
+    }
+    @RequestMapping("/table")
+    public  String teb(){
+
+        return "/manager/table";
+    }
 
     @RequestMapping("/groupmanager")
     public  String getGroupManager(HttpServletRequest httpServletRequest){
