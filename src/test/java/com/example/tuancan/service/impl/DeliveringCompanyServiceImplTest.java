@@ -54,7 +54,7 @@ public class DeliveringCompanyServiceImplTest {
 
         deliveringCompany.setDeliveringCompanyNo(2);
         deliveringCompany.setCompanyGrade(companyGrade);
-        deliveringCompany.setDeliveringCompanyName("xihua");
+        deliveringCompany.setDeliveringCompanyName("fff");
         deliveringCompany.setDeliveringCompanyContact("33333");
         deliveringCompany.setDeliveringCompanyMobile("13072865896");
         deliveringCompany.setDeliveringCompanyLicense("111");
@@ -75,7 +75,7 @@ public class DeliveringCompanyServiceImplTest {
         DeliveringCompany deliveringCompany = new DeliveringCompany();
         deliveringCompany.setDeliveringCompanyNo(2);
 
-        DeliveringCompany deliveringCompany1 = service.selectByIdWithGrade(deliveringCompany);
+        DeliveringCompany deliveringCompany1 = service.selectByIdWithGrade(deliveringCompany.getDeliveringCompanyNo());
         System.out.println(JsonUtil.toJson(deliveringCompany1));
     }
 

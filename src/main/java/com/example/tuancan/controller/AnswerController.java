@@ -22,6 +22,11 @@ public class AnswerController {
         return answer;
     }
 
+    @RequestMapping("/index")
+    public  String index(){
+
+        return "/manager/pt_index";
+    }
     @RequestMapping("/empty")
     public  String empty(){
 

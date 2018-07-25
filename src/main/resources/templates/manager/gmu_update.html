@@ -1,0 +1,446 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <!-- Bootstrap Styles-->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="/assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> 
+     
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>HYBRID</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right top_right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Doe</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Today</em>
+                                    </span>
+                                </div>
+                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down  top_right"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li class="active">
+                        <a href="ui-elements.html"><i class="fa fa-desktop"></i>用餐单位</a>
+                        <ul class="nav nav-second-level">
+                            <li class="">
+                                <a href="" th:href="@{/groupMealUnit/yes_list}">用餐单位列表<span class="fa "></span></a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/groupMealUnit/no_list}">未审核列表<span class="fa arrow"></span></a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="">
+                        <a href="#"><i class="fa fa-desktop"></i>团餐机构</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >团餐机构列表</a>
+                            </li>
+
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >未审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
+					<li>
+                        <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >菜谱类型列表</a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href=""  th:href="@{/yes_list}" >列表</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="table.html"><i class="fa fa-table"></i>权限设置</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">设置团餐机构等级</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="form.html"><i class="fa fa-edit"></i> 处理投诉 </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">投诉列表</a>
+                            </li>
+                            <li>
+                                <a href="#">未处理列表</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 查询配送<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">xxxx</a>
+                            </li>
+                            <li>
+                                <a href="#">xxx</a>
+                            </li>
+                            <li>
+                                <a href="#">sanji<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+
+
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+
+
+						<ul class="breadcrumb" >
+                            <i style="text-align: left">公司信息</i>
+                                <li><a href="#">首页</a></li>
+                                <li><a href="#">用餐单位</a></li>
+                                <li class="active">公司信息</li>
+
+                        </ul>
+
+                        <ul class="top_search">
+
+
+                            <div class="container-fluid">
+                                <div class="span12">
+                                     <div class="row-fluid">
+                                         <form class="form-horizontal" role="form" id="savegmu">
+                                             <input type="hidden" name="groupMealUnitId" th:value="${unit.groupMealUnitId}">
+                                             <br>
+                                             <div class="row">
+                                                 <label  class="col-sm-2 control-label">公司名称 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" th:value="${unit.groupMealUnitName}" name="groupMealUnitName" class="form-control" id="firstname" placeholder="请输入">
+                                                 </div>
+
+                                                 <label  class="col-sm-2 control-label">开户行 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="groupMealUnitBank" th:value="${unit.groupMealUnitBank}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+                                             </div>
+                                             <br>
+
+                                             <div class="row">
+                                                 <label  class="col-sm-2 control-label">公司联系人 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="groupMealUnitContact" th:value="${unit.groupMealUnitContact}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+
+                                                 <label class="col-sm-2 control-label">开户账号 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="groupMealUnitAccount" th:value="${unit.groupMealUnitAccount}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <div class="row">
+                                                 <label  class="col-sm-2 control-label">联系方式（手机）：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="groupMealUnitMobile" th:value="${unit.groupMealUnitMobile}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+
+                                                 <label  class="col-sm-2 control-label">办公电话 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="groupMealUnitOfficetel" th:value="${unit.groupMealUnitOfficetel}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <div class="row">
+                                                 <label  class="col-sm-2 control-label">地址 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="groupMealUnitAddress" th:value="${unit.groupMealUnitAddress}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+
+                                                 <label  class="col-sm-2 control-label">注册时间 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" disabled th:value="${#dates.format(unit.groupMealUnitCreateDate,'yyyy-MM-dd HH:mm:ss')}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <div class="row">
+                                                 <label for="lastname" class="col-sm-2 control-label">营业执照 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="groupMealUnitLicense" th:value="${unit.groupMealUnitLicense}" class="form-control" id="lastname" placeholder="请输入">
+                                                 </div>
+
+                                                 <label for="lastname" class="col-sm-2 control-label">公司简介 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <textarea  name="groupMealUnitDisc" rows="3" cols="80"  th:text="${unit.groupMealUnitDisc}"></textarea>
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <div class="row">
+                                                 <label for="lastname" class="col-sm-2 control-label">状态 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <span name="" th:text="待审核" class="text-danger" th:if="${unit.groupMealUnitStatus==2}"></span>
+                                                     <span name="" th:text="审核通过" class="text-success" th:if="${unit.groupMealUnitStatus==3}"></span>
+                                                     <span name="" th:text="已停用"  class="text-muted-" th:if="${unit.groupMealUnitStatus==0}"></span>
+
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <br>
+                                             <div class="row">
+                                                 <div class="col-sm-offset-2 col-lg-4">
+                                                     <a id="commit" href="javascript:void(0);" class="btn btn-primary ">&nbsp;提交&nbsp;</a>
+                                                     &nbsp;&nbsp;
+                                                     <a id="cancel" href="javascript:void(0);" class="btn btn-primary ">&nbsp;取消&nbsp;</a>
+                                                 </div>
+                                             </div>
+                                         </form>
+
+
+
+                                     </div>
+                                </div>
+                            </div>
+                        </ul>
+
+
+                       <div class="text_data">
+
+                           <div id="succAlert" hidden class="alert alert-success">
+                               <a href="#" class="close" data-dismiss="alert">&times;</a>
+                               <strong>提交成功！</strong>。
+                           </div>
+                           <div id="warnAlert" hidden="" class="alert alert-warning">
+                               <a href="#" class="close" data-dismiss="alert">&times;</a>
+                               <strong>错误！</strong>您的网络连接有问题。
+                           </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+        <!--<div class="foot_div">-->
+            <!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
+
+        <!--</div>-->
+        <!--隐藏框-->
+
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <!--<script src="/assets/js/jquery-1.10.2.js"></script>-->
+    <script src="/webjars/jquery/3.3.0/jquery.js"></script>
+    <!-- Bootstrap Js -->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+    <script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="/assets/js/jquery.metisMenu.js"></script>
+
+	
+    <!-- Custom Js -->
+    <script src="/assets/js/custom-scripts.js"></script>
+    <script type="text/javascript">
+        $('#commit').click(function () {
+            var formdata=$("#savegmu").serialize();
+            //alert(formdata);
+            $.ajax({
+                url:"/groupMealUnit/save",
+                type:"POST",
+                data:formdata,
+                error:function (error) {
+                    $('#warnAlert').show();
+                },
+                success:function (result) {
+                    $('#succAlert').show();
+                      //location.reload();
+                   // alert("ok");
+                   // window.location.reload();
+                },
+            });
+        });
+        $("#cancel").click(function () {
+            location.reload();
+        });
+    </script>
+
+</body>
+
+</html>
