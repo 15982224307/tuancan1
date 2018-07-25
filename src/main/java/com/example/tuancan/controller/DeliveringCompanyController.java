@@ -8,9 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,20 +39,20 @@ public class DeliveringCompanyController {
         return "/manager/dc_list";
     }
 
-    @RequestMapping("/dc_details")
-    public String dc_details(Model model,DeliveringCompany deliveringCompany){
+    @RequestMapping("/dc_details/{id}")
+    public String dc_details(Model model, @PathVariable("id") Integer id){
 
-        if (deliveringCompany.getDeliveringCompanyNo()==null){
+        if (id==null){
 
-            return "/manager/dc_newOrupdate";
+            return "/manager/dc_update";
 
         }
-        log.info("dcid:"+deliveringCompany.getDeliveringCompanyNo());
-        DeliveringCompany company = deliveringCompanyService.selectByIdWithGrade(deliveringCompany.getDeliveringCompanyNo());
+        log.info("dcid:"+id);
+        DeliveringCompany company = deliveringCompanyService.selectByIdWithGrade(id);
         log.info(JsonUtil.toJson(company));
         model.addAttribute("dc",company);
 
-        return "/manager/dc_newOrupdate";
+        return "/manager/dc_update";
     }
 
     @RequestMapping(value = "/save",method = {RequestMethod.POST})
@@ -64,10 +62,11 @@ public class DeliveringCompanyController {
         log.info(JsonUtil.toJson(company));
         if (company.getDeliveringCompanyNo()!=null){
             DeliveringCompany deliveringCompany= deliveringCompanyService.selectByIdWithGrade(company.getDeliveringCompanyNo());
+
             deliveringCompany.setDeliveringCompanyTel(company.getDeliveringCompanyTel());
             deliveringCompany.setDeliveringCompanyBank(company.getDeliveringCompanyBank());
             deliveringCompany.setDeliveringCompanyContact(company.getDeliveringCompanyContact());
-
+            log.info("name:"+deliveringCompany.getDeliveringCompanyContact());
             int insertOne = deliveringCompanyService.updateOne(deliveringCompany);
             log.info(insertOne+"");
         }else {
@@ -75,5 +74,17 @@ public class DeliveringCompanyController {
         }
         return "ok";
        // return "forward:/deliveringCompany/yes_list";
+    }
+
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
+    public String search(Model model,@RequestParam(name = "name") String name){
+
+        log.info(name);
+        List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllByName(name);
+
+        log.info(JsonUtil.toJson(deliveringCompanies));
+        model.addAttribute("dclist",deliveringCompanies);
+
+        return "/manager/dc_list :: #searchtable";
     }
 }

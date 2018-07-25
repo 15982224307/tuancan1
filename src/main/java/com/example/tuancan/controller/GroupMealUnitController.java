@@ -39,17 +39,17 @@ public class GroupMealUnitController {
     }
 
     @RequestMapping("/gmu_details/{unitId}")
-    public String dc_details(Model model, @PathVariable(value = "",required = false) Integer unitId){
+    public String dc_details(Model model, @PathVariable("unitId") Integer unitId){
 
         if (unitId==null){
-            return "/manager/gmu_newOrupdate";
+            return "/manager/gmu_update";
 
         }else {
             log.info(""+unitId);
 
             GroupMealUnit groupMealUnit = groupMealUnitService.selectOneById(unitId);
             model.addAttribute("unit",groupMealUnit);
-            return "/manager/gmu_newOrupdate";
+            return "/manager/gmu_update";
 
         }
 
@@ -84,7 +84,7 @@ public class GroupMealUnitController {
         log.info(JsonUtil.toJson(groupMealUnits));
         model.addAttribute("gmulist",groupMealUnits);
 
-        return "/manager/gmu_list :: #list_gm";
+        return "/manager/gmu_list :: #searchtable";
     }
 }
 

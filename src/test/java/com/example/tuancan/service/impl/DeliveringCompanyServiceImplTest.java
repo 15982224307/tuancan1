@@ -54,7 +54,7 @@ public class DeliveringCompanyServiceImplTest {
 
         deliveringCompany.setDeliveringCompanyNo(2);
         deliveringCompany.setCompanyGrade(companyGrade);
-        deliveringCompany.setDeliveringCompanyName("xihua");
+        deliveringCompany.setDeliveringCompanyName("fff");
         deliveringCompany.setDeliveringCompanyContact("33333");
         deliveringCompany.setDeliveringCompanyMobile("13072865896");
         deliveringCompany.setDeliveringCompanyLicense("111");
