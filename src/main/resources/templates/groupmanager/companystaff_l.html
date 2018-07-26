@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8" />
@@ -244,71 +244,57 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 
-                    <!--菜单管理-->
                     <li>
-                        <a href="#" ><i class="fa fa-dashboard"></i> 菜单管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">明日菜单</a>
-                            </li>
-                            <li>
-                                <a href="#">用餐单位菜单</a>
-                            </li>
-                        </ul>
+                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <!--配送单管理-->
                     <li>
-                        <a href="#" ><i class="fa fa-desktop"></i> 配送单管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">生成配送单</a>
-                            </li>
-                            <li>
-                                <a href="#">查询配送单</a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">应急配送单</a>
-                            </li>
-                            <li>
-                                <a href="#">结算配送单</a>
-                            </li>
-                        </ul>
+                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
                     </li>
-                    <!--食谱与餐标-->
 					<li>
-                        <a href="#" ><i class="fa fa-bar-chart-o"></i> 食谱与餐标<span class="fa arrow"></span></a>
+                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                    </li>
+                    
+                    <li>
+                        <a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>
+                    </li>
+                    <li>
+                        <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">定义食谱</a>
+                                <a href="#">Second Level Link</a>
                             </li>
                             <li>
-                                <a href="#">定义餐标</a>
+                                <a href="#">Second Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+
+                                </ul>
+
                             </li>
                         </ul>
                     </li>
-                    <!--管理与授权 -->
                     <li>
-                        <a href="" class="active-menu"><i class="fa fa-qrcode"></i> 管理与授权</a>
+                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
                     </li>
-
-                    <!--其他操作-->
-                    <li>
-                        <a href="#" active-menu><i class="fa fa-table"></i> 其他操作<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">确认合同</a>
-                            </li>
-                            <li>
-                                <a href="#">平台投诉</a>
-                            </li>
-                            <li>
-                                <a href="#">完善基本信息</a>
-                            </li>
-                        </ul>
-                    </li>
-
                 </ul>
 
             </div>
@@ -325,8 +311,9 @@
 
 						<ul class="breadcrumb" >
                             <i style="text-align: left">员工列表</i>
-                                <li><a href="/groupmanager/index">首页</a></li>
-                                <li class="active">管理与授权</li>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Library</a></li>
+                                <li class="active">Data</li>
 
                         </ul>
 
@@ -339,9 +326,8 @@
                                     <div class="span12">
                                      <div class="row-fluid">
                                          <form class="">
-                                             按账号 <span  class="text-info">(手机号)</span> 查询： <input id="search_input" class="input-medium search-query" type="text" />
-                                             <button id="search_name" class=" btn-mini btn_search" type="button">查询</button>
-                                             <button  data-toggle="modal" data-target="#myModal" id="add_staff" class=" btn-mini btn_search" type="button">添加</button>
+                                             按会议名称查询： <input class="input-medium search-query" type="text" />
+                                             <button class=" btn-mini btn_search" type="button">按钮</button>
                                         </form>
                                     </div>
                                 </div>
@@ -349,65 +335,9 @@
                         </ul>
 
 
-                        <div class="text_data ">
-
-                            <table id="table_staff" class="table table-hover  table-striped table-bordered table_shadow">
-                                <thead>
-                                <tr>
-                                    <th>编号</th>
-                                    <th>账号</th>
-                                    <th>手机号</th>
-                                    <th>职务</th>
-                                    <th>默认</th>
-                                    <th>状态</th>
-                                    <th>创建日期</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        <div class="text_data">
 
 
-
-
-                                <tr th:each="staff,count:${staff_list}">
-                                    <td th:text="${count.count}"></td>
-                                    <td class="login_name" th:text="${staff.dCompanyStaffLoginname}"></td>
-                                    <td th:text="${staff.dCompanyStaffMobile}"></td>
-                                    <td th:text="${staff.dCompanyStaffPosition}"></td>
-                                    <td >
-                                        <span th:if="${staff.dCompanyStaffDefault} == 0" class="text-danger">否</span>
-                                        <span th:if="${staff.dCompanyStaffDefault} == 1" class="text-primary">是</span>
-                                    </td>
-                                    <td >
-                                        <span th:if="${staff.dCompanyStaffStatus} == 0" class="text-danger">停用</span>
-                                        <span th:if="${staff.dCompanyStaffStatus} == 1" class="text-primary">启用</span>
-
-                                    </td>
-                                    <td th:text="${#dates.format(staff.dCompanyStaffCreatedate,'yyyy-MM-dd &nbsp;&nbsp;  HH:mm:ss')}">
-                                    </td>
-                                    <td >
-
-                                        <button  data-toggle="modal" data-target="#author"  id="author_staff" class="btn btn-info btn-xs author_staff" type="button">授权</button>
-
-                                    </td>
-                                </tr>
-
-
-                                </tbody>
-                            </table>
-
-
-
-
-                            <ul class=" pagination pagination-lg pull-right">
-                                <li><a href="#">&laquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
-                            </ul>
 
                         </div>
                     </div>
@@ -424,119 +354,6 @@
         <!--</div>-->
 
     </div>
-
-    <!--添加员工的表单页面-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        添加员工
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <form  role="form">
-                        <div class="form-group">
-                            <label>账号</label>
-                            <input id="staff_name" type="text" class="form-control" placeholder="员工手机号作为账号">
-                        </div>
-                        <label >职务</label>
-                        <div>
-                            <label class="radio-inline">
-                                <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked> 选项 1
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 2
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 3
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 4
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 5
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 6
-                            </label>
-
-                            </label>
-                        </div>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button id="staff_submit" type="button" class="btn btn-primary">
-                        提交
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-    <div class="modal fade" id="author" tabindex="-1" role="dialog" aria-labelledby="authorModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="authorModalLabel">
-                        员工授权
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <form  role="form">
-                        <div class="form-group">
-                            <label>账号</label>
-                            <input id="sta_name" type="text" class="form-control" disabled placeholder="员工手机号作为账号">
-                        </div>
-                        <label >权限</label>
-                        <div>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox1" value="option1"> 选项 1
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2"> 选项 2
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> 选项 3
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2"> 选项 2
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> 选项 3
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2"> 选项 2
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> 选项 3
-                            </label>
-                        </div>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button id="staff_submit" type="button" class="btn btn-primary">
-                        提交
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
@@ -550,60 +367,7 @@
 	
     <!-- Custom Js -->
     <script src="/assets/js/custom-scripts.js"></script>
-
-    <script>
-
-//        ajax查询staff
-        $(function () {
-           $("#search_name").click(function (e) {
-               var name = $("#search_input").val();
-               var id = 2;//id行session中获取，此处测试，后期修改
-               $.ajax({
-                   url: "/companystaff/search",
-                   type:"POST",
-                   data:{"id":id,"name":name},
-                   success:function (result) {
-                     $("#table_staff").html(result);
-                   },
-                   error:function (result) {
-                     alert("搜索失败!");
-                   }
-                   });
-           });
-        });
-
-        /*提交添加员工*/
-        $(function () {
-           $("#staff_submit").click(function () {
-                var name = $("#staff_name").val();
-                var zhiwu = $('input[name="optionsRadiosinline"]:checked').val();
-                var id = 2;//id行session中获取，此处测试，后期修改
-                $.ajax({
-                    url:"/companystaff/addstaff",
-                    type:"POST",
-                    data:{"name":name,"zhiwu":zhiwu,"id":id},
-                    success:function (result) {
-                        $('#myModal').modal('hide');
-                        location.reload();
-                    },
-                    error:function (result) {
-                        alert("添加失败!");
-                    }
-                });
-                });
-
-        });
-
-        $(function () {
-            $('.author_staff').click( function () {
-
-                var name = $(this).parent().siblings().eq(1);
-                $("#sta_name").val(name.text());
-
-            });
-        });
-
-    </script>
+ 
 
 </body>
 

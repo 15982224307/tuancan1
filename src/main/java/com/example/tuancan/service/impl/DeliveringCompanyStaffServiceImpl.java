@@ -17,6 +17,12 @@ public class DeliveringCompanyStaffServiceImpl implements DeliveringCompanyStaff
     private DeliveringCompanyStaffMapper dCStaffmapper;
 
     @Override
+    public List<DeliveringCompanyStaff> selecyStaffByLikeName(Integer id, String value) {
+        return dCStaffmapper.selectStaffByLikeName(id,value);
+    }
+
+
+    @Override
     public DeliveringCompanyStaff selectByIdWithCompany(DeliveringCompanyStaff deliveringCompanyStaff) {
         return dCStaffmapper.selectByIdWithCompany(deliveringCompanyStaff);
     }

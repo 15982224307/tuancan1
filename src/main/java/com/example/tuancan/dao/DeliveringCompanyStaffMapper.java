@@ -30,6 +30,13 @@ public interface DeliveringCompanyStaffMapper extends Mapper<DeliveringCompanySt
     @ResultMap(value = "selectByIdWithCompany")
     public List<DeliveringCompanyStaff> selectAllByCompanyNo(Integer companyId);
 
+    /*账号模糊查询*/
+    @Select({"select * from deliveringcompanystaff where DeliveringCompany_no=#{companyId}" +
+            " and DCompanyStaff_loginname like CONCAT (CONCAT('%',#{name}),'%')"})
+    @ResultMap(value = "selectByIdWithCompany")
+    public List<DeliveringCompanyStaff> selectStaffByLikeName(@Param("companyId") Integer id,@Param("name") String name);
+
+
     /**
      * 根据id修改员工信息
      * @param deliveringCompanyStaff

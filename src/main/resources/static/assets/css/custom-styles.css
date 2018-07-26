@@ -132,6 +132,11 @@ border-color: #24C2CD;
     margin: 0 auto;
     padding: 10px;
     margin-top: 20px;
+
+}
+.table_shadow{
+    -webkit-box-shadow: 0px -1px 12px rgba(123, 116, 128, 0.22);
+    box-shadow: 0px -1px 12px rgba(123, 116, 128, 0.22);
 }
 .btn_search{
     height: 26px;
@@ -545,7 +550,10 @@ color: #fff !important;
 	border-bottom: 1px solid rgba(107, 108, 109, 0.19);
 }
 ul.nav.nav-second-level.collapse.in {
-background: #096E75;
+    background: white;
+}
+ul.nav.nav-second-level.collapse li:hover {
+    background: rgba(122, 128, 123, 0.5);
 }
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
