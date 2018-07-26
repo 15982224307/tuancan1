@@ -34,6 +34,11 @@ public class FoodMaterialServiceImpl implements FoodMaterialService {
         return foodMaterialMapper.selectByClassId(id);
     }
 
+    @Override
+    public List<FoodMaterial> selectByName(String name) {
+        return foodMaterialMapper.selectByName(name);
+    }
+
     /**
      * 所有数据
      */

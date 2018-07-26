@@ -1,8 +1,6 @@
 package com.example.tuancan.service;
 
-import com.example.tuancan.model.Classification;
 import com.example.tuancan.model.FoodMaterial;
-import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -16,6 +14,8 @@ public interface  FoodMaterialService {
      *  根据小类编号查询结果*/
    public List<FoodMaterial> selectByClassId(Integer id);
 
+    /*  名字 查询结果*/
+    public List<FoodMaterial> selectByName(String name);
    /**
     *所有数据*/
    public List<FoodMaterial> getAll();

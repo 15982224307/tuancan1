@@ -11,8 +11,8 @@ import java.util.List;
 public interface RecipeTypeMapper extends Mapper<RecipeType> {
 
     /*根据名称查询*/
-    @Select("select * from recipetype where RecipeType_name = #{String name}")
-    public RecipeType selectOneByName(String name);
+    @Select("select * from recipetype where RecipeType_name like '%${value}%'")
+    public List<RecipeType> selectByName(String name);
 
     /*根据创建时间逆排序*/
     @Select("select * from recipetype order by RecipeType_createdate DESC")

@@ -27,7 +27,7 @@ public class FoodMaterial {
 
     /*食材名称*/
     @Column(name = "Foodmaterial_name")
-    private String oodmaterialName;
+    private String foodmaterialName;
 
     /*食材描述*/
     @Column(name = "Foodmaterial_disc")

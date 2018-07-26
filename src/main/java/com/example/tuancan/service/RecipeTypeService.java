@@ -20,7 +20,7 @@ public interface RecipeTypeService {
     public RecipeType selectOneById(Integer id);
 
     /*通过name查询数据*/
-    public RecipeType selectOneByName(String name);
+    public List<RecipeType> selectByName(String name);
 
     /*得到所有数据*/
     public List<RecipeType> selectAll();

@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RecipeTypeServiceTest {
@@ -57,8 +55,8 @@ public class RecipeTypeServiceTest {
     /*根据name查询*/
     @Test
     public void selectOneByName() throws Exception {
-        RecipeType recipeType = recipeTypeService.selectOneByName("sxa");
-        System.out.println(JsonUtil.toJson(recipeType));
+        List<RecipeType> sxa = recipeTypeService.selectByName("sxa");
+        System.out.println(JsonUtil.toJson(sxa));
     }
 
     /*得到所有数据*/

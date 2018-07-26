@@ -156,7 +156,7 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 
-                    <li class="active">
+                    <li>
                         <a href="ui-elements.html"><i class="fa fa-desktop"></i>用餐单位</a>
                         <ul class="nav nav-second-level">
                             <li class="">
@@ -185,7 +185,7 @@
                         <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
+                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >菜谱类型列表</a>
                             </li>
                             <li>
                                 <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
@@ -194,7 +194,7 @@
                                 <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/foodMaterial/list/1}" >食材管理</a>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材管理</a>
                             </li>
                         </ul>
                     </li>
@@ -272,23 +272,25 @@
 
 
 						<ul class="breadcrumb" >
-                            <i style="text-align: left">用餐机构列表</i>
+                            <i style="text-align: left">团餐机构列表</i>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">用餐单位机构</a></li>
-                                <li class="active">用餐单位列表</li>
+                                <li><a href="#">团餐机构</a></li>
+                                <li class="active">团餐机构列表</li>
 
                         </ul>
 
                         <ul class="top_search">
 
+
                             <div class="container-fluid">
+
 
                                     <div class="span12">
                                      <div class="row-fluid">
                                          <form class="">
-                                             按公司名称查询： <input class="input-medium search-query" id="unitname" type="text" />
+                                             按公司名称查询： <input class="input-medium search-query" type="text" id="dcname"/>
                                              &nbsp;&nbsp;&nbsp;<button id="search" class="btn btn-primary" type="button">查询</button>
-                                             <button class=" btn-mini btn_search" type="button">查询</button>
+                                             <button class="btn-mini btn_search" type="button">查询</button>
                                         </form>
                                     </div>
                                 </div>
@@ -296,58 +298,73 @@
                         </ul>
 
 
-                        <div class="text_data" >
+                        <div class="text_data">
 
                             <table id="searchtable" style="box-shadow: 0px -1px 12px rgba(13,12,20,0.41);"  class="table_shadow table table-bordered table-striped table-hover ">
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
-                                    <th  scope="" style="width: 200px">公司名称</th>
-                                    <th scope="">联系人</th>
-                                    <th scope="">开户行</th>
-                                    <th scope="">开户账号</th>
-                                    <th scope="">办公电话</th>
-                                    <th scope="">状态</th>
-                                    <th scope="">操作</th>
+                                    <th  scope="" style="width: 200px">食材名称</th>
+                                    <th scope="">食材描述</th>
+                                    <th scope="">食材图片</th>
+                                    <th scope="">创建日期 </th>
+                                    <th scope="">操作 </th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="dc,stat : ${gmulist}" th:if="${not #lists.isEmpty(gmulist)}">
-                                    <td th:text="${stat.count}"></td>
-                                    <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${dc.groupMealUnitName}" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId} }"></a></td>
-                                    <td th:text="${dc.groupMealUnitContact}">公司联系人</td>
-                                    <td th:text="${dc.groupMealUnitBank}">开户行</td>
-                                    <td th:text="${dc.groupMealUnitAccount}">开户账号</td>
-                                    <td th:text="${dc.groupMealUnitOfficetel}">办公电话</td>
-                                    <td >
-                                        <i th:text="待审核" class="text-danger" th:if="${dc.groupMealUnitStatus==2}"></i>
-                                        <i th:text="审核通过" class="text-success" th:if="${dc.groupMealUnitStatus==3}"></i>
-                                        <i th:text="已停用"  class="text-muted" th:if="${dc.groupMealUnitStatus==0}"></i>
-
-                                    </td>
+                                <tr th:each="fm,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
+                                    <td th:text="${stat.count+(pageNum-1)*10}"></td>
+                                    <td th:text="${fm.foodmaterialName}"></td>
+                                    <td th:text="${fm.foodmaterialDisc}"></td>
+                                    <td th:text="${fm.foodmaterialIcon}"></td>
+                                    <td th:text="${#dates.format(fm.foodmaterialCreatedate,'yyyy-MM-dd')}"></td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{/groupMealUnit/gmu_details/${groupMealUnitId}}"  target="main" >&nbsp;详情</a>
-                                        <a class="btn btn-xs btn-success" th:href="@{/groupMealUnit/gmu_details/${groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==2}"  target="main" >&nbsp;审核通过</a>
-
-                                        <a class="btn btn-xs btn-success" th:href="@{/groupMealUnit/gmu_details/${groupMealUnitId}" th:if="${dc.groupMealUnitStatus==0}"  target="main" >&nbsp;启用</a>
-                                        <a class="btn btn-xs btn-danger" th:href="@{/groupMealUnit}" th:if="${dc.groupMealUnitStatus==3}" target="main" >&nbsp;停用</a>
+                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringCompany/dc_details/'+${fm.foodmaterialId}}"  >详情</a>
 
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-
                             <!--分页栏位-->
                             <ul class=" pagination pagination-lg pull-right">
-                                <li><a href="#">&laquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
+                                <li class="disabled">
+                                    <a th:if="${pageNum-1==0}"  href="javascript:void(0);">&laquo;</a>
+                                </li>
+                                <li class="active">
+                                    <a th:if="${pageNum-1!=0}" th:href="@{'/foodMaterial/list/'+${pageNum-1}}">&laquo;</a>
+                                </li>
+
+                                <li th:each="pageNo : ${#numbers.sequence(pageNum-2, pageNum-1)}" th:if="${pageNum-1>1}">
+                                    <a th:if="${pageNum eq pageNo}"  href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a th:if="${not (pageNum eq pageNo)}" th:href="@{'/foodMaterial/list/'+${pageNo}}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a th:text="${pageNum}" href="javascript:void(0);"></a>
+                                </li>
+                                <li th:each="pageNo : ${#numbers.sequence(pageNum+1, pageNum+2)}">
+                                    <a th:if="${pageNum eq pageNo}"  href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a th:if="${not (pageNum eq pageNo)}" th:href="@{'/foodMaterial/list/'+${pageNo}}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+
+                                <li class="active">
+                                    <a th:if="${not isLastPage}" th:href="@{'/foodMaterial/list/'+${pageNum+5}}">&raquo;</a>
+                                </li>
+                                <li class="disabled">
+                                    <a th:if="${isLastPage}" class="disabled" href="javascript:void(0);">&raquo;</a>
+                                </li>
                             </ul>
+
                         </div>
                     </div>
                 </div>
@@ -373,20 +390,19 @@
     <!-- Metis Menu Js -->
     <script src="/assets/js/jquery.metisMenu.js"></script>
 
-
     <!-- Custom Js -->
     <script src="/assets/js/custom-scripts.js"></script>
 
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var unitname=$("#unitname").val();
+            var dcname=$("#dcname").val();
             //alert(formdata);
             $.ajax({
-                url:"/groupMealUnit/search",
+                url:"/deliveringCompany/search",
                 type:"POST",
                 data:{
-                    'groupMealUnitName':unitname,
+                    'name':dcname,
                 },
                 error:function (error) {
 
@@ -399,6 +415,7 @@
 
         });
     </script>
+ 
 
 </body>
 

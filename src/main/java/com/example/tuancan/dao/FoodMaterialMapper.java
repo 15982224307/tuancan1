@@ -18,9 +18,13 @@ public interface FoodMaterialMapper extends Mapper<FoodMaterial>{
     })
     public FoodMaterial selectOneById(Integer id);
 
+    /*  名字 查询结果*/
+    @Select("select * from foodmaterial where foodmaterialName like '%${value}%'")
+    public List<FoodMaterial> selectByName(String name);
+
     /*所有数据*/
     @Select("select * from foodmaterial ")
-    @ResultMap(value = "getone")
+    //@ResultMap(value = "getone")
     public List<FoodMaterial> getAll();
 
 
@@ -31,7 +35,7 @@ public interface FoodMaterialMapper extends Mapper<FoodMaterial>{
 
     /*插入数据*/
     @Insert("insert into foodmaterial values(null,#{classification.classificationId}," +
-            "#{oodmaterialName},#{foodmaterialDisc},#{foodmaterialIcon},#{foodmaterialCreatedate})")
+            "#{foodmaterialName},#{foodmaterialDisc},#{foodmaterialIcon},#{foodmaterialCreatedate})")
     public int insertOne(FoodMaterial foodMaterial);
 
 }

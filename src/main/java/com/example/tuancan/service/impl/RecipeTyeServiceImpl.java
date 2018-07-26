@@ -40,8 +40,8 @@ public class RecipeTyeServiceImpl implements RecipeTypeService {
 
     /*根据name查询*/
     @Override
-    public RecipeType selectOneByName(String name) {
-        return recipeTypeMapper.selectOneByName(name);
+    public List<RecipeType> selectByName(String name) {
+        return recipeTypeMapper.selectByName(name);
     }
 
     /*得到所有数据*/
