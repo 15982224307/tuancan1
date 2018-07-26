@@ -20,6 +20,10 @@ public interface DeliveringCompanyStaffService {
 
    public List<DeliveringCompanyStaff> selecyStaffByLikeName(Integer id,String value);
 
+    /*账号查询*/
+   public DeliveringCompanyStaff selectStaffByLoginName(@Param("companyId") Integer id,@Param("name") String name);
+
+
 
 
 }

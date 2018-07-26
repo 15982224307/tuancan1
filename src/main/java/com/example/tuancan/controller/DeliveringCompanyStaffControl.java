@@ -43,6 +43,7 @@ public class DeliveringCompanyStaffControl {
         List<DeliveringCompanyStaff> deliveringCompanyStaffs = deliveringCompanyStaffService.selecyStaffByLikeName(id, name);
 
         model.addAttribute("staff_list",deliveringCompanyStaffs);
+       // return "/groupmanager/companystaff_list";
         return  "/groupmanager/companystaff_list :: #table_staff";
     }
     /*添加员工*/
@@ -61,8 +62,51 @@ public class DeliveringCompanyStaffControl {
         deliveringCompanyStaff.setDCompanyStaffPosition(zhiwu);
         deliveringCompanyStaff.setDCompanyStaffDefault(1);
         deliveringCompanyStaff.setDCompanyStaffStatus(1);
+
+
         deliveringCompanyStaffService.insertOne(deliveringCompanyStaff);
 
         return "redirect:/companystaff/manager";
     }
+
+    /*获取员工权限*/
+
+    @RequestMapping("/getstaffdefault")
+    public String getStaffDefault(@RequestParam("id")Integer id,@RequestParam("name")String name){
+
+        log.info("公司id:"+id + "账号:" + name);
+        DeliveringCompanyStaff deliveringCompanyStaff = deliveringCompanyStaffService.selectStaffByLoginName(id, name);
+
+        String dCompanyStaffAuthority = deliveringCompanyStaff.getDCompanyStaffAuthority();
+        return JsonUtil.toJson(dCompanyStaffAuthority);
+
+    }
+
+    /*更改员工权限*/
+    @ResponseBody
+    @RequestMapping("/updatestaff")
+    public String updataStaff(@RequestParam("id")Integer id,@RequestParam("name")String name,@RequestParam("authors")String authors ){
+
+        log.info("公司id:"+id + " 账号:" + name + " 权限：" +authors);
+        DeliveringCompanyStaff deliveringCompanyStaff = deliveringCompanyStaffService.selectStaffByLoginName(id,name);
+        deliveringCompanyStaff.setDCompanyStaffAuthority(authors);
+        deliveringCompanyStaffService.updateOneById(deliveringCompanyStaff);
+        return "/companystaff/manager";
+    }
+    /*更改状态*/
+    @RequestMapping("/updatestatus")
+    public String updateStaffStatus(@RequestParam("id")Integer id,@RequestParam("name")String name){
+        log.info("公司id:"+id + " 账号:" + name );
+        DeliveringCompanyStaff deliveringCompanyStaff = deliveringCompanyStaffService.selectStaffByLoginName(id,name);
+        int dCompanyStaffStatus = deliveringCompanyStaff.getDCompanyStaffStatus();
+        if(dCompanyStaffStatus == 1){
+            deliveringCompanyStaff.setDCompanyStaffStatus(0);
+        }else {
+            deliveringCompanyStaff.setDCompanyStaffStatus(1);
+        }
+        deliveringCompanyStaffService.updateOneById(deliveringCompanyStaff);
+        return "redirect:/companystaff/manager";
+
+    }
+
 }
