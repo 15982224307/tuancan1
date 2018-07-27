@@ -4,6 +4,9 @@ import com.example.tuancan.enums.StatusEnum;
 import com.example.tuancan.model.DeliveringCompany;
 import com.example.tuancan.service.DeliveringCompanyService;
 import com.example.tuancan.utils.JsonUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,21 +23,50 @@ public class DeliveringCompanyController {
     @Autowired
     private DeliveringCompanyService deliveringCompanyService;
 
-    @RequestMapping("/yes_list")
-    public String dcStausYeslist(Model model){
-
+    @RequestMapping(value = {"/yes_list/{pagenum}","/yes_list"})
+    public String dcStausYeslist(Model model,@PathVariable(value = "pagenum",required = false) Integer pageNum){
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
         List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllByStatus(StatusEnum.StatusUP.getCode());
+        PageInfo<DeliveringCompany> pageInfo = new PageInfo<DeliveringCompany>(deliveringCompanies);
+        //获得当前页
+        model.addAttribute("pageNum", pageInfo.getPageNum());
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getPages());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        //model.addAttribute("page",pageInfo);
+        model.addAttribute("path","/deliveringCompany/yes_list");
         model.addAttribute("dclist",deliveringCompanies);
         return "/manager/dc_list";
     }
 
-    @RequestMapping("/no_list")
-    public String dcStatusNolist(Model model){
+    @RequestMapping(value = {"/no_list/{pagenum}","/no_list"})
+    public String dcStatusNolist(Model model,@PathVariable(value = "pagenum",required = false) Integer pageNum){
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
 
         List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllByStatus(StatusEnum.StatusWait.getCode());
-        List<DeliveringCompany> deliveringCompanies2 = deliveringCompanyService.selectAllByStatus(StatusEnum.StatusDOWN.getCode());
-
-        deliveringCompanies.addAll(deliveringCompanies2);
+        PageInfo<DeliveringCompany> pageInfo = new PageInfo<DeliveringCompany>(deliveringCompanies);
+        //获得当前页
+        model.addAttribute("pageNum", pageInfo.getPageNum());
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getPages());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        model.addAttribute("path","/deliveringCompany/no_list");
         model.addAttribute("dclist",deliveringCompanies);
         return "/manager/dc_list";
     }

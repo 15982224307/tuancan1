@@ -181,11 +181,11 @@
                             </li>
                         </ul>
                     </li>
-					<li>
+					<li class="active">
                         <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >菜谱类型列表</a>
+                                <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
                             </li>
                             <li>
                                 <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
@@ -194,7 +194,7 @@
                                 <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材管理</a>
+                                <a href="" th:href="@{/foodMaterial/list}" >食材管理</a>
                             </li>
                         </ul>
                     </li>
@@ -326,45 +326,9 @@
                                 </tr>
                                 </tbody>
                             </table>
+
                             <!--分页栏位-->
-                            <ul class=" pagination pagination-lg pull-right">
-                                <li class="disabled">
-                                    <a th:if="${pageNum-1==0}"  href="javascript:void(0);">&laquo;</a>
-                                </li>
-                                <li class="active">
-                                    <a th:if="${pageNum-1!=0}" th:href="@{'/foodMaterial/list/'+${pageNum-1}}">&laquo;</a>
-                                </li>
-
-                                <li th:each="pageNo : ${#numbers.sequence(pageNum-2, pageNum-1)}" th:if="${pageNum-1>1}">
-                                    <a th:if="${pageNum eq pageNo}"  href="javascript:void(0);">
-                                        <span th:text="${pageNo}"></span>
-                                    </a>
-
-                                    <a th:if="${not (pageNum eq pageNo)}" th:href="@{'/foodMaterial/list/'+${pageNo}}">
-                                        <span th:text="${pageNo}"></span>
-                                    </a>
-                                </li>
-                                <li class="disabled">
-                                    <a th:text="${pageNum}" href="javascript:void(0);"></a>
-                                </li>
-                                <li th:each="pageNo : ${#numbers.sequence(pageNum+1, pageNum+2)}">
-                                    <a th:if="${pageNum eq pageNo}"  href="javascript:void(0);">
-                                        <span th:text="${pageNo}"></span>
-                                    </a>
-
-                                    <a th:if="${not (pageNum eq pageNo)}" th:href="@{'/foodMaterial/list/'+${pageNo}}">
-                                        <span th:text="${pageNo}"></span>
-                                    </a>
-                                </li>
-
-                                <li class="active">
-                                    <a th:if="${not isLastPage}" th:href="@{'/foodMaterial/list/'+${pageNum+5}}">&raquo;</a>
-                                </li>
-                                <li class="disabled">
-                                    <a th:if="${isLastPage}" class="disabled" href="javascript:void(0);">&raquo;</a>
-                                </li>
-                            </ul>
-
+                            <div th:include="manager/page::page"></div>
                         </div>
                     </div>
                 </div>

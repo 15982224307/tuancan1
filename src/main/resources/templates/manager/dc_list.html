@@ -300,7 +300,7 @@
 
                         <div class="text_data">
 
-                            <table id="searchtable" style="box-shadow: 0px -1px 12px rgba(13,12,20,0.41);"  class="table_shadow table table-bordered table-striped table-hover ">
+                            <table id="searchtable"  class="table_shadow table table-bordered table-striped table-hover ">
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
@@ -340,6 +340,8 @@
                                 </tbody>
                             </table>
 
+                            <!--分页栏位-->
+                          <div th:include="manager/page::page"></div>
 
                         </div>
                     </div>
