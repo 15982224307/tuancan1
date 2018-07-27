@@ -3,6 +3,9 @@ package com.example.tuancan.controller;
 import com.example.tuancan.model.RecipeType;
 import com.example.tuancan.service.RecipeTypeService;
 import com.example.tuancan.utils.JsonUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +22,26 @@ public class RecipeTypeController {
     @Autowired
     private RecipeTypeService recipeTypeService;
 
-    @RequestMapping(value = "/list")
-    public String  rtlist(Model model){
+    @RequestMapping(value = {"/list/{pagenum}","/list"})
+    public String  rtlist(Model model,@PathVariable(value = "pagenum",required = false) Integer pageNum){
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
         List<RecipeType> recipeTypes = recipeTypeService.selectOrderByCreateDateDESC();
-
+        PageInfo<RecipeType> pageInfo = new PageInfo<RecipeType>(recipeTypes);
+        //获得当前页
+        model.addAttribute("pageNum", pageInfo.getPageNum());
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getPages());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        //model.addAttribute("page",pageInfo);
+        model.addAttribute("path","/recipeType/list");
         model.addAttribute("typelist",recipeTypes);
 
         return "/manager/rctype_list";

@@ -1,0 +1,112 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="page">
+    <!-- 处理页数大于7 的情况 -->
+    <ul class="pagination pagination-lg pull-right" data-th-if="${totalPages gt 7}" >
+        <!-- 上一页 -->
+        <li class="page-item" data-th-classappend="*{isFirstPage} ? 'disabled' : ''">
+            <a th:href="@{${path}+'/'+${pageNum-1}}"  class="page-link" data-th-attr="pageIndex=${pageNum} " aria-label="Previous">
+                <span aria-hidden="true">«</span>
+            </a>
+        </li>
+
+        <!-- 首页 -->
+        <li class="page-item" data-th-classappend="${(pageNum) eq 1} ? 'active' : ''" >
+            <a href="javascript:void(0);" class="page-link" th:if="${pageNum eq 1}" data-th-attr="pageIndex=1">1</a>
+            <a th:href="@{${path}+'/1'}" class="page-link" th:if="${not (pageNum eq 1)}" data-th-attr="pageIndex=1">1</a>
+        </li>
+
+
+        <!-- 当前页面小于等于4 -->
+        <li class="page-item" data-th-if="${(pageNum) le 4}" data-th-each="i : ${#numbers.sequence(2,5)}"
+            data-th-classappend="${(pageNum) eq i} ? 'active' : ''" >
+            <a class="page-link" th:if="${pageNum eq i}"  href="javascript:void(0);"ata-th-attr="pageIndex=${i}">
+                <span data-th-text="${i}"></span>
+            </a>
+            <a class="page-link" th:if="${not (pageNum eq i)}"  th:href="@{${path}+'/'+${i}}"ata-th-attr="pageIndex=${i}">
+                <span data-th-text="${i}"></span>
+            </a>
+        </li>
+
+        <li class="page-item disabled" data-th-if="${pageNum le 4}">
+            <a href="javascript:void(0);" class="page-link">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+
+        <!-- 最后一页与当前页面之差，小于等于3 -->
+        <li class="page-item disabled" data-th-if="${(totalPages-pageNum) le 3}">
+            <a href="javascript:void(0);" class="page-link">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+        <li class="page-item" data-th-if="${(totalPages-pageNum) le 3}" data-th-each="i : ${#numbers.sequence(totalPages-3, totalPages-1)}"
+            data-th-classappend="${pageNum eq i} ? 'active' : ''" >
+            <a class="page-link" href="javascript:void(0);" th:if="${pageNum eq i}" data-th-attr="pageIndex=${i} ">
+                <span data-th-text="${i}"></span>
+            </a>
+            <a class="page-link" th:href="@{${path}+'/'+${i}}" th:if="${not (pageNum eq i)}" data-th-attr="pageIndex=${i} ">
+                <span data-th-text="${i}"></span>
+            </a>
+        </li>
+        <!-- 最后一页与当前页面之差大于3，且  当前页面大于4-->
+        <li class="page-item disabled" data-th-if="${(pageNum gt 4) && ((totalPages-pageNum) gt 3 )}">
+            <a href="javascript:void(0);" class="page-link">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+        <li class="page-item" data-th-if="${(pageNum gt 4) && ((totalPages-pageNum) gt 3 )}" >
+            <a th:href="@{${path}+'/'+${pageNum}}" class="page-link" data-th-attr="pageIndex=${pageNum}">[[${pageNum}]]</a>
+        </li>
+        <li class="page-item active" data-th-if="${(pageNum gt 4) && ((totalPages-pageNum) gt 3 )}">
+            <a th:href="@{${path}+'/'+${pageNum+1}}" class="page-link" data-th-attr="pageIndex=${pageNum} + 1">[[${pageNum + 1}]]</a>
+        </li>
+        <li class="page-item" data-th-if="${(pageNum gt 4) && ((totalPages-pageNum) gt 3 )}">
+            <a th:href="@{${path}+'/'+${pageNum+2}}" class="page-link" data-th-attr="pageIndex=${pageNum} + 2">[[${pageNum + 2}]]</a>
+        </li>
+        <li class="page-item disabled"  data-th-if="${(pageNum gt 4) && ((totalPages-pageNum) gt 3 )}">
+            <a href="javascript:void(0);" class="page-link">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+
+        <!-- 最后一页 -->
+        <li class="page-item" data-th-classappend="${pageNum eq totalPages} ? 'active' : ''" >
+            <a href="javascript:void(0);" class="page-link" th:if="${pageNum eq totalPages}" data-th-attr="pageIndex=${totalPages}">[[${totalPages}]]</a>
+            <a th:href="@{${path}+'/'+${totalPages}}" th:if="${not (pageNum eq totalPages)}" class="page-link" data-th-attr="pageIndex=${totalPages}">[[${totalPages}]]</a>
+        </li>
+
+        <!-- 下一页 -->
+        <li class="page-item" data-th-classappend="*{isLastPage} ? 'disabled' : ''">
+            <a th:href="@{${path}+'/'+${pageNum+1}}" class="page-link" data-th-attr="pageIndex=${pageNum} " aria-label="Next">
+                <span aria-hidden="true">»</span>
+            </a>
+        </li>
+    </ul>
+    <!--页数小于等于7的情况-->
+    <ul class=" pagination pagination-lg pull-right" data-th-if="${totalPages le 7}">
+
+        <li data-th-classappend="*{isFirstPage} ? 'disabled' : ''">
+            <a th:href="@{${path}+'/'+${pageNum-1}}">&laquo;</a>
+        </li>
+        <li th:each="pageNo : ${#numbers.sequence(1, totalPages)}" data-th-classappend="${pageNum eq pageNo} ? 'active' : ''">
+            <a th:if="${pageNum eq pageNo}"  href="javascript:void(0);">
+                <span th:text="${pageNo}"></span>
+            </a>
+            <a th:if="${not (pageNum eq pageNo)}" th:href="@{${path}+'/'+${pageNo}}">
+                <span th:text="${pageNo}"></span>
+            </a>
+        </li>
+        <li  data-th-classappend="*{isLastPage} ? 'disabled' : ''">
+            <a th:href="@{${path}+'/'+${pageNum+1}}">&raquo;</a>
+        </li>
+
+    </ul>
+</div>
+</body>
+</html>

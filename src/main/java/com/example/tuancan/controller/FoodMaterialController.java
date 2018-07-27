@@ -22,7 +22,7 @@ public class FoodMaterialController {
     @Autowired
     private FoodMaterialService foodMaterialService;
 
-    @RequestMapping(value = "/list/{pagenum}")
+    @RequestMapping(value = {"/list/{pagenum}","/list"})
     public String  rtlist(Model model,@PathVariable(value = "pagenum",required = false) Integer pageNum){
         if (pageNum==null||pageNum<=0){
             pageNum=1;
@@ -44,6 +44,8 @@ public class FoodMaterialController {
         model.addAttribute("totalPages", pageInfo.getPages());
         //是否是最后一页
         model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        //分页访问路径路径
+        model.addAttribute("path","/foodMaterial/list");
 
         model.addAttribute("page",pageInfo);
         return "/manager/foodma_list";

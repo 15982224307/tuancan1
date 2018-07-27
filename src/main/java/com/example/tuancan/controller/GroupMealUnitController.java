@@ -4,6 +4,9 @@ import com.example.tuancan.enums.StatusEnum;
 import com.example.tuancan.model.GroupMealUnit;
 import com.example.tuancan.service.GroupMealUnitService;
 import com.example.tuancan.utils.JsonUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,33 +23,64 @@ public class GroupMealUnitController {
     @Autowired
     private GroupMealUnitService groupMealUnitService;
 
-    @RequestMapping("/yes_list")
-    public String dcStausYeslist(Model model){
-
+    @RequestMapping(value = {"/yes_list/{pagenum}","/yes_list"})
+    public String dcStausYeslist(Model model,@PathVariable(value = "pagenum",required = false) Integer pageNum){
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
         List<GroupMealUnit> groupMealUnits = groupMealUnitService.selectByStatus(StatusEnum.StatusUP.getCode());
+        PageInfo<GroupMealUnit> pageInfo = new PageInfo<GroupMealUnit>(groupMealUnits);
+
         log.info(JsonUtil.toJson(groupMealUnits));
+        //获得当前页
+        model.addAttribute("pageNum", pageInfo.getPageNum());
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getPages());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        model.addAttribute("path","/groupMealUnit/yes_list");
         model.addAttribute("gmulist",groupMealUnits);
         return "/manager/gmu_list";
     }
 
-    @RequestMapping("/no_list")
-    public String dcStatusNolist(Model model){
-
+    @RequestMapping(value = {"/no_list/{pagenum}","/no_list"})
+    public String dcStatusNolist(Model model,@PathVariable(value = "pagenum",required = false) Integer pageNum){
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
         List<GroupMealUnit> groupMealUnits = groupMealUnitService.selectByStatus(StatusEnum.StatusWait.getCode());
+        PageInfo<GroupMealUnit> pageInfo = new PageInfo<GroupMealUnit>(groupMealUnits);
+
         log.info(JsonUtil.toJson(groupMealUnits));
+        //获得当前页
+        model.addAttribute("pageNum", pageInfo.getPageNum());
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getPages());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        model.addAttribute("path","/groupMealUnit/no_list");
         model.addAttribute("gmulist",groupMealUnits);
+
         return "/manager/gmu_list";
     }
 
     @RequestMapping("/gmu_details/{unitId}")
     public String dc_details(Model model, @PathVariable("unitId") Integer unitId){
-
         if (unitId==null){
             return "/manager/gmu_update";
 
         }else {
             log.info(""+unitId);
-
             GroupMealUnit groupMealUnit = groupMealUnitService.selectOneById(unitId);
             model.addAttribute("unit",groupMealUnit);
             return "/manager/gmu_update";
@@ -59,7 +93,6 @@ public class GroupMealUnitController {
     @ResponseBody
     public String savedc(GroupMealUnit unit){
         //更新
-
         if (unit.getGroupMealUnitId()==null){
             return "error";
         }else {
