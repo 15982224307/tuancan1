@@ -45,8 +45,8 @@ public interface TomorrowMenuDetailMapper extends Mapper<TomorrowMenudetail>{
     public List<TomorrowMenudetail> getAll();
 
     /*插入数据*/
-    @Insert("insert into  tomorrowmenudetail values(null,#{recipe.recipeId},#{tomorrowMenuMaster.tomorrowMenuMasterId}" +
-            ",#{tomorrowMenuIsRecommend},#{tomorrowMenuMemo})")
+    @Insert("insert into  tomorrowmenudetail values(null,#{tomorrowMenuMaster.tomorrowMenuMasterId}" +
+            ",#{recipe.recipeId},#{tomorrowMenuIsRecommend},#{tomorrowMenuMemo})")
     public int insertOne(TomorrowMenudetail tomorrowMenudetail);
 
     /*删除数据*/

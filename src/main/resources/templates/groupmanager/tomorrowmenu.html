@@ -339,129 +339,39 @@
 
 
                         <div class="container-fluid">
-
                             <p>公司</p>
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#">公司一</a></li>
-                                <li><a href="#">公司二</a></li>
-                                <li><a href="#">公司三</a></li>
-                                <li><a href="#">公司四</a></li>
-                                <li><a href="#">公司五</a></li>
-                                <li><a href="#">公司六</a></li>
-
+                                <li th:each="unit,count:${mealUnit}" data-th-classappend="${count.count == 1}?'active':''">
+                                    <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true">Home</a>
+                                </li>
 
                             </ul>
 
-                            <p style="font-size: 15px;color:lightskyblue">荤菜<span style="font-size: 14px;color:darkgray"> (选择2个)</span></p>
+                            <div class="tab-content">
 
+                                <div th:each="unit,count:${mealUnit}" class="tab-pane fade " data-th-classappend="${count.count == 1}?'active in':''" th:id="${unit.UnitName}">
 
-                            <table class="table table-hover huncai_tabel  table-bordered ">
-                                <tbody>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
-                                </tr>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
-                                </tr>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
+                                    <p style="font-size: 15px;color:lightskyblue">荤菜<span style="font-size: 12px;color:darkgray" th:text=" '(至少选择'+ ${unit.hun_number} + '个)'"></span></p>
 
-                                </tr>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
-
-                                </tr>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
-
-                                </tr>
-
-
-                                </tbody>
-                            </table>
-
-
-
-                            <p style="font-size: 15px;color:lightskyblue"> 素菜<span style="font-size: 14px;color:rgba(106,103,166,0.59)">(选择1个)</span></p>
-                            <!---->
-
-                            <table  class="table table-hover sucai_tabel  table-bordered ">
-                                <tbody>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
-                                </tr>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
-                                </tr>
-                                <tr >
-                                    <td >李庄白肉</td>
-                                    <td >酸辣土豆丝</td>
-                                    <td >红烧肉</td>
-                                    <td >小炒肉</td>
-                                    <td >麻婆豆腐</td>
-                                    <td >鱼香茄子</td>
-                                    <td >凉拌苦瓜</td>
-                                </tr>
-
-
-                                </tbody>
-                            </table>
-
-                            <button id="choice_finishi" type="button" class="btn btn-info pull-right">选择完成</button>
-
+                                    <div th:lang="${meal.key}" th:text="${key.current.value}"  th:each="meal,key:${unit.huncai}" class="meal_td hun "  data-th-classappend="'hun' + ${unit.UnitID}"
+                                         style="margin-bottom:-1px;margin-right:-1px;height:34px;width: 12.5%;float: left;border: 1px solid gainsboro;text-align: center;
+                                         line-height: 34px;"
+                                    ></div>
+                                    <p></p>
+                                    <p></p>
+                                    <p style="font-size: 15px;color:lightskyblue"> 素菜<span style="font-size: 12px;color:darkgray" th:text=" '(至少选择'+ ${unit.su_number} + '个)'"></span></p>
+                                    <div th:lang="${meal.key}" th:text="${key.current.value}"  th:each="meal,key:${unit.sucai}" class="meal_td su" data-th-classappend="'su' + ${unit.UnitID}"
+                                         style="margin-bottom:-1px;margin-right:-1px;height:34px;width: 12.5%;float: left;border: 1px solid gainsboro;text-align: center;
+                                         line-height: 34px;"
+                                    ></div>
+                                    <p></p>
+                                    <p></p>
+                                    <button id="choice_finishi" type="button" class="btn btn-info pull-right"
+                                            th:onclick="'finish_choice('+ this +','+ ${unit.UnitID}+ ')'">选择完成</button>
+                                </div>
+                            </div>
                         </div>
                     </ul>
-
-
-                    <div class="text_data ">
-
-
-
-                    </div>
-
-
                 </div>
             </div>
 
@@ -475,6 +385,32 @@
 
     <!--</div>-->
 
+</div>
+<div class="modal fade" id="finish_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="message">
+                    <span class="glyphicon "></span>提示
+                </h4>
+            </div>
+            <div hidden="hidden" id="foodid_message"></div>
+            <div hidden="hidden" id="unitid"></div>
+            <div class="modal-body text-danger" id="text_message">
+                你是否要停用此账号!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary" id="submit_Choice">
+                    确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
 
 
@@ -494,41 +430,110 @@
 
 <script>
 
+
+    /*确认*/
     $(function () {
-        $("#choice_finishi").click(function () {
-            alert(window.location.href);
+        $("#submit_Choice").click(function () {
+            foodsid = $("#foodid_message").text();
+            unitid = $("#unitid").text();
+            $.ajax({
+                url:"/tomorrowmenu/addmenu",
+                type:"POST",
+                data:{"unitid":unitid,"foodsid":foodsid},
+                success:function () {
+                    alert("成功!");
+                    $("#finish_message").modal("hide");
+                },
+                error:function () {
+                    alert("发生错误!");
+                }
+            });
+
         });
     });
+
+    /*确认选择*/
+    function finish_choice(obj, id) {
+        $_this = $(obj);
+        var meal = $(".hun" + id);
+        var vege = $(".su" + id);
+
+        var ids = [];
+        var name = [];
+        $.each(meal,function (index,value) {
+          if( $(value).hasClass("huncai_choice")){
+              ids.push($(this).attr("lang"));
+              name.push($(this).text());
+          }
+        });
+        $.each(vege,function (index,value) {
+            if( $(value).hasClass("sucai_choice")){
+                ids.push($(this).attr("lang"));
+                name.push($(this).text());
+            }
+        });
+        if(name.length == 0){
+            alert("没选够!");
+        }
+        else {
+            $("#foodid_message").text(ids);
+            $("#unitid").text(id);
+            $("#text_message").text("选择了："+ name);
+            $("#finish_message").modal("show");
+        }
+
+
+
+    }
     /*选择菜单*/
   $(function () {
-      $("td").click(function () {
-          var huncai_count = $(".huncai_choice").length;
-          var sucai_count = $(".sucai_choice").length;
-
-            if($(this).parent().parent().parent().hasClass("huncai_tabel")){
-                if($(this).hasClass("huncai_choice")){
-                    $(this).css("background","white").removeClass("huncai_choice");
-                }else{
-                    if(huncai_count < 2){
-                        $(this).css("background","#87CEFA").addClass("huncai_choice");
-                    }else {
-                        alert("荤菜够了!");
-                    }
-                }
-
-            }else if($(this).parent().parent().parent().hasClass("sucai_tabel")){
-                if($(this).hasClass("sucai_choice")){
-                    $(this).css("background","white").removeClass("sucai_choice");
-                }else{
-                    if(sucai_count < 1){
-                        $(this).css("background", "#87CEFA").addClass("sucai_choice");
-                    }else {
-                        alert("素菜够了!");
-                    }
-                }
-            }
+      $(".meal_td").click(function () {
+          if($(this).hasClass("hun")) {
+              if ($(this).hasClass("huncai_choice")) {
+                  $(this).css("background", "white").removeClass("huncai_choice");
+              } else {
+                  $(this).css("background", "#87CEFA").addClass("huncai_choice");
+              }
+          }else {
+              if($(this).hasClass("sucai_choice")){
+                  $(this).css("background","white").removeClass("sucai_choice");
+              }else {
+                  $(this).css("background", "#87CEFA").addClass("sucai_choice");
+              }
+          }
       });
   });
+
+//    $(function () {
+//        $("td").click(function () {
+//            var huncai_count = $(".huncai_choice").length;
+//            var sucai_count = $(".sucai_choice").length;
+//
+//            if($(this).parent().parent().parent().hasClass("huncai_tabel")){
+//                if($(this).hasClass("huncai_choice")){
+//                    $(this).css("background","white").removeClass("huncai_choice");
+//                }else{
+//                    if(huncai_count < 2){
+//                        $(this).css("background","#87CEFA").addClass("huncai_choice");
+//                    }else {
+//                        alert("荤菜够了!");
+//                    }
+//                }
+//
+//            }else if($(this).parent().parent().parent().hasClass("sucai_tabel")){
+//                if($(this).hasClass("sucai_choice")){
+//                    $(this).css("background","white").removeClass("sucai_choice");
+//                }else{
+//                    if(sucai_count < 1){
+//                        $(this).css("background", "#87CEFA").addClass("sucai_choice");
+//                    }else {
+//                        alert("素菜够了!");
+//                    }
+//                }
+//            }
+//        });
+//    });
+
 
 </script>
 

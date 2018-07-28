@@ -44,8 +44,7 @@ public class GroupMealMenumasterServiceImplTest {
     @Test
     public void selectByUnitId() throws Exception {
 
-        List<GroupMealMenumaster> groupMealMenumasters =
-                service.selectByUnitId(3);
+        GroupMealMenumaster groupMealMenumasters = service.selectByUnitId(3);
         System.out.println(JsonUtil.toJson(groupMealMenumasters));
     }
 

@@ -30,8 +30,8 @@ public class TomorrowMenuMasterServiceTest {
     /*测试按单位id查询*/
     @Test
     public void selectByUnitId() throws Exception {
-        List<TomorrowMenuMaster> tomorrowMenuMasters = tomorrowMenuMasterService.selectByUnitId(2);
-        System.out.println(JsonUtil.toJson(tomorrowMenuMasters));
+        List<TomorrowMenuMaster> tomorrowMenuMasters = tomorrowMenuMasterService.selectByUnitId(3);
+        System.out.println(JsonUtil.toJson(tomorrowMenuMasters.get(0)));
     }
 
     /*测试状态查询*/
