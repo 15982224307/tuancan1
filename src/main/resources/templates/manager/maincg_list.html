@@ -5,8 +5,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link href="/assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
-    <link href="/assets/css/zTreeStyle/metroStyle.css" rel="stylesheet">
     <!-- Bootstrap Styles-->
     <link href="/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -190,13 +188,13 @@
                                 <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/mainCategorie/list}" >食材一级分类</a>
+                                <a href="javascript:void(0);">食材一级分类</a>
                             </li>
                             <li>
                                 <a href="" th:href="@{/classification/list}" >食材二级分类</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"  >食材管理</a>
+                                <a href="" th:href="@{/foodMaterial/list}" >食材管理</a>
                             </li>
                         </ul>
                     </li>
@@ -274,10 +272,10 @@
 
 
 						<ul class="breadcrumb" >
-                            <i style="text-align: left">食材列表</i>
+                            <i style="text-align: left">团餐机构列表</i>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">菜系管理</a></li>
-                                <li class="active">食材列表</li>
+                                <li><a href="#">团餐机构</a></li>
+                                <li class="active">团餐机构列表</li>
 
                         </ul>
 
@@ -290,43 +288,34 @@
                                     <div class="span12">
                                      <div class="row-fluid">
                                          <form class="">
-                                             按食材名称查询： <input class="input-medium search-query" type="text" id="maname"/>
+                                             按分类名称查询： <input class="input-medium search-query" type="text" id="mainname"/>
                                              &nbsp;&nbsp;&nbsp;<button id="search" class="btn btn-primary" type="button">查询</button>
-                                             <button  data-toggle="modal" data-target="#myModal" id="add_type" type="button" class="btn btn-primary">添加</button>
-
-                                         </form>
+                                             <button id="addtype" data-toggle="modal" data-target="#myModal" class="btn btn-primary" type="button">添加</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </ul>
 
 
-                        <div class="text_data">
+                        <div class="text_data" >
                             <div id="searchtable">
                             <table  class="table_shadow table table-bordered table-striped table-hover ">
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
-                                    <th  scope="" style="width: 200px">食材名称</th>
-                                    <th scope="">食材描述</th>
-                                    <th scope="">食材图片</th>
-                                    <th scope="">创建日期 </th>
+                                    <th  scope="">食材分类名称</th>
                                     <th scope="">操作 </th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="fm,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
+                                <tr th:each="mc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
                                     <td th:text="${stat.count+(pageNum-1)*10}"></td>
-                                    <td th:text="${fm.foodmaterialName}"></td>
-                                    <td th:text="${fm.foodmaterialDisc}"></td>
-                                    <td ><img th:src="${fm.foodmaterialIcon}" th:if="${fm.foodmaterialIcon!=''}"></td>
-                                    <td th:text="${#dates.format(fm.foodmaterialCreatedate,'yyyy-MM-dd')}"></td>
+                                    <td th:text="${mc.maincategorieName}"></td>
                                     <td>
                                         <button data-toggle="modal" data-target="#myModal" type="button" class="updatetype btn btn-xs btn-primary"
-                                                th:onclick="'updatetype('+${fm.foodmaterialId}+')'"><i class="fa fa-edit "></i>&nbsp;修改&nbsp;&nbsp;</button>
-                                        <button data-toggle="modal" data-target="#uploadmodal" type="button" class="uploadbtn btn btn-xs btn-primary"
-                                                th:onclick="'uploadpic('+${fm.foodmaterialId}+')'"><i class="fa fa-edit "></i>&nbsp;上传图片&nbsp;&nbsp;</button>
+                                                th:onclick="'updatetype('+${mc.maincategorieId}+',\''+${mc.maincategorieName}+'\')'"><i class="fa fa-edit "></i>&nbsp;修改&nbsp;&nbsp;</button>
 
                                     </td>
                                 </tr>
@@ -335,7 +324,6 @@
 
                             <!--分页栏位-->
                             <div th:include="manager/page::page"></div>
-
                             </div>
 
                         </div>
@@ -356,7 +344,7 @@
     <!-- 添加分类型的表单页面-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content" >
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -365,37 +353,13 @@
                         添加食材分类
                     </h4>
                 </div>
-                <div class="modal-body" style="height:250px ;">
-                    <form  role="form" id="formdata" class="form-horizontal">
-                        <input type="hidden" name="foodmaterialId" value="" id="fmId">
+                <div class="modal-body">
+                    <form  role="form" id="formdata">
+                        <input type="hidden" name="maincategorieId" value="" id="typeId">
                         <div class="form-group">
-                            <label for="modal_type" class="col-sm-2 control-label">上级分类</label>
-                            <div class="col-sm-10">
-                                    <input type="hidden" id="modal_id" name="classification.classificationId" >
-                                    <input  class="form-control custom-input" id="modal_type" type="text"  value="请选择分类" style="width:120px;"/>
-                                    <div hidden id="ztreeDropdownContent" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
-                             background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
-                                        <ul id="partTree" class="ztree"></ul>
-                                    </div>
-                            </div>
-
+                            <label>名称</label>
+                            <input type="text" id="modal_name" name="maincategorieName" class="form-control" placeholder="请输入名称">
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="modal_name" class="col-sm-2 control-label">食材名称</label>
-                            <div class="col-sm-10">
-                            <input type="text" id="modal_name" name="foodmaterialName" class="form-control" placeholder="请输入名称">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="modal_desc" class="col-sm-2 control-label">食材描述</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="modal_desc" name="foodmaterialDisc" class="form-control" placeholder="请输入名称">
-                            </div>
-                        </div>
-                        <br>
-
                     </form>
 
                 </div>
@@ -410,14 +374,14 @@
         </div><!-- /.modal -->
     </div>
 
-     <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel1">
+                    <h4 class="modal-title" id="myModalLabel">
                         友情提示！不能为空
                     </h4>
                 </div>
@@ -429,46 +393,10 @@
         </div><!-- /.modal -->
     </div>
 
-     <div class="modal fade" id="uploadmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="uploadlabel">
-                        上传食材图片
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <form id="uploadform" role="form" enctype="multipart/form-data" method="post" action= "/foodMaterial/upload" class="form-horizontal">
-                        <input type="hidden" id="fmpicId" name="fmid" value="">
-                        <div class="form-group">
-                            <label for="modal_desc" class="col-sm-2 control-label">食材图片</label>
-                            <div class="col-sm-10">
-                                <input type="file" id="inputfile" name="picfile" class="form-control">
-                            </div>
-                        </div>
-                        <br>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
-                    </button>
-                    <button id="uploadcommit" type="button" class="btn btn-primary">
-                        上传
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="/webjars/jquery/3.3.0/jquery.js"></script>
-
-    <script type="text/javascript" src="/assets/js/jquery.ztree.core.js"></script>
     <!-- Bootstrap Js -->
     <script src="/assets/js/bootstrap.min.js"></script>
     <!--<script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>-->
@@ -481,15 +409,13 @@
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var name=$("#maname").val();
-            console.log(name);
-            if(name==null||name==""){
+            var mainname=$("#mainname").val();
+            if(mainname==null||mainname==""){
                 $('#warning').modal('show');
                 return;
             }
-            //alert(formdata);
             $.ajax({
-                url:"/foodMaterial/search/"+name,
+                url:"/mainCategorie/search/"+mainname,
                 type:"POST",
                 data:{
                     'asyc':true,
@@ -504,151 +430,50 @@
             });
 
         });
-        /*上传图片*/
-        function uploadpic(fmid) {
-            $("#fmpicId").val(fmid);
-        }
-        $("#uploadcommit").click(function () {
-            $("#uploadform").submit();
-        });
-        function updatetype(id) {
-            $('#myModalLabel').text("更新分类");
-
-            $.ajax({
-                url:"/foodMaterial/getone/"+id,
-                type:"POST",
-                data:{},
-                success:function (data) {
-                    $("#modal_id").val(data.classification.classificationId);
-                    $('#modal_type').val(data.classification.classificationName);
-                    $('#fmId').val(data.foodmaterialId);
-                    $('#modal_name').val(data.foodmaterialName);
-                    $('#modal_desc').val(data.foodmaterialDisc);
-                },
-                error:function (error) {
-                    alert("网络错误，请稍后再试");
-                }
-            });
+        function updatetype(id,name) {
+            $('#myModalLabel').text("更新食材分类");
+            $('#typeId').val(id);
+            $('#modal_name').val(name);
         };
         $(function () {
-            /*树级菜单*/
-            var setting={
-                view: {
-                    showLine: true,
-                    showIcon:true,
-                },
-                //获取json数据
-                async : {
-                    enable : true,
-                    url: "/foodMaterial/getTree", // Ajax 获取数据的 URL 地址
-                    autoParam : [ "id", "name" ] //ajax提交的时候，传的是id值
-                },
-                callback:{
-                    onAsyncError:function () {
-                        alert("网络错误");
-                    },
-                    beforeClick:function (treeId, treeNode) {
-                        var check = (treeNode && !treeNode.isParent);
-                        if (!check){
-                            alert("请选择下级分类");
-                        }
-                        return check;
-                    },
-                    onClick:function (event, treeId, treeNode) {
-                        if(!treeNode.isParent){
-                            $("#modal_id").val(treeNode.id);
-                            alert(treeNode.name);
-                            $("#modal_type").val(treeNode.name);
-                            $("#modal_type").attr("readonly","true");
-                            hideMenu();
-                        }else {
-                            var zTree = $.fn.zTree.getZTreeObj("partTree");
-                            var node = zTree.getNodeByParam("id", $('#modal_id').val(), null);
-                            zTree.selectNode(node);
-                        }
-                    }
-                },
-                data: {
-                    simpleData: {
-                        enable: true,
-                        idKey: "id",
-                        pIdKey: "pId",
-                        rootPId: 0,
-                    }
-                },
-
-            };
-            function showMenu() {
-                var cityObj = $("#partInput");
-                var cityOffset = $("#partInput").offset();
-                $("#ztreeDropdownContent").slideDown("fast");
-                $("body").bind("mousedown", onBodyDown);
+            /*搜索回显*/
+            var url=window.location.href;
+            var arr=url.split("/");
+            if (arr.length==7){
+                $("#mainname").val(decodeURI(decodeURI(arr[5])));
             }
-            function hideMenu() {
-                $("#ztreeDropdownContent").fadeOut("fast");
-                $("body").unbind("mousedown", onBodyDown);
-            }
-            function onBodyDown(event) {
-                if (!(event.target.id == "modal_type" || event.target.id == "ztreeDropdownContent" || $(event.target).parents("#ztreeDropdownContent").length>0)) {
-                    hideMenu();
-                }
-            }
-            $.fn.zTree.init($("#partTree"), setting);
-            $("#modal_type").click(function(){
-                showMenu();
-            });
-
+            /*添加或者更新*/
             $('#add_type').click(function () {
-                $('#myModalLabel').text("添加分类");
-
+                $('#myModalLabel').text("添加食材分类");
             });
 
             //模态框完全对隐藏时触发。
             $('#myModal').on('hidden.bs.modal', function () {
                 // 执行一些动作...
-                //清空上级分类
-                $("#modal_id").val('');
-                $('#modal_type')
-                $('#fmId').val('');
+                $('#typeId').val('');
                 $('#modal_name').val('');
-                $('#modal_desc').val('');
-
-            });
-            //模态框完全对隐藏时触发。
-            $('#uploadmodal').on('hidden.bs.modal', function () {
-                // 执行一些动作...
-                $("#fmpicId").val('');
-            });
-
+            })
             $('#confirm_commit').click(function () {
-                var modal_id=$("#modal_id").val();
                 var name=$('#modal_name').val();
-                var desc=$('#modal_desc').val();
-                if(modal_id==""||name==""){
+                if(name==""){
                     $('#warning').modal('show');
                     return;
                 }
                 var savedata = $('#formdata').serialize();
                 $.ajax({
-                    url: "/foodMaterial/save",
+                    url: "/mainCategorie/save",
                     type: "POST",
                     data: savedata,
                     error: function (error) {
                         alert("网络错误");
                     },
                     success: function (result) {
-                        alert("添加成功");
+                        $('#search').click();
                         $('#myModal').modal('hide');
                     }
                 });
-            });
-                /*搜索回显*/
-            var url=window.location.href;
-            var arr=url.split("/");
 
-            if (arr.length==7){
-                $("#maname").val(decodeURI(decodeURI(arr[5])));
-            }
+            });
         });
     </script>
  

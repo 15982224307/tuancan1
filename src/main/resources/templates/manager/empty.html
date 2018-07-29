@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
 	<!-- Bootstrap Styles-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
         <!-- Custom Styles-->
-    <link href="assets/css/custom-styles.css" rel="stylesheet" />
-     <!-- Google Fonts-->
+    <link href="/assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="/assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+    <!--<link href="/assets/css/zTreeStyle/metroStyle.css" rel="stylesheet">-->
+
+    <!-- Google Fonts-->
    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
@@ -301,9 +304,13 @@
             <div id="page-inner">
 			 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-header">
-                            Empty Page <small>Create new page.</small>
-                        </h1>
+                        <div class="ztree-dropdown">
+                            <input class="custom-input" id="partInput" type="text" readonly value="请选择主分部分项" style="width:120px;"/>
+                            <div hidden id="ztreeDropdownContent" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
+                             background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
+                                <ul id="partTree" class="ztree"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div> 
                  <!-- /. ROW  -->
@@ -316,14 +323,77 @@
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!--<script src="assets/js/jquery-1.10.2.js"></script>-->
+    <script type="text/javascript" src="/webjars/jquery/3.3.0/jquery.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.ztree.core.js"></script>
       <!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="/assets/js/jquery.metisMenu.js"></script>
       <!-- Custom Js -->
-    <script src="assets/js/custom-scripts.js"></script>
+    <script src="/assets/js/custom-scripts.js"></script>
     
-   
+   <script type="text/javascript">
+
+       var setting={
+           view: {
+               showLine: true,
+               showIcon:true,
+           },
+           //获取json数据
+           async : {
+               enable : true,
+               url: "/foodMaterial/getTree", // Ajax 获取数据的 URL 地址
+               autoParam : [ "id", "name" ] //ajax提交的时候，传的是id值
+           },
+           callback:{
+               onAsyncError:function () {
+                   alert("网络错误");
+               },
+               beforeClick:function (treeId, treeNode) {
+                   var check = (treeNode && !treeNode.isParent);
+                   if (!check){
+                       alert("请选择下级分类");
+                   }
+                   return check;
+               },
+               onClick:function (event, treeId, treeNode) {
+                   if(!treeNode.isParent){
+                       $("#").val(treeNode.id);
+                       $("#").val(treeNode.text)
+                   }
+               }
+           },
+           data: {
+               simpleData: {
+                   enable: true,
+                   idKey: "id",
+                   pIdKey: "pId",
+                   rootPId: 0,
+               }
+           },
+
+       };
+       function showMenu() {
+           var cityObj = $("#partInput");
+           var cityOffset = $("#partInput").offset();
+           $("#ztreeDropdownContent").css({left:cityOffset.left+"px",top:cityOffset.top+cityObj.outerHeight()+"px"}).slideDown("fast");
+           $("#ztreeDropdownContent").slideDown("fast");
+           $("body").bind("mousedown", onBodyDown);
+       }
+       function hideMenu() {
+           $("#ztreeDropdownContent").fadeOut("fast");
+           $("body").unbind("mousedown", onBodyDown);
+       }
+       function onBodyDown(event) {
+           if (!(event.target.id == "partInput" || event.target.id == "ztreeDropdownContent" || $(event.target).parents("#ztreeDropdownContent").length>0)) {
+               hideMenu();
+           }
+       }
+       $.fn.zTree.init($("#partTree"), setting);
+       $("#partInput").focus(function(){
+           showMenu();
+       });
+   </script>
 </body>
 </html>

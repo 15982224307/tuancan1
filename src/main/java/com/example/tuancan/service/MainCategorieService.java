@@ -17,4 +17,10 @@ public interface MainCategorieService {
     /**
      * 插入数据*/
     public int insertOne(MainCategorie mainCategorie);
+
+    /*更新*/
+    public  int updateOne(MainCategorie mainCategorie);
+
+    public List<MainCategorie> selectByName(String name);
+
 }

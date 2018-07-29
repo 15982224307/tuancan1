@@ -12,13 +12,17 @@ public interface  FoodMaterialService {
 
     /**
      *  根据小类编号查询结果*/
-   public List<FoodMaterial> selectByClassId(Integer id);
+    public List<FoodMaterial> selectByClassId(Integer id);
+
+    public int updateOne(FoodMaterial foodMaterial);
+    //更新图片
+    public int updatePic(Integer fmid,String pathurl);
 
     /*  名字 查询结果*/
     public List<FoodMaterial> selectByName(String name);
    /**
     *所有数据*/
-   public List<FoodMaterial> getAll();
+    public List<FoodMaterial> getAll();
     /**
      * 插入数据*/
     public int insertOne(FoodMaterial foodMaterial);

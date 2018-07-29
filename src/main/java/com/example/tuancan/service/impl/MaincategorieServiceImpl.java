@@ -32,6 +32,16 @@ public class MaincategorieServiceImpl implements MainCategorieService{
         return mainCategorieMapper.insert(mainCategorie);
     }
 
+    @Override
+    public int updateOne(MainCategorie mainCategorie) {
+        return mainCategorieMapper.updateByPrimaryKey(mainCategorie);
+    }
+
+    @Override
+    public List<MainCategorie> selectByName(String name) {
+        return mainCategorieMapper.selectByName(name);
+    }
+
     /**
      * 根据id查询
      *

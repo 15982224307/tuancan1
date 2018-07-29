@@ -9,6 +9,7 @@
     <link href="/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
     <link href="/assets/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- Custom Styles-->
     <link href="/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
@@ -193,13 +194,13 @@
                         <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
+                                <a href="javascript:void(0);">菜谱类型列表</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
+                                <a href="" th:href="@{/mainCategorie/list}" >食材一级分类</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
+                                <a href="" th:href="@{/classification/list}" >食材二级分类</a>
                             </li>
                             <li>
                                 <a href="" th:href="@{/foodMaterial/list/1}" >食材管理</a>
@@ -299,7 +300,7 @@
                                              按菜谱类型名称查询： <input class="input-medium search-query" type="text" id="typename"/>
                                              &nbsp;&nbsp;&nbsp;<button id="search" class="btn btn-primary" type="button">查询</button>
                                             <!--添加-->
-                                             <button  data-toggle="modal" data-target="#myModal" id="add_type" type="button" class=" btn-mini btn_search">添加</button>
+                                             <button  data-toggle="modal" data-target="#myModal" id="add_type" type="button" class="btn btn-primary">添加</button>
                                              <!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" type="button">-->
                                                  <!--开始演示模态框-->
                                              <!--</button>-->
@@ -312,8 +313,8 @@
 
 
                         <div class="text_data">
-
-                            <table id="sshtml"  class="table_shadow table table-bordered table-striped table-hover ">
+                            <div id="searchtable">
+                            <table  class="table_shadow table table-bordered table-striped table-hover ">
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
@@ -325,14 +326,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="dc,stat : ${typelist}" th:if="${not #lists.isEmpty(typelist)}">
+                                <tr th:each="dc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
                                     <td th:text="${stat.count}"></td>
                                     <td class="zt"  th:text=" ${dc.recipeTypeName}"></td>
                                     <td th:text="${dc.recipeTypeDisc}">菜系简介</td>
                                     <td th:text="${#dates.format(dc.recipeTypeCreatedate,'yyyy-MM-dd HH:mm:ss')}">创建日期</td>
                                     <td>
-                                        <button data-toggle="modal" data-target="#myModal" class="updatetype btn btn-xs btn-primary" th:onclick="'updatetype('+${dc.recipeTypeId}+',\''+${dc.recipeTypeName}+'\',\''+${dc.recipeTypeDisc}+'\')'" th:lang="${dc.recipeTypeId}">修改</button>
-                                        <button data-toggle="modal" data-target="#deletetype"  class="dletetype btn btn-xs btn-danger" th:onclick="'deletetype('+${dc.recipeTypeId}+')'"  th:lang="${dc.recipeTypeId}">删除</button>
+                                        <button data-toggle="modal" data-target="#myModal" class="updatetype btn btn-xs btn-primary" th:onclick="'updatetype('+${dc.recipeTypeId}+',\''+${dc.recipeTypeName}+'\',\''+${dc.recipeTypeDisc}+'\')'" th:lang="${dc.recipeTypeId}"><i class="fa fa-edit "></i>&nbsp;修改&nbsp;</button>
+                                        &nbsp;&nbsp;<button data-toggle="modal" data-target="#deletetype"  class="dletetype btn btn-xs btn-danger" th:onclick="'deletetype('+${dc.recipeTypeId}+')'"  th:lang="${dc.recipeTypeId}"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
 
                                     </td>
                                 </tr>
@@ -342,6 +343,8 @@
 
                             <!--分页栏位-->
                             <div th:include="manager/page::page"></div>
+
+                            </div>
 
                         </div>
                     </div>
@@ -423,6 +426,26 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+
+    <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">
+                        友情提示！不能为空
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
@@ -435,20 +458,22 @@
         $('#search').click(function () {
 
             var typename=$("#typename").val();
-            //alert(formdata);
-            //window.location.href="/recipeType/search?typename="+typename;
+            if(typename==null||typename==""){
+                $('#warning').modal('show');
+                return;
+            }
             $.ajax({
-                url:"/recipeType/search",
+                url:"/recipeType/search/"+typename,
                 type:"POST",
                 data:{
-                    'typename':typename,
+                    'asyc':true,
                 },
                 error:function (error) {
                     alert("网络错误");
                 },
                 success:function (result) {
                     //alert(result);
-                    $("#sshtml").html(result);
+                    $("#searchtable").html(result);
                 },
             });
 
@@ -474,6 +499,14 @@
         };
 
         $(function () {
+            var url=window.location.href;
+            var arr=url.split("/");
+            /*$.each(arr,function (index,value) {
+                console.log(index+"==="+arr[index]);
+            })*/
+            if (arr.length==7){
+                $("#typename").val(decodeURI(decodeURI(arr[5])));
+            }
             /*添加或者更新*/
             $('#add_type').click(function () {
 
@@ -490,6 +523,11 @@
                 $('#modal_desc').val('');
             })
             $('#confirm_commit').click(function () {
+                var name=$('#modal_name').val();
+                if (name==""){
+                    $('#warning').modal('show');
+                    return;
+                }
                 var savedata=$('#formdata').serialize();
                 //alert(savedata);
                 $.ajax({

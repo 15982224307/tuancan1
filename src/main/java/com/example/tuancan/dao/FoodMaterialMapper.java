@@ -19,7 +19,7 @@ public interface FoodMaterialMapper extends Mapper<FoodMaterial>{
     public FoodMaterial selectOneById(Integer id);
 
     /*  名字 查询结果*/
-    @Select("select * from foodmaterial where foodmaterialName like '%${value}%'")
+    @Select("select * from foodmaterial where Foodmaterial_name like '%${value}%'")
     public List<FoodMaterial> selectByName(String name);
 
     /*所有数据*/
@@ -37,5 +37,11 @@ public interface FoodMaterialMapper extends Mapper<FoodMaterial>{
     @Insert("insert into foodmaterial values(null,#{classification.classificationId}," +
             "#{foodmaterialName},#{foodmaterialDisc},#{foodmaterialIcon},#{foodmaterialCreatedate})")
     public int insertOne(FoodMaterial foodMaterial);
+
+    @Update({"update foodmaterial set classification_id=#{classification.classificationId},Foodmaterial_name=#{foodmaterialName},Foodmaterial_disc=#{foodmaterialDisc} where Foodmaterial_id=#{foodmaterialId}"})
+    public int updateOne(FoodMaterial foodMaterial);
+
+    @Update({"update foodmaterial set Foodmaterial_icon=#{pathurl} where Foodmaterial_id=#{fmid}"})
+    public int updatePic(@Param("fmid") Integer fmid,@Param("pathurl") String pathurl);
 
 }

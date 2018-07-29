@@ -24,6 +24,11 @@ public class ClassificationServiceImpl implements ClassificationService {
         return classificationMapper.selectOneById(id);
     }
 
+    @Override
+    public List<Classification> selectByMainId(Integer mainid) {
+        return classificationMapper.selectByMainId(mainid);
+    }
+
     /**
      * s所有结果
      */
@@ -32,13 +37,23 @@ public class ClassificationServiceImpl implements ClassificationService {
         return classificationMapper.getAll();
     }
 
+    @Override
+    public int insertOne(Classification classification) {
+        return classificationMapper.insertOne(classification);
+    }
+
+    @Override
+    public int updateOne(Classification classification) {
+        return classificationMapper.updateOne(classification);
+    }
+
     /**
      * 根据name查询单个结果
      *
      * @param name
      */
     @Override
-    public Classification selectOneByName(String name) {
-        return classificationMapper.selectOneByName(name);
+    public List<Classification> selectByName(String name) {
+        return classificationMapper.selectByName(name);
     }
 }

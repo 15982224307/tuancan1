@@ -4,15 +4,20 @@ import com.example.tuancan.enums.StatusEnum;
 import com.example.tuancan.model.GroupMealUnit;
 import com.example.tuancan.service.GroupMealUnitService;
 import com.example.tuancan.utils.JsonUtil;
+import com.example.tuancan.utils.PageUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 @RequestMapping("/groupMealUnit")
@@ -33,17 +38,8 @@ public class GroupMealUnitController {
         PageInfo<GroupMealUnit> pageInfo = new PageInfo<GroupMealUnit>(groupMealUnits);
 
         log.info(JsonUtil.toJson(groupMealUnits));
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-        model.addAttribute("path","/groupMealUnit/yes_list");
+
+        PageUtil.setPageModel(model,pageInfo,"/groupMealUnit/yes_list");
         model.addAttribute("gmulist",groupMealUnits);
         return "/manager/gmu_list";
     }
@@ -58,18 +54,7 @@ public class GroupMealUnitController {
         PageInfo<GroupMealUnit> pageInfo = new PageInfo<GroupMealUnit>(groupMealUnits);
 
         log.info(JsonUtil.toJson(groupMealUnits));
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-        model.addAttribute("path","/groupMealUnit/no_list");
-        model.addAttribute("gmulist",groupMealUnits);
+        PageUtil.setPageModel(model,pageInfo,"/groupMealUnit/no_list");
 
         return "/manager/gmu_list";
     }
@@ -109,14 +94,40 @@ public class GroupMealUnitController {
         // return "forward:/deliveringCompany/yes_list";
     }
 
-    @RequestMapping(value = "/search",method = RequestMethod.POST)
-    public String search(Model model,@RequestParam(name = "groupMealUnitName") String groupMealUnitName){
+    @RequestMapping(value = {"/search/{name}","/search/{name}/{pagenum}"},method = {RequestMethod.POST,RequestMethod.GET})
+    public String search(Model model, @PathVariable(value = "name",required = false) String name,
+                         @PathVariable(value = "pagenum",required = false) Integer pageNum,
+                         @RequestParam(value = "asyc",required = false,defaultValue = "false")Boolean asyc){
+        log.info(name);
+        //PageUtil.checkPageNumAndCriteria(pageNum,name);
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        if (StringUtils.isEmpty(name)||name.equals("*")){
+            name="";
+        }
+        String decode=null;
+        String encode=null;
+        try {
+            decode= URLDecoder.decode(name, "utf-8");
+            decode= URLDecoder.decode(decode, "utf-8");
+            encode = URLEncoder.encode(decode,"utf-8");
+            encode = URLEncoder.encode(encode,"utf-8");
+            log.info("++"+decode);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
+        List<GroupMealUnit> groupMealUnits = groupMealUnitService.selectByLikeName(name);
+        PageInfo<GroupMealUnit> pageInfo = new PageInfo<GroupMealUnit>(groupMealUnits);
 
-        log.info(groupMealUnitName);
-        List<GroupMealUnit> groupMealUnits = groupMealUnitService.selectByLikeName(groupMealUnitName);
         log.info(JsonUtil.toJson(groupMealUnits));
-        model.addAttribute("gmulist",groupMealUnits);
+        PageUtil.setPageModel(model,pageInfo,"/groupMealUnit/search/"+encode);
 
+        model.addAttribute("gmulist",groupMealUnits);
+        if (!asyc){
+            return "/manager/gmu_list";
+        }
         return "/manager/gmu_list :: #searchtable";
     }
 }

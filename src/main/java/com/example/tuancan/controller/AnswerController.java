@@ -2,6 +2,7 @@ package com.example.tuancan.controller;
 
 import com.example.tuancan.model.Answer;
 import com.example.tuancan.service.AnswerService;
+import com.example.tuancan.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,11 @@ public class AnswerController {
 
     @RequestMapping("/index1")
     @ResponseBody
-    public  Answer getAnswer(){
+    public  String getAnswer(HttpServletRequest request){
+        System.out.println(JsonUtil.toJson(request.getParameterMap()));
         Answer answer = answerService.selectOne(2);
-        return answer;
+       // return answer;
+        return "[{\"id\":1, \"pId\":0, \"name\":\"test1\",\"isParent\":\"true\"}]";
     }
 
     @RequestMapping("/index")
