@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.Mapping;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -30,6 +31,18 @@ public interface RecipeMapper extends Mapper<Recipe>{
     @Select("select * from recipe where DeliveringCompany_no = #{companyid}")
     @ResultMap(value = "getone")
     public List<Recipe> selectByCompanyId(Integer companyid);
+
+    /*公司编号查询荤菜and小于价格*/
+    @Select("select * from recipe where DeliveringCompany_no = #{companyid} and recipe_costprice < #{price} and recipe_Meat_or_vegetable = 1")
+    @ResultMap(value = "getone")
+    public List<Recipe> selectByCompanyIdAndHunAndByPrice(@Param("companyid") Integer companyid,@Param("price") BigDecimal price);
+
+
+    /*公司编号查询素菜and小于价格*/
+    @Select("select * from recipe where DeliveringCompany_no = #{companyid} and recipe_costprice < #{price} and recipe_Meat_or_vegetable = 2")
+    @ResultMap(value = "getone")
+    public List<Recipe> selectByCompanyIdAndBySuAndByPrice(@Param("companyid") Integer companyid,@Param("price") BigDecimal price);
+
 
     /*食谱名称模糊查询*/
     @Select("select * from recipe where recipe_name like '%${value}%'")

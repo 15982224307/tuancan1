@@ -5,6 +5,7 @@ import com.example.tuancan.model.Recipe;
 import com.example.tuancan.model.RecipeType;
 import org.apache.ibatis.annotations.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface RecipeService {
@@ -20,6 +21,13 @@ public interface RecipeService {
 
     /*食谱名称模糊查询*/
     public List<Recipe> slectByLikeName(String name);
+
+
+    /*公司编号查询荤菜and小于价格*/
+    public List<Recipe> selectByCompanyIdAndHunAndByPrice(@Param("companyid") Integer companyid,@Param("price") BigDecimal price);
+
+    /*公司编号查询素菜and小于价格*/
+    public List<Recipe> selectByCompanyIdAndBySuAndByPrice(@Param("companyid") Integer companyid,@Param("price") BigDecimal price);
 
     /*荤素查询*/
      public List<Recipe> slectByMeatOrVegetable(int meatorvegetable);

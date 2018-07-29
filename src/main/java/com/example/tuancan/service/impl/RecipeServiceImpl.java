@@ -6,6 +6,7 @@ import com.example.tuancan.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -20,10 +21,21 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeMapper.selectOneById(id);
     }
 
+
     /*菜谱编号查询*/
     @Override
     public List<Recipe> selectByTypeId(Integer id) {
         return recipeMapper.selectByTypeId(id);
+    }
+
+    @Override
+    public List<Recipe> selectByCompanyIdAndHunAndByPrice(Integer companyid, BigDecimal price) {
+        return recipeMapper.selectByCompanyIdAndHunAndByPrice(companyid,price);
+    }
+
+    @Override
+    public List<Recipe> selectByCompanyIdAndBySuAndByPrice(Integer companyid, BigDecimal price) {
+        return recipeMapper.selectByCompanyIdAndBySuAndByPrice(companyid,price);
     }
 
     /*公司所属查询*/

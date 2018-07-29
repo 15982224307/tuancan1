@@ -253,7 +253,7 @@
                     <a href="#"><i class="fa fa-dashboard"></i> 菜单管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse in" aria-expanded="true">
                         <li>
-                            <a href="/groupmanager/tomorrow" >明日菜单</a>
+                            <a href="/groupmanager/tomorrow">明日菜单</a>
                         </li>
                         <li>
                             <a href="#" class="active-menu">用餐单位菜单</a>
@@ -294,7 +294,7 @@
                 </li>
                 <!--管理与授权 -->
                 <li>
-                    <a href="/companystaff/manager" ><i class="fa fa-qrcode"></i> 管理与授权</a>
+                    <a href="/companystaff/manager"><i class="fa fa-qrcode"></i> 管理与授权</a>
                 </li>
 
                 <!--其他操作-->
@@ -328,7 +328,7 @@
 
 
                     <ul class="breadcrumb">
-                        <i style="text-align: left">明日菜单管理</i>
+                        <i style="text-align: left">用餐单位菜单</i>
                         <li><a href="/groupmanager/index">首页</a></li>
                         <li class="active">菜单管理</li>
                         <li class="active">用餐单位菜单</li>
@@ -341,36 +341,110 @@
                         <div class="container-fluid">
                             <p>公司</p>
                             <ul class="nav nav-tabs">
-                                <li th:each="unit,count:${mealUnit}" data-th-classappend="${count.count == 1}?'active':''">
-                                    <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true">Home</a>
+                                <li th:each="unit,count:${mealUnit}"
+                                    data-th-classappend="${count.count == 1}?'active':''">
+                                    <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}" data-toggle="tab"
+                                       aria-expanded="true">Home</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content">
 
-                                <div th:each="unit,count:${mealUnit}" class="tab-pane fade " data-th-classappend="${count.count == 1}?'active in':''" th:id="${unit.UnitName}">
+                                <div th:each="unit,count:${mealUnit}" class="tab-pane fade "
+                                     data-th-classappend="${count.count == 1}?'active in':''" th:id="${unit.UnitName}">
 
-                                    <p style="font-size: 15px;color:lightskyblue">荤菜<span style="font-size: 12px;color:darkgray" th:text=" '(至少选择'+ ${unit.hun_number} + '个)'"></span></p>
 
-                                    <div th:lang="${meal.key}" th:text="${key.current.value}"  th:each="meal,key:${unit.huncai}" class="meal_td hun "  data-th-classappend="'hun' + ${unit.UnitID}"
-                                         style="margin-bottom:-1px;margin-right:-1px;height:34px;width: 12.5%;float: left;border: 1px solid gainsboro;text-align: center;
-                                         line-height: 34px;"
-                                    ></div>
-                                    <p></p>
-                                    <p></p>
-                                    <p style="font-size: 15px;color:lightskyblue"> 素菜<span style="font-size: 12px;color:darkgray" th:text=" '(至少选择'+ ${unit.su_number} + '个)'"></span></p>
-                                    <div th:lang="${meal.key}" th:text="${key.current.value}"  th:each="meal,key:${unit.sucai}" class="meal_td su" data-th-classappend="'su' + ${unit.UnitID}"
-                                         style="margin-bottom:-1px;margin-right:-1px;height:34px;width: 12.5%;float: left;border: 1px solid gainsboro;text-align: center;
-                                         line-height: 34px;"
-                                    ></div>
-                                    <p></p>
-                                    <p></p>
-                                    <button th:if="${unit.added} == 1"type="button" class="btn btn-info pull-right"
-                                          disabled="disabled">已添加</button>
+                                    <div style="width: 100%;height: 600px;">
+                                        <!--左边信息-->
+                                        <div style="width: 25%;height:100%;float: left">
+                                            <p></p>
+                                            <p></p>
+                                            <form class="">
+                                                <div class="form-group " style="width: 150px;height:100%">
+                                                    <label class="control-label">餐标</label>
+                                                    <select class="form-control " disabled="disabled">
+                                                        <option th:text="${unit.diningStandard.standardName}"
+                                                                th:value="${unit.diningStandard.standardPrice}">1
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group " style="width: 150px">
+                                                    <label class="control-label">荤菜个数</label>
+                                                    <select class="form-control" disabled="disabled">
+                                                        <option th:value="${unit.hun_number}"
+                                                                th:text="${unit.hun_number}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group " style="width: 150px">
+                                                    <label class="control-label">素菜个数</label>
+                                                    <select class="form-control" disabled="disabled">
+                                                        <option th:value="${unit.su_number}" value="1"
+                                                                th:text="${unit.su_number}"></option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!--/左边信息-->
 
-                                    <button th:if="${unit.added} == 0" id="choice_finishi" type="button" class="btn btn-info pull-right"
-                                            th:onclick="'finish_choice('+ this +','+ ${unit.UnitID}+ ')'">选择完成</button>
+                                        <div style="width:75%;height:200px;float: right;height: 100%;margin-top: 10px">
+                                            <div style="width:60%;float: left;height: 100%">
+                                                <div style="width:80%;float: left;height: 100%">
+                                                    <div style="width: 70%;height: 100%;margin:auto;border: 1px solid grey">
+                                                        <p>&nbsp;&nbsp;自动生成食谱:</p>
+
+                                                        <div style="height:50%;width:100%;">
+                                                            <!--荤菜-->
+                                                            <p>荤菜</p>
+
+                                                            <div th:lang="${hun.id}" th:text="${hun.name} + '( '+ ${hun.price} + '元)'"  th:each="hun,coutnt:${unit.hun_recipe}"
+                                                                 class="meal_td su" style="margin-bottom:-1px;margin:5px 5px;height:34px;width: 30%;float: left;
+                                                            border: 1px solid gainsboro;text-align: center;line-height: 34px;">
+                                                                <button type="button" class="close" onclick="Iclose(this)"
+                                                                        title="删除">&times;
+                                                                </button>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div style="height:50%;width:100%;">
+                                                            <!--荤菜-->
+                                                            <p>荤菜</p>
+                                                            <div th:lang="${su.id}" th:text="${su.name} + '( '+ ${su.price} + '元)'"  th:each="su,coutnt:${unit.su_recipe}"
+                                                                    class="meal_td su" style="margin-bottom:-1px;margin:5px 5px;height:34px;width: 30%;float: left;
+                                                            border: 1px solid gainsboro;text-align: center;line-height: 34px;">
+                                                                <button type="button" class="close" onclick="Iclose(this)"
+                                                                        title="删除">&times;
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                            <div style="width:40%;height: 100%;float: right">
+
+                                                <div style="width: 80%;height: 100%;margin:auto;border: 1px solid grey"
+                                                     id="delete_recipe">
+                                                    <p>&nbsp;&nbsp;移除的食谱:</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!--<div class="pull-right" style="width: 200px;height: 500px;border: 1px solid grey;float: right"></div>-->
+
+                                    <p></p>
+
+                                    <button id="choice_finishi" type="button" class="btn btn-info pull-right"
+                                            th:onclick="'finish_choice('+ this +','+ ${unit.UnitID}+ ')'">选择完成
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -389,7 +463,8 @@
     <!--</div>-->
 
 </div>
-<div class="modal fade" id="finish_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="finish_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -434,109 +509,12 @@
 <script>
 
 
-    /*确认*/
-    $(function () {
-        $("#submit_Choice").click(function () {
-            foodsid = $("#foodid_message").text();
-            unitid = $("#unitid").text();
-            $.ajax({
-                url:"/tomorrowmenu/addmenu",
-                type:"POST",
-                data:{"unitid":unitid,"foodsid":foodsid},
-                success:function () {
-                    alert("成功!");
-                    $("#finish_message").modal("hide");
-                    location.reload();
-                },
-                error:function () {
-                    alert("发生错误!");
-                }
-            });
-
-        });
-    });
-
-    /*确认选择*/
-    function finish_choice(obj, id) {
-        $_this = $(obj);
-        var meal = $(".hun" + id);
-        var vege = $(".su" + id);
-
-        var ids = [];
-        var name = [];
-        $.each(meal,function (index,value) {
-          if( $(value).hasClass("huncai_choice")){
-              ids.push($(this).attr("lang"));
-              name.push($(this).text());
-          }
-        });
-        $.each(vege,function (index,value) {
-            if( $(value).hasClass("sucai_choice")){
-                ids.push($(this).attr("lang"));
-                name.push($(this).text());
-            }
-        });
-        if(name.length == 0){
-            alert("没选够!");
-        }
-        else {
-            $("#foodid_message").text(ids);
-            $("#unitid").text(id);
-            $("#text_message").text("选择了："+ name);
-            $("#finish_message").modal("show");
-        }
-
-
+    function Iclose(obj) {
+        var $_this = $(obj);
+        $_this.parent().remove();
+        $("#delete_recipe").append($_this.parent());
 
     }
-    /*选择菜单*/
-  $(function () {
-      $(".meal_td").click(function () {
-          if($(this).hasClass("hun")) {
-              if ($(this).hasClass("huncai_choice")) {
-                  $(this).css("background", "white").removeClass("huncai_choice");
-              } else {
-                  $(this).css("background", "#87CEFA").addClass("huncai_choice");
-              }
-          }else {
-              if($(this).hasClass("sucai_choice")){
-                  $(this).css("background","white").removeClass("sucai_choice");
-              }else {
-                  $(this).css("background", "#87CEFA").addClass("sucai_choice");
-              }
-          }
-      });
-  });
-
-//    $(function () {
-//        $("td").click(function () {
-//            var huncai_count = $(".huncai_choice").length;
-//            var sucai_count = $(".sucai_choice").length;
-//
-//            if($(this).parent().parent().parent().hasClass("huncai_tabel")){
-//                if($(this).hasClass("huncai_choice")){
-//                    $(this).css("background","white").removeClass("huncai_choice");
-//                }else{
-//                    if(huncai_count < 2){
-//                        $(this).css("background","#87CEFA").addClass("huncai_choice");
-//                    }else {
-//                        alert("荤菜够了!");
-//                    }
-//                }
-//
-//            }else if($(this).parent().parent().parent().hasClass("sucai_tabel")){
-//                if($(this).hasClass("sucai_choice")){
-//                    $(this).css("background","white").removeClass("sucai_choice");
-//                }else{
-//                    if(sucai_count < 1){
-//                        $(this).css("background", "#87CEFA").addClass("sucai_choice");
-//                    }else {
-//                        alert("素菜够了!");
-//                    }
-//                }
-//            }
-//        });
-//    });
 
 
 </script>

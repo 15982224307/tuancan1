@@ -39,4 +39,6 @@ public class UnitAndStandard {
     /*是否已经添加*/
     private Integer added;
 
+    private List<Recipeid_name_privce> hun_recipe;
+    private List<Recipeid_name_privce> su_recipe;
 }

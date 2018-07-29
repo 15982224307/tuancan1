@@ -1,6 +1,7 @@
 package com.example.tuancan.controller;
 
 import com.example.tuancan.dto.UnitAndStandard;
+import com.example.tuancan.enums.StatusEnum;
 import com.example.tuancan.model.*;
 import com.example.tuancan.service.*;
 import com.example.tuancan.utils.JsonUtil;
@@ -92,7 +93,7 @@ public class TommorwMenuController {
 //                /*循环得到餐谱细节 添加到具体的分类中*/
                 for(MenuDetail menuDetail : menuDetails){
                     Recipe recipe = recipeService.selectOneById(menuDetail.getRecipe().getRecipeId());
-                    if(recipe.getRecipeMeatOrVegetable() == 0){
+                    if(recipe.getRecipeMeatOrVegetable() == StatusEnum.Meat.getCode()){
                         huncai_number.put(recipe.getRecipeId(),recipe.getRecipeName());
                     }else{
                         sucai_number.put(recipe.getRecipeId(),recipe.getRecipeName());
@@ -106,6 +107,7 @@ public class TommorwMenuController {
         model.addAttribute("mealUnit",unit_Company);
         return "/groupmanager/tomorrowmenu";
     }
+
 
     @ResponseBody
     @RequestMapping("/addmenu")
@@ -140,7 +142,6 @@ public class TommorwMenuController {
              Recipe recipe = new Recipe();
              recipe.setRecipeId(Integer.parseInt(food));
              tomorrowMenudetail.setRecipe(recipe);
-
              double v = Math.random() * 10 + 1;
              /*随机推荐 ，有需要再更换*/
              if(v > 5){
@@ -149,13 +150,8 @@ public class TommorwMenuController {
              else {
                  tomorrowMenudetail.setTomorrowMenuIsRecommend(0);
              }
-
              tomorrowMenuDetailService.insertOne(tomorrowMenudetail);
          }
-
-
-
-
         return "5255";
     }
 }
