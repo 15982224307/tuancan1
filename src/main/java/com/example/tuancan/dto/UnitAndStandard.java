@@ -36,4 +36,7 @@ public class UnitAndStandard {
     /*素菜*/
     private Map<Integer,String>sucai;
 
+    /*是否已经添加*/
+    private Integer added;
+
 }

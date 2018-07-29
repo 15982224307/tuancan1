@@ -256,7 +256,7 @@
                             <a href="/groupmanager/tomorrow">明日菜单</a>
                         </li>
                         <li>
-                            <a href="#">用餐单位菜单</a>
+                            <a href="/groupmanager/unit">用餐单位菜单</a>
                         </li>
                     </ul>
                 </li>
@@ -614,7 +614,6 @@
                 data: {"id": id, "name": name},
                 success: function (result) {
                     $("#table_staff").html(result);
-                  //  window.location.href("http://www.baidu.com");
                 },
                 error: function (result) {
                     alert("搜索失败!");

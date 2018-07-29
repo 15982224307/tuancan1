@@ -17,4 +17,10 @@ public class groupManagerController {
 
         return "redirect:/tomorrowmenu/menu";
     }
+
+    @RequestMapping("/unit")
+    public String unitMenu(){
+
+        return "redirect:/unitmenu/menu";
+    }
 }

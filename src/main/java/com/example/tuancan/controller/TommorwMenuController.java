@@ -17,7 +17,7 @@ import java.util.*;
 
 @Slf4j
 @Controller
-@RequestMapping("tomorrowmenu")
+@RequestMapping("/tomorrowmenu")
 public class TommorwMenuController {
 
     @Autowired
@@ -64,6 +64,22 @@ public class TommorwMenuController {
                 unitAndStandard.setSu_number(groupMealContract.getGMlContractVegetablenumber());
                 unitAndStandard.setUnitID(unit_id);
                 unitAndStandard.setUnitName(groupMealContract.getGroupMealUnit().getGroupMealUnitName());
+                /*是否已经添加 0：未添加 1：已添加*/
+                unitAndStandard.setAdded(0);
+
+                try {
+                    /*防止数据库不存在此记录，抛出异常*/
+                    List<TomorrowMenuMaster> tomorrowMenuMasters = tomorrowMenuMasterService.selectByUnitId(unit_id);
+                    TomorrowMenuMaster tomorrowMenuMaster1 = tomorrowMenuMasters.get(0);
+
+                    Date tomorrowMenuMasterUsedate = tomorrowMenuMaster1.getTomorrowMenuMasterUsedate();
+                    if(tomorrowMenuMasterUsedate.getDate() == new Date().getDate() + 1) {
+                        unitAndStandard.setAdded(1);
+                    }
+                }catch (Exception e){
+                    log.info("可能不存在某条记录，导致数据溢出!");
+                }
+
 
                 /*荤素基本信息*/
 
