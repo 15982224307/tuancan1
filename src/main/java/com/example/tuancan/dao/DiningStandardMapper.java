@@ -38,7 +38,7 @@ public interface DiningStandardMapper extends Mapper<DiningStandard>{
      * @param companyNo
      * @return
      */
-    @Select({"select * from diningstandard where DeliveringCompany_no=#{companyNo} order by Standard_price asc"})
+    @Select({"select * from diningstandard where DeliveringCompany_no=#{companyNo} "})
     public List<DiningStandard> selectAllByCompanyNo(Integer companyNo);
 
 

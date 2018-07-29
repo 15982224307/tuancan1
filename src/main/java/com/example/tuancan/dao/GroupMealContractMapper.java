@@ -26,6 +26,18 @@ public interface GroupMealContractMapper  extends Mapper<GroupMealContract>{
     })
     public GroupMealContract selectOneById(Integer id);
 
+
+    /*根据单位编号查询数据*/
+    @Select("select * from groupmealcontract where GroupMealUnit_id=#{id}")
+    @ResultMap(value = "selectOne")
+    public List<GroupMealContract> selectOneByUnitId(Integer id);
+
+
+    /*根据餐标查询数据*/
+    @Select("select * from groupmealcontract where Standard_id=#{id}")
+    @ResultMap(value = "selectOne")
+    public List<GroupMealContract> selectOneByReipeId(Integer id);
+
     /**
      * 查询合同所有数据
      * @return

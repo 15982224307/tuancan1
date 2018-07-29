@@ -20,7 +20,7 @@ public interface TomorrowMenuMasterMapper extends Mapper<TomorrowMenuMaster> {
     public TomorrowMenuMaster selectOneById(Integer id);
 
     /*根据用餐单位查询*/
-    @Select("select * from tomorrowmenumaster where GroupMealUnit_id = #{unitid}")
+    @Select("select * from tomorrowmenumaster where GroupMealUnit_id = #{unitid} order by TomorrowMenuMaster_createdate DESC ")
     @ResultMap(value = "getone")
     public List<TomorrowMenuMaster> selectByUnitId(Integer unitid);
 

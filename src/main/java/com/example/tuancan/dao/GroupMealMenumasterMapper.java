@@ -24,7 +24,7 @@ public interface GroupMealMenumasterMapper extends Mapper<GroupMealMenumaster> {
      * 根据用餐单位ID查询
      */
     @Select({"select * from groupmealmenumaster where GroupMealUnit_id=#{groupMealUnitId}"})
-    public  List<GroupMealMenumaster> selectByUnitId(Integer groupMealUnitId);
+    public  GroupMealMenumaster selectByUnitId(Integer groupMealUnitId);
 
     /**
      *  查询所有

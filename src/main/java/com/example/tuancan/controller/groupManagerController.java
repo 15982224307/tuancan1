@@ -11,4 +11,16 @@ public class groupManagerController {
     public String index(){
         return "/groupmanager/index";
     }
+
+    @RequestMapping("/tomorrow")
+    public String tomorrowMenu(){
+
+        return "redirect:/tomorrowmenu/menu";
+    }
+
+    @RequestMapping("/unit")
+    public String unitMenu(){
+
+        return "redirect:/unitmenu/menu";
+    }
 }

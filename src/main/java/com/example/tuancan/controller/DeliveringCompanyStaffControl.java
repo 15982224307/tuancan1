@@ -27,9 +27,9 @@ public class DeliveringCompanyStaffControl {
     @RequestMapping("/manager")
     public String getAllStaff(Model model, HttpServletRequest httpServletRequest){
 
-       Integer companyId = (Integer) httpServletRequest.getSession().getAttribute("companyId");
-
-        List<DeliveringCompanyStaff> deliveringCompanyStaffs = deliveringCompanyStaffService.selectAllByCompanyNo(2);
+        httpServletRequest.getSession().setAttribute("companyId",2);
+        Integer companyId = (Integer) httpServletRequest.getSession().getAttribute("companyId");
+        List<DeliveringCompanyStaff> deliveringCompanyStaffs = deliveringCompanyStaffService.selectAllByCompanyNo(companyId);
         model.addAttribute("staff_list",deliveringCompanyStaffs);
 
         return "/groupmanager/companystaff_list";

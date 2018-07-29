@@ -16,6 +16,16 @@ public class GroupMealContractServiceimpl implements GroupMealContractService {
     private GroupMealContractMapper groupMealContractMapper;
 
     @Override
+    public List<GroupMealContract> selectOneByUnitId(Integer id) {
+        return groupMealContractMapper.selectOneByUnitId(id);
+    }
+
+    @Override
+    public List<GroupMealContract> selectOneByReipeId(Integer id) {
+        return groupMealContractMapper.selectOneByReipeId(id);
+    }
+
+    @Override
     public GroupMealContract selectOneById(Integer id) {
         return groupMealContractMapper.selectOneById(id);
     }
