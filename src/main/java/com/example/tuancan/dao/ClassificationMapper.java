@@ -19,16 +19,23 @@ public interface ClassificationMapper extends Mapper<Classification>{
     public Classification selectOneById(Integer id);
 
     /*  根据name查询单个结果*/
-    @Select("select * from classification where classification_name = #{name}")
+    @Select("select * from classification where classification_name like '%${value}%'")
     @ResultMap(value = "getone")
-    public Classification selectOneByName(String name);
+    public List<Classification> selectByName(String name);
 
+    /*xxx根据主分类id拿*/
+    @Select({"select * from classification where maincategorie_id=#{mainid}"})
+    public List<Classification> selectByMainId(Integer mainid);
 
     /*  s所有结果*/
-    @Select("select * from classification " )
+    @Select("select * from classification order by classification_name asc" )
     @ResultMap(value = "getone")
     public List<Classification> getAll();
 
+    @Insert({"insert into classification(maincategorie_id,classification_name) values(#{cascadeType.maincategorieId},#{classificationName})"})
+    @Options( useGeneratedKeys = true,keyColumn = "classification_id",keyProperty = "classificationId")
+    public int insertOne(Classification classification);
 
-
+    @Update({"update classification set maincategorie_id=#{cascadeType.maincategorieId},classification_name=#{classificationName} where classification_id=#{classificationId}"})
+    public int updateOne(Classification classification);
 }

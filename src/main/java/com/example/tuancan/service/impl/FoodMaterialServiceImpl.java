@@ -35,6 +35,16 @@ public class FoodMaterialServiceImpl implements FoodMaterialService {
     }
 
     @Override
+    public int updateOne(FoodMaterial foodMaterial) {
+        return foodMaterialMapper.updateOne(foodMaterial);
+    }
+
+    @Override
+    public int updatePic(Integer fmid, String pathurl) {
+        return foodMaterialMapper.updatePic(fmid,pathurl);
+    }
+
+    @Override
     public List<FoodMaterial> selectByName(String name) {
         return foodMaterialMapper.selectByName(name);
     }

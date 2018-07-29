@@ -4,15 +4,20 @@ import com.example.tuancan.enums.StatusEnum;
 import com.example.tuancan.model.DeliveringCompany;
 import com.example.tuancan.service.DeliveringCompanyService;
 import com.example.tuancan.utils.JsonUtil;
+import com.example.tuancan.utils.PageUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -31,19 +36,8 @@ public class DeliveringCompanyController {
         Page<Object> page = PageHelper.startPage(pageNum, 10);
         List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllByStatus(StatusEnum.StatusUP.getCode());
         PageInfo<DeliveringCompany> pageInfo = new PageInfo<DeliveringCompany>(deliveringCompanies);
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-        //model.addAttribute("page",pageInfo);
-        model.addAttribute("path","/deliveringCompany/yes_list");
-        model.addAttribute("dclist",deliveringCompanies);
+        PageUtil.setPageModel(model,pageInfo,"/deliveringCompany/yes_list");
+
         return "/manager/dc_list";
     }
 
@@ -56,18 +50,10 @@ public class DeliveringCompanyController {
 
         List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllByStatus(StatusEnum.StatusWait.getCode());
         PageInfo<DeliveringCompany> pageInfo = new PageInfo<DeliveringCompany>(deliveringCompanies);
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-        model.addAttribute("path","/deliveringCompany/no_list");
+
+        PageUtil.setPageModel(model,pageInfo,"/deliveringCompany/no_list");
         model.addAttribute("dclist",deliveringCompanies);
+
         return "/manager/dc_list";
     }
 
@@ -108,15 +94,40 @@ public class DeliveringCompanyController {
        // return "forward:/deliveringCompany/yes_list";
     }
 
-    @RequestMapping(value = "/search",method = RequestMethod.POST)
-    public String search(Model model,@RequestParam(name = "name") String name){
+    @RequestMapping(value = {"/search/{name}","/search/{name}/{pagenum}"},method = {RequestMethod.POST,RequestMethod.GET})
+    public String search(Model model, @PathVariable(value = "name",required = false) String name,
+                         @PathVariable(value = "pagenum",required = false) Integer pageNum,
+                         @RequestParam(value = "asyc",required = false,defaultValue = "false")Boolean asyc){
 
         log.info(name);
+        //PageUtil.checkPageNumAndCriteria(pageNum,name);
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        if (StringUtils.isEmpty(name)||name.equals("*")){
+            name="";
+        }
+        String decode=null;
+        String encode=null;
+        try {
+            decode= URLDecoder.decode(name, "utf-8");
+            decode= URLDecoder.decode(decode, "utf-8");
+            encode = URLEncoder.encode(decode,"utf-8");
+            encode = URLEncoder.encode(encode,"utf-8");
+            log.info(encode+"++"+decode);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
         List<DeliveringCompany> deliveringCompanies = deliveringCompanyService.selectAllByName(name);
-
+        PageInfo<DeliveringCompany> pageInfo = new PageInfo<DeliveringCompany>(deliveringCompanies);
         log.info(JsonUtil.toJson(deliveringCompanies));
-        model.addAttribute("dclist",deliveringCompanies);
 
+        PageUtil.setPageModel(model,pageInfo,"/deliveringCompany/search/"+encode);
+        model.addAttribute("dclist",deliveringCompanies);
+        if (!asyc){
+            return "/manager/dc_list";
+        }
         return "/manager/dc_list :: #searchtable";
     }
 }

@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ClassificationServiceTest {
@@ -36,7 +34,7 @@ public class ClassificationServiceTest {
     /*测试name查询*/
     @Test
     public void selectOneByName() throws Exception {
-        Classification classification = classificationService.selectOneByName("鸡");
+        List<Classification> classification = classificationService.selectByName("鸡");
         System.out.println(JsonUtil.toJson(classification));
     }
 

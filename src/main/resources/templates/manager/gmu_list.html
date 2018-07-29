@@ -188,7 +188,7 @@
                                 <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
+                                <a href="" th:href="@{/mainCategorie/list}" >食材一级分类</a>
                             </li>
                             <li>
                                 <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
@@ -297,8 +297,8 @@
 
 
                         <div class="text_data" >
-
-                            <table id="searchtable" style="box-shadow: 0px -1px 12px rgba(13,12,20,0.41);"  class="table_shadow table table-bordered table-striped table-hover ">
+                            <div id="searchtable">
+                            <table class="table_shadow table table-bordered table-striped table-hover ">
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
@@ -313,7 +313,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="dc,stat : ${gmulist}" th:if="${not #lists.isEmpty(gmulist)}">
+                                <tr th:each="dc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
                                     <td th:text="${stat.count}"></td>
                                     <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${dc.groupMealUnitName}" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId} }"></a></td>
                                     <td th:text="${dc.groupMealUnitContact}">公司联系人</td>
@@ -327,11 +327,11 @@
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{/groupMealUnit/gmu_details/${groupMealUnitId}}"  target="main" >&nbsp;详情</a>
-                                        <a class="btn btn-xs btn-success" th:href="@{/groupMealUnit/gmu_details/${groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==2}"  target="main" >&nbsp;审核通过</a>
+                                        <a class="btn btn-xs btn-primary" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}"  target="main" >&nbsp;详情</a>
+                                        <a class="btn btn-xs btn-success" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==2}"  target="main" >&nbsp;审核通过</a>
 
-                                        <a class="btn btn-xs btn-success" th:href="@{/groupMealUnit/gmu_details/${groupMealUnitId}" th:if="${dc.groupMealUnitStatus==0}"  target="main" >&nbsp;启用</a>
-                                        <a class="btn btn-xs btn-danger" th:href="@{/groupMealUnit}" th:if="${dc.groupMealUnitStatus==3}" target="main" >&nbsp;停用</a>
+                                        <a class="btn btn-xs btn-success" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==0}"  target="main" >&nbsp;启用</a>
+                                        <a class="btn btn-xs btn-danger" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==3}" target="main" >&nbsp;停用</a>
 
                                     </td>
                                 </tr>
@@ -340,7 +340,7 @@
 
                             <!--分页栏位-->
                             <div th:include="manager/page::page"></div>
-
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -356,6 +356,26 @@
         <!--</div>-->
 
     </div>
+
+    <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        友情提示！不能为空
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
@@ -374,12 +394,16 @@
         $('#search').click(function () {
 
             var unitname=$("#unitname").val();
+            if (unitname==null||unitname==""){
+                $('#warning').modal('show');
+                return;
+            }
             //alert(formdata);
             $.ajax({
-                url:"/groupMealUnit/search",
+                url:"/groupMealUnit/search/"+unitname,
                 type:"POST",
                 data:{
-                    'groupMealUnitName':unitname,
+                    'asyc':true,
                 },
                 error:function (error) {
 
@@ -391,6 +415,16 @@
             });
 
         });
+        $(function () {
+            var url=window.location.href;
+            var arr=url.split("/");
+            /*$.each(arr,function (index,value) {
+                console.log(index+"==="+arr[index]);
+            })*/
+            if (arr.length==7){
+                $("#unitname").val(decodeURI(decodeURI(arr[5])));
+            }
+        })
     </script>
 
 </body>

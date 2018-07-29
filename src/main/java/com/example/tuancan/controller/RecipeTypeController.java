@@ -3,15 +3,20 @@ package com.example.tuancan.controller;
 import com.example.tuancan.model.RecipeType;
 import com.example.tuancan.service.RecipeTypeService;
 import com.example.tuancan.utils.JsonUtil;
+import com.example.tuancan.utils.PageUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -30,37 +35,11 @@ public class RecipeTypeController {
         Page<Object> page = PageHelper.startPage(pageNum, 10);
         List<RecipeType> recipeTypes = recipeTypeService.selectOrderByCreateDateDESC();
         PageInfo<RecipeType> pageInfo = new PageInfo<RecipeType>(recipeTypes);
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-        //model.addAttribute("page",pageInfo);
-        model.addAttribute("path","/recipeType/list");
-        model.addAttribute("typelist",recipeTypes);
+
+        PageUtil.setPageModel(model,pageInfo,"/recipeType/list");
 
         return "/manager/rctype_list";
     }
-
-//    @RequestMapping(value = "/detail/{id}")
-//    public String  newordetail(Model model, @PathVariable(value = "id",required = false)Integer id){
-//        if (id==null){
-//            //添加页面
-//            return "";
-//        }else {
-//            //详细
-//            RecipeType recipeType = recipeTypeService.selectOneById(id);
-//            model.addAttribute("typelist",recipeType);
-//        }
-//
-//        return "/manager";
-//    }
-
     @RequestMapping(value = "/save",method = {RequestMethod.POST})
     @ResponseBody
     public String  saveorupdate(Model model,RecipeType  recipeType){
@@ -87,12 +66,45 @@ public class RecipeTypeController {
 
         return "ok";
     }
-    @RequestMapping(value = "/search")
-    public String  search(Model model,@RequestParam(value = "typename",required = false) String typename){
-        List<RecipeType> recipeTypes = recipeTypeService.selectByName(typename);
+
+    @RequestMapping(value = {"/search/{name}","/search/{name}/{pagenum}"},method = {RequestMethod.POST,RequestMethod.GET})
+    public String  search(Model model,@PathVariable(value = "name",required = false) String name,
+                          @PathVariable(value = "pagenum",required = false) Integer pageNum,
+                          @RequestParam(value = "asyc",required = false,defaultValue ="false")Boolean asyc){
+
+        log.info(name+"+"+asyc);
+        //PageUtil.checkPageNumAndCriteria(pageNum,name);
+        if (pageNum==null||pageNum<=0){
+            pageNum=1;
+        }
+        if (StringUtils.isEmpty(name)||name.equals("*")){
+            name="";
+        }
+        String decode=null;
+        String encode=null;
+        try {
+            //先解码 在编码
+            decode= URLDecoder.decode(name, "utf-8");
+            decode= URLDecoder.decode(decode, "utf-8");
+            encode = URLEncoder.encode(decode,"utf-8");
+            encode = URLEncoder.encode(encode,"utf-8");
+            log.info(encode+"++"+decode);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        log.info(pageNum+"");
+        Page<Object> page = PageHelper.startPage(pageNum, 10);
+        List<RecipeType> recipeTypes = recipeTypeService.selectByName(name);
+        PageInfo<RecipeType> pageInfo = new PageInfo<RecipeType>(recipeTypes);
+        log.info(JsonUtil.toJson(recipeTypes));
+
+        PageUtil.setPageModel(model,pageInfo,"/recipeType/search/"+encode);
 
         model.addAttribute("typelist",recipeTypes);
 
-        return "/manager/rctype_list :: #sshtml";
+        if (!asyc){
+            return "/manager/rctype_list";
+        }
+        return "/manager/rctype_list :: #searchtable";
     }
 }

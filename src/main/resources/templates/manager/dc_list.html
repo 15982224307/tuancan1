@@ -185,13 +185,13 @@
                         <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >菜谱类型列表</a>
+                                <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
+                                <a href="" th:href="@{/mainCategorie/list}" >食材一级分类</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
+                                <a href="" th:href="@{/classification/list}" >食材二级分类</a>
                             </li>
                             <li>
                                 <a href="" th:href="@{/foodMaterial/list/1}" >食材管理</a>
@@ -288,9 +288,9 @@
                                     <div class="span12">
                                      <div class="row-fluid">
                                          <form class="">
-                                             按公司名称查询： <input  class="input-medium search-query" type="text" />
-                                             <button class=" btn-mini btn_search .btn .btn-primary" type="button">查询</button>
-                                             <button class=" btn-mini btn_search" type="button">查询</button>
+                                             按公司名称查询： <input  class="input-medium search-query" id="dcname" type="text" />
+                                             &nbsp;&nbsp;&nbsp;<button  id="search" class="btn btn-primary" type="button">查询</button>
+                                             <!--<button class=" btn-mini btn_search" type="button">查询</button>-->
                                         </form>
                                     </div>
                                 </div>
@@ -299,8 +299,8 @@
 
 
                         <div class="text_data">
-
-                            <table id="searchtable"  class="table_shadow table table-bordered table-striped table-hover ">
+                            <div id="searchtable" >
+                            <table  class="table_shadow table table-bordered table-striped table-hover ">
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
@@ -315,8 +315,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="dc,stat : ${dclist}" th:if="${not #lists.isEmpty(dclist)}">
-                                    <td th:text="${stat.count}"></td>
+                                <tr th:each="dc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
+                                    <td th:text="${stat.count+(pageNum-1)*10}"></td>
                                     <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${dc.deliveringCompanyName}" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"></a></td>
                                     <td th:text="${dc.deliveringCompanyContact}">公司联系人</td>
                                     <td th:text="${dc.deliveringCompanyBank}">开户行</td>
@@ -325,11 +325,12 @@
                                     <td >
                                         <i th:text="待审核" class="text-danger" th:if="${dc.deliveringCompanyStatus==2}"></i>
                                         <i th:text="审核通过" class="text-success" th:if="${dc.deliveringCompanyStatus==3}"></i>
+                                        <i th:text="待完善信息" class="text-info" th:if="${dc.deliveringCompanyStatus==1}"></i>
                                         <i th:text="已停用"  class="text-muted" th:if="${dc.deliveringCompanyStatus==0}"></i>
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"  >详情</a>
+                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"  ><i class="fa fa-edit "></i>&nbsp;详情</a>
                                         <a class="btn btn-xs btn-success" th:href="@{/deliveringCompany/${dc.deliveringCompanyNo}}" th:if="${dc.deliveringCompanyStatus==2}"  >审核通过</a>
 
                                         <a class="btn btn-xs btn-success" th:href="@{/deliveringCompany/${dc.deliveringCompanyNo}}" th:if="${dc.deliveringCompanyStatus==0}" >启用</a>
@@ -342,7 +343,7 @@
 
                             <!--分页栏位-->
                           <div th:include="manager/page::page"></div>
-
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -358,6 +359,26 @@
         <!--</div>-->
 
     </div>
+
+    <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        友情提示！不能为空
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
@@ -375,12 +396,16 @@
         $('#search').click(function () {
 
             var dcname=$("#dcname").val();
+            if(dcname==null||dcname==""){
+                $('#warning').modal('show');
+                return;
+            }
             //alert(formdata);
             $.ajax({
-                url:"/deliveringCompany/search",
+                url:"/deliveringCompany/search/"+dcname,
                 type:"POST",
                 data:{
-                    'name':dcname,
+                    'asyc':true,
                 },
                 error:function (error) {
 
@@ -391,6 +416,16 @@
                 },
             });
 
+        });
+        $(function () {
+            var url=window.location.href;
+            var arr=url.split("/");
+            /*$.each(arr,function (index,value) {
+                console.log(index+"==="+arr[index]);
+            })*/
+            if (arr.length==7){
+                $("#dcname").val(decodeURI(decodeURI(arr[5])));
+            }
         });
     </script>
  
