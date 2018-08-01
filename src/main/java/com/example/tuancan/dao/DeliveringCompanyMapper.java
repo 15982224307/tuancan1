@@ -69,5 +69,7 @@ public interface DeliveringCompanyMapper extends Mapper<DeliveringCompany>{
     @ResultMap(value = "selectByIdWithGrade")
     public List<DeliveringCompany> selectAllWithGrade();
 
+    @Update({"update deliveringcompany set DeliveringCompany_status=#{status} where DeliveringCompany_no=#{id}"})
+    public int updateStatusById(@Param("id")Integer id,@Param("status")Integer status);
 
 }

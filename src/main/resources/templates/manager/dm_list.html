@@ -270,20 +270,16 @@
                 <div class="row">
                     <div class="col-md-12">
 
-
 						<ul class="breadcrumb" >
-                            <i style="text-align: left">团餐机构列表</i>
+                            <i style="text-align: left">配送列表</i>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">团餐机构</a></li>
-                                <li class="active">团餐机构列表</li>
+                                <li><a href="#">查询配送</a></li>
+                                <li class="active">配送列表</li>
 
                         </ul>
 
                         <ul class="top_search">
-
-
                             <div class="container-fluid">
-
 
                                     <div class="span12">
                                      <div class="row-fluid">
@@ -304,39 +300,32 @@
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
-                                    <th  scope="" style="width: 200px">公司名称</th>
-                                    <th scope="">联系人</th>
-                                    <th scope="">开户行</th>
-                                    <th scope="">开户账号</th>
-                                    <th scope="">办公电话</th>
+                                    <th  scope="" style="width: 200px">团餐公司名称</th>
+                                    <th scope="">用餐公司名称</th>
+                                    <th scope="">配送日期</th>
+                                    <th scope="">应急配送</th>
                                     <th scope="">状态</th>
                                     <th scope="">操作</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="dc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
+                                <tr th:each="dm,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
                                     <td th:text="${stat.count+(pageNum-1)*10}"></td>
-                                    <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${dc.deliveringCompanyName}" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"></a></td>
-                                    <td th:text="${dc.deliveringCompanyContact}">公司联系人</td>
-                                    <td th:text="${dc.deliveringCompanyBank}">开户行</td>
-                                    <td th:text="${dc.deliveringCompanyAccount}">开户账号</td>
-                                    <td th:text="${dc.deliveringCompanyTel}">办公电话</td>
+                                    <td class="zt"><a th:text="${dm?.deliveringCompany?.deliveringCompanyName}" th:href="@{'/deliveringCompany/dc_details/'+${dm?.deliveringCompany?.deliveringCompanyNo}}"></a></td>
+                                    <td><a th:text="${dm?.groupMealUnit?.groupMealUnitName}" th:href="@{'/groupMealUnit/gmu_details/'+${dm?.groupMealUnit?.groupMealUnitId}}"></a></td>
+                                    <td th:text="${#dates.format(dm.deliveringMasterDelivedate,'yyyy-MM-dd')}"></td>
+                                    <td th:if="${dm.deliveringMasterIsEmergency==0}"><span class="text-info" th:text="否"></span></td>
+                                    <td th:if="${dm.deliveringMasterIsEmergency==1}"><span class="text-danger" th:text="是" ></span></td>
                                     <td >
-                                        <i th:text="待审核" class="text-danger" th:if="${dc?.deliveringCompanyStatus==2}"></i>
-                                        <i th:text="审核通过" class="text-success" th:if="${dc?.deliveringCompanyStatus==3}"></i>
-                                        <i th:text="待完善信息" class="text-info" th:if="${dc?.deliveringCompanyStatus==1}"></i>
-                                        <i th:text="已停用"  class="text-muted" th:if="${dc?.deliveringCompanyStatus==0}"></i>
+                                        <i th:text="订单创建" class="text-danger" th:if="${dm.deliveringMasterStatus==0}"></i>
+                                        <i th:text="已确认" class="text-info" th:if="${dm.deliveringMasterStatus==1}"></i>
+                                        <i th:text="已支付" class="text-success" th:if="${dm.deliveringMasterStatus==2}"></i>
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"  ><i class="fa fa-edit "></i>&nbsp;详情</a>
-                                        &nbsp;
-                                        <a id="commit" href="javascript:void(0);" th:onclick="'statusbtn('+${dc?.deliveringCompanyNo}+','+${dc?.deliveringCompanyStatus+1}+')'" class=" btn btn-xs btn-success" th:if="${dc?.deliveringCompanyStatus==2}">&nbsp;审核通过&nbsp;</a>
-                                        &nbsp;
-                                        <a id="stop" href="javascript:void(0);" th:onclick="'statusbtn('+${dc?.deliveringCompanyNo}+','+${dc?.deliveringCompanyStatus-3}+')'" class=" btn btn-xs btn-danger" th:if="${dc?.deliveringCompanyStatus==3}" >&nbsp;停用&nbsp;</a>
-                                        &nbsp;
-                                        <a id="restart" href="javascript:void(0);" th:onclick="'statusbtn('+${dc?.deliveringCompanyNo}+','+${dc?.deliveringCompanyStatus+2}+')'" class=" btn btn-xs btn-muted" th:if="${dc?.deliveringCompanyStatus==0}">&nbsp;启用&nbsp;</a>
+                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringMaster/dm_details/'+${dm.deliveringMasterId} }"  ><i class="fa fa-edit "></i>&nbsp;详情</a>
+
                                     </td>
                                 </tr>
                                 </tbody>
@@ -345,16 +334,6 @@
                             <!--分页栏位-->
                           <div th:include="manager/page::page"></div>
                             </div>
-
-                            <div id="succAlert" hidden class="alert alert-success">
-                                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                <strong>提交成功！</strong>。
-                            </div>
-                            <div id="warnAlert" hidden="" class="alert alert-warning">
-                                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                <strong>错误！</strong>您的网络连接有问题。
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -378,7 +357,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel1">
+                    <h4 class="modal-title" id="myModalLabel">
                         友情提示！不能为空
                     </h4>
                 </div>
@@ -390,36 +369,13 @@
         </div><!-- /.modal -->
     </div>
 
-    <div class="modal fade" id="comfirmmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel2">
-                       确认更改吗？
-                    </h4>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" id="ID" value="">
-                    <input type="hidden" id="Status" value="">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-danger" id="comfirm">确认
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="/webjars/jquery/3.3.0/jquery.js"></script>
     <!-- Bootstrap Js -->
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <!--<script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+    <script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>
     <!-- Metis Menu Js -->
     <script src="/assets/js/jquery.metisMenu.js"></script>
 
@@ -451,41 +407,7 @@
             });
 
         });
-        function statusbtn(id,status) {
-            console.log(id+">>>"+status);
-
-            $('#comfirmmodal').modal('show');
-            $('#ID').val(id);
-            $('#Status').val(status);
-        };
-
-        $('#comfirm').click(function () {
-            id=$('#ID').val();
-            status=$('#Status').val();
-            $.ajax({
-                url:"/deliveringCompany/status/"+id,
-                type:"POST",
-                data:{
-                    status:status,
-                },
-                error:function (error) {
-                    $('#warnAlert').show();
-                    $('#comfirmmodal').modal('hide');
-                },
-                success:function (result) {
-                    $('#succAlert').show();
-                    $('#comfirmmodal').modal('hide');
-                },
-            });
-        });
         $(function () {
-            //模态框完全对隐藏时触发。
-            $('#comfirmmodal').on('hidden.bs.modal', function () {
-                // 执行一些动作...
-                $('#ID').val('');
-                $('#Status').val('');
-            })
-
             var url=window.location.href;
             var arr=url.split("/");
             /*$.each(arr,function (index,value) {

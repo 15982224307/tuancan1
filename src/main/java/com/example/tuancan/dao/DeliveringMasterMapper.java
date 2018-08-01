@@ -23,7 +23,7 @@ public interface DeliveringMasterMapper extends Mapper<DeliveringMaster>{
             @Result(column = "DeliveringCompany_no",property = "deliveringCompany",javaType = DeliveringCompany.class,
             one = @One(select = "com.example.tuancan.dao.DeliveringCompanyMapper.selectByPrimaryKey"))
     })
-    public DeliveringMaster selectOneById(DeliveringMaster deliveringMaster);
+    public DeliveringMaster selectOneById(@Param("deliveringMasterId") Integer deliveringMasterId);
 
     /**
      * 通过是否应急查询配送单信息 伴随团餐机构和用餐机构信息
@@ -51,9 +51,15 @@ public interface DeliveringMasterMapper extends Mapper<DeliveringMaster>{
             "DeliveringMaster_delivedate=#{deliveringMasterDelivedate},DeliveringMaster_price=#{deliveringMasterPrice},DeliveringMaster_amount=#{deliveringMasterAmount}," +
             "DeliveringMaster_memo=#{deliveringMasterMemo},DeliveringMaster_status=#{deliveringMasterStatus},DeliveringMaster_isEmergency=#{deliveringMasterIsEmergency}," +
             "DeliveringMaster_creater=#{deliveringMasterCreater},DeliveringMaster_confirmer=#{deliveringMasterConfirmer} where DeliveringMaster_id=#{deliveringMasterId}"})
-    @Options(useGeneratedKeys = true,keyProperty = "deliveringMaster_id",keyColumn = "DeliveringMaster_id")
     public int updateOne(DeliveringMaster deliveringMaster);
 
+    /*通过用餐公司id查询*/
+    @Select({"select * from deliveringmaster where GroupMealUnit_id=#{unitId}"})
+    public List<DeliveringMaster> selectByUnitId(@Param("unitId") Integer unitId);
+
+    /*通过团餐id*/
+    @Select({"select * from deliveringmaster where DeliveringCompany_no=#{dcNo}"})
+    public List<DeliveringMaster> selectBydcNo(@Param("dcNo") Integer dcNo);
     /**
      * 插入一条数据
      * @param deliveringMaster
@@ -61,7 +67,7 @@ public interface DeliveringMasterMapper extends Mapper<DeliveringMaster>{
      */
     @Insert({"insert into deliveringmaster values(null,#{groupMealUnit.groupMealUnitId},#{deliveringCompany.deliveringCompanyNo}," +
             "#{deliveringMasterDelivedate},#{deliveringMasterPrice},#{deliveringMasterAmount},#{deliveringMasterMemo}," +
-            "#{deliveringMasterStatus},#{deliveringMasterIsEmergency},#{deliveringMasterCreatedate},#{deliveringMasterCreater},#{deliveringMasterConfirmer})"
+            "#{deliveringMasterStatus},#{deliveringMasterIsEmergency},#{deliveringMasterCreatedate},#{deliveringMasterCreater})"
             })
     @Options(useGeneratedKeys = true,keyProperty = "deliveringMasterId",keyColumn = "DeliveringMaster_id")
     public int insertOne(DeliveringMaster deliveringMaster);

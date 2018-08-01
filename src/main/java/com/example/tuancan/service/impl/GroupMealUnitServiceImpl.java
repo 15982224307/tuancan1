@@ -5,7 +5,6 @@ import com.example.tuancan.model.GroupMealUnit;
 import com.example.tuancan.service.GroupMealUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
@@ -91,6 +90,11 @@ public class GroupMealUnitServiceImpl implements GroupMealUnitService {
     @Override
     public int updateOne(GroupMealUnit groupMealUnit) {
         return groupMealUnitMapper.updateByPrimaryKeySelective(groupMealUnit);
+    }
+
+    @Override
+    public int updateStatusById(Integer id, Integer status) {
+        return groupMealUnitMapper.updateStatusById(id,status);
     }
 
     /*工具公司名模糊查询*/

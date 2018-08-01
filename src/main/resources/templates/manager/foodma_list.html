@@ -222,10 +222,10 @@
                         <a href="form.html"><i class="fa fa-edit"></i> 处理投诉 </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">投诉列表</a>
+                                <a href="" th:href="@{/complaint/yes_list}">投诉列表</a>
                             </li>
                             <li>
-                                <a href="#">未处理列表</a>
+                                <a href="#" th:href="@{/complaint/no_list}">未处理列表</a>
                             </li>
                         </ul>
                     </li>
@@ -235,10 +235,7 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 查询配送<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">xxxx</a>
-                            </li>
-                            <li>
-                                <a href="#">xxx</a>
+                                <a href="#" th:href="@{/deliveringMaster/list}">配送详情</a>
                             </li>
                             <li>
                                 <a href="#">sanji<span class="fa arrow"></span></a>
@@ -441,7 +438,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <form id="uploadform" role="form" enctype="multipart/form-data" method="post" action= "/foodMaterial/upload" class="form-horizontal">
+                    <form id="uploadform" role="form" enctype="multipart/form-data" method="post" action= "javascript:void(0);" class="form-horizontal">
                         <input type="hidden" id="fmpicId" name="fmid" value="">
                         <div class="form-group">
                             <label for="modal_desc" class="col-sm-2 control-label">食材图片</label>
@@ -509,7 +506,32 @@
             $("#fmpicId").val(fmid);
         }
         $("#uploadcommit").click(function () {
-            $("#uploadform").submit();
+            var file=$("#inputfile").val();
+            console.log(file);
+            var ext=file.split(".");
+            console.log(ext[ext.length-1]);
+            if($.trim(file)==""||!ext[ext.length-1]=="jpg"||!ext[ext.length-1]=="jpeg"||!ext[ext.length-1]=="png"){
+                $("#myModalLabel1").text("友情提示！文件不能为空或者文件不是图片类型");
+                $("#warning").modal("show");
+                return;
+            }
+            var formdata=new FormData($("#uploadform")[0]);
+            $.ajax({
+                url:"/foodMaterial/upload",
+                type:"POST",
+                data:formdata,
+                async:false,
+                contentType:false,
+                processData:false,
+                success:function (data) {
+                    alert(data.msg);
+                    $('#uploadmodal').modal('hide');
+                },
+                error:function () {
+                    alert("上传失败，网络故障");
+                }
+            });
+
         });
         function updatetype(id) {
             $('#myModalLabel').text("更新分类");
@@ -617,6 +639,11 @@
                 $('#modal_desc').val('');
 
             });
+            $('#warning').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $("#myModalLabel1").text("友情提示！不能为空");
+            });
+
             //模态框完全对隐藏时触发。
             $('#uploadmodal').on('hidden.bs.modal', function () {
                 // 执行一些动作...

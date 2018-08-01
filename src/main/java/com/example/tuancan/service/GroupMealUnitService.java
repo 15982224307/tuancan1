@@ -1,6 +1,7 @@
 package com.example.tuancan.service;
 
 import com.example.tuancan.model.GroupMealUnit;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -45,5 +46,8 @@ public interface GroupMealUnitService {
 
     /*修改一条数据*/
     public int updateOne(GroupMealUnit groupMealUnit);
+
+    public int updateStatusById(@Param("id")Integer id, @Param("status") Integer status);
+
 
 }

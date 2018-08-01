@@ -181,7 +181,7 @@
                             </li>
                         </ul>
                     </li>
-					<li>
+					<li class="active">
                         <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -194,7 +194,7 @@
                                 <a href="" th:href="@{/classification/list}" >食材二级分类</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/foodMaterial/list/1}" >食材管理</a>
+                                <a href="javascript:void(0);"  >食材管理</a>
                             </li>
                         </ul>
                     </li>
@@ -220,7 +220,7 @@
                         <a href="form.html"><i class="fa fa-edit"></i> 处理投诉 </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">投诉列表</a>
+                                <a href="javascript:void(0);">投诉列表</a>
                             </li>
                             <li>
                                 <a href="#">未处理列表</a>
@@ -272,10 +272,10 @@
 
 
 						<ul class="breadcrumb" >
-                            <i style="text-align: left">团餐机构列表</i>
+                            <i style="text-align: left">食材列表</i>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">团餐机构</a></li>
-                                <li class="active">团餐机构列表</li>
+                                <li><a href="#">菜系管理</a></li>
+                                <li class="active">食材列表</li>
 
                         </ul>
 
@@ -288,10 +288,10 @@
                                     <div class="span12">
                                      <div class="row-fluid">
                                          <form class="">
-                                             按公司名称查询： <input  class="input-medium search-query" id="dcname" type="text" />
-                                             &nbsp;&nbsp;&nbsp;<button  id="search" class="btn btn-primary" type="button">查询</button>
-                                             <!--<button class=" btn-mini btn_search" type="button">查询</button>-->
-                                        </form>
+                                             按内容查询： <input class="input-medium search-query" type="text" id="maname"/>
+                                             &nbsp;&nbsp;&nbsp;<button id="search" class="btn btn-primary" type="button">查询</button>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -299,60 +299,38 @@
 
 
                         <div class="text_data">
-                            <div id="searchtable" >
+                            <div id="searchtable">
                             <table  class="table_shadow table table-bordered table-striped table-hover ">
                                 <thead>
                                 <tr>
                                     <th scope="">序号</th>
-                                    <th  scope="" style="width: 200px">公司名称</th>
-                                    <th scope="">联系人</th>
-                                    <th scope="">开户行</th>
-                                    <th scope="">开户账号</th>
-                                    <th scope="">办公电话</th>
-                                    <th scope="">状态</th>
-                                    <th scope="">操作</th>
+                                    <th  scope="" style="width: 200px">投诉人</th>
+                                    <th scope="">投诉内容</th>
+                                    <th scope="">处理人</th>
+                                    <th scope="">投诉日期 </th>
+                                    <th scope="">操作 </th>
 
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr th:each="dc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
+                                <tbody style="text-align: center;">
+                                <tr th:each="cp,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
                                     <td th:text="${stat.count+(pageNum-1)*10}"></td>
-                                    <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${dc.deliveringCompanyName}" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"></a></td>
-                                    <td th:text="${dc.deliveringCompanyContact}">公司联系人</td>
-                                    <td th:text="${dc.deliveringCompanyBank}">开户行</td>
-                                    <td th:text="${dc.deliveringCompanyAccount}">开户账号</td>
-                                    <td th:text="${dc.deliveringCompanyTel}">办公电话</td>
-                                    <td >
-                                        <i th:text="待审核" class="text-danger" th:if="${dc?.deliveringCompanyStatus==2}"></i>
-                                        <i th:text="审核通过" class="text-success" th:if="${dc?.deliveringCompanyStatus==3}"></i>
-                                        <i th:text="待完善信息" class="text-info" th:if="${dc?.deliveringCompanyStatus==1}"></i>
-                                        <i th:text="已停用"  class="text-muted" th:if="${dc?.deliveringCompanyStatus==0}"></i>
-
-                                    </td>
+                                    <td th:text="${cp.complainter}"></td>
+                                    <td style="width: 500px;"><p style="width: 400px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;-o-text-overflow：ellipsis;"  th:text="${cp?.complaintContent}"></p></td>
+                                    <td th:text="${cp?.manager?.managerName}"></td>
+                                    <td th:text="${#dates.format(cp?.complaintDate,'yyyy-MM-dd')}"></td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"  ><i class="fa fa-edit "></i>&nbsp;详情</a>
-                                        &nbsp;
-                                        <a id="commit" href="javascript:void(0);" th:onclick="'statusbtn('+${dc?.deliveringCompanyNo}+','+${dc?.deliveringCompanyStatus+1}+')'" class=" btn btn-xs btn-success" th:if="${dc?.deliveringCompanyStatus==2}">&nbsp;审核通过&nbsp;</a>
-                                        &nbsp;
-                                        <a id="stop" href="javascript:void(0);" th:onclick="'statusbtn('+${dc?.deliveringCompanyNo}+','+${dc?.deliveringCompanyStatus-3}+')'" class=" btn btn-xs btn-danger" th:if="${dc?.deliveringCompanyStatus==3}" >&nbsp;停用&nbsp;</a>
-                                        &nbsp;
-                                        <a id="restart" href="javascript:void(0);" th:onclick="'statusbtn('+${dc?.deliveringCompanyNo}+','+${dc?.deliveringCompanyStatus+2}+')'" class=" btn btn-xs btn-muted" th:if="${dc?.deliveringCompanyStatus==0}">&nbsp;启用&nbsp;</a>
+                                        <a class="btn btn-xs btn-primary" th:href="@{'/complaint/cp_details/'+${cp.complaintId} }"  ><i class="fa fa-edit "></i>&nbsp;详情</a>
+                                        <button data-toggle="modal" data-target="#deletetype" class="btn btn-xs btn-danger"  th:onclick="'deletecp('+${cp.complaintId}+')'" ><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
 
                             <!--分页栏位-->
-                          <div th:include="manager/page::page"></div>
-                            </div>
+                            <div th:include="manager/page::page"></div>
 
-                            <div id="succAlert" hidden class="alert alert-success">
-                                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                <strong>提交成功！</strong>。
-                            </div>
-                            <div id="warnAlert" hidden="" class="alert alert-warning">
-                                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                <strong>错误！</strong>您的网络连接有问题。
                             </div>
 
                         </div>
@@ -369,6 +347,32 @@
 
         <!--</div>-->
 
+    </div>
+
+    <div class="modal fade" id="deletetype" tabindex="-1" role="dialog" aria-labelledby="authorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close closedel" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="deleteModalLabel">
+                        确认删除该投诉内容吗？
+                    </h4>
+                </div>
+                <!--<div class="modal-body">
+
+                </div>-->
+                <div class="modal-footer">
+                    <input type="hidden" name="cpid" value="" id="deltypeId">
+                    <button type="button" class="btn btn-default closedel" data-dismiss="modal">关闭
+                    </button>
+                    <button id="confirm_del" type="button" class="btn btn-danger">
+                        确认删除
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
 
     <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -390,28 +394,6 @@
         </div><!-- /.modal -->
     </div>
 
-    <div class="modal fade" id="comfirmmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel2">
-                       确认更改吗？
-                    </h4>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" id="ID" value="">
-                    <input type="hidden" id="Status" value="">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-danger" id="comfirm">确认
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
 
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
@@ -429,14 +411,15 @@
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var dcname=$("#dcname").val();
-            if(dcname==null||dcname==""){
+            var name=$("#maname").val();
+            console.log(name);
+            if(name==null||name==""){
                 $('#warning').modal('show');
                 return;
             }
             //alert(formdata);
             $.ajax({
-                url:"/deliveringCompany/search/"+dcname,
+                url:"/complaint/search/"+name,
                 type:"POST",
                 data:{
                     'asyc':true,
@@ -451,48 +434,82 @@
             });
 
         });
-        function statusbtn(id,status) {
-            console.log(id+">>>"+status);
-
-            $('#comfirmmodal').modal('show');
-            $('#ID').val(id);
-            $('#Status').val(status);
+        /*删除*/
+        function deletecp(id) {
+            console.log(window.event.srcElement || window.event.target);
+            var srcclick=window.event.srcElement || window.event.target;
+            $(srcclick).addClass('rm');
+            $('#deltypeId').val(id);
         };
-
-        $('#comfirm').click(function () {
-            id=$('#ID').val();
-            status=$('#Status').val();
-            $.ajax({
-                url:"/deliveringCompany/status/"+id,
-                type:"POST",
-                data:{
-                    status:status,
-                },
-                error:function (error) {
-                    $('#warnAlert').show();
-                    $('#comfirmmodal').modal('hide');
-                },
-                success:function (result) {
-                    $('#succAlert').show();
-                    $('#comfirmmodal').modal('hide');
-                },
-            });
-        });
         $(function () {
             //模态框完全对隐藏时触发。
-            $('#comfirmmodal').on('hidden.bs.modal', function () {
+            $('#deletetype').on('hidden.bs.modal', function () {
                 // 执行一些动作...
-                $('#ID').val('');
-                $('#Status').val('');
-            })
+                $('.rm').removeClass('rm');
 
+            });
+            $('#warning').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $("#myModalLabel1").text("友情提示！不能为空");
+            });
+
+            //模态框完全对隐藏时触发。
+            $('#uploadmodal').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $("#fmpicId").val('');
+            });
+
+            $('#confirm_commit').click(function () {
+                var modal_id=$("#modal_id").val();
+                var name=$('#modal_name').val();
+                var desc=$('#modal_desc').val();
+                if(modal_id==""||name==""){
+                    $('#warning').modal('show');
+                    return;
+                }
+                var savedata = $('#formdata').serialize();
+                $.ajax({
+                    url: "/foodMaterial/save",
+                    type: "POST",
+                    data: savedata,
+                    error: function (error) {
+                        alert("网络错误");
+                    },
+                    success: function (result) {
+                        alert("添加成功");
+                        $('#myModal').modal('hide');
+                    }
+                });
+            });
+
+            /*删除*/
+            $('.closedel').click(function () {
+                $('.rm').removeClass('rm');
+            });
+
+            $('#confirm_del').click(function () {
+                typeid=$('#deltypeId').val();
+
+                $.ajax({
+                    url:"/complaint/delete/"+typeid,
+                    type:"POST",
+                    data:{},
+                    error:function (error) {
+                        alert("网络错误");
+                    },
+                    success:function (result) {
+                        //location.reload();
+                        $('.rm').parent().parent().hide();
+                        $('#deletetype').modal('hide');
+                    }
+                });
+            });
+                /*搜索回显*/
             var url=window.location.href;
             var arr=url.split("/");
-            /*$.each(arr,function (index,value) {
-                console.log(index+"==="+arr[index]);
-            })*/
+
             if (arr.length==7){
-                $("#dcname").val(decodeURI(decodeURI(arr[5])));
+                $("#maname").val(decodeURI(decodeURI(arr[5])));
             }
         });
     </script>

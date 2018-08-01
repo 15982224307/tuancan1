@@ -9,6 +9,7 @@ import lombok.Getter;
 public enum ResultEnum {
 
     SUCCESS(0,"成功"),
+    ERROR(404,"失败"),
     ;
     private Integer code;
 
