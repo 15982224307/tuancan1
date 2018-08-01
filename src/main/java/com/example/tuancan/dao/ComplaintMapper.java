@@ -17,34 +17,42 @@ public interface ComplaintMapper extends Mapper<Complaint>{
      * @return
      */
     @Select({"select * from complaint where manager_id=#{managerId}"})
-    @Results(id = "selectByManagerId",value = {
-            @Result(column = "manager_id",property = "manager",javaType = Manager.class,
-            one=@One(select = "com.example.tuancan.dao.ManagerMapper.selectByPrimaryKey"))
-    })
     public List<Complaint> selectAllByManagerId(Integer managerId);
 
+    @Select({"select * from complaint order by Complaint_date desc"})
+    @ResultMap(value = "selectByManagerId")
+    public List<Complaint> selectAll();
+
+    @Select({"select * from complaint where manager_id!=null"})
+    @ResultMap(value = "selectByManagerId")
+    public List<Complaint> selectBy();
     /**
      * 根据id查询一条数据
      * @param complaintId
      * @return
      */
     @Select({"select * from complaint where Complaint_id=#{complaintId}"})
-    @ResultMap(value = "selectByManagerId")
+    @Results(id = "selectByManagerId",value = {
+            @Result(column = "manager_id",property = "manager",javaType = Manager.class,
+                    one=@One(select = "com.example.tuancan.dao.ManagerMapper.selectByPrimaryKey"))
+    })
     public Complaint selectOneByIdWithManager(Integer complaintId);
+
     /**
      * 根据处理结果查询
      * @param complaintSettle
      * @return
      */
-    @Select({"select * from complaint where Complaint_settle like '%${value}%' order by Complaint_settledate desc"})
-    public List<Complaint> selectAllBByComplaintSettleOrderBySettleDate(String complaintSettle);
+    @Select({"select * from complaint where Complaint_settle like '%${value}%' or Complaint_content like '%${value}%' order by Complaint_settledate desc"})
+    public List<Complaint> selectAllBByComplaintSettleOrderBySettleDate(@Param("value") String complaintSettle);
+
     /**
      * 插入一条投诉数据
      * @param complaint
      * @return
      */
-    @Insert({"insert into complaint(manager_id,Complainter,Complaint_content,Complaint_settle) " +
-            "values(#{manager.managerId},#{complainter},#{complaintContent},#{complaintSettle})"})
+    @Insert({"insert into complaint(Complainter,Complaint_content,Complaint_settle) " +
+            "values(#{complainter},#{complaintContent},#{complaintSettle})"})
     @Options(useGeneratedKeys = true,keyColumn = "Complaint_id",keyProperty = "complaintId")
     public int insertOne(Complaint complaint);
 

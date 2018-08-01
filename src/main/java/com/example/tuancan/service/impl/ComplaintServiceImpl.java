@@ -45,6 +45,12 @@ public class ComplaintServiceImpl implements ComplaintService{
     public List<Complaint> selectAllByManagerId(Integer managerId) {
         return complaintMapper.selectAllByManagerId(managerId);
     }
+
+    @Override
+    public List<Complaint> selectAll() {
+        return complaintMapper.selectAll();
+    }
+
     /**
      * 根据处理结果查询
      * @param complaintSettle

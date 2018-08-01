@@ -27,7 +27,7 @@ public class DeliveringMasterServiceImplTest {
     public void selectOneById() throws Exception {
         DeliveringMaster deliveringMaster = new DeliveringMaster();
         deliveringMaster.setDeliveringMasterId(1);
-        DeliveringMaster deliveringMaster1 = service.selectOneById(deliveringMaster);
+        DeliveringMaster deliveringMaster1 = service.selectOneById(2);
         log.info(JsonUtil.toJson(deliveringMaster1));
         System.out.println(deliveringMaster1);
     }

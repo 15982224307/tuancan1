@@ -74,6 +74,14 @@ public class GroupMealUnitController {
 
     }
 
+    @RequestMapping("/status/{id}")
+    @ResponseBody
+    public String updatestatus(@PathVariable("id")Integer id,@RequestParam("status")Integer status){
+        log.info(id+">>>>"+status);
+        int i = groupMealUnitService.updateStatusById(id, status);
+        return "ok";
+    }
+
     @RequestMapping(value = "/save",method = {RequestMethod.POST})
     @ResponseBody
     public String savedc(GroupMealUnit unit){
@@ -85,7 +93,7 @@ public class GroupMealUnitController {
             GroupMealUnit groupMealUnit = groupMealUnitService.selectOneById(unit.getGroupMealUnitId());
             groupMealUnit.setGroupMealUnitContact(unit.getGroupMealUnitContact());
             groupMealUnit.setGroupMealUnitName(unit.getGroupMealUnitName());
-
+            //........平台没有修改内容权利
             log.info(JsonUtil.toJson(groupMealUnit));
             int i = groupMealUnitService.updateOne(groupMealUnit);
             log.info(i+"");

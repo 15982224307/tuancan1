@@ -1,8 +1,9 @@
 package com.example.tuancan.dao;
 
 import com.example.tuancan.model.GroupMealUnit;
-import lombok.Data;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -45,4 +46,8 @@ public interface GroupMealUnitMapper extends Mapper<GroupMealUnit>{
     /*t通过审核日期查询数据*/
     @Select("SELECT * FROM groupmealunit where GroupMealUnit_reviewDate >#{date}")
     public List<GroupMealUnit> selectByReviewGtDate(Date date);
+
+    /*xx根据id更新状态*/
+    @Update({"update groupmealunit set GroupMealUnit_status=#{status} where GroupMealUnit_id=#{id}"})
+    public int updateStatusById(@Param("id")Integer id,@Param("status") Integer status);
 }

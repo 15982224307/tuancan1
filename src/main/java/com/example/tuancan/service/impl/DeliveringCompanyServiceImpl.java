@@ -71,4 +71,9 @@ public class DeliveringCompanyServiceImpl implements DeliveringCompanyService {
     public List<DeliveringCompany> findByExample(Example example) {
         return deliveringCompanyMapper.selectByExample(example);
     }
+
+    @Override
+    public int updateStatusById(Integer id, Integer status) {
+        return deliveringCompanyMapper.updateStatusById(id,status);
+    }
 }

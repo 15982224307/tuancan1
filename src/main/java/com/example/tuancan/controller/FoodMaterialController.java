@@ -1,6 +1,8 @@
 package com.example.tuancan.controller;
 
+import com.example.tuancan.dto.Result;
 import com.example.tuancan.dto.TreeVO;
+import com.example.tuancan.enums.ResultEnum;
 import com.example.tuancan.model.Classification;
 import com.example.tuancan.model.FoodMaterial;
 import com.example.tuancan.model.MainCategorie;
@@ -9,6 +11,7 @@ import com.example.tuancan.service.FoodMaterialService;
 import com.example.tuancan.service.MainCategorieService;
 import com.example.tuancan.utils.JsonUtil;
 import com.example.tuancan.utils.PageUtil;
+import com.example.tuancan.utils.ResultUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +36,7 @@ import java.util.List;
 @RequestMapping("/foodMaterial")
 public class FoodMaterialController {
 
-    public static final String path="D:\\tuancan";
+    private String path="D:\\tuancan";
     @Autowired
     private FoodMaterialService foodMaterialService;
 
@@ -161,7 +164,8 @@ public class FoodMaterialController {
 
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
-    public void upload(@RequestParam(value = "fmid")Integer fmid,
+    @ResponseBody
+    public Result upload(@RequestParam(value = "fmid")Integer fmid,
                          @RequestParam(value = "picfile")MultipartFile picfile){
         if (!picfile.isEmpty()){
             log.info(picfile.getOriginalFilename()+"==========>文件开始上传");
@@ -169,11 +173,14 @@ public class FoodMaterialController {
                     .substring(picfile.getOriginalFilename().lastIndexOf(".")-1).toLowerCase();
             String filename="pic"+System.currentTimeMillis()+ext;
             log.info("=======>存储名称"+filename);
-            File destfile = new File(path +"/"+filename);
-            if (!destfile.getParentFile().exists()){
-                destfile.getParentFile().mkdirs();
-            }
             try {
+               // path= ResourceUtils.getURL("classpath:").getPath();
+                log.info(""+path);
+                File destfile = new File(path +"/"+filename);
+                if (!destfile.getParentFile().exists()){
+                    destfile.getParentFile().mkdirs();
+                }
+
                 picfile.transferTo(destfile);
                 log.info(destfile.getAbsolutePath()+">>"+destfile.getPath());
                 int updatePic = foodMaterialService.updatePic(fmid, destfile.getAbsolutePath());
@@ -181,8 +188,9 @@ public class FoodMaterialController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //return "/foodMaterial/list";
+            return ResultUtil.status(ResultEnum.SUCCESS.getCode(),ResultEnum.SUCCESS.getMessage());
         }
-        //return null;
+        return ResultUtil.status(ResultEnum.ERROR.getCode(),ResultEnum.ERROR.getMessage());
+
     }
 }

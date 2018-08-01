@@ -313,25 +313,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="dc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
-                                    <td th:text="${stat.count}"></td>
-                                    <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${dc.groupMealUnitName}" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId} }"></a></td>
-                                    <td th:text="${dc.groupMealUnitContact}">公司联系人</td>
-                                    <td th:text="${dc.groupMealUnitBank}">开户行</td>
-                                    <td th:text="${dc.groupMealUnitAccount}">开户账号</td>
-                                    <td th:text="${dc.groupMealUnitOfficetel}">办公电话</td>
+                                <tr th:each="unit,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
+                                    <td th:text="${stat.count+(pageNum-1)*10}"></td>
+                                    <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${unit.groupMealUnitName}" th:href="@{'/groupMealUnit/gmu_details/'+${unit?.groupMealUnitId} }"></a></td>
+                                    <td th:text="${unit.groupMealUnitContact}">公司联系人</td>
+                                    <td th:text="${unit.groupMealUnitBank}">开户行</td>
+                                    <td th:text="${unit?.groupMealUnitAccount}">开户账号</td>
+                                    <td th:text="${unit?.groupMealUnitOfficetel}">办公电话</td>
                                     <td >
-                                        <i th:text="待审核" class="text-danger" th:if="${dc.groupMealUnitStatus==2}"></i>
-                                        <i th:text="审核通过" class="text-success" th:if="${dc.groupMealUnitStatus==3}"></i>
-                                        <i th:text="已停用"  class="text-muted" th:if="${dc.groupMealUnitStatus==0}"></i>
+                                        <i th:text="待审核" class="text-danger" th:if="${unit?.groupMealUnitStatus==2}"></i>
+                                        <i th:text="审核通过" class="text-success" th:if="${unit?.groupMealUnitStatus==3}"></i>
+                                        <i th:text="已停用"  class="text-muted" th:if="${unit?.groupMealUnitStatus==0}"></i>
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}"  target="main" >&nbsp;详情</a>
-                                        <a class="btn btn-xs btn-success" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==2}"  target="main" >&nbsp;审核通过</a>
-
-                                        <a class="btn btn-xs btn-success" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==0}"  target="main" >&nbsp;启用</a>
-                                        <a class="btn btn-xs btn-danger" th:href="@{'/groupMealUnit/gmu_details/'+${dc.groupMealUnitId}}" th:if="${dc.groupMealUnitStatus==3}" target="main" >&nbsp;停用</a>
+                                        <a class="btn btn-xs btn-primary" th:href="@{'/groupMealUnit/gmu_details/'+${unit.groupMealUnitId}}"  target="main" >&nbsp;详情</a>
+                                        <a id="commit" href="javascript:void(0);" th:onclick="'statusbtn('+${unit.groupMealUnitId}+','+${unit?.groupMealUnitStatus+1}+')'" class="btn-xs btn btn-success" th:if="${unit?.groupMealUnitStatus==2}">&nbsp;审核通过&nbsp;</a>
+                                        &nbsp;
+                                        <a id="stop" href="javascript:void(0);" th:onclick="'statusbtn('+${unit.groupMealUnitId}+','+${unit?.groupMealUnitStatus-3}+')'"  class=" btn-xs btn btn-danger" th:if="${unit?.groupMealUnitStatus==3}" th:lang="${unit?.groupMealUnitStatus}">&nbsp;停用&nbsp;</a>
+                                        &nbsp;
+                                        <a id="restart" href="javascript:void(0);" th:onclick="'statusbtn('+${unit.groupMealUnitId}+','+${unit?.groupMealUnitStatus+2}+')'" class="btn-xs btn btn-muted" th:if="${unit?.groupMealUnitStatus==0}" th:lang="${unit?.groupMealUnitStatus}">&nbsp;启用&nbsp;</a>
 
                                     </td>
                                 </tr>
@@ -340,6 +341,15 @@
 
                             <!--分页栏位-->
                             <div th:include="manager/page::page"></div>
+                            </div>
+
+                            <div id="succAlert" hidden class="alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>提交成功！</strong>。
+                            </div>
+                            <div id="warnAlert" hidden="" class="alert alert-warning">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>错误！</strong>您的网络连接有问题。
                             </div>
                         </div>
                     </div>
@@ -375,14 +385,36 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+    <div class="modal fade" id="comfirmmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
+                        确认更改吗？
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="ID" value="">
+                    <input type="hidden" id="Status" value="">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-danger" id="comfirm">确认
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="/webjars/jquery/3.3.0/jquery.js"></script>
     <!-- Bootstrap Js -->
-    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
-    <script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!--<script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>-->
     <!-- Metis Menu Js -->
     <script src="/assets/js/jquery.metisMenu.js"></script>
 
@@ -415,7 +447,44 @@
             });
 
         });
+
+        function statusbtn(id,status) {
+            console.log(id+">>>"+status);
+
+            $('#comfirmmodal').modal('show');
+            $('#ID').val(id);
+            $('#Status').val(status);
+
+        };
+
+        $('#comfirm').click(function () {
+            id=$('#ID').val();
+            status=$('#Status').val();
+            $.ajax({
+                url:"/groupMealUnit/status/"+id,
+                type:"POST",
+                data:{
+                    status:status,
+                },
+                error:function (error) {
+                    $('#warnAlert').show();
+                    $('#comfirmmodal').modal('hide');
+                },
+                success:function (result) {
+                    $('#succAlert').show();
+                    $('#comfirmmodal').modal('hide');
+                },
+            });
+        });
         $(function () {
+
+            //模态框完全对隐藏时触发。
+            $('#comfirmmodal').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $('#ID').val('');
+                $('#Status').val('');
+            })
+
             var url=window.location.href;
             var arr=url.split("/");
             /*$.each(arr,function (index,value) {

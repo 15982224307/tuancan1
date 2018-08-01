@@ -333,7 +333,7 @@
                                     <td th:text="${#dates.format(dc.recipeTypeCreatedate,'yyyy-MM-dd HH:mm:ss')}">创建日期</td>
                                     <td>
                                         <button data-toggle="modal" data-target="#myModal" class="updatetype btn btn-xs btn-primary" th:onclick="'updatetype('+${dc.recipeTypeId}+',\''+${dc.recipeTypeName}+'\',\''+${dc.recipeTypeDisc}+'\')'" th:lang="${dc.recipeTypeId}"><i class="fa fa-edit "></i>&nbsp;修改&nbsp;</button>
-                                        &nbsp;&nbsp;<button data-toggle="modal" data-target="#deletetype"  class="dletetype btn btn-xs btn-danger" th:onclick="'deletetype('+${dc.recipeTypeId}+')'"  th:lang="${dc.recipeTypeId}"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                                        <!--&nbsp;&nbsp;<button data-toggle="modal" data-target="#deletetype"  class="dletetype btn btn-xs btn-danger" th:onclick="'deletetype('+${dc.recipeTypeId}+')'"  th:lang="${dc.recipeTypeId}"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>-->
 
                                     </td>
                                 </tr>

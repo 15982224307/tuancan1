@@ -21,4 +21,6 @@ public interface DeliveringCompanyService {
 
     public List<DeliveringCompany> findByExample(Example example);
 
+    public int updateStatusById(Integer id,Integer status);
+
 }

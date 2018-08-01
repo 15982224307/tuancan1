@@ -289,17 +289,17 @@
                                      <div class="row-fluid">
 
                                          <form class="form-horizontal" role="form" id="savedc">
-                                             <input type="hidden" name="deliveringCompanyNo" th:value="${dc.deliveringCompanyNo}">
+                                             <input type="hidden" name="deliveringCompanyNo" th:value="${dc?.deliveringCompanyNo}" id="formID">
                                              <br>
                                              <div class="row">
                                                  <label for="firstname" class="col-sm-2 control-label">公司名称 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" th:value="${dc.deliveringCompanyName}" name="deliveringCompanyName" class="form-control" id="firstname" placeholder="请输入">
+                                                     <input type="text" th:value="${dc?.deliveringCompanyName}" name="deliveringCompanyName" class="form-control" id="firstname" placeholder="请输入">
                                                  </div>
 
                                                  <label for="lastname" class="col-sm-2 control-label">开户行 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" name="deliveringCompanyBank" th:value="${dc.deliveringCompanyBank}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" name="deliveringCompanyBank" th:value="${dc?.deliveringCompanyBank}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
                                              </div>
                                              <br>
@@ -307,48 +307,48 @@
                                              <div class="row">
                                                  <label for="lastname" class="col-sm-2 control-label">公司联系人 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" name="deliveringCompanyContact" th:value="${dc.deliveringCompanyContact}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" name="deliveringCompanyContact" th:value="${dc?.deliveringCompanyContact}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
 
                                                  <label for="lastname" class="col-sm-2 control-label">开户账号 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" name="deliveringCompanyAccount" th:value="${dc.deliveringCompanyAccount}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" name="deliveringCompanyAccount" th:value="${dc?.deliveringCompanyAccount}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
                                              </div>
                                              <br>
                                              <div class="row">
                                                  <label for="lastname" class="col-sm-2 control-label">联系方式（手机）：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" name="deliveringCompanyMobile" th:value="${dc.deliveringCompanyMobile}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" name="deliveringCompanyMobile" th:value="${dc?.deliveringCompanyMobile}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
 
                                                  <label for="lastname" class="col-sm-2 control-label">办公电话 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" name="deliveringCompanyTel" th:value="${dc.deliveringCompanyTel}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" name="deliveringCompanyTel" th:value="${dc?.deliveringCompanyTel}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
                                              </div>
                                              <br>
                                              <div class="row">
                                                  <label for="lastname" class="col-sm-2 control-label">地址 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" name="deliveringCompanyAddress" th:value="${dc.deliveringCompanyAddress}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" name="deliveringCompanyAddress" th:value="${dc?.deliveringCompanyAddress}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
 
                                                  <label for="lastname" class="col-sm-2 control-label">创建日期 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" disabled th:value="${#dates.format(dc.deliveringCompanyCreateDate,'yyyy-MM-dd HH:mm:ss')}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" disabled th:value="${#dates.format(dc?.deliveringCompanyCreateDate,'yyyy-MM-dd HH:mm:ss')}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
                                              </div>
                                              <br>
                                              <div class="row">
                                                  <label for="lastname" class="col-sm-2 control-label">营业执照 ：</label>
                                                  <div class="col-lg-2">
-                                                     <input type="text" name="deliveringCompanyLicense" th:value="${dc.deliveringCompanyLicense}" class="form-control" id="lastname" placeholder="请输入">
+                                                     <input type="text" name="deliveringCompanyLicense" th:value="${dc?.deliveringCompanyLicense}" class="form-control" id="lastname" placeholder="请输入">
                                                  </div>
 
                                                  <label for="lastname" class="col-sm-2 control-label">公司简介 ：</label>
                                                  <div class="col-lg-2">
-                                                     <textarea  name="deliveringCompanyDisc" rows="3" cols="80"  th:text="${dc.deliveringCompanyDisc}"></textarea>
+                                                     <textarea  name="deliveringCompanyDisc" rows="3" cols="80"  th:text="${dc?.deliveringCompanyDisc}"></textarea>
                                                  </div>
                                              </div>
                                              <br>
@@ -365,9 +365,14 @@
                                              <br>
                                              <div class="row">
                                                  <div class="col-sm-offset-2 col-lg-4">
-                                                     <a id="commit" href="javascript:void(0);" class="btn btn-primary ">&nbsp;提交&nbsp;</a>
+
+                                                     <a id="commit" href="javascript:void(0);" class="statusbtn btn btn-success" th:if="${dc?.deliveringCompanyStatus==2}" lang="3">&nbsp;审核通过&nbsp;</a>
                                                      &nbsp;&nbsp;
-                                                     <a id="cancel" href="javascript:void(0);" class="btn btn-primary ">&nbsp;取消&nbsp;</a>
+                                                     <a id="stop" href="javascript:void(0);" class="statusbtn btn btn-danger" th:if="${dc?.deliveringCompanyStatus==3}" lang="0">&nbsp;停用&nbsp;</a>
+                                                     &nbsp;&nbsp;
+                                                     <a id="restart" href="javascript:void(0);" class="statusbtn btn btn-muted" th:if="${dc?.deliveringCompanyStatus==0}" lang="2">&nbsp;启用&nbsp;</a>
+                                                     &nbsp;&nbsp;
+                                                     <a id="cancel" href="javascript:void(0);" class="statusbtn btn btn-primary ">&nbsp;返回&nbsp;</a>
                                                  </div>
                                              </div>
                                          </form>
@@ -405,14 +410,37 @@
         <!--隐藏框-->
 
     </div>
+    <div class="modal fade" id="comfirmmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
+                        确认更改吗？
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="ID" value="">
+                    <input type="hidden" id="Status" value="">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-danger" id="comfirm">确认
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <!--<script src="/assets/js/jquery-1.10.2.js"></script>-->
     <script src="/webjars/jquery/3.3.0/jquery.js"></script>
     <!-- Bootstrap Js -->
-    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
-    <script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!--<script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>-->
     <!-- Metis Menu Js -->
     <script src="/assets/js/jquery.metisMenu.js"></script>
 
@@ -420,26 +448,48 @@
     <!-- Custom Js -->
     <script src="/assets/js/custom-scripts.js"></script>
     <script type="text/javascript">
-        $('#commit').click(function () {
-            var formdata=$("#savedc").serialize();
-            //alert(formdata);
+        $('.statusbtn').click(function () {
+            //var formdata=$("#savegmu").serialize();
+            var id=$("#formID").val();
+            var status=$(this).attr("lang");
+            console.log(id+">>>"+status);
+
+            $('#comfirmmodal').modal('show');
+            $('#ID').val(id);
+            $('#Status').val(status);
+        });
+
+        $('#comfirm').click(function () {
+            id=$('#ID').val();
+            status=$('#Status').val();
             $.ajax({
-                url:"/deliveringCompany/save",
+                url:"/groupMealUnit/status/"+id,
                 type:"POST",
-                data:formdata,
+                data:{
+                    status:status,
+                },
                 error:function (error) {
                     $('#warnAlert').show();
+                    $('#comfirmmodal').modal('hide');
                 },
                 success:function (result) {
                     $('#succAlert').show();
-                      //location.reload();
-                   // alert("ok");
-                   // window.location.reload();
+                    $('#comfirmmodal').modal('hide');
+
                 },
             });
         });
         $("#cancel").click(function () {
-            location.reload();
+            history.back();
+        });
+        $(function () {
+
+            //模态框完全对隐藏时触发。
+            $('#comfirmmodal').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $('#ID').val('');
+                $('#Status').val('');
+            })
         });
     </script>
 

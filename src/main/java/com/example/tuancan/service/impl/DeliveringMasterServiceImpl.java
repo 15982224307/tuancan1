@@ -19,8 +19,8 @@ public class DeliveringMasterServiceImpl implements DeliveringMasterService {
      * @return
      */
     @Override
-    public DeliveringMaster selectOneById(DeliveringMaster deliveringMaster) {
-        return deliveringMasterMapper.selectOneById(deliveringMaster);
+    public DeliveringMaster selectOneById(Integer deliveringMasterId) {
+        return deliveringMasterMapper.selectOneById(deliveringMasterId);
     }
 
     /**
@@ -30,6 +30,16 @@ public class DeliveringMasterServiceImpl implements DeliveringMasterService {
     @Override
     public List<DeliveringMaster> selectAllWithDeliverComAndMealUnit() {
         return deliveringMasterMapper.selectAllWithDeliverComAndMealUnit();
+    }
+
+    @Override
+    public List<DeliveringMaster> selectByUnitId(Integer unitId) {
+        return deliveringMasterMapper.selectByUnitId(unitId);
+    }
+
+    @Override
+    public List<DeliveringMaster> selectBydcNo(Integer dcNo) {
+        return deliveringMasterMapper.selectBydcNo(dcNo);
     }
 
     /**

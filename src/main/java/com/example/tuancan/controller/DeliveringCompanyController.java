@@ -73,6 +73,14 @@ public class DeliveringCompanyController {
         return "/manager/dc_update";
     }
 
+    @RequestMapping("/status/{id}")
+    @ResponseBody
+    public String updatestatus(@PathVariable("id")Integer id,@RequestParam("status")Integer status){
+        log.info(id+">>>>"+status);
+        int i = deliveringCompanyService.updateStatusById(id, status);
+        return "ok";
+    }
+
     @RequestMapping(value = "/save",method = {RequestMethod.POST})
     @ResponseBody
     public String savedc(DeliveringCompany company){
@@ -84,6 +92,7 @@ public class DeliveringCompanyController {
             deliveringCompany.setDeliveringCompanyTel(company.getDeliveringCompanyTel());
             deliveringCompany.setDeliveringCompanyBank(company.getDeliveringCompanyBank());
             deliveringCompany.setDeliveringCompanyContact(company.getDeliveringCompanyContact());
+            //........
             log.info("name:"+deliveringCompany.getDeliveringCompanyContact());
             int insertOne = deliveringCompanyService.updateOne(deliveringCompany);
             log.info(insertOne+"");
