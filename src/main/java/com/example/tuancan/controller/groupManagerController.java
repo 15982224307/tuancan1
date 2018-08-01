@@ -23,4 +23,12 @@ public class groupManagerController {
 
         return "redirect:/unitmenu/menu";
     }
+
+    @RequestMapping("/recipe")
+    public String recipe(){
+
+        return "redirect:/recipe/define";
+    }
+
+
 }

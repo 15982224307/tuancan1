@@ -28,6 +28,8 @@ public interface FoodMaterialMapper extends Mapper<FoodMaterial>{
     public List<FoodMaterial> getAll();
 
 
+
+
     /*  根据小类编号查询结果*/
     @Select("select * from foodmaterial where classification_id =#{id}")
     @ResultMap(value = "getone")

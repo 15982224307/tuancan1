@@ -154,10 +154,45 @@ public class FoodMaterialController {
                 treeVO.setIsParent("false");
                 treeVOS.add(treeVO);
             }
-
         }
         return treeVOS;
     }
+
+    @RequestMapping(value = "/yuanliao")
+    @ResponseBody
+    public  List<TreeVO> getYuanliao(@RequestParam(value = "id",required = false) Integer id,
+                                 @RequestParam(value = "name",required = false)String name){
+        log.info(id+"="+name);
+        List<TreeVO> treeVOS=new ArrayList<>();
+        TreeVO treeVO=null;
+        if (id==null||StringUtils.isEmpty(name)){
+            treeVO = new TreeVO();
+            treeVO.setId("0");
+            treeVO.setName("请选择分类");
+            treeVOS.add(treeVO);
+            List<Classification> all = classificationService.getAll();
+            for (Classification classification:all){
+                treeVO = new TreeVO();
+                treeVO.setId(String.valueOf(classification.getClassificationId() + 10000));
+                treeVO.setName(classification.getClassificationName());
+                treeVO.setpId("0");
+                treeVOS.add(treeVO);
+            }
+        }else {
+            id = id - 10000;
+            List<FoodMaterial> all = foodMaterialService.selectByClassId(id);
+            for (FoodMaterial foodMaterial:all){
+                treeVO = new TreeVO();
+                treeVO.setId(String.valueOf(foodMaterial.getFoodmaterialId()));
+                treeVO.setName(foodMaterial.getFoodmaterialName());
+                treeVO.setpId(String.valueOf(id) + 10000);
+                treeVO.setIsParent("false");
+                treeVOS.add(treeVO);
+            }
+        }
+        return treeVOS;
+    }
+
 
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
