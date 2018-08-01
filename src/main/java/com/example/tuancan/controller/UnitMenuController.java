@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import sun.security.provider.Sun;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,12 +96,52 @@ public class UnitMenuController {
             }
 
         }
-
-
         model.addAttribute("mealUnit",unit_Company);
         return "/groupmanager/unitmenu";
     }
 
+
+
+    @RequestMapping("/addmenu")
+    public String addMenu(@RequestParam("foodsid") String foodsid ,@RequestParam("unitid") String unitid,
+                          @RequestParam("food_name") String food_name){
+
+        log.info("公司id：" + unitid + " 食谱id："+foodsid + " 菜单名："+food_name);
+
+        GroupMealMenumaster groupMealMenumaster1 = groupMealMenumasterService.selectByUnitId(Integer.parseInt(unitid));
+        if((groupMealMenumaster1 == null)){
+             /*团餐单位主表信息*/
+            GroupMealMenumaster groupMealMenumaster = new GroupMealMenumaster();
+            /*添加用餐单位信息*/
+            GroupMealUnit groupMealUnit = new GroupMealUnit();
+            groupMealUnit.setGroupMealUnitId(Integer.parseInt(unitid));
+            /*其他信息*/
+            groupMealMenumaster.setGroupMealUnit(groupMealUnit);
+            groupMealMenumaster.setGroupMealMenumasterName(food_name);
+            /*插入数据*/
+            groupMealMenumasterService.InsertOne(groupMealMenumaster);
+        }
+
+
+        menuDetailService.deleteOne(groupMealMenumaster1.getGroupMealMenumasterId());
+        /*详细信息*/
+        MenuDetail menuDetail = new MenuDetail();
+        menuDetail.setGroupMealMenumaster(groupMealMenumaster1);
+
+        String[] split = foodsid.split(",");
+        for(String recipe_id : split){
+            Recipe recipe = new Recipe();
+            recipe.setRecipeId(Integer.parseInt(recipe_id));
+            menuDetail.setRecipe(recipe);
+            menuDetail.setMenuDetailNo(new Date().getDate());
+
+            menuDetailService.insertOne(menuDetail);
+        }
+
+
+
+        return "redirect:/unitmenu/menu";
+    }
 
 
 }

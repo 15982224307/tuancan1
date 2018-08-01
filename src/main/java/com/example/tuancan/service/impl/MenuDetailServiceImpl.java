@@ -77,10 +77,10 @@ public class MenuDetailServiceImpl implements MenuDetailService {
     /**
      * 删除数据
      *
-     * @param menuDetail
+     * @param id
      */
     @Override
-    public int deleteOne(MenuDetail menuDetail) {
-        return menuDetailMapper.deleteOne(menuDetail);
+    public int deleteOne(Integer id) {
+        return menuDetailMapper.deleteOne(id);
     }
 }
