@@ -36,7 +36,7 @@ public interface MenuDetailService {
 
     /**
      * 删除数据*/
-   public int deleteOne(MenuDetail menuDetail);
+   public int deleteOne(Integer id);
 
 
 

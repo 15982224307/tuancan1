@@ -49,8 +49,8 @@ public interface MenuDetailMapper extends Mapper<MenuDetail>{
     public int updateOne(MenuDetail menuDetail);
 
     /*删除数据*/
-    @Delete("delete from menudetail where GroupMealMenumaster_id = #{groupMealMenumaster.groupMealMenumasterId} and recipe_id = #{recipe.recipeId} ")
-    public int deleteOne(MenuDetail menuDetail);
+    @Delete("delete from menudetail where GroupMealMenumaster_id = #{id}")
+    public int deleteOne(Integer id);
 
 
 }

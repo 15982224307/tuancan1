@@ -82,7 +82,7 @@ public class MenuDetailServiceTest {
     @Test
     public void deleteOne() throws Exception {
         MenuDetail menuDetail = menuDetailService.selectByRecipeNoAndMasterNo(3, 1);
-        int i = menuDetailService.deleteOne(menuDetail);
+        int i = menuDetailService.deleteOne(1);
         System.out.println(i);
     }
 
