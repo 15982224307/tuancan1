@@ -19,7 +19,6 @@
         .table>tbody>tr>td{
             border:0px;
         }
-
     </style>
 </head>
 
@@ -292,7 +291,7 @@
                     <a href="#"><i class="fa fa-bar-chart-o"></i> 食谱与餐标<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse in"aria-expanded="true">
                         <li>
-                            <a href="#"  class="active-menu">定义食谱</a>
+                            <a href="/groupmanager/recipe"  class="active-menu">定义食谱</a>
                         </li>
                         <li>
                             <a href="/groupmanager/standard">定义餐标</a>
@@ -335,16 +334,16 @@
 
 
                     <ul class="breadcrumb">
-                        <i style="text-align: left">定义食谱</i>
+                        <i style="text-align: left">更新食谱</i>
                         <li><a href="/groupmanager/index">首页</a></li>
                         <li class="active">食谱与餐标</li>
-                        <li class="active">定义食谱</li>
+                        <li class="active">更新食谱</li>
 
                     </ul>
 
                     <ul class="top_search">
 
-            <form id="form" action="/recipe/addrecipe" >
+            <form id="form" action="/recipe/update" >
                         <div class="container-fluid">
 
                             <table class="table">
@@ -355,10 +354,11 @@
 
                                 <tr>
                                     <td>
+                                        <input hidden="hidden" th:value="${recipe.recipeId}" name="recipeId"></input>
                                         <div class="form-group">
                                             <label>食谱分类编号</label>
                                             <select class="form-control" name="type">
-                                                <option disabled="disabled" selected style="display: none">请选择分类</option>
+                                                <option selected style="display: none" th:value="${recipe.recipeTypeId.recipeTypeId}" th:text="${recipe.recipeTypeId.recipeTypeName}">请选择分类</option>
                                                 <option th:each="type,count:${recipelist}" th:text="${type.recipeTypeName}"
                                                         th:value="${type.recipeTypeId}"></option>
                                             </select>
@@ -367,69 +367,40 @@
                                     <td>
                                         <div class="form-group">
                                             <label >食谱名称</label>
-                                            <input autocomplete="off" name="recipeName" type="text" class="form-control" placeholder="请输入食谱名称">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group" >
-                                            <label >原料</label>
-                                            <input autocomplete="off" id="modal_type" type="text" class="form-control" placeholder="请选择原料">
-                                            <div hidden id="ztreeDropdownContent" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
-                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
-                                                <ul id="partTree" class="ztree"></ul>
-                                            </div>
-                                            <div hidden id="food_weight" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
-                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
-                                                <input type="text" id="yuanliao_weight" class="form-control" placeholder="请输入重量(克为单位)">
-                                                <br>
-                                                <button type="button" class="btn btn-info pull-right" onclick="addYuanliao()">添加</button>
-
-                                            </div>
-                                            <input id="modal_id" name="recipeMaterial" hidden="hidden">
-
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label >辅料</label>
-
-                                            <input autocomplete="off" id="modal_type2" type="text" class="form-control" placeholder="请选择原料">
-                                            <div hidden id="ztreeDropdownContent2" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
-                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
-                                                <ul id="partTree2" class="ztree"></ul>
-                                            </div>
-
-                                            <div hidden id="food_weight1" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
-                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
-
-                                                <br>
-                                                <button type="button" class="btn btn-info pull-left" onclick="addFuliao(this)">少许</button>
-                                                <button type="button" class="btn btn-info pull-center" onclick="addFuliao(this)">适量</button>
-                                                <button type="button" class="btn btn-info pull-right" onclick="addFuliao(this)">过量</button>
-
-                                            </div>
-                                            <input id="modal_id2" name="recipeAccessorie" hidden="hidden">
+                                            <input autocomplete="off" th:value="${recipe.recipeName}" name="recipeName" type="text" class="form-control" placeholder="请输入食谱名称">
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
                                             <label >荤素标志</label>
                                             <select name="recipeMeatOrVegetable" class="form-control">
-                                                <option disabled="disabled" selected style="display: none">请选择荤素</option>
+
+                                                <option selected style="display: none"
+                                                        th:value="${recipe.recipeMeatOrVegetable}" th:if="${recipe.recipeMeatOrVegetable} == 1" th:text="荤菜"></option>
+                                                <option selected style="display: none"
+                                                        th:value="${recipe.recipeMeatOrVegetable}"th:if="${recipe.recipeMeatOrVegetable} == 2"  th:text="素菜"></option>
                                                 <option value="1">荤菜</option>
                                                 <option value="2">素菜</option>
 
                                             </select>
                                         </div>
                                     </td>
+                                </tr>
+
+                                <tr>
+
+
                                     <td>
                                         <div class="form-group">
                                             <label >菜品类型</label>
                                             <select class="form-control"  name="recipeType">
-                                                <option disabled="disabled" selected style="display: none">请选择菜品类型</option>
+                                                <option selected style="display: none"    th:value="${recipe.recipeType}" th:if="${recipe.recipeType} == 1" th:text="炒菜">请选择菜品类型</option>
+                                                <option selected style="display: none"    th:value="${recipe.recipeType}" th:if="${recipe.recipeType} == 2" th:text="凉菜">请选择菜品类型</option>
+                                                <option selected style="display: none"    th:value="${recipe.recipeType}" th:if="${recipe.recipeType} == 3" th:text="汤菜">请选择菜品类型</option>
+                                                <option selected style="display: none"    th:value="${recipe.recipeType}" th:if="${recipe.recipeType} == 4" th:text="蒸菜">请选择菜品类型</option>
+                                                <option selected style="display: none"    th:value="${recipe.recipeType}" th:if="${recipe.recipeType} == 5" th:text="烧菜">请选择菜品类型</option>
+
+
                                                 <option value="1">炒菜</option>
                                                 <option value="2">凉菜</option>
                                                 <option value="3">汤菜</option>
@@ -439,78 +410,79 @@
                                             </select>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td>
-                                        <div class="form-group">
-                                            <label>是否糕点</label>
-                                            <select name="recipeIsCakes" class="form-control" >
-                                                <option disabled="disabled" selected style="display: none">请选择是否糕点</option>
-                                                <option value="0">不是</option>
-                                                <option value="1">是</option>
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>是否糕点</label>
+                                        <select name="recipeIsCakes" class="form-control" >
+                                            <option selected style="display: none"  th:value="${recipe.recipeIsCakes}" th:if="${recipe.recipeIsCakes} == 0" th:text="不是">请选择是否糕点</option>
+                                            <option selected style="display: none"  th:value="${recipe.recipeIsCakes}" th:if="${recipe.recipeIsCakes} == 1" th:text="是">请选择是否糕点</option>
+                                            <option value="0">不是</option>
+                                            <option value="1">是</option>
+                                        </select>
+                                    </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
                                             <label >菜品特色</label>
-                                            <input autocomplete="off" name="recipeCharacter" type="text" class="form-control" placeholder="菜品特色">
+                                            <input autocomplete="off" th:value="${recipe.recipeCharacter}"name="recipeCharacter" type="text" class="form-control" placeholder="菜品特色">
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label >适合人群</label>
-                                            <input autocomplete="off" name="recipePeople" type="text" class="form-control" placeholder="菜品特色">
-                                        </div>
-                                    </td>
-
                                 </tr>
                                 <tr>
 
-
-
+                                    <td>
+                                        <div class="form-group">
+                                            <label >适合人群</label>
+                                            <input autocomplete="off" th:value="${recipe.recipePeople}" name="recipePeople" type="text" class="form-control" placeholder="菜品特色">
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="form-group">
                                             <label >成本单价</label>
-                                            <input autocomplete="off"  name="recipeCostprice" type="text" class="form-control" placeholder="请输入成本单价">
+                                            <input autocomplete="off" th:value="${recipe.recipeCostprice}"   name="recipeCostprice" type="text" class="form-control" placeholder="请输入成本单价">
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
                                             <label >菜谱状态</label>
                                             <select name="recipeStatus" class="form-control">
-                                                <option disabled="disabled" selected style="display: none">请选择菜品状态</option>
+                                                <option  selected style="display: none"  th:value="${recipe.recipeStatus}" th:if="${recipe.recipeStatus} == 1" th:text="可用">请选择菜品状态</option>
+                                                <option  selected style="display: none"  th:value="${recipe.recipeStatus}" th:if="${recipe.recipeStatus} == 0" th:text="不可用">请选择菜品状态</option>
                                                 <option value="1" >可用</option>
                                                 <option value="0">不可用</option>
                                             </select>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label>创建者</label>
-                                            <input  autocomplete=" off"name="recipeOwner" type="text" class="form-control" placeholder="创建者">
-                                        </div>
-                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="form-group">
-                                            <label>菜谱图标</label>
-                                            <input name="recipeIcon" type="file" id="inputfile">
+                                            <label>创建者</label>
+                                            <input autocomplete="off" th:value="${recipe.recipeOwner}"  name="recipeOwner" type="text" class="form-control" placeholder="创建者">
                                         </div>
                                     </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>菜谱图标</label>
+                                            <input autocomplete="off" name="recipeIcon" type="file" id="inputfile">
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+
                                 </tr>
                                 <tr>
                                     <td>
                                     <div class="form-group">
                                         <label>加工流程</label>
-                                        <textarea name="recipeProcessing" class="form-control" rows="3" style="resize:none"  placeholder="在这里输入加工流程..."></textarea>
+                                        <textarea th:text=" ${recipe.recipeProcessing}" name="recipeProcessing" class="form-control" rows="3" style="resize:none"  placeholder="在这里输入加工流程..."></textarea>
                                     </div>
                                 </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <button type="button" id="Sub" class="btn btn-info pull-right" onclick="sub()">添加食谱</button>
+                            <button type="button" id="Sub" class="btn btn-info pull-right" onclick="sub()">修改食谱</button>
 
                         </div>
 
@@ -586,7 +558,7 @@
     }
 
     function sub() {
-        alert("添加成功!");
+        alert("修改成功!");
         $("#form").submit();
     }
 

@@ -3,7 +3,9 @@ package com.example.tuancan.controller;
 import com.example.tuancan.model.*;
 import com.example.tuancan.service.*;
 import com.example.tuancan.utils.JsonUtil;
+import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,8 +49,11 @@ public class RecipeController {
         return "/groupmanager/recipe";
     }
 
+    /*添加*/
     @RequestMapping("/addrecipe")
     public String addRecipe(Recipe recipe, @RequestParam("type") String type,HttpServletRequest httpServletRequest){
+
+
 
         /*插入数据到食谱中*/
         RecipeType recipeType = new RecipeType();
@@ -65,34 +70,101 @@ public class RecipeController {
 
         /*原料编号*/
         String recipeMaterial = recipe1.getRecipeMaterial();
-        String[] split = recipeMaterial.split(",");
+        if(!StringUtils.isEmpty(recipeMaterial)){
+            String[] split = recipeMaterial.split(",");
+            for(int i = 0;i<split.length ;i++){
+                Material material = new Material();
+                String[] split1 = split[i].split(":");
+                int i1 = Integer.parseInt(split1[0]);
+                int i2 = Integer.parseInt(split1[1]);
 
-        for(int i = 0;i<split.length ;i++){
-            Material material = new Material();
-            int i1 = Integer.parseInt(split[i]);
-            FoodMaterial foodMaterial = foodMaterialService.selectOneById(i1);
-            material.setFoodMaterial(foodMaterial);
-            material.setRecipe(recipe1);
-            material.setMaterialNo(new Date().getDate());
-            materialService.insertOne(material);
+                System.out.println(i2);
+                FoodMaterial foodMaterial = foodMaterialService.selectOneById(i1);
+                material.setFoodMaterial(foodMaterial);
+                material.setRecipe(recipe1);
+                material.setMaterialNo(new Date().getDate());
+                material.setMaterialWeight(i2);
+                materialService.insertOne(material);
+            }
         }
 
-        /*辅料编号*/
+//
+//        /*辅料编号*/
         String recipeAccessorie = recipe1.getRecipeAccessorie();
-        String[] split1 = recipeAccessorie.split(",");
+        if(!StringUtils.isEmpty(recipeAccessorie)) {
+            String[] split1 = recipeAccessorie.split(",");
+            for(int i = 0;i<split1.length ;i++){
+                Accessorie accessorie = new Accessorie();
+                String[] split2 = split1[i].split(":");
+                int i1 = Integer.parseInt(split2[0]);
+                String w = split2[1];
+                System.out.println(w);
+                FoodMaterial foodMaterial = foodMaterialService.selectOneById(i1);
+                accessorie.setFoodMaterial(foodMaterial);
+                accessorie.setRecipe(recipe1);
+                accessorie.setAccessorieNo(new Date().getDate());
+                accessorie.setAccessorieWeight(w);
 
-        for(int i = 0;i<split1.length ;i++){
-            Accessorie accessorie = new Accessorie();
-            int i1 = Integer.parseInt(split[i]);
-            FoodMaterial foodMaterial = foodMaterialService.selectOneById(i1);
-            accessorie.setFoodMaterial(foodMaterial);
-            accessorie.setRecipe(recipe1);
-            accessorie.setAccessorieNo(new Date().getDate());
-
-            accessorieService.insertOne(accessorie);
+                accessorieService.insertOne(accessorie);
+            }
         }
-
-
         return "redirect:/groupmanager/recipe";
+    }
+
+    /*查看已添加食谱*/
+    @RequestMapping("/getallrecipes")
+    public String getAllRecipes(HttpServletRequest httpServletRequest,Model model){
+        Integer companyId = (Integer) httpServletRequest.getSession().getAttribute("companyId");
+        List<Recipe> recipes = recipeService.selectByCompanyId(companyId);
+        model.addAttribute("recipes",recipes);
+        return "/groupmanager/allrecipe";
+    }
+
+    /*更新状态*/
+    @RequestMapping("/updatestatus")
+    public String updateStatus(@RequestParam("id") Integer id){
+        Recipe recipe = recipeService.selectOneById(id);
+        int recipeStatus = recipe.getRecipeStatus();
+        if(recipeStatus == 1){
+            recipe.setRecipeStatus(0);
+        }else {
+            recipe.setRecipeStatus(1);
+        }
+        recipeService.updateOne(recipe);
+        return "redirect:/recipe/getallrecipes";
+    }
+
+    /*更新数据*/
+    @RequestMapping("/updaterecipe")
+    public String updateRecipe(@RequestParam("id") Integer id,Model model){
+        Recipe recipe = recipeService.selectOneById(id);
+        model.addAttribute("recipe",recipe);
+        List<RecipeType> recipeTypes = recipeTypeService.selectAll();
+        model.addAttribute("recipelist",recipeTypes);
+
+        return "/groupmanager/updaterecipe";
+    }
+
+    /*确认更新*/
+    @RequestMapping("/update")
+    public String update(Recipe recipe, @RequestParam("type") String type,HttpServletRequest httpServletRequest){
+
+        RecipeType recipeType = new RecipeType();
+        recipeType.setRecipeTypeId(Integer.parseInt(type));
+        recipe.setRecipeTypeId(recipeType);
+
+        String recipeIcon1 = recipeService.selectOneById(recipe.getRecipeId()).getRecipeIcon();
+
+        String recipeIcon = recipe.getRecipeIcon();
+        if(StringUtils.isEmpty(recipeIcon)){
+            recipeIcon = recipeIcon1;
+            recipe.setRecipeIcon(recipeIcon);
+        }
+        DeliveringCompany deliveringCompany = new DeliveringCompany();
+        Integer companyId = (Integer) httpServletRequest.getSession().getAttribute("companyId");
+        deliveringCompany.setDeliveringCompanyNo(companyId);
+        recipe.setDeliveringCompanyNo(deliveringCompany);
+        recipeService.updateOne(recipe);
+        return "redirect:/recipe/getallrecipes";
     }
 }

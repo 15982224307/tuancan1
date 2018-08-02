@@ -35,7 +35,7 @@ public class DiningStandardServiceImplTest {
 
     @Test
     public void selectAllByCompanyNo() throws Exception {
-        List<DiningStandard> diningStandards = service.selectAllByCompanyNo(1);
+        List<DiningStandard> diningStandards = service.selectAllByCompanyNo(2);
         System.out.println(JsonUtil.toJson(diningStandards));
     }
 
@@ -62,24 +62,14 @@ public class DiningStandardServiceImplTest {
 
     @Test
     public void updateOne() throws Exception {
+
+        DiningStandard standard = service.selectOneWithCompany(5);
         DeliveringCompany deliveringCompany = new DeliveringCompany();
-        deliveringCompany.setDeliveringCompanyNo(1);
-
-        DiningStandard diningStandard = new DiningStandard();
-        diningStandard.setStandardId(2);
-        diningStandard.setDeliveringCompany(deliveringCompany);
-        diningStandard.setStandardName("15快");
-        diningStandard.setStandardMeatnumber(5);
-        diningStandard.setStandardVegetablenumber(5);
-        diningStandard.setStandardPrice(new BigDecimal(15.55));
-        diningStandard.setStandardIsFreeDessert(1);
-        diningStandard.setStandardIsFreeSoup(1);
-        diningStandard.setStandardIsFreeFruit(1);
-
-
-        int i = service.UpdateOne(diningStandard);
+        deliveringCompany.setDeliveringCompanyNo(2);
+        standard.setDeliveringCompany(deliveringCompany);
+        standard.setStandardPrice(new BigDecimal(25.50));
+        int i = service.UpdateOne(standard);
         System.out.println(i);
-        System.out.println(JsonUtil.toJson(diningStandard));
     }
 
 }
