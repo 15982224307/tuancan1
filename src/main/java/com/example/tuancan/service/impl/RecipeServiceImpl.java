@@ -3,6 +3,9 @@ package com.example.tuancan.service.impl;
 import com.example.tuancan.dao.RecipeMapper;
 import com.example.tuancan.model.Recipe;
 import com.example.tuancan.service.RecipeService;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -102,6 +105,11 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<Recipe> getAll() {
         return recipeMapper.getAll();
+    }
+
+    @Override
+    public Recipe selectByCompanyIdAndName(Integer companyid, String name) {
+        return recipeMapper.selectByCompanyIdAndName(companyid,name);
     }
 
     /*更新数据*/

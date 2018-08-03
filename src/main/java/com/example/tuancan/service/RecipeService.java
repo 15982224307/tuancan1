@@ -56,6 +56,9 @@ public interface RecipeService {
     /*全部查询*/
     public List<Recipe> getAll();
 
+    /*公司编号和菜谱名查询*/
+    public Recipe selectByCompanyIdAndName(@Param("companyid") Integer companyid,@Param("companyid")String name);
+
     /*增加数据*/
     public int insertOne(Recipe recipe);
 

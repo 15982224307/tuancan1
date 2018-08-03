@@ -1,0 +1,757 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home</title>
+    <!-- Bootstrap Styles-->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+    <link href="/assets/css/zTreeStyle/metroStyle.css" rel="stylesheet">
+    <!-- Custom Styles-->
+    <link href="/assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <style>
+        .table>tbody>tr>td{
+            border:0px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>HYBRID</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right top_right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Doe</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Today</em>
+                                    </span>
+                            </div>
+                            <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem Ipsum has been the industry's standard dummy text ever since the...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>Read All Messages</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-tasks">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 1</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (success)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 2</strong>
+                                    <span class="pull-right text-muted">28% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+                                        <span class="sr-only">28% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 3</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (warning)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 4</strong>
+                                    <span class="pull-right text-muted">85% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                        <span class="sr-only">85% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Tasks</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-tasks -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i> New Comment
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                <span class="pull-right text-muted small">12 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-tasks fa-fw"></i> New Task
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Alerts</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-alerts -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down  top_right"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <!--菜单管理-->
+                <li>
+                    <a href="#"><i class="fa fa-dashboard"></i> 菜单管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/groupmanager/tomorrow">明日菜单</a>
+                        </li>
+                        <li>
+                            <a href="/groupmanager/unit">用餐单位菜单</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--配送单管理-->
+                <li>
+                    <a href="#"><i class="fa fa-desktop"></i> 配送单管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/groupmanager/delivering">生成配送单</a>
+                        </li>
+                        <li>
+                            <a href="#">查询配送单</a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">应急配送单</a>
+                        </li>
+                        <li>
+                            <a href="#">结算配送单</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--食谱与餐标-->
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o"></i> 食谱与餐标<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in"aria-expanded="true">
+                        <li>
+                            <a href="#"  class="active-menu">定义食谱</a>
+                        </li>
+                        <li>
+                            <a href="/groupmanager/standard">定义餐标</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--管理与授权 -->
+                <li>
+                    <a href="/companystaff/manager " ><i class="fa fa-qrcode"></i> 管理与授权</a>
+                </li>
+
+                <!--其他操作-->
+                <li>
+                    <a href="#" active-menu><i class="fa fa-table"></i> 其他操作<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">确认合同</a>
+                        </li>
+                        <li>
+                            <a href="#">平台投诉</a>
+                        </li>
+                        <li>
+                            <a href="#">完善基本信息</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <ul class="breadcrumb">
+                        <i style="text-align: left">定义食谱</i>
+                        <li><a href="/groupmanager/index">首页</a></li>
+                        <li class="active">食谱与餐标</li>
+                        <li class="active">定义食谱</li>
+
+                    </ul>
+
+                    <ul class="top_search">
+
+            <form id="form" action="/recipe/addrecipe" >
+                        <div class="container-fluid">
+
+                            <table class="table">
+                                <a href="/recipe/getallrecipes">查看食谱</a>
+                                <br>
+                                <br>
+                                <tbody>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>食谱分类编号</label>
+                                            <select class="form-control" name="type">
+                                                <option disabled="disabled" selected style="display: none">请选择分类</option>
+                                                <option th:each="type,count:${recipelist}" th:text="${type.recipeTypeName}"
+                                                        th:value="${type.recipeTypeId}"></option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label >食谱名称</label>
+                                            <input autocomplete="off" name="recipeName" type="text" class="form-control" placeholder="请输入食谱名称">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group" >
+                                            <label >原料</label>
+                                            <input autocomplete="off" id="modal_type" type="text" class="form-control" placeholder="请选择原料">
+                                            <div hidden id="ztreeDropdownContent" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
+                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
+                                                <ul id="partTree" class="ztree"></ul>
+                                            </div>
+                                            <div hidden id="food_weight" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
+                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
+                                                <input type="text" id="yuanliao_weight" class="form-control" placeholder="请输入重量(克为单位)">
+                                                <br>
+                                                <button type="button" class="btn btn-info pull-right" onclick="addYuanliao()">添加</button>
+
+                                            </div>
+                                            <input id="modal_id" name="recipeMaterial" hidden="hidden">
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label >辅料</label>
+
+                                            <input autocomplete="off" id="modal_type2" type="text" class="form-control" placeholder="请选择原料">
+                                            <div hidden id="ztreeDropdownContent2" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
+                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
+                                                <ul id="partTree2" class="ztree"></ul>
+                                            </div>
+
+                                            <div hidden id="food_weight1" class="ztree-dropdown-content" style="display:none; position:absolute;z-index:999;height:300px; min-width:163px;
+                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
+
+                                                <br>
+                                                <button type="button" class="btn btn-info pull-left" onclick="addFuliao(this)">少许</button>
+                                                <button type="button" class="btn btn-info pull-center" onclick="addFuliao(this)">适量</button>
+                                                <button type="button" class="btn btn-info pull-right" onclick="addFuliao(this)">过量</button>
+
+                                            </div>
+                                            <input id="modal_id2" name="recipeAccessorie" hidden="hidden">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label >荤素标志</label>
+                                            <select name="recipeMeatOrVegetable" class="form-control">
+                                                <option disabled="disabled" selected style="display: none">请选择荤素</option>
+                                                <option value="1">荤菜</option>
+                                                <option value="2">素菜</option>
+
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label >菜品类型</label>
+                                            <select class="form-control"  name="recipeType">
+                                                <option disabled="disabled" selected style="display: none">请选择菜品类型</option>
+                                                <option value="1">炒菜</option>
+                                                <option value="2">凉菜</option>
+                                                <option value="3">汤菜</option>
+                                                <option value="4">蒸菜</option>
+                                                <option value="5">烧菜</option>
+
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>是否糕点</label>
+                                            <select name="recipeIsCakes" class="form-control" >
+                                                <option disabled="disabled" selected style="display: none">请选择是否糕点</option>
+                                                <option value="0">不是</option>
+                                                <option value="1">是</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label >菜品特色</label>
+                                            <input autocomplete="off" name="recipeCharacter" type="text" class="form-control" placeholder="菜品特色">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label >适合人群</label>
+                                            <input autocomplete="off" name="recipePeople" type="text" class="form-control" placeholder="菜品特色">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+
+
+
+                                    <td>
+                                        <div class="form-group">
+                                            <label >成本单价</label>
+                                            <input autocomplete="off"  name="recipeCostprice" type="text" class="form-control" placeholder="请输入成本单价">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label >菜谱状态</label>
+                                            <select name="recipeStatus" class="form-control">
+                                                <option disabled="disabled" selected style="display: none">请选择菜品状态</option>
+                                                <option value="1" >可用</option>
+                                                <option value="0">不可用</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>创建者</label>
+                                            <input  autocomplete=" off"name="recipeOwner" type="text" class="form-control" placeholder="创建者">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>菜谱图标</label>
+                                            <input name="recipeIcon" type="file" id="inputfile">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <div class="form-group">
+                                        <label>加工流程</label>
+                                        <textarea name="recipeProcessing" class="form-control" rows="3" style="resize:none"  placeholder="在这里输入加工流程..."></textarea>
+                                    </div>
+                                </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" id="Sub" class="btn btn-info pull-right" onclick="sub()">添加食谱</button>
+
+                        </div>
+
+            </form>
+                    </ul>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+    <!--<div class="foot_div">-->
+    <!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
+
+    <!--</div>-->
+
+</div>
+
+
+
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="/assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script src="/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.ztree.core.js"></script>
+
+<!-- Metis Menu Js -->
+<script src="/assets/js/jquery.metisMenu.js"></script>
+
+
+<!-- Custom Js -->
+<script src="/assets/js/custom-scripts.js"></script>
+
+<script th:inline="javascript">
+
+    function addYuanliao() {
+
+        var ids =  $("#modal_id").val();
+        var to =  $("#modal_type").val();
+        to = to + "( " + $("#yuanliao_weight").val() + "克),";
+        ids = ids + ":" + $("#yuanliao_weight").val() + ",";
+        $("#modal_type").val(to);
+        $("#modal_id").val(ids);
+        $("#food_weight").css("display","none");
+        $("#yuanliao_weight").val("");
+    }
+
+    function addFuliao(obj) {
+        var $_this = $(obj);
+        var ids =  $("#modal_id2").val();
+        var to =  $("#modal_type2").val();
+
+        if($_this.text() == "少许"){
+            to = to + "( 少许),";
+            ids = ids + ":少许,";
+        }else if($_this.text() == "适量"){
+            to = to + "( 适量),";
+            ids = ids + ":适量,";
+        }else if($_this.text() == "过量") {
+            to = to + "( 过量),";
+            ids = ids + ":过量,";
+        }
+
+        $("#modal_type2").val(to);
+        $("#modal_id2").val(ids);
+        $("#food_weight1").css("display","none");
+    }
+
+    function sub() {
+        alert("添加成功!");
+        $("#form").submit();
+    }
+
+    /*辅料*/
+    $(function () {
+        /*树级菜单*/
+        var setting={
+            view: {
+                showLine: true,
+                showIcon:true,
+            },
+            //获取json数据
+            async : {
+                enable : true,
+                url: "/foodMaterial/yuanliao", // Ajax 获取数据的 URL 地址
+                autoParam : [ "id", "name" ] //ajax提交的时候，传的是id值
+            },
+            callback:{
+                onAsyncError:function () {
+                    alert("网络错误");
+                },
+                beforeClick:function (treeId, treeNode) {
+                    var check = (treeNode && !treeNode.isParent);
+                    if (!check){
+                        alert("请选择下级分类");
+                    }
+                    return check;
+                },
+                onClick:function (event, treeId, treeNode) {
+                    var names =   $("#modal_type2").val();
+                    var ids =  $("#modal_id2").val();
+                    if(!treeNode.isParent){
+                        ids = ids + treeNode.id ;
+                        $("#modal_id2").val(ids);
+                        names = names + treeNode.name
+                        $("#modal_type2").val(names);
+
+                        $("#food_weight1").show();
+                        hideMenu();
+                    }else {
+                        var zTree = $.fn.zTree.getZTreeObj("partTree2");
+                        var node = zTree.getNodeByParam("id", $('#modal_id').val(), null);
+                        zTree.selectNode(node);
+                    }
+                }
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: 0,
+                }
+            }
+        }
+        $.fn.zTree.init($("#partTree2"), setting);
+
+        function showMenu() {
+            $("#ztreeDropdownContent2").slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#ztreeDropdownContent2").slideUp("fast");
+            /*折叠所有*/
+            $.fn.zTree.getZTreeObj("partTree2").expandAll(false);
+            $("body").unbind("mousedown", onBodyDown);
+        }
+
+        function onBodyDown(event) {
+            if (!(event.target.id == "modal_type2" || event.target.id == "ztreeDropdownContent2" || $(event.target).parents("#ztreeDropdownContent2").length>0)) {
+                hideMenu();
+            }
+        }
+
+        $("#modal_type2").click(function(){
+            showMenu();
+        });
+    });
+
+
+    /*原料*/
+    $(function () {
+        /*树级菜单*/
+        var setting={
+            view: {
+                showLine: true,
+                showIcon:true,
+            },
+            //获取json数据
+            async : {
+                enable : true,
+                url: "/foodMaterial/yuanliao", // Ajax 获取数据的 URL 地址
+                autoParam : [ "id", "name" ] //ajax提交的时候，传的是id值
+            },
+            callback:{
+                onAsyncError:function () {
+                    alert("网络错误");
+                },
+                beforeClick:function (treeId, treeNode) {
+                    var check = (treeNode && !treeNode.isParent);
+                    if (!check){
+                        alert("请选择下级分类");
+                    }
+                    return check;
+                },
+                onClick:function (event, treeId, treeNode) {
+                    var names =   $("#modal_type").val();
+                    var ids =  $("#modal_id").val();
+                    if(!treeNode.isParent){
+
+                        ids = ids + treeNode.id ;
+                        $("#modal_id").val(ids);
+
+                        names = names + treeNode.name
+                        $("#modal_type").val(names);
+                        $("#food_weight").show();
+                        $("#yuanliao_weight").focus();
+                        hideMenu();
+                    }else {
+                        var zTree = $.fn.zTree.getZTreeObj("partTree");
+                        var node = zTree.getNodeByParam("id", $('#modal_id').val(), null);
+                        zTree.selectNode(node);
+                    }
+                }
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: 0,
+                }
+            }
+        }
+        $.fn.zTree.init($("#partTree"), setting);
+        function showMenu() {
+            $("#ztreeDropdownContent").slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#ztreeDropdownContent").slideUp("fast");
+            /*折叠所有*/
+            $.fn.zTree.getZTreeObj("partTree").expandAll(false);
+            $("body").unbind("mousedown", onBodyDown);
+        }
+
+        function onBodyDown(event) {
+            if (!(event.target.id == "modal_type" || event.target.id == "ztreeDropdownContent" || $(event.target).parents("#ztreeDropdownContent").length>0)) {
+                hideMenu();
+            }
+        }
+
+        $("#modal_type").click(function(){
+            showMenu();
+        });
+    });
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

@@ -32,6 +32,11 @@ public interface RecipeMapper extends Mapper<Recipe>{
     @ResultMap(value = "getone")
     public List<Recipe> selectByCompanyId(Integer companyid);
 
+    /*公司编号和菜谱名查询*/
+    @Select("select * from recipe where DeliveringCompany_no = #{companyid} and recipe_name = #{name}")
+    @ResultMap(value = "getone")
+    public Recipe selectByCompanyIdAndName(@Param("companyid") Integer companyid,@Param("name")String name);
+
     /*公司编号查询荤菜and小于价格*/
     @Select("select * from recipe where DeliveringCompany_no = #{companyid} and recipe_costprice < #{price} and recipe_Meat_or_vegetable = 1")
     @ResultMap(value = "getone")

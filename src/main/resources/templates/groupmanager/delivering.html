@@ -1,0 +1,668 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home</title>
+    <!-- Bootstrap Styles-->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+    <link href="/assets/css/zTreeStyle/metroStyle.css" rel="stylesheet">
+    <!-- Custom Styles-->
+    <link href="/assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>HYBRID</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right top_right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Doe</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Today</em>
+                                    </span>
+                            </div>
+                            <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem Ipsum has been the industry's standard dummy text ever since the...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>Read All Messages</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-tasks">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 1</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (success)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 2</strong>
+                                    <span class="pull-right text-muted">28% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+                                        <span class="sr-only">28% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 3</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (warning)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 4</strong>
+                                    <span class="pull-right text-muted">85% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                        <span class="sr-only">85% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Tasks</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-tasks -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i> New Comment
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                <span class="pull-right text-muted small">12 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-tasks fa-fw"></i> New Task
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Alerts</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-alerts -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down  top_right"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <!--菜单管理-->
+                <li>
+                    <a href="#"><i class="fa fa-dashboard"></i> 菜单管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/groupmanager/tomorrow">明日菜单</a>
+                        </li>
+                        <li>
+                            <a href="/groupmanager/unit">用餐单位菜单</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--配送单管理-->
+                <li>
+                    <a href="#"><i class="fa fa-desktop"></i> 配送单管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in" aria-expanded="true">
+                        <li>
+                            <a href="#" class="active-menu">生成配送单</a>
+                        </li>
+                        <li>
+                            <a href="#">查询配送单</a>
+                        </li>
+
+                        <li>
+                            <a href="#">应急配送单</a>
+                        </li>
+                        <li>
+                            <a href="#">结算配送单</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--食谱与餐标-->
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o"></i> 食谱与餐标<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level ">
+                        <li>
+                            <a href="/groupmanager/recipe">定义食谱</a>
+                        </li>
+                        <li>
+                            <a href="/groupmanager/standard">定义餐标</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--管理与授权 -->
+                <li>
+                    <a href="/companystaff/manager "><i class="fa fa-qrcode"></i> 管理与授权</a>
+                </li>
+
+                <!--其他操作-->
+                <li>
+                    <a href="#" active-menu><i class="fa fa-table"></i> 其他操作<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">确认合同</a>
+                        </li>
+                        <li>
+                            <a href="#">平台投诉</a>
+                        </li>
+                        <li>
+                            <a href="#">完善基本信息</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+    <!--&lt;!&ndash; /. NAV SIDE  &ndash;&gt;-->
+
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <ul class="breadcrumb">
+                        <i style="text-align: left">生成配送单</i>
+                        <li><a href="/groupmanager/index">首页</a></li>
+                        <li class="active">配送单管理</li>
+                        <li class="active">生成配送单</li>
+
+                    </ul>
+                    <ul class="top_search">
+
+                        <form id="form" action="/standard/addstandard">
+                            <div class="container-fluid">
+                                <table class="table">
+                                    <a href="javascript:void(0)" onclick="allStandard()">已有餐标</a>
+
+                                    <div  hidden="hidden" id="standards" style="margin-top: 5px; position:absolute;z-index:999;height:200px; min-width:163px;
+                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
+                                        <ul id="partTree" class="ztree">
+                                            <li th:each="s,count:${standards}" class="standard_name" style="margin: 10px 10px">
+                                                <a href="#" th:text=" ${s.standardName}  + '( '+ ${s.standardPrice}+'元)'"
+                                                th:onclick="'openModal(' + ${count.count} + ')'">两荤一素(15.00元)</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group ">
+                                                    <label>餐标名称</label>
+                                                    <input id="standardName"  autocomplete="off"name="standardName" type="text" class="form-control"
+                                                           placeholder="请输入餐标名称">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>荤菜个数</label>
+                                                    <select name="standardMeatnumber" class="form-control">
+                                                        <option disabled="disabled" selected style="display: none">请选择荤素
+                                                        </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>素菜个数</label>
+                                                    <select name="standardVegetablenumber" class="form-control">
+                                                        <option disabled="disabled" selected style="display: none">请选择荤素
+                                                        </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>单价</label>
+                                                    <input autocomplete="off" name="standardPrice" type="text" class="form-control"
+                                                           placeholder="请输入餐标单价">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>是否送汤菜</label>
+                                                    <select class="form-control" name="standardIsFreeSoup">
+                                                        <option disabled="disabled" selected style="display: none">请选择是否赠送汤菜</option>
+                                                        <option value="0">否</option>
+                                                        <option value="1">是</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>是否送甜点</label>
+                                                    <select class="form-control" name="standardIsFreeDessert">
+                                                        <option disabled="disabled" selected style="display: none">请选择是否赠送甜点</option>
+                                                        <option value="0">否</option>
+                                                        <option value="1">是</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>是否送水果</label>
+                                                    <select name="standardIsFreeFruit" class="form-control">
+                                                        <option disabled="disabled" selected style="display: none">请选择是否赠送水果</option>
+                                                        <option value="0">否</option>
+                                                        <option value="1">是</option>>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+
+                            <button type="button" id="Sub" class="btn btn-info pull-right" onclick="sub()">添加餐标</button>
+
+                            </div>
+
+                        </form>
+
+
+
+                    </ul>
+                </div>
+             </div>
+        </div>
+    <!-- /. PAGE INNER  -->
+    </div>
+
+<!-- /. PAGE WRAPPER  -->
+<!--<div class="foot_div">-->
+<!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
+
+</div>
+
+
+<!--添加员工的表单页面-->
+<div th:each="form,count:${standards}" class="modal fade" th:id="myModal + ${count.count}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    详情列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form th:id="new_form + ${count.count}" action="/standard/updatestandard">
+                      <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group ">
+                                <label>餐标名称</label>
+                                <input  name="standardId" type="text" hidden="hidden"
+                                       th:value="${form.standardId}">
+                                <input autocomplete="off" name="standardName" type="text" class="form-control"
+                                      th:value="${form.standardName}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>荤菜个数</label>
+                                <select name="standardMeatnumber" class="form-control">
+                                    <option selected style="display: none"
+                                            th:text="${form.standardMeatnumber}" th:value="${form.standardMeatnumber}">请选择荤素
+                                    </option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>素菜个数</label>
+                                <select name="standardVegetablenumber" class="form-control">
+                                    <option selected style="display: none"
+                                            th:text="${form.standardVegetablenumber}" th:value="${form.standardVegetablenumber}">请选择荤素
+                                    </option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label>单价</label>
+                                <input autocomplete="off" name="standardPrice" type="text" class="form-control"
+                                       th:value="${form.standardPrice}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>是否送汤菜</label>
+                                <select class="form-control" name="standardIsFreeSoup">
+                                    <option  selected style="display: none"
+                                             th:value="${form.standardIsFreeSoup}" th:if="${form.standardIsFreeSoup} == 0" th:text="否"></option>
+                                    <option  selected style="display: none"
+                                             th:value="${form.standardIsFreeSoup}" th:if="${form.standardIsFreeSoup} == 1" th:text="是"></option>
+
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>是否送甜点</label>
+                                <select class="form-control" name="standardIsFreeDessert">
+                                    <option selected style="display: none"
+                                            th:value="${form.standardIsFreeDessert}" th:if="${form.standardIsFreeDessert} == 0" th:text="否"></option>
+                                    <option selected style="display: none"
+                                            th:value="${form.standardIsFreeDessert}" th:if="${form.standardIsFreeDessert} == 1" th:text="是"></option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label>是否送水果</label>
+                                <select name="standardIsFreeFruit" class="form-control">
+                                    <option selected style="display: none"
+                                            th:value="${form.standardIsFreeFruit}" th:if="${form.standardIsFreeFruit} == 0" th:text="否"></option>
+                                    <option selected style="display: none"
+                                            th:value="${form.standardIsFreeFruit}" th:if="${form.standardIsFreeFruit} == 1" th:text="是"></option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" th:onclick="'modalSub('+ ${count.count} +')'">
+                    提交修改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="/assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Js -->
+<script src="/assets/js/jquery.metisMenu.js"></script>
+
+
+<!-- Custom Js -->
+<script src="/assets/js/custom-scripts.js"></script>
+
+<script th:inline="javascript">
+
+    /*提交添加*/
+    function sub() {
+        if($.trim($("#standardName").val()) == ""||$("#standardName").val() == null){
+            alert("餐标名不能为空!");
+        }else{
+            alert("添加成功!");
+            $("#form").submit();
+        }
+
+    }
+
+    /*查看餐标*/
+    function allStandard() {
+        $("#standards").show();
+    }
+
+    /*点击餐标*/
+    function openModal(obj) {
+        $("#standards").hide();
+        $("#myModal"+obj).modal("show");
+
+    }
+
+    /*提交更新*/
+    function modalSub(obj) {
+        alert("修改成功!");
+        $("#new_form"+obj).submit();
+    }
+//
+    /*隐藏*/
+    function hideMenu() {
+        $('#standards').hide();
+        $("body").unbind("mousedown", onBodyDown);
+    }
+
+    /*点击div之外的事件*/
+    function onBodyDown(event) {
+        if (!((event.target.id == "standards" ) || ((event.target.id == "partTree" )) )) {
+            hideMenu();
+        }
+    }
+
+</script>
+
+</body>
+
+</html>

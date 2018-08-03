@@ -9,18 +9,12 @@
     <link href="/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FontAwesome Styles-->
     <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+    <link href="/assets/css/zTreeStyle/metroStyle.css" rel="stylesheet">
     <!-- Custom Styles-->
     <link href="/assets/css/custom-styles.css" rel="stylesheet"/>
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
-    <style>
-        .hun:hover{
-            cursor: pointer;
-        }
-        .su:hover{
-            cursor: pointer;
-        }
-    </style>
 
 </head>
 
@@ -259,12 +253,12 @@
                 <!--菜单管理-->
                 <li>
                     <a href="#"><i class="fa fa-dashboard"></i> 菜单管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse in" aria-expanded="true">
+                    <ul class="nav nav-second-level">
                         <li>
                             <a href="/groupmanager/tomorrow">明日菜单</a>
                         </li>
                         <li>
-                            <a href="#" class="active-menu">用餐单位菜单</a>
+                            <a href="/groupmanager/unit">用餐单位菜单</a>
                         </li>
                     </ul>
                 </li>
@@ -291,9 +285,9 @@
                 <!--食谱与餐标-->
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> 食谱与餐标<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <ul class="nav nav-second-level collapse in"aria-expanded="true">
                         <li>
-                            <a href="/groupmanager/recipe">定义食谱</a>
+                            <a href="/groupmanager/recipe"  class="active-menu">定义食谱</a>
                         </li>
                         <li>
                             <a href="/groupmanager/standard">定义餐标</a>
@@ -302,7 +296,7 @@
                 </li>
                 <!--管理与授权 -->
                 <li>
-                    <a href="/companystaff/manager"><i class="fa fa-qrcode"></i> 管理与授权</a>
+                    <a href="/companystaff/manager " ><i class="fa fa-qrcode"></i> 管理与授权</a>
                 </li>
 
                 <!--其他操作-->
@@ -336,133 +330,84 @@
 
 
                     <ul class="breadcrumb">
-                        <i style="text-align: left">用餐单位菜单</i>
+                        <i style="text-align: left">查看食谱</i>
                         <li><a href="/groupmanager/index">首页</a></li>
-                        <li class="active">菜单管理</li>
-                        <li class="active">用餐单位菜单</li>
+                        <li class="active">食谱与餐标</li>
+                        <li class="active">所有食谱</li>
 
                     </ul>
 
                     <ul class="top_search">
 
-
                         <div class="container-fluid">
-                            <p>公司</p>
-                            <ul class="nav nav-tabs">
-                                <li th:each="unit,count:${mealUnit}"
-                                    data-th-classappend="${count.count == 1}?'active':''">
-                                    <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}" data-toggle="tab"
-                                       aria-expanded="true">Home</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content">
-
-                                <div th:each="unit,count:${mealUnit}" class="tab-pane fade "
-                                     data-th-classappend="${count.count == 1}?'active in':''" th:id="${unit.UnitName}">
-
-
-                                    <div style="width: 100%;height: 600px;">
-                                        <!--左边信息-->
-                                        <div style="width: 15%;height:100%;float: left">
-                                            <p></p>
-                                            <p></p>
-                                            <form class="">
-                                                <div class="form-group " style="width: 150px;height:100%">
-                                                    <label class="control-label">餐标</label>
-                                                    <select class="form-control " disabled="disabled">
-                                                        <option th:text="${unit.diningStandard.standardName}"
-                                                                th:value="${unit.diningStandard.standardPrice}">1
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group " style="width: 150px">
-                                                    <label class="control-label">荤菜个数</label>
-                                                    <select class="form-control" disabled="disabled">
-                                                        <option th:value="${unit.hun_number}"
-                                                                th:text="${unit.hun_number}"></option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group " style="width: 150px">
-                                                    <label class="control-label">素菜个数</label>
-                                                    <select class="form-control" disabled="disabled">
-                                                        <option th:value="${unit.su_number}" value="1"
-                                                                th:text="${unit.su_number}"></option>
-                                                    </select>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!--/左边信息-->
-
-                                        <div style="width:85%;float: right;height: 100%;margin-top: 10px">
-                                            <div style="width:50%;float: left;height: 100%">
-                                                <div style="width:100%;float: left;height: 100%">
-                                                    <div style="width: 90%;height: 100%;margin:auto;border: 1px solid grey" class="food_left">
-                                                        <p>&nbsp;&nbsp;自动生成食谱:<span style="font-size: 10px;color: #FF6A8E"> &nbsp;&nbsp;(双击移除)</span></p>
-
-                                                        <div style="height:50%;width:100%;"  class="choice_hun">
-                                                            <!--荤菜-->
-                                                            <p>&nbsp;&nbsp;荤菜</p>
-
-                                                            <div th:lang="${hun.id}" th:text="${hun.name} + '( '+ ${hun.price} + '元)'"  th:each="hun,coutnt:${unit.hun_recipe}"
-                                                                 class="meal_td hun" style="margin-bottom:-1px;margin:5px 5px;height:34px;width: 30%;float: left;overflow: hidden;
-                                                            border: 1px solid gainsboro;text-align: center;line-height: 34px;" data-th-classappend="'hun' + ${unit.UnitID}">
-
-                                                            </div>
-
-                                                        </div>
-                                                        <div style="height:50%;width:100%;" class="choice_su">
-                                                            <!--荤菜-->
-                                                            <p>&nbsp;&nbsp;素菜</p>
-                                                            <div th:lang="${su.id}" th:text="${su.name} + '( '+ ${su.price} + '元)'"  th:each="su,coutnt:${unit.su_recipe}"
-                                                                 class="meal_td  su" style="margin-bottom:-1px;margin:5px 5px;height:34px;width: 30%;float: left;overflow: hidden;
-                                                            border: 1px solid gainsboro;text-align: center;line-height: 34px;" data-th-classappend="'su' + ${unit.UnitID}">
-
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-
-
-                                                </div>
-
-                                            </div>
-                                            <div style="width:50%;height: 100%;float: right">
-
-                                                <div style="width: 100%;height: 100%;margin:auto;border: 1px solid grey" class="food_right">
-                                                    <p>&nbsp;&nbsp;移除的食谱:<span style="font-size: 10px;color: #FF6A8E"> &nbsp;&nbsp;(双击恢复)</span></p>
-
-
-                                                    <div style="height:50%;width:100%;" class="delete_hun">
-                                                        <!--荤菜-->
-                                                        <p>&nbsp;&nbsp;荤菜</p>
-
-                                                    </div>
-                                                    <div style="height:50%;width:100%;" class="delete_su">
-                                                        <!--荤菜-->
-                                                        <p>&nbsp;&nbsp;素菜</p>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <!--<div class="pull-right" style="width: 200px;height: 500px;border: 1px solid grey;float: right"></div>-->
-
-                                    <p></p>
-
-                                    <button id="choice_finishi" type="button" class="btn btn-info pull-right"
-                                            th:onclick="'finish_choice('+ this +','+ ${unit.UnitID}+ ')'">选择完成
-                                    </button>
-                                </div>
-                            </div>
                         </div>
+
+
                     </ul>
+
+                    <div class="text_data ">
+
+                        <table id="table_staff" class="table table-hover  table-striped table-bordered table_shadow">
+
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>分类</th>
+                                <th>状态</th>
+                                <th>创建日期</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr th:each="recipe,count:${recipes}">
+                                <td th:text="${count.count}"></td>
+                                <td th:text="${recipe.recipeName}"></td>
+                                <td th:text="${recipe.recipeTypeId.recipeTypeName}"></td>
+                                <td>
+                                    <a th:href="@{'/recipe/updatestatus?id=' + ${recipe.recipeId} }"
+                                            th:if="${recipe.recipeStatus} == 0" class="text-danger">不可用</a>
+                                    <a th:href="@{'/recipe/updatestatus?id=' + ${recipe.recipeId} }"
+                                            th:if="${recipe.recipeStatus} == 1" class="text-primary">可用</a>
+
+                                </td>
+
+                                <td th:text="${#dates.format(recipe.recipeCreatedate,'yyyy-MM-dd &nbsp;&nbsp;  HH:mm:ss')}">
+                                </td>
+                                <td>
+                                    <button data-toggle="modal"  id="author_staff"
+                                            class="btn btn-info btn-xs staff_autor pull-center"  type="button"
+                                            th:onclick="'getMessage('+ ${recipe.recipeId} +')'">修改
+
+                                    </button>
+                                    <button data-toggle="modal"  id="author_staff"
+                                            class="btn btn-info btn-xs staff_autor pull-center"  type="button"
+                                            >修改食材
+
+                                    </button>
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+
+                        <ul class=" pagination pagination-lg pull-right">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#" >1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+
+                    </div>
+
+
                 </div>
             </div>
 
@@ -477,34 +422,7 @@
     <!--</div>-->
 
 </div>
-<div class="modal fade" id="finish_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="message">
-                    <span class="glyphicon "></span>提示
-                </h4>
-            </div>
-            <div hidden="hidden" id="foodid_message"></div>
-            <div hidden="hidden" id="unitid"></div>
-            <div class="modal-body text-success" id="text_message">
-                <label>新建菜单名</label>
-                <input id="sta_name" type="text" class="form-control"  placeholder="请输入菜单名">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                </button>
-                <button type="button" class="btn btn-primary" id="submit_Choice">
-                    确认
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
+
 
 
 <!-- /. WRAPPER  -->
@@ -513,6 +431,7 @@
 <script src="/assets/js/jquery-1.10.2.js"></script>
 <!-- Bootstrap Js -->
 <script src="/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.ztree.core.js"></script>
 
 <!-- Metis Menu Js -->
 <script src="/assets/js/jquery.metisMenu.js"></script>
@@ -521,81 +440,10 @@
 <!-- Custom Js -->
 <script src="/assets/js/custom-scripts.js"></script>
 
-<script>
-
-
-    $(function () {
-        $("#submit_Choice").click(function () {
-            var foodsid = $("#foodid_message").text();
-            var unitid = $("#unitid").text();
-            var food_name = $("#sta_name").val();
-            if(food_name == null||food_name == ""){
-                alert("不能为空!")
-            }else{
-                $.ajax({
-                    url:"/unitmenu/addmenu",
-                    type:"POST",
-                    data:{"unitid":unitid,"foodsid":foodsid,"food_name":food_name},
-                    success:function () {
-                        alert("成功!");
-                        $("#finish_message").modal("hide");
-                        location.reload();
-                    },
-                    error:function () {
-                        alert("发生错误!");
-                    }
-                });
-            }
-        });
-    });
-    /*选择完成*/
-    function finish_choice(obj,id) {
-        var $_this = $(obj);
-        var vege = $(".su" + id);
-        var meal = $(".hun" + id);
-        var ids = [];
-        $.each(meal,function (index,value) {
-            if($(this).parent().hasClass("choice_hun")){
-                ids.push($(this).attr("lang"));
-            }
-        });
-        $.each(vege,function (index,value) {
-            if($(this).parent().hasClass("choice_su")){
-                ids.push($(this).attr("lang"));
-            }
-        });
-        $("#unitid").text(id);
-        $("#foodid_message").text(ids);
-        $("#finish_message").modal("show");
+<script th:inline="javascript">
+    function getMessage(id) {
+        location.href = "/recipe/updaterecipe?id=" + id;
     }
-
-    /*食谱移动*/
-    $(function () {
-        /*左边移到右边*/
-        $(".food_left").on("dblclick",".hun",function () {
-            $(this).remove();
-            $(".delete_hun").append($(this));
-        });
-        $(".food_left").on("dblclick",".su",function () {
-            $(this).remove();
-            $(".delete_su").append($(this));
-        });
-        /*右边移到左边*/
-        $(".food_right").on("dblclick", ".hun", function () {
-            $(this).remove();
-            $(".choice_hun").append($(this));
-        });
-        $(".food_right").on("dblclick", ".su", function () {
-            $(this).remove();
-            $(".choice_su").append($(this));
-        });
-
-    });
-
-
-
-
-
 
 
 </script>
