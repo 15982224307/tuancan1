@@ -55,10 +55,18 @@ public interface DeliveringMasterMapper extends Mapper<DeliveringMaster>{
 
     /*通过用餐公司id查询*/
     @Select({"select * from deliveringmaster where GroupMealUnit_id=#{unitId}"})
+    @Results(id = "selectByUnitId",value = {
+            @Result(column = "DeliveringCompany_no",property = "deliveringCompany",javaType = DeliveringCompany.class,
+                    one = @One(select = "com.example.tuancan.dao.DeliveringCompanyMapper.selectByPrimaryKey"))
+    })
     public List<DeliveringMaster> selectByUnitId(@Param("unitId") Integer unitId);
 
     /*通过团餐id*/
     @Select({"select * from deliveringmaster where DeliveringCompany_no=#{dcNo}"})
+    @Results(id = "selectBydcNo",value = {
+            @Result(column = "GroupMealUnit_id",property = "groupMealUnit",javaType = GroupMealUnit.class,
+                    one = @One(select = "com.example.tuancan.dao.GroupMealUnitMapper.selectByPrimaryKey"))
+    })
     public List<DeliveringMaster> selectBydcNo(@Param("dcNo") Integer dcNo);
     /**
      * 插入一条数据

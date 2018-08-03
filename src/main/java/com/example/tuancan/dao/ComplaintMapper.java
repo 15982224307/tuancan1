@@ -23,9 +23,9 @@ public interface ComplaintMapper extends Mapper<Complaint>{
     @ResultMap(value = "selectByManagerId")
     public List<Complaint> selectAll();
 
-    @Select({"select * from complaint where manager_id!=null"})
+    @Select({"select * from complaint where manager_id is null"})
     @ResultMap(value = "selectByManagerId")
-    public List<Complaint> selectBy();
+    public List<Complaint> selectNULL();
     /**
      * 根据id查询一条数据
      * @param complaintId
@@ -39,7 +39,7 @@ public interface ComplaintMapper extends Mapper<Complaint>{
     public Complaint selectOneByIdWithManager(Integer complaintId);
 
     /**
-     * 根据处理结果查询
+     * 根据处理结果和投诉内容查询
      * @param complaintSettle
      * @return
      */
