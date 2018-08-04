@@ -37,6 +37,17 @@ public class StaffOrderServiceImpl implements StaffOrderService {
     }
 
     /**
+     * 员工编号和日期查询
+     *
+     * @param id
+     * @param date
+     */
+    @Override
+    public List<StaffOrder> selectOneByStaffIdAnduseDate(Integer id, Date date) {
+        return staffOrderMapper.selectOneByStaffIdAnduseDate(id,date);
+    }
+
+    /**
      * 菜谱编号查询
      *
      * @param id

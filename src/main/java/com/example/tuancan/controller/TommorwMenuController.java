@@ -25,9 +25,6 @@ public class TommorwMenuController {
     private DiningStandardService diningStandardService;
 
     @Autowired
-    private GroupMealUnitService groupMealUnitService;
-
-    @Autowired
     private GroupMealContractService groupMealContractService;
 
     @Autowired

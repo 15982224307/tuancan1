@@ -60,7 +60,8 @@ public interface DiningStandardMapper extends Mapper<DiningStandard>{
      */
     @Update({"update diningstandard set DeliveringCompany_no=#{deliveringCompany.deliveringCompanyNo},Standard_name=#{standardName},Standard_meatnumber=#{standardMeatnumber}," +
             "Standard_Vegetablenumber=#{standardVegetablenumber},Standard_price=#{standardPrice},Standard_IsFreeSoup=#{standardIsFreeSoup}," +
-            "Standard_IsFreeDessert=#{standardIsFreeDessert},Standard_isFreeFruit=#{standardIsFreeFruit} where Standard_id=#{standardId}"})
+            "Standard_IsFreeDessert=#{standardIsFreeDessert},Standard_isFreeFruit=#{standardIsFreeFruit} where standardId=#{standardId}"})
+    @Options(useGeneratedKeys = true,keyProperty = "standardId",keyColumn = "StandardId")
     public  int UpdateOne(DiningStandard diningStandard);
 
 

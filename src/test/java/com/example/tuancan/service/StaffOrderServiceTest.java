@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +30,19 @@ public class StaffOrderServiceTest {
     public void selectOneById() throws Exception {
         StaffOrder staffOrder = staffOrderService.selectOneById(1);
         System.out.println(JsonUtil.toJson(staffOrder));
+    }
+
+    @Test
+    public void selectOneByStaffIdAnduseDate() throws Exception {
+        /*格式化日期*/
+        DateFormat bf = new SimpleDateFormat("yyyy-MM-dd");
+        /*返回字符串，再转换为日期*/
+        Date date = java.sql.Date.valueOf(bf.format(new Date()));
+
+        List<StaffOrder> staffOrders = staffOrderService.selectOneByStaffIdAnduseDate(10, date);
+        System.out.println(JsonUtil.toJson(staffOrders));
+
+
     }
 
     /*测试员工id查询点餐*/
