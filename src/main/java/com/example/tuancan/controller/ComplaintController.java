@@ -32,7 +32,7 @@ public class ComplaintController {
         if (pageNum==null||pageNum<=0){
             pageNum=1;
         }
-        Page<Object> page = PageHelper.startPage(pageNum, 10);
+        Page<Object> page = PageHelper.startPage(pageNum, 9);
         List<Complaint> complaints = complaintService.selectAll();
         PageInfo<Complaint> pageInfo = new PageInfo<Complaint>(complaints);
 
@@ -48,7 +48,7 @@ public class ComplaintController {
         if (pageNum==null||pageNum<=0){
             pageNum=1;
         }
-        Page<Object> page = PageHelper.startPage(pageNum, 10);
+        Page<Object> page = PageHelper.startPage(pageNum, 9);
         List<Complaint> complaints = complaintService.selectAllByManagerId(null);
         PageInfo<Complaint> pageInfo = new PageInfo<Complaint>(complaints);
 
@@ -112,7 +112,7 @@ public class ComplaintController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Page<Object> page = PageHelper.startPage(pageNum, 10);
+        Page<Object> page = PageHelper.startPage(pageNum, 9);
         List<Complaint> complaints = complaintService.selectAllBByComplaintSettleOrderBySettleDate(decode);
         PageInfo<Complaint> pageInfo = new PageInfo<Complaint>(complaints);
         log.info(JsonUtil.toJson(complaints));

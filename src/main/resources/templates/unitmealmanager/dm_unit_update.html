@@ -8,7 +8,7 @@
     <!-- Bootstrap Styles-->
     <link href="/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="/assets/css/font-awesome.css" rel="stylesh eet" />
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom Styles-->
     <link href="/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
@@ -169,7 +169,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="active">
                         <a href="#"><i class="fa fa-desktop"></i>团餐机构</a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -181,20 +181,20 @@
                             </li>
                         </ul>
                     </li>
-					<li class="active">
+					<li>
                         <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
+                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >菜谱类型列表</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/mainCategorie/list}" >食材一级分类</a>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/classification/list}" >食材二级分类</a>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"  >食材管理</a>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材管理</a>
                             </li>
                         </ul>
                     </li>
@@ -207,7 +207,7 @@
 
                         </ul>
                     </li>
-                    
+
                     <li>
                         <a href="table.html"><i class="fa fa-table"></i>权限设置</a>
                         <ul class="nav nav-second-level">
@@ -220,7 +220,7 @@
                         <a href="form.html"><i class="fa fa-edit"></i> 处理投诉 </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="javascript:void(0);">投诉列表</a>
+                                <a href="#">投诉列表</a>
                             </li>
                             <li>
                                 <a href="#">未处理列表</a>
@@ -272,96 +272,149 @@
 
 
 						<ul class="breadcrumb" >
-                            <i style="text-align: left">食材列表</i>
+                            <i style="text-align: left">配送单详情</i>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">菜系管理</a></li>
-                                <li class="active">食材列表</li>
+                                <li><a href="#">团餐机构</a></li>
+                                <li class="active">配送单详情</li>
 
                         </ul>
 
                         <ul class="top_search">
-
-
                             <div class="container-fluid">
-
 
                                     <div class="span12">
                                      <div class="row-fluid">
-                                         <form class="">
-                                             按内容查询： <input class="input-medium search-query" type="text" id="maname"/>
-                                             &nbsp;&nbsp;&nbsp;<button id="search" class="btn btn-primary" type="button">查询</button>
 
+                                         <form class="form-horizontal" role="form" id="savedc">
+                                             <input type="hidden" name="deliveringCompanyNo" th:value="${dm?.deliveringMasterId}">
+                                             <br>
+                                             <br>
+                                             <div class="row">
+                                                 <label for="firstname" class="col-sm-2 control-label">团餐公司名称 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <span class="form-control-static" th:text="${dm?.deliveringCompany?.deliveringCompanyName}" id="firstname"></span>
+                                                 </div>
+
+                                                 <label for="lastname" class="col-sm-2 control-label">用餐公司名称 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <span class="form-control-static" th:text="${dm?.groupMealUnit?.groupMealUnitName}" id="firstname"></span>
+                                                 </div>
+                                             </div>
+                                             <br>
+
+                                             <div class="row">
+                                                 <label for="lastname" class="col-sm-2 control-label">单价（一份） ：</label>
+                                                 <div class="col-lg-2">
+                                                     <span class="form-control-static" th:text="${dm?.deliveringMasterPrice+'元'}" id="firstname"></span>
+                                                     <!--<input type="text" name="" th:value="${}" class="form-control" id="lastname">-->
+                                                 </div>
+
+                                                 <label for="lastname" class="col-sm-2 control-label">数量（份） ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="number" name="deliveringMasterAmount" th:value="${dm?.deliveringMasterAmount}" class="form-control" id="lastname">
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <div class="row">
+                                                 <label for="lastname" class="col-sm-2 control-label">创建人：</label>
+                                                 <div class="col-lg-2">
+                                                     <span class="form-control-static" th:text="${dm?.deliveringMasterCreater}" id="firstname"></span>
+                                                     <!--<input type="text" name="" th:value="${dm?.deliveringMasterCreater}" class="form-control" id="lastname" placeholder="无">-->
+                                                 </div>
+
+                                                 <label for="lastname" class="col-sm-2 control-label">确认人 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="deliveringMasterConfirmer" th:value="${dm?.deliveringMasterConfirmer}" class="form-control" id="lastname" placeholder="无">
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <div class="row">
+                                                 <label for="lastname" class="col-sm-2 control-label">支付状态 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <span th:text="订单创建" class="text-danger" th:if="${dm.deliveringMasterStatus==0}"></span>
+                                                     <span th:text="已确认" class="text-info" th:if="${dm.deliveringMasterStatus==1}"></span>
+                                                     <span th:text="已支付" class="text-success" th:if="${dm.deliveringMasterStatus==2}"></span>
+                                                 </div>
+                                                 <label for="lastname" class="col-sm-2 control-label">是否应急 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input name="deliveringMasterIsEmergency" type="hidden" id="IsEmergency" value="">
+                                                     <div class="btn-toolbar" role="toolbar">
+                                                         <div class="btn-group">
+                                                             <button type="button" class="btn btnselect" th:text="否" lang="0" data-th-classappend="${dm.deliveringMasterIsEmergency==0?'btn-success':'btn-default'}">否</button>
+                                                             <button type="button" class="btn btnselect" th:text="是" lang="1" data-th-classappend="${dm.deliveringMasterIsEmergency==1?'btn-success':'btn-default'}">是</button>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <br>
+                                             <div class="row">
+                                                 <label for="lastname" class="col-sm-2 control-label">配送日期 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <input type="text" name="" th:value="${#dates.format(dm?.deliveringMasterDelivedate,'yyyy-MM-dd HH:mm:ss')}" class="form-control" id="lastname" placeholder="无">
+                                                 </div>
+
+                                                 <label for="lastname" class="col-sm-2 control-label">备注 ：</label>
+                                                 <div class="col-lg-2">
+                                                     <textarea  name="deliveringMasterMemo" rows="5" cols="40" style="resize: none"  th:text="${dm?.deliveringMasterMemo}"></textarea>
+
+                                                 </div>
+
+                                             </div>
+                                             <br>
+                                             <br>
+                                             <div class="row">
+                                                 <div class="col-sm-offset-2 col-lg-4 pull-right">
+                                                     &nbsp;&nbsp;
+                                                     <a id="" href="javascript:void(0);" class="btn btn-primary " th:if="${(#session.getAttribute('unitID')==''+dm?.groupMealUnit?.groupMealUnitId) && (dm?.deliveringMasterStatus==0)}">&nbsp;修改&nbsp;</a>
+                                                     <a id="back" href="javascript:void(0);" class="btn btn-primary ">&nbsp;返回&nbsp;</a>
+                                                 </div>
+                                             </div>
                                          </form>
+
+
                                     </div>
                                 </div>
                             </div>
                         </ul>
 
 
-                        <div class="text_data">
-                            <div id="searchtable">
-                            <!--<table  class="table_shadow table table-bordered table-striped table-hover ">
-                                <thead>
-                                <tr>
-                                    <th scope="">序号</th>
-                                    <th  scope="" style="width: 200px">投诉人</th>
-                                    <th scope="">投诉内容</th>
-                                    <th scope="">处理人</th>
-                                    <th scope="">投诉日期 </th>
-                                    <th scope="">操作 </th>
 
-                                </tr>
-                                </thead>
-                                <tbody style="">
-                                <tr th:each="cp,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
-                                    <td th:text="${stat.count+(pageNum-1)*10}"></td>
-                                    <td th:text="${cp.complainter}"></td>
-                                    <td style="width: 500px;"><p style="width: 400px;overflow: hidden;white-space: nowrap;-o-text-overflow:ellipsis;text-overflow: ellipsis;"  th:text="${cp?.complaintContent}"></p></td>
-                                    <td th:text="${cp?.manager?.managerName}"></td>
-                                    <td th:text="${#dates.format(cp?.complaintDate,'yyyy-MM-dd')}"></td>
-                                    <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{'/complaint/cp_details/'+${cp.complaintId} }"  ><i class="fa fa-edit "></i>&nbsp;详情</a>
-                                        <button data-toggle="modal" data-target="#deletetype" class="btn btn-xs btn-danger"  th:onclick="'deletecp('+${cp.complaintId}+')'" ><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                           <div class="text_data">
+                               <div id="searchtable" >
+                                   <table  class="table_shadow table table-bordered table-striped table-hover ">
+                                       <caption>配送单详细 </caption>
+                                       <thead>
+                                       <tr>
+                                           <th scope="">序号</th>
+                                           <th  scope="" style="width: 200px">菜谱名称</th>
+                                           <th scope="">数量</th>
+                                           <th scope="">备注</th>
 
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>-->
+                                       </tr>
+                                       </thead>
+                                       <tbody>
+                                       <tr th:each="dm,stat : ${details}" th:if="${not #lists.isEmpty(details)}">
+                                           <td style="width: 150px" th:text="${stat.count}"></td>
+                                           <td style="width: 150px" class="zt" ><a th:text="${dm?.recipe?.recipeName}" th:href="@{'/recipe/'+${dm?.recipe?.recipeId}}"></a></td>
+                                           <td style="width: 150px" th:text="${dm?.deliveringDetailNumber}"></td>
+                                           <td th:text="${dm?.deliveringDetailMemo}"></td>
 
-                              <!--<div class="col-md-12 col-sm-12">-->
-                                    <div class="col-md-4 col-sm-4" th:each="cp,stat : ${page.list}">
+                                       </tr>
+                                       </tbody>
+                                   </table>
 
-                                        <div class="panel" data-th-classappend="${cp?.manager?.managerName}?'panel-success':'panel-danger'">
-                                            <div class="panel-heading"  style="height: 40px">
-                                        <span class="pull-left"data-th-text="${cp?.manager?.managerName}?'已处理':'未处理'">
-                                            向左快速浮动
-                                        </span>
-                                                <span data-toggle="modal" data-target="#deletetype" th:onclick="'deletecp('+${cp.complaintId}+')'"  class="pull-right glyphicon glyphicon-remove-circle" style="width: 15px;height: 15px;">
+                               </div>
 
-                                        </span>
-                                            </div>
-                                            <div class="panel-body">
-                                                <a  th:href="@{'/complaint/cp_details/'+${cp.complaintId} }"><p style="width: 400px;overflow: hidden;white-space: nowrap;-o-text-overflow:ellipsis;text-overflow: ellipsis;"  th:text="${cp?.complaintContent}"></p></a>
-                                            </div>
-                                            <div class="panel-footer" style="height: 40px">
-                                        <span class="pull-left" th:text="${cp.complainter}">
-                                            向左快速浮动
-                                        </span>
-                                                <span class="pull-right" th:text="${#dates.format(cp?.complaintDate,'yyyy-MM-dd')}">
-                                            向右快速浮动
-                                        </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <!--</div>-->
-
-                            <!--分页栏位-->
-                            <div th:include="manager/page::page"></div>
+                               <div id="succAlert" hidden class="alert alert-success">
+                                   <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                   <strong>提交成功！</strong>。
+                               </div>
+                               <div id="warnAlert" hidden="" class="alert alert-warning">
+                                   <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                   <strong>错误！</strong>您的网络连接有问题。
+                               </div>
 
                             </div>
-                        </div>
-
-
                     </div>
                 </div>
 
@@ -374,58 +427,13 @@
             <!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
 
         <!--</div>-->
+        <!--隐藏框-->
 
     </div>
-
-    <div class="modal fade" id="deletetype" tabindex="-1" role="dialog" aria-labelledby="authorModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close closedel" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="deleteModalLabel">
-                        确认删除该投诉内容吗？
-                    </h4>
-                </div>
-                <!--<div class="modal-body">
-
-                </div>-->
-                <div class="modal-footer">
-                    <input type="hidden" name="cpid" value="" id="deltypeId">
-                    <button type="button" class="btn btn-default closedel" data-dismiss="modal">关闭
-                    </button>
-                    <button id="confirm_del" type="button" class="btn btn-danger">
-                        确认删除
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-    <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel1">
-                        友情提示！不能为空
-                    </h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
+    <!--<script src="/assets/js/jquery-1.10.2.js"></script>-->
     <script src="/webjars/jquery/3.3.0/jquery.js"></script>
     <!-- Bootstrap Js -->
     <script src="/assets/js/bootstrap.min.js"></script>
@@ -433,115 +441,29 @@
     <!-- Metis Menu Js -->
     <script src="/assets/js/jquery.metisMenu.js"></script>
 
+	
     <!-- Custom Js -->
     <script src="/assets/js/custom-scripts.js"></script>
-
     <script type="text/javascript">
-        $('#search').click(function () {
 
-            var name=$("#maname").val();
-            console.log(name);
-            if(name==null||name==""){
-                $('#warning').modal('show');
-                return;
+        $('.btnselect').click(function () {
+            var check=$(this).hasClass("btn-success");
+            if (check){
+                $(this).removeClass("btn-success");
+                $(this).addClass("btn-default");
+                $(this).siblings('button').addClass("btn-success");
+            }else {
+                $(this).removeClass("btn-default");
+                $(this).addClass("btn-success");
+                $(this).siblings('button').removeClass("btn-success");
             }
-            //alert(formdata);
-            $.ajax({
-                url:"/complaint/search/"+name,
-                type:"POST",
-                data:{
-                    'asyc':true,
-                },
-                error:function (error) {
-
-                },
-                success:function (result) {
-                    //alert("ok");
-                    $("#searchtable").html(result);
-                },
-            });
-
+            $("#IsEmergency").val($(this).attr("lang"));
         });
-        /*删除*/
-        function deletecp(id) {
-            console.log(window.event.srcElement || window.event.target);
-            var srcclick=window.event.srcElement || window.event.target;
-            $(srcclick).addClass('rm');
-            $('#deltypeId').val(id);
-        };
-        $(function () {
-            //模态框完全对隐藏时触发。
-            $('#deletetype').on('hidden.bs.modal', function () {
-                // 执行一些动作...
-                $('.rm').removeClass('rm');
 
-            });
-            $('#warning').on('hidden.bs.modal', function () {
-                // 执行一些动作...
-                $("#myModalLabel1").text("友情提示！不能为空");
-            });
-
-            //模态框完全对隐藏时触发。
-            $('#uploadmodal').on('hidden.bs.modal', function () {
-                // 执行一些动作...
-                $("#fmpicId").val('');
-            });
-
-            $('#confirm_commit').click(function () {
-                var modal_id=$("#modal_id").val();
-                var name=$('#modal_name').val();
-                var desc=$('#modal_desc').val();
-                if(modal_id==""||name==""){
-                    $('#warning').modal('show');
-                    return;
-                }
-                var savedata = $('#formdata').serialize();
-                $.ajax({
-                    url: "/foodMaterial/save",
-                    type: "POST",
-                    data: savedata,
-                    error: function (error) {
-                        alert("网络错误");
-                    },
-                    success: function (result) {
-                        alert("添加成功");
-                        $('#myModal').modal('hide');
-                    }
-                });
-            });
-
-            /*删除*/
-            $('.closedel').click(function () {
-                $('.rm').removeClass('rm');
-            });
-
-            $('#confirm_del').click(function () {
-                typeid=$('#deltypeId').val();
-
-                $.ajax({
-                    url:"/complaint/delete/"+typeid,
-                    type:"POST",
-                    data:{},
-                    error:function (error) {
-                        alert("网络错误");
-                    },
-                    success:function (result) {
-                        //location.reload();
-                        $('.rm').parent().parent().hide();
-                        $('#deletetype').modal('hide');
-                    }
-                });
-            });
-                /*搜索回显*/
-            var url=window.location.href;
-            var arr=url.split("/");
-
-            if (arr.length==7){
-                $("#maname").val(decodeURI(decodeURI(arr[5])));
-            }
+        $("#back").click(function () {
+            history.back();
         });
     </script>
- 
 
 </body>
 

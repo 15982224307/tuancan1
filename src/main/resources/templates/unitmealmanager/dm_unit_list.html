@@ -181,7 +181,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -229,9 +229,20 @@
                                 <a href="#">sanji<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="#">Third Level Link</a>
+                                        <a href="" th:href="@{/deliveringMaster/unitlist}">用餐单位查询配送</a>
                                     </li>
-
+                                    <li>
+                                        <a href="" th:href="@{/deliverlist}">回答问卷</a>
+                                    </li>
+                                    <li>
+                                        <a href="" th:href="@{/tomorrowmenu/unitmenu}">获取明日菜单</a>
+                                    </li>
+                                    <li>
+                                        <a href="" th:href="@{/deliveringMaster/deliverlist}">拟定合同</a>
+                                    </li>
+                                    <li>
+                                        <a href="" th:href="@{/deliveringMaster/deliverlist}">填写应急配送单</a>
+                                    </li>
                                 </ul>
 
                             </li>
@@ -294,7 +305,7 @@
                                 <tr th:each="dm,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
                                     <td th:text="${stat.count+(pageNum-1)*10}"></td>
                                     <td class="zt"><a th:text="${dm?.deliveringCompany?.deliveringCompanyName}" th:href="@{'/deliveringCompany/dc_details/'+${dm?.deliveringCompany?.deliveringCompanyNo}}"></a></td>
-                                    <td><a th:text="${dm?.groupMealUnit?.groupMealUnitName}" th:href="@{'/groupMealUnit/gmu_details/'+${dm?.groupMealUnit?.groupMealUnitId}}"></a></td>
+                                    <td><a th:text="${unit?.groupMealUnitName}" th:href="@{'/groupMealUnit/gmu_details/'+${unit?.groupMealUnitId}}"></a></td>
                                     <td th:text="${#dates.format(dm.deliveringMasterDelivedate,'yyyy-MM-dd')}"></td>
                                     <td th:if="${dm.deliveringMasterIsEmergency==0}"><span class="text-info" th:text="否"></span></td>
                                     <td th:if="${dm.deliveringMasterIsEmergency==1}"><span class="text-danger" th:text="是" ></span></td>
@@ -305,7 +316,9 @@
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringMaster/dm_details/'+${dm.deliveringMasterId} }"  ><i class="fa fa-edit "></i>&nbsp;详情</a>
+                                        <a class="btn btn-xs btn-primary" th:href="@{'/deliveringMaster/dm_unit_details/'+${dm.deliveringMasterId} }"  ><i class="fa fa-edit "></i>&nbsp;详情&nbsp;</a>
+                                        &nbsp;
+                                        <a class="btn btn-xs btn-primary"  th:if="${(#session.getAttribute('unitID')==''+unit?.groupMealUnitId) && (dm.deliveringMasterStatus==0)}" ><i class="fa fa-edit "></i>&nbsp;确认&nbsp;</a>
 
                                     </td>
                                 </tr>

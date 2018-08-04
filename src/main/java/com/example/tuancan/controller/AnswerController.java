@@ -24,8 +24,10 @@ public class AnswerController {
     }
 
     @RequestMapping("/index")
-    public  String index(){
+    public  String index(HttpServletRequest request){
 
+        request.getSession(true).setAttribute("unitID","1");
+        request.getSession(true).setAttribute("dcno","1");
         return "/manager/pt_index";
     }
     @RequestMapping("/empty")

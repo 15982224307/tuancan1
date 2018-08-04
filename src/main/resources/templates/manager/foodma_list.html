@@ -159,10 +159,10 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i>用餐单位</a>
+                        <a href="ui-elements.html"><i class="fa fa-desktop"></i>用餐单位<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="">
-                                <a href="" th:href="@{/groupMealUnit/yes_list}">用餐单位列表<span class="fa "></span></a>
+                                <a href="" th:href="@{/groupMealUnit/yes_list}">用餐单位列表<span class="fa"></span></a>
                             </li>
                             <li>
                                 <a href="" th:href="@{/groupMealUnit/no_list}">未审核列表<span class="fa arrow"></span></a>
@@ -175,43 +175,33 @@
                         <a href="#"><i class="fa fa-desktop"></i>团餐机构</a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >团餐机构列表</a>
+                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >团餐机构列表<span class="fa arrow"></span></a>
                             </li>
 
                             <li>
-                                <a href="" th:href="@{/deliveringCompany/no_list}" >未审核列表</a>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >未审核列表<span class="fa arrow"></span></a>
                             </li>
                         </ul>
                     </li>
 					<li class="active">
-                        <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
+                        <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表</a>
+                                <a href=""  th:href="@{/recipeType/list}" >菜谱类型列表<span class="fa arrow"></span></a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/mainCategorie/list}" >食材一级分类</a>
+                                <a href="" th:href="@{/mainCategorie/list}" >食材一级分类<span class="fa arrow"></span></a>
                             </li>
                             <li>
-                                <a href="" th:href="@{/classification/list}" >食材二级分类</a>
+                                <a href="" th:href="@{/classification/list}" >食材二级分类<span class="fa arrow"></span></a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"  >食材管理</a>
+                                <a href="javascript:void(0);"  >食材管理<span class="fa arrow"></span></a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href=""  th:href="@{/yes_list}" >列表</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="table.html"><i class="fa fa-table"></i>权限设置</a>
+                        <a href="table.html"><i class="fa fa-table"></i>权限设置<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">设置团餐机构等级</a>
@@ -219,13 +209,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="form.html"><i class="fa fa-edit"></i> 处理投诉 </a>
+                        <a href="form.html"><i class="fa fa-edit"></i> 处理投诉<span class="fa arrow"></span> </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="" th:href="@{/complaint/yes_list}">投诉列表</a>
+                                <a href="" th:href="@{/complaint/yes_list}">投诉列表<span class="fa arrow"></span></a>
                             </li>
                             <li>
-                                <a href="#" th:href="@{/complaint/no_list}">未处理列表</a>
+                                <a href="#" th:href="@{/complaint/no_list}">未处理列表<span class="fa arrow"></span></a>
                             </li>
                         </ul>
                     </li>
@@ -235,21 +225,24 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 查询配送<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#" th:href="@{/deliveringMaster/list}">配送详情</a>
+                                <a href="#" th:href="@{/deliveringMaster/list}">配送详情<span class="fa arrow"></span></a>
                             </li>
+
                             <li>
                                 <a href="#">sanji<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="#">Third Level Link</a>
+                                        <a href="" th:href="@{/deliveringMaster/unitlist}">用餐单位查询配送</a>
                                     </li>
                                     <li>
-                                        <a href="#">Third Level Link</a>
+                                        <a href="" th:href="@{/deliveringMaster/deliverlist}">团餐餐单位查询配送</a>
                                     </li>
                                     <li>
-                                        <a href="#">Third Level Link</a>
+                                        <a href="" th:href="@{/deliveringMaster/deliverlist}">获取明日菜单</a>
                                     </li>
-
+                                    <li>
+                                        <a href="" th:href="@{/deliveringMaster/deliverlist}">拟定合同</a>
+                                    </li>
                                 </ul>
 
                             </li>
@@ -478,7 +471,7 @@
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var name=$("#maname").val();
+            var name=$.trim($("#maname").val());
             console.log(name);
             if(name==null||name==""){
                 $('#warning').modal('show');
@@ -633,7 +626,7 @@
                 // 执行一些动作...
                 //清空上级分类
                 $("#modal_id").val('');
-                $('#modal_type')
+                $('#modal_type').val('')
                 $('#fmId').val('');
                 $('#modal_name').val('');
                 $('#modal_desc').val('');
