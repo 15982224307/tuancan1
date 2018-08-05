@@ -16,6 +16,14 @@
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
+    <style>
+        .pad{
+            margin-left: 10px;
+        }
+        .text_color{
+            color: blueviolet;
+        }
+    </style>
 </head>
 
 <body>
@@ -337,121 +345,62 @@
                     </ul>
                     <ul class="top_search">
 
-                        <form id="form" action="/standard/addstandard">
                             <div class="container-fluid">
-                                <table class="table">
-                                    <a href="javascript:void(0)" onclick="allStandard()">已有餐标</a>
 
-                                    <div  hidden="hidden" id="standards" style="margin-top: 5px; position:absolute;z-index:999;height:200px; min-width:163px;
-                                               background-color:white;border:1px solid;overflow-y:auto;overflow-x:auto;">
-                                        <ul id="partTree" class="ztree">
-                                            <li th:each="s,count:${standards}" class="standard_name" style="margin: 10px 10px">
-                                                <a href="#" th:text=" ${s.standardName}  + '( '+ ${s.standardPrice}+'元)'"
-                                                th:onclick="'openModal(' + ${count.count} + ')'">两荤一素(15.00元)</a>
-                                            </li>
-                                        </ul>
+                                <p>公司</p>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a  href="#index" data-toggle="tab" aria-expanded="true">首页</a>
+                                    </li>
+
+                                    <li th:each="unit,count:${mealUnit}" ><!--data-th-classappend="${count.count == 1}?'active':''"-->
+                                        <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true"></a>
+                                        <input type="text" hidden="hidden" th:value="${unit.prrice}" th:id="'price' + ${unit.UnitID}">
+                                        <input type="text" hidden="hidden" th:value="${unit.people}" th:id="'people' + ${unit.UnitID}">
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+
+                                    <!--首页-->
+                                    <div class="tab-pane fade active in" id="index" style="height: 260px">
+                                        <p class="text-info">点击单位进行配送单管理</p>
                                     </div>
-                                    <br>
-                                    <br>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-group ">
-                                                    <label>餐标名称</label>
-                                                    <input id="standardName"  autocomplete="off"name="standardName" type="text" class="form-control"
-                                                           placeholder="请输入餐标名称">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label>荤菜个数</label>
-                                                    <select name="standardMeatnumber" class="form-control">
-                                                        <option disabled="disabled" selected style="display: none">请选择荤素
-                                                        </option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
 
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label>素菜个数</label>
-                                                    <select name="standardVegetablenumber" class="form-control">
-                                                        <option disabled="disabled" selected style="display: none">请选择荤素
-                                                        </option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <div th:each="unit,count:${mealUnit}" class="tab-pane fade " th:id="${unit.UnitName}"> <!--data-th-classappend="${count.count == 1}?'active in':''"-->
 
-                                        <tr>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label>单价</label>
-                                                    <input autocomplete="off" name="standardPrice" type="text" class="form-control"
-                                                           placeholder="请输入餐标单价">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label>是否送汤菜</label>
-                                                    <select class="form-control" name="standardIsFreeSoup">
-                                                        <option disabled="disabled" selected style="display: none">请选择是否赠送汤菜</option>
-                                                        <option value="0">否</option>
-                                                        <option value="1">是</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label>是否送甜点</label>
-                                                    <select class="form-control" name="standardIsFreeDessert">
-                                                        <option disabled="disabled" selected style="display: none">请选择是否赠送甜点</option>
-                                                        <option value="0">否</option>
-                                                        <option value="1">是</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label>是否送水果</label>
-                                                    <select name="standardIsFreeFruit" class="form-control">
-                                                        <option disabled="disabled" selected style="display: none">请选择是否赠送水果</option>
-                                                        <option value="0">否</option>
-                                                        <option value="1">是</option>>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                </tbody>
-                            </table>
+                                        <p style="font-size: 15px;color:lightskyblue">荤菜<span style="font-size: 12px;color:darkgray" th:text=" '(选择'+ ${unit.hun_number} + '个)'"></span></p>
+                                        <div >
 
-                            <button type="button" id="Sub" class="btn btn-info pull-right" onclick="sub()">添加餐标</button>
+                                            <label class="checkbox-inline " style="margin-bottom: 5px;"
+                                                  th:each="hun_recipe,count:${unit.hun_recipes}" data-th-classappend="${count.count le unit.hun_number}?'pad text_color':''">
+                                                <input th:class="'order' + ${unit.UnitID}"
+                                                        data-th-attr="checked = ${count.count le unit.hun_number}" type="checkbox" th:value="${hun_recipe.recipeId}" th:text="${hun_recipe.recipeName} + '(已有' + ${hun_recipe.quantity} + '人选择 )'">
+                                            </label>
+                                        </div>
+
+                                        <p style="font-size: 15px;color:lightskyblue"> 素菜<span style="font-size: 12px;color:darkgray" th:text=" '(选择'+ ${unit.su_number} + '个)'"></span></p>
+                                        <div>
+                                            <label class="checkbox-inline " style="margin-bottom: 5px;"
+                                                   th:each="su_recipe,count:${unit.su_recipes}" data-th-classappend="${count.count le unit.su_number}?'pad text_color':''">
+                                                <input th:class="'order' + ${unit.UnitID}"
+                                                        data-th-attr="checked = ${count.count le unit.su_number}" type="checkbox" th:value="${su_recipe.recipeId}" th:text="${su_recipe.recipeName} + '(已有' + ${su_recipe.quantity} + '人选择 )'">
+                                            </label>
+                                        </div>
+                                        <p></p>
+                                        <p></p>
+                                        <!--<button type="button" class="btn btn-info pull-right"-->
+                                                <!--disabled="disabled">已添加</button>-->
+
+                                        <button id="choice_finishi" type="button" class="btn btn-info pull-right"
+                                                th:onclick="'finish_choice('+ this +','+ ${unit.UnitID}+ ')'">选择完成</button>
+                                    </div>
+                                </div>
+
 
                             </div>
 
-                        </form>
+
 
 
 
@@ -468,136 +417,29 @@
 
 </div>
 
-
-<!--添加员工的表单页面-->
-<div th:each="form,count:${standards}" class="modal fade" th:id="myModal + ${count.count}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="finish_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    详情列表
+                <h4 class="modal-title" id="message">
+                    <span class="glyphicon "></span>提示
                 </h4>
             </div>
-            <div class="modal-body">
-                <form th:id="new_form + ${count.count}" action="/standard/updatestandard">
-                      <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="form-group ">
-                                <label>餐标名称</label>
-                                <input  name="standardId" type="text" hidden="hidden"
-                                       th:value="${form.standardId}">
-                                <input autocomplete="off" name="standardName" type="text" class="form-control"
-                                      th:value="${form.standardName}">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <label>荤菜个数</label>
-                                <select name="standardMeatnumber" class="form-control">
-                                    <option selected style="display: none"
-                                            th:text="${form.standardMeatnumber}" th:value="${form.standardMeatnumber}">请选择荤素
-                                    </option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <label>素菜个数</label>
-                                <select name="standardVegetablenumber" class="form-control">
-                                    <option selected style="display: none"
-                                            th:text="${form.standardVegetablenumber}" th:value="${form.standardVegetablenumber}">请选择荤素
-                                    </option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                <label>单价</label>
-                                <input autocomplete="off" name="standardPrice" type="text" class="form-control"
-                                       th:value="${form.standardPrice}">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <label>是否送汤菜</label>
-                                <select class="form-control" name="standardIsFreeSoup">
-                                    <option  selected style="display: none"
-                                             th:value="${form.standardIsFreeSoup}" th:if="${form.standardIsFreeSoup} == 0" th:text="否"></option>
-                                    <option  selected style="display: none"
-                                             th:value="${form.standardIsFreeSoup}" th:if="${form.standardIsFreeSoup} == 1" th:text="是"></option>
-
-                                    <option value="0">否</option>
-                                    <option value="1">是</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <label>是否送甜点</label>
-                                <select class="form-control" name="standardIsFreeDessert">
-                                    <option selected style="display: none"
-                                            th:value="${form.standardIsFreeDessert}" th:if="${form.standardIsFreeDessert} == 0" th:text="否"></option>
-                                    <option selected style="display: none"
-                                            th:value="${form.standardIsFreeDessert}" th:if="${form.standardIsFreeDessert} == 1" th:text="是"></option>
-                                    <option value="0">否</option>
-                                    <option value="1">是</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                <label>是否送水果</label>
-                                <select name="standardIsFreeFruit" class="form-control">
-                                    <option selected style="display: none"
-                                            th:value="${form.standardIsFreeFruit}" th:if="${form.standardIsFreeFruit} == 0" th:text="否"></option>
-                                    <option selected style="display: none"
-                                            th:value="${form.standardIsFreeFruit}" th:if="${form.standardIsFreeFruit} == 1" th:text="是"></option>
-                                    <option value="0">否</option>
-                                    <option value="1">是</option>>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                </form>
+            <div hidden="hidden" id="foodid_message"></div>
+            <div hidden="hidden" id="unitid"></div>
+            <div class="modal-body text-success" id="text_message">
+                <label>创建人</label>
+                <input id="sta_name" type="text" class="form-control"  placeholder="请输入您的名字">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
                 </button>
-                <button type="button" class="btn btn-primary" th:onclick="'modalSub('+ ${count.count} +')'">
-                    提交修改
+                <button type="button" class="btn btn-primary" id="submit_Choice">
+                    确认
                 </button>
             </div>
         </div><!-- /.modal-content -->
@@ -619,47 +461,42 @@
 
 <script th:inline="javascript">
 
-    /*提交添加*/
-    function sub() {
-        if($.trim($("#standardName").val()) == ""||$("#standardName").val() == null){
-            alert("餐标名不能为空!");
-        }else{
-            alert("添加成功!");
-            $("#form").submit();
-        }
+   function finish_choice(obj,id) {
+       $("#finish_message").modal("show");
+       $_this = $(obj);
+       var check_recipes = $(".order" + id);
 
-    }
+       var price = $("#price" + id).val();
+       var people = $("#people" + id).val();
 
-    /*查看餐标*/
-    function allStandard() {
-        $("#standards").show();
-    }
+       var recipe_ids = "";
+       $.each(check_recipes,function () {
+           if($(this).is(":checked")){
+               recipe_ids =  recipe_ids + $(this).val() +",";
+           }
+       });
 
-    /*点击餐标*/
-    function openModal(obj) {
-        $("#standards").hide();
-        $("#myModal"+obj).modal("show");
+       $("#submit_Choice").click(function () {
+           var creater = $("#sta_name").val();
+           if($.trim(creater) ==""){
+               alert("不能为空!")
+           }else{
+               $.ajax({
+                   type:"POST",
+                   data:{"price":price,"recipe_ids":recipe_ids,"unit_id":id,"people":people,"creater":creater},
+                   url:"/delivering/sendunit",
+                   success:function () {
+                       alert("成功!")
+                       $("#finish_message").modal("hide");
+                   },
+                   error:function () {
+                   }
+               });
+           }
 
-    }
+       });
 
-    /*提交更新*/
-    function modalSub(obj) {
-        alert("修改成功!");
-        $("#new_form"+obj).submit();
-    }
-//
-    /*隐藏*/
-    function hideMenu() {
-        $('#standards').hide();
-        $("body").unbind("mousedown", onBodyDown);
-    }
-
-    /*点击div之外的事件*/
-    function onBodyDown(event) {
-        if (!((event.target.id == "standards" ) || ((event.target.id == "partTree" )) )) {
-            hideMenu();
-        }
-    }
+   }
 
 </script>
 

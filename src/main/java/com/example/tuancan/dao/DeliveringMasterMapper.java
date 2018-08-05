@@ -75,7 +75,8 @@ public interface DeliveringMasterMapper extends Mapper<DeliveringMaster>{
      */
     @Insert({"insert into deliveringmaster values(null,#{groupMealUnit.groupMealUnitId},#{deliveringCompany.deliveringCompanyNo}," +
             "#{deliveringMasterDelivedate},#{deliveringMasterPrice},#{deliveringMasterAmount},#{deliveringMasterMemo}," +
-            "#{deliveringMasterStatus},#{deliveringMasterIsEmergency},#{deliveringMasterCreatedate},#{deliveringMasterCreater})"
+            "#{deliveringMasterStatus},#{deliveringMasterIsEmergency},#{deliveringMasterCreatedate},#{deliveringMasterCreater}," +
+            "#{deliveringMasterConfirmer})"
             })
     @Options(useGeneratedKeys = true,keyProperty = "deliveringMasterId",keyColumn = "DeliveringMaster_id")
     public int insertOne(DeliveringMaster deliveringMaster);

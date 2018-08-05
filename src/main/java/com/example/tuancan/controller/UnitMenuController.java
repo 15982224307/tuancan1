@@ -109,17 +109,22 @@ public class UnitMenuController {
         log.info("公司id：" + unitid + " 食谱id："+foodsid + " 菜单名："+food_name);
 
         GroupMealMenumaster groupMealMenumaster1 = groupMealMenumasterService.selectByUnitId(Integer.parseInt(unitid));
-        if((groupMealMenumaster1 == null)){
-             /*团餐单位主表信息*/
-            GroupMealMenumaster groupMealMenumaster = new GroupMealMenumaster();
+         /*团餐单位主表信息*/
+        GroupMealMenumaster groupMealMenumaster = new GroupMealMenumaster();
+
             /*添加用餐单位信息*/
-            GroupMealUnit groupMealUnit = new GroupMealUnit();
-            groupMealUnit.setGroupMealUnitId(Integer.parseInt(unitid));
+        GroupMealUnit groupMealUnit = new GroupMealUnit();
+        groupMealUnit.setGroupMealUnitId(Integer.parseInt(unitid));
             /*其他信息*/
-            groupMealMenumaster.setGroupMealUnit(groupMealUnit);
-            groupMealMenumaster.setGroupMealMenumasterName(food_name);
+        groupMealMenumaster.setGroupMealUnit(groupMealUnit);
+        groupMealMenumaster.setGroupMealMenumasterName(food_name);
+
+        if((groupMealMenumaster1 == null)){
             /*插入数据*/
             groupMealMenumasterService.InsertOne(groupMealMenumaster);
+        }else {
+            groupMealMenumaster1.setGroupMealMenumasterName(food_name);
+            groupMealMenumasterService.UpdateOne(groupMealMenumaster1);
         }
 
 

@@ -19,6 +19,10 @@ public interface StaffOrderService {
     public StaffOrder selectOneById(Integer id);
 
     /**
+    员工编号和日期查询*/
+    public List<StaffOrder> selectOneByStaffIdAnduseDate(Integer id, Date date);
+
+    /**
      * 员工编号查询
      **/
    public List<StaffOrder> selectOneByStaffId(Integer id);

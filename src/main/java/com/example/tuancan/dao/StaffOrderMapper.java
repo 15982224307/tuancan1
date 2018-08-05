@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import javax.annotation.security.PermitAll;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,11 @@ public interface StaffOrderMapper extends Mapper<StaffOrder> {
     @Select("select * from stafforder where GMStaff_id =#{id}")
     @ResultMap(value = "getone")
     public List<StaffOrder> selectOneByStaffId(Integer id);
+
+   /*员工编号和日期查询*/
+   @Select("select * from stafforder where GMStaff_id =#{id} and StaffOrder_usedate = #{date}")
+   @ResultMap(value = "getone")
+   public List<StaffOrder> selectOneByStaffIdAnduseDate(@Param("id") Integer id,@Param("date") Date date);
 
     /*菜谱编号查询*/
     @Select("select * from stafforder where StaffOrder_id =#{id}")
