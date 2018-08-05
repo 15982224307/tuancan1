@@ -381,7 +381,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">
+                    <h4 class="modal-title" id="warnlabel">
                         友情提示！不能为空
                     </h4>
                 </div>
@@ -409,7 +409,7 @@
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var mainname=$("#mainname").val();
+            var mainname=$.trim($("#mainname").val());
             if(mainname==null||mainname==""){
                 $('#warning').modal('show');
                 return;
@@ -421,7 +421,8 @@
                     'asyc':true,
                 },
                 error:function (error) {
-
+                    $("#warnlabel").text("糟糕！网络错误");
+                    $('#warning').modal('show');
                 },
                 success:function (result) {
                     //alert("ok");
@@ -452,7 +453,11 @@
                 // 执行一些动作...
                 $('#typeId').val('');
                 $('#modal_name').val('');
-            })
+            });
+            $('#warning').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $("#warnlabel").text("友情提示！不能为空");
+            });
             $('#confirm_commit').click(function () {
                 var name=$('#modal_name').val();
                 if(name==""){
@@ -465,10 +470,14 @@
                     type: "POST",
                     data: savedata,
                     error: function (error) {
-                        alert("网络错误");
+                        //alert("网络错误");
+                        $("#warnlabel").text("糟糕！网络错误");
+                        $('#warning').modal('show');
                     },
                     success: function (result) {
-                        $('#search').click();
+                        //$('#search').click();
+                        $("#warnlabel").text("操作成功");
+                        $('#warning').modal('show');
                         $('#myModal').modal('hide');
                     }
                 });

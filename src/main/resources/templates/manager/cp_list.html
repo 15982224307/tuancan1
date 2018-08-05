@@ -333,12 +333,12 @@
 
                                         <div class="panel" data-th-classappend="${cp?.manager?.managerName}?'panel-success':'panel-danger'">
                                             <div class="panel-heading"  style="height: 40px">
-                                        <span class="pull-left"data-th-text="${cp?.manager?.managerName}?'已处理':'未处理'">
-                                            向左快速浮动
-                                        </span>
-                                                <span data-toggle="modal" data-target="#deletetype" th:onclick="'deletecp('+${cp.complaintId}+')'"  class="pull-right glyphicon glyphicon-remove-circle" style="width: 15px;height: 15px;">
-
-                                        </span>
+                                                <span class="pull-left"data-th-text="${cp?.manager?.managerName}?'已处理':'未处理'">
+                                                    向左快速浮动
+                                                </span>
+                                                <span data-toggle="modal" data-target="#deletetype" th:onclick="'deletecp('+${cp.complaintId}+')'"
+                                                      class="pull-right glyphicon glyphicon-remove-circle" style="width: 15px;height: 15px;">
+                                                </span>
                                             </div>
                                             <div class="panel-body">
                                                 <a  th:href="@{'/complaint/cp_details/'+${cp.complaintId} }"><p style="width: 400px;overflow: hidden;white-space: nowrap;-o-text-overflow:ellipsis;text-overflow: ellipsis;"  th:text="${cp?.complaintContent}"></p></a>
@@ -410,7 +410,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel1">
+                    <h4 class="modal-title" id="warnlabel">
                         友情提示！不能为空
                     </h4>
                 </div>
@@ -439,7 +439,7 @@
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var name=$("#maname").val();
+            var name=$.trim($("#maname").val());
             console.log(name);
             if(name==null||name==""){
                 $('#warning').modal('show');
@@ -453,7 +453,8 @@
                     'asyc':true,
                 },
                 error:function (error) {
-
+                    $("#warnlabel").text("糟糕！网络错误，请稍后再试");
+                    $('#warning').modal('show');
                 },
                 success:function (result) {
                     //alert("ok");
@@ -478,18 +479,12 @@
             });
             $('#warning').on('hidden.bs.modal', function () {
                 // 执行一些动作...
-                $("#myModalLabel1").text("友情提示！不能为空");
-            });
-
-            //模态框完全对隐藏时触发。
-            $('#uploadmodal').on('hidden.bs.modal', function () {
-                // 执行一些动作...
-                $("#fmpicId").val('');
+                $("#warnlabel").text("友情提示！不能为空");
             });
 
             $('#confirm_commit').click(function () {
                 var modal_id=$("#modal_id").val();
-                var name=$('#modal_name').val();
+                var name=$.trim($('#modal_name').val());
                 var desc=$('#modal_desc').val();
                 if(modal_id==""||name==""){
                     $('#warning').modal('show');
@@ -501,10 +496,14 @@
                     type: "POST",
                     data: savedata,
                     error: function (error) {
-                        alert("网络错误");
+                        //alert("网络错误");
+                        $("#warnlabel").text("糟糕！网络错误");
+                        $('#warning').modal('show');
                     },
                     success: function (result) {
-                        alert("添加成功");
+                        //alert("添加成功");
+                        $("#warnlabel").text("操作成功");
+                        $('#warning').modal('show');
                         $('#myModal').modal('hide');
                     }
                 });
@@ -523,11 +522,16 @@
                     type:"POST",
                     data:{},
                     error:function (error) {
-                        alert("网络错误");
+                       // alert("网络错误");
+                        $("#warnlabel").text("糟糕！网络错误");
+                        $('#warning').modal('show');
                     },
                     success:function (result) {
                         //location.reload();
-                        $('.rm').parent().parent().hide();
+                        $('.rm').parent().parent().parent().hide();
+                        //alert("添加成功");
+                        $("#warnlabel").text("操作成功");
+                        $('#warning').modal('show');
                         $('#deletetype').modal('hide');
                     }
                 });

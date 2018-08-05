@@ -374,7 +374,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">
+                    <h4 class="modal-title" id="warnlabel">
                         友情提示！不能为空
                     </h4>
                 </div>
@@ -425,7 +425,7 @@
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var unitname=$("#unitname").val();
+            var unitname=$.trim($("#unitname").val());
             if (unitname==null||unitname==""){
                 $('#warning').modal('show');
                 return;
@@ -438,7 +438,8 @@
                     'asyc':true,
                 },
                 error:function (error) {
-
+                    $("#warnlabel").text("糟糕！网络错误，请稍后再试");
+                    $('#warning').modal('show');
                 },
                 success:function (result) {
                     //alert("ok");
@@ -484,7 +485,10 @@
                 $('#ID').val('');
                 $('#Status').val('');
             })
-
+            $('#warning').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $("#warnlabel").text("友情提示！不能为空");
+            });
             var url=window.location.href;
             var arr=url.split("/");
             /*$.each(arr,function (index,value) {

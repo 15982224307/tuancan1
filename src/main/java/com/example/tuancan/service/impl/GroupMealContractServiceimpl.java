@@ -31,8 +31,8 @@ public class GroupMealContractServiceimpl implements GroupMealContractService {
     }
 
     @Override
-    public List<GroupMealContract> selectAll() {
-        return groupMealContractMapper.selectAll();
+    public List<GroupMealContract> findAll() {
+        return groupMealContractMapper.findAll();
     }
 
     @Override
