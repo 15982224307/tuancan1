@@ -32,8 +32,16 @@ public interface DeliveringMasterMapper extends Mapper<DeliveringMaster>{
      */
     @Select({"select * from deliveringmaster where DeliveringMaster_isEmergency=#{DeliveringMasterIsEmergency}"})
     @ResultMap(value = "selectOneById")
-    public List<DeliveringMaster> slectByIsEmergency(DeliveringMaster deliveringMaster);
+    public List<DeliveringMaster> selectByIsEmergency(DeliveringMaster deliveringMaster);
 
+    /*时间倒序查询所有*/
+    @Select({"select * from deliveringmaster where GroupMealUnit_id=#{unitid} and DeliveringCompany_no = #{companyid} order by DeliveringMaster_delivedate DESC"})
+    public List<DeliveringMaster> selectByDeliverdate(@Param("unitid") Integer unitid,@Param("companyid")Integer companyid);
+
+
+    @Select({"select * from deliveringmaster where GroupMealUnit_id=#{unitid} and DeliveringCompany_no = #{companyid} order by DeliveringMaster_delivedate DESC"})
+    @ResultMap(value = "selectOneById")
+    public List<DeliveringMaster> selectByUnitAndCompanyAndOrderByDeliverdate(@Param("unitid") Integer unitid,@Param("companyid")Integer companyid);
     /**
      * 查询送单信息数据集 伴随团餐机构和用餐机构信息
      * @return

@@ -61,7 +61,7 @@ public class DeliveringController {
                 int su = groupMealContract.getGMlContractVegetablenumber();
                 unitAndOrder.setHun_number(hun);
                 unitAndOrder.setSu_number(su);
-                unitAndOrder.setPrrice(standard.getStandardPrice());
+                unitAndOrder.setPrice(standard.getStandardPrice());
                 /*设置公司信息*/
                 unitAndOrder.setUnitID(unit_id);
                 unitAndOrder.setUnitName(groupMealContract.getGroupMealUnit().getGroupMealUnitName());
@@ -82,10 +82,24 @@ public class DeliveringController {
                 int people = OrderListUtil.getPeopleNumber(unitAndOrders)/(hun + su);
                 unitAndOrder.setPeople(people);
 
+                /*配送单是否已经生成过了
+                * 通过查询配送的配送日期是否和当前时间相等*/
+                List<DeliveringMaster> deliveringMasters = deliveringMasterService.selectByUnitAndCompanyAndOrderByDeliverdate(unit_id, companyId);
+                try {
+                    if (deliveringMasters.get(0).getDeliveringMasterDelivedate().getDate() == new Date().getDate()) {
+                        unitAndOrder.setIsCreat(1);
+                    } else {
+                        unitAndOrder.setIsCreat(0);
+                    }
+                }catch (Exception e){
+                    log.info(e.getMessage());
+                }
+
                 unit_Company.add(unitAndOrder);
             }
         }
         model.addAttribute("mealUnit",unit_Company);
+//        System.out.println(JsonUtil.toJson(model));
         return "/groupmanager/delivering";
     }
 

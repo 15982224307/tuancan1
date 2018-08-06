@@ -28,7 +28,7 @@ public class UnitAndOrder {
     private int su_number;
     
     /*餐标单价*/
-    private BigDecimal prrice;
+    private BigDecimal price;
 
     /*点餐人数*/
     private int people;
@@ -38,6 +38,8 @@ public class UnitAndOrder {
 
     private List<RecipeAndQuantity> su_recipes;
 
+    /*是否已经生成*/
+    private int isCreat;
 
 
 

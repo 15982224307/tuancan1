@@ -46,5 +46,11 @@ public class groupManagerController {
 
         return "redirect:/delivering/creat";
     }
+    /*查询配送单*/
+    @RequestMapping("/historydelivering")
+    public String historyDelivering(){
+
+        return "redirect:/historydelivering/history";
+    }
 
 }

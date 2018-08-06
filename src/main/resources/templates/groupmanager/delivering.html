@@ -278,7 +278,7 @@
                             <a href="#" class="active-menu">生成配送单</a>
                         </li>
                         <li>
-                            <a href="#">查询配送单</a>
+                            <a href="/groupmanager/historydelivering">查询配送单</a>
                         </li>
 
                         <li>
@@ -355,7 +355,7 @@
 
                                     <li th:each="unit,count:${mealUnit}" ><!--data-th-classappend="${count.count == 1}?'active':''"-->
                                         <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true"></a>
-                                        <input type="text" hidden="hidden" th:value="${unit.prrice}" th:id="'price' + ${unit.UnitID}">
+                                        <input type="text" hidden="hidden" th:value="${unit.price}" th:id="'price' + ${unit.UnitID}">
                                         <input type="text" hidden="hidden" th:value="${unit.people}" th:id="'people' + ${unit.UnitID}">
                                     </li>
                                 </ul>
@@ -389,10 +389,10 @@
                                         </div>
                                         <p></p>
                                         <p></p>
-                                        <!--<button type="button" class="btn btn-info pull-right"-->
-                                                <!--disabled="disabled">已添加</button>-->
+                                        <button type="button" th:if="${unit.isCreat} == 1" class="btn  pull-right btn-success"
+                                                disabled="disabled">已生成</button>
 
-                                        <button id="choice_finishi" type="button" class="btn btn-info pull-right"
+                                        <button id="choice_finishi"  th:if="${unit.isCreat} == 0" type="button" class="btn btn-info pull-right"
                                                 th:onclick="'finish_choice('+ this +','+ ${unit.UnitID}+ ')'">选择完成</button>
                                     </div>
                                 </div>
@@ -462,6 +462,7 @@
 <script th:inline="javascript">
 
    function finish_choice(obj,id) {
+       $("#sta_name").focus();
        $("#finish_message").modal("show");
        $_this = $(obj);
        var check_recipes = $(".order" + id);
@@ -488,6 +489,7 @@
                    success:function () {
                        alert("成功!")
                        $("#finish_message").modal("hide");
+                       location.href = "/groupmanager/delivering";
                    },
                    error:function () {
                    }

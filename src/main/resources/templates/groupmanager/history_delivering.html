@@ -16,6 +16,14 @@
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
+    <style>
+        .pad{
+            margin-left: 10px;
+        }
+        .text_color{
+            color: blueviolet;
+        }
+    </style>
 </head>
 
 <body>
@@ -265,15 +273,14 @@
                 <!--配送单管理-->
                 <li>
                     <a href="#"><i class="fa fa-desktop"></i> 配送单管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <ul class="nav nav-second-level collapse in" aria-expanded="true">
                         <li>
-                            <a href="/groupmanager/delivering">生成配送单</a>
+                            <a href="/groupmanager/delivering" >生成配送单</a>
                         </li>
                         <li>
-                            <a href="/groupmanager/historydelivering">查询配送单</a>
+                            <a href="#" class="active-menu">查询配送单</a>
                         </li>
-                    </ul>
-                    <ul class="nav nav-second-level">
+
                         <li>
                             <a href="#">应急配送单</a>
                         </li>
@@ -285,9 +292,9 @@
                 <!--食谱与餐标-->
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> 食谱与餐标<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse in"aria-expanded="true">
+                    <ul class="nav nav-second-level ">
                         <li>
-                            <a href="/groupmanager/recipe"  class="active-menu">定义食谱</a>
+                            <a href="/groupmanager/recipe">定义食谱</a>
                         </li>
                         <li>
                             <a href="/groupmanager/standard">定义餐标</a>
@@ -296,7 +303,7 @@
                 </li>
                 <!--管理与授权 -->
                 <li>
-                    <a href="/companystaff/manager " ><i class="fa fa-qrcode"></i> 管理与授权</a>
+                    <a href="/companystaff/manager "><i class="fa fa-qrcode"></i> 管理与授权</a>
                 </li>
 
                 <!--其他操作-->
@@ -320,7 +327,7 @@
         </div>
 
     </nav>
-    <!-- /. NAV SIDE  -->
+    <!--&lt;!&ndash; /. NAV SIDE  &ndash;&gt;-->
 
 
     <div id="page-wrapper">
@@ -330,108 +337,153 @@
 
 
                     <ul class="breadcrumb">
-                        <i style="text-align: left">查看食谱</i>
+                        <i style="text-align: left">查询配送单</i>
                         <li><a href="/groupmanager/index">首页</a></li>
-                        <li class="active">食谱与餐标</li>
-                        <li class="active">所有食谱</li>
+                        <li class="active">配送单管理</li>
+                        <li class="active">查询配送单</li>
 
                     </ul>
-
                     <ul class="top_search">
 
-                        <div class="container-fluid">
-                        </div>
+                            <div class="container-fluid">
+
+                                <p>公司</p>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a  href="#index" data-toggle="tab" aria-expanded="true">首页</a>
+                                    </li>
+
+                                    <li th:each="unit,count:${mealUnit}" ><!--data-th-classappend="${count.count == 1}?'active':''"-->
+                                        <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true"></a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+
+                                    <!--首页-->
+                                    <div class="tab-pane fade active in" id="index" style="height: 260px">
+                                        <p class="text-info">点击单位查看历史记录</p>
+                                    </div>
+
+                                    <div th:each="unit,count:${mealUnit}" class="tab-pane fade " th:id="${unit.UnitName}"> <!--data-th-classappend="${count.count == 1}?'active in':''"-->
+
+
+                                        <table id="table_staff" class="table table-hover  table-striped table-bordered ">
+
+                                            <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>状态</th>
+                                                <th>是否应急</th>
+                                                <th>配送时间</th>
+                                                <th>创建人</th>
+                                                <th>确认人</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                            <tr th:each="history,count:${unit.deliveringMasters}">
+                                                <td th:text="${count.count}">
+                                                </td>
+
+                                                <td>
+                                                    <span th:if="${history.deliveringMasterStatus} == 0" class="text-primary">新建</span>
+                                                    <span th:if="${history.deliveringMasterStatus} == 1" class="text-info">确认</span>
+                                                    <span th:if="${history.deliveringMasterStatus} == 2" class="text-success">已支付</span>
+
+                                                </td>
+                                                <td>
+                                                    <span th:if="${history.deliveringMasterIsEmergency} == 0" class="text-primary">不是</span>
+                                                    <span th:if="${history.deliveringMasterIsEmergency} == 1" class="text-danger">是</span>
+                                                </td>
+
+
+                                                <td th:text="${#dates.format(history.deliveringMasterDelivedate,'yyyy-MM-dd &nbsp;&nbsp;')}">
+                                                </td>
+                                                <td th:text="${history.deliveringMasterCreater}"></td>
+                                                <td th:text="${history.deliveringMasterConfirmer}"></td>
+                                                <td>
+                                                    <button data-toggle="modal"  id="author_staff"
+                                                            class="btn btn-info btn-xs staff_autor"  type="button"
+                                                    th:onclick="'getDetails(' + ${history.deliveringMasterId} + ')'">详情
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+
+
+                                            </tbody>
+                                        </table>
+
+
+                                        <ul class=" pagination pagination-lg pull-right">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#" >1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
 
 
                     </ul>
-
-                    <div class="text_data ">
-
-                        <table id="table_staff" class="table table-hover  table-striped table-bordered table_shadow">
-
-                            <thead>
-                            <tr>
-                                <th>编号</th>
-                                <th>名称</th>
-                                <th>分类</th>
-                                <th>状态</th>
-                                <th>创建日期</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-
-                            <tr th:each="recipe,count:${recipes}">
-                                <td th:text="${count.count}"></td>
-                                <td th:text="${recipe.recipeName}"></td>
-                                <td th:text="${recipe.recipeTypeId.recipeTypeName}"></td>
-                                <td>
-                                    <a th:href="@{'/recipe/updatestatus?id=' + ${recipe.recipeId} }"
-                                            th:if="${recipe.recipeStatus} == 0" class="text-danger">不可用</a>
-                                    <a th:href="@{'/recipe/updatestatus?id=' + ${recipe.recipeId} }"
-                                            th:if="${recipe.recipeStatus} == 1" class="text-primary">可用</a>
-
-                                </td>
-
-                                <td th:text="${#dates.format(recipe.recipeCreatedate,'yyyy-MM-dd &nbsp;&nbsp;  HH:mm:ss')}">
-                                </td>
-                                <td>
-                                    <button data-toggle="modal"  id="author_staff"
-                                            class="btn btn-info btn-xs staff_autor pull-center"  type="button"
-                                            th:onclick="'getMessage('+ ${recipe.recipeId} +')'">修改
-
-                                    </button>
-                                    <button data-toggle="modal"  id="author_staff"
-                                            class="btn btn-info btn-xs staff_autor pull-center"  type="button"
-                                            >修改食材
-
-                                    </button>
-                                </td>
-                            </tr>
-
-
-                            </tbody>
-                        </table>
-
-
-                        <ul class=" pagination pagination-lg pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#" >1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-
-                    </div>
-
-
                 </div>
-            </div>
-
-
+             </div>
         </div>
-        <!-- /. PAGE INNER  -->
+    <!-- /. PAGE INNER  -->
     </div>
-    <!-- /. PAGE WRAPPER  -->
-    <!--<div class="foot_div">-->
-    <!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
 
-    <!--</div>-->
+<!-- /. PAGE WRAPPER  -->
+<!--<div class="foot_div">-->
+<!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
 
 </div>
 
-
-
+<div class="modal fade" id="finish_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="message">
+                    <span class="glyphicon "></span>提示
+                </h4>
+            </div>
+            <div hidden="hidden" id="foodid_message"></div>
+            <div hidden="hidden" id="unitid"></div>
+            <div class="modal-body text-success" id="text_message">
+                <label>创建人</label>
+                <input id="sta_name" type="text" class="form-control"  placeholder="请输入您的名字">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary" id="submit_Choice">
+                    确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
 <!-- jQuery Js -->
 <script src="/assets/js/jquery-1.10.2.js"></script>
 <!-- Bootstrap Js -->
 <script src="/assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.ztree.core.js"></script>
 
 <!-- Metis Menu Js -->
 <script src="/assets/js/jquery.metisMenu.js"></script>
@@ -441,10 +493,9 @@
 <script src="/assets/js/custom-scripts.js"></script>
 
 <script th:inline="javascript">
-    function getMessage(id) {
-        location.href = "/recipe/updaterecipe?id=" + id;
+    function getDetails(deliveringId) {
+        location.href = "/historydelivering/getdetails?deliveringId=" + deliveringId;
     }
-
 
 </script>
 

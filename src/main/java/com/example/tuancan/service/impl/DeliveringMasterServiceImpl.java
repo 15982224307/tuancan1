@@ -38,6 +38,16 @@ public class DeliveringMasterServiceImpl implements DeliveringMasterService {
     }
 
     @Override
+    public List<DeliveringMaster> selectByUnitAndCompanyAndOrderByDeliverdate(Integer unitid, Integer companyid) {
+        return deliveringMasterMapper.selectByUnitAndCompanyAndOrderByDeliverdate(unitid,companyid);
+    }
+
+    @Override
+    public List<DeliveringMaster> selectByDeliverdate(Integer unitid,Integer companyid) {
+        return deliveringMasterMapper.selectByDeliverdate(unitid,companyid);
+    }
+
+    @Override
     public List<DeliveringMaster> selectBydcNo(Integer dcNo) {
         return deliveringMasterMapper.selectBydcNo(dcNo);
     }
@@ -48,8 +58,8 @@ public class DeliveringMasterServiceImpl implements DeliveringMasterService {
      * @return
      */
     @Override
-    public List<DeliveringMaster> slectByIsEmergency(DeliveringMaster deliveringMaster) {
-        return deliveringMasterMapper.slectByIsEmergency(deliveringMaster);
+    public List<DeliveringMaster> selectByIsEmergency(DeliveringMaster deliveringMaster) {
+        return deliveringMasterMapper.selectByIsEmergency(deliveringMaster);
     }
 
     /**

@@ -268,7 +268,7 @@
                             <a href="/groupmanager/delivering">生成配送单</a>
                         </li>
                         <li>
-                            <a href="#">查询配送单</a>
+                            <a href="/groupmanager/historydelivering">查询配送单</a>
                         </li>
                     </ul>
                     <ul class="nav nav-second-level">
@@ -366,7 +366,7 @@
                                     ></div>
                                     <p></p>
                                     <p></p>
-                                    <button th:if="${unit.added} == 1"type="button" class="btn btn-info pull-right"
+                                    <button th:if="${unit.added} == 1"type="button" class="btn btn-success pull-right"
                                           disabled="disabled">已添加</button>
 
                                     <button th:if="${unit.added} == 0" id="choice_finishi" type="button" class="btn btn-info pull-right"
