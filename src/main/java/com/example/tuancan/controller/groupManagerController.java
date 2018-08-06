@@ -52,5 +52,11 @@ public class groupManagerController {
 
         return "redirect:/historydelivering/history";
     }
+    /*结算配送单*/
+    @RequestMapping("/settledelivering")
+    public String settleDelivering(){
+
+        return "redirect:/settledelivering/all";
+    }
 
 }

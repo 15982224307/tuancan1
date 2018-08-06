@@ -11,19 +11,19 @@
     <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
     <link href="/assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
     <link href="/assets/css/zTreeStyle/metroStyle.css" rel="stylesheet">
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
     <!-- Custom Styles-->
     <link href="/assets/css/custom-styles.css" rel="stylesheet"/>
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
     <style>
-        .neirong div{
-            margin-top: 20px;
+        .pad{
+            margin-left: 10px;
         }
-        .neirong span{
-            margin-left: 15px;
-            font-size: 20px;
-            color: #737fd8;
+        .text_color{
+            color: blueviolet;
         }
     </style>
 </head>
@@ -280,12 +280,10 @@
                             <a href="/groupmanager/delivering" >生成配送单</a>
                         </li>
                         <li>
-                            <a href="/groupmanager/historydelivering" class="active-menu">查询配送单</a>
+                            <a href="/groupmanager/historydelivering" >查询配送单</a>
                         </li>
-
-
                         <li>
-                            <a href="/groupmanager/settledelivering">结算配送单</a>
+                            <a href="#" class="active-menu">结算配送单</a>
                         </li>
                     </ul>
                 </li>
@@ -337,67 +335,103 @@
 
 
                     <ul class="breadcrumb">
-                        <i style="text-align: left">配送单详情</i>
+                        <i style="text-align: left">结算配送单</i>
                         <li><a href="/groupmanager/index">首页</a></li>
                         <li class="active">配送单管理</li>
-                        <li class="active">详情页面</li>
+                        <li class="active">结算</li>
 
                     </ul>
                     <ul class="top_search">
-
                             <div class="container-fluid">
-                                <a href="/groupmanager/historydelivering">返回</a>
-                                <form style="font-size: 16px">
 
-                                    <div class="row neirong">
+                                <p>公司</p>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a  href="#index" data-toggle="tab" aria-expanded="true">首页</a>
+                                    </li>
 
-                                        <div class="col-lg-3">
-                                             用餐单位:<span th:text="${master.groupMealUnit.groupMealUnitName}"></span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            配送单位:<span th:text="${master.deliveringCompany.deliveringCompanyName}">344</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            配送日期:<span th:text="${#dates.format(master.deliveringMasterDelivedate,'yyyy-MM-dd')}">344</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            单价:<span th:text="${master.deliveringMasterPrice}">344</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            份数:<span th:text="${master.deliveringMasterAmount}">344</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            状态:<span th:if="${master.deliveringMasterStatus == 0}">新建</span>
-                                            <span th:if="${master.deliveringMasterStatus == 1}">确认</span>
-                                            <span th:if="${master.deliveringMasterStatus == 2}">已支付</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            是否应急:<span th:if="${master.deliveringMasterIsEmergency == 0}">不是</span>
-                                            <i th:if="${master.deliveringMasterIsEmergency == 1}" class="text-danger" style="margin-left: 15px;font-size: 20px">是</i>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            创建日期:<span th:text="${#dates.format(master.deliveringMasterCreatedate,'yyyy-MM-dd HH:mm:ss &nbsp;&nbsp;')}">344</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            创建人:<span th:text="${master.deliveringMasterCreater}">344</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            确认人:<span th:text="${master.deliveringMasterConfirmer}">344</span>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            备注:<span th:text="${master.deliveringMasterMemo}">344</span>
-                                        </div>
+                                    <li th:each="unit,count:${mealUnit}" ><!--data-th-classappend="${count.count == 1}?'active':''"-->
+                                        <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true"></a>
+                                    </li>
+                                </ul>
 
+                                <div class="tab-content">
+
+                                    <!--首页-->
+                                    <div class="tab-pane fade active in" id="index" style="height: 260px">
+                                        <p class="text-info">点击单位查看结算</p>
                                     </div>
 
+                                    <div th:each="unit,count:${mealUnit}" class="tab-pane fade " th:id="${unit.UnitName}"> <!--data-th-classappend="${count.count == 1}?'active in':''"-->
 
-                                </form>
-                                <hr>
-                                <span th:if="${master.deliveringMasterIsEmergency == 0}" style="color:#FFC240;">配送详情:</span>
-                                <div th:each="recipe,count:${details}" style="margin-top: 15px;font-size: 16px">
-                                    <span th:text="${recipe.recipe.recipeName}"style="width: 200px;display: block;float: left"></span>
-                                    <span style="margin-left: 10px;width: 10px" > *</span>
-                                    <sapn th:text="${recipe.deliveringDetailNumber}+' (份)'"></sapn>
+                                        <table id="table_staff" class="table table-hover  table-striped table-bordered ">
+
+                                            <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>单价</th>
+                                                <th>份数</th>
+                                                <th>配送时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                            <tr th:each="history,count:${unit.deliveringMasters}">
+                                                <td th:text="${count.count}">
+                                                </td>
+
+                                                <td>
+                                                    <span th:if="${history.deliveringMasterStatus} == 0" class="text-primary">新建</span>
+                                                    <span th:if="${history.deliveringMasterStatus} == 1" class="text-info">确认</span>
+                                                    <span th:if="${history.deliveringMasterStatus} == 2" class="text-success">已支付</span>
+
+                                                </td>
+                                                <td>
+                                                    <span th:if="${history.deliveringMasterIsEmergency} == 0" class="text-primary">不是</span>
+                                                    <span th:if="${history.deliveringMasterIsEmergency} == 1" class="text-danger">是</span>
+                                                </td>
+
+
+                                                <td th:text="${#dates.format(history.deliveringMasterDelivedate,'yyyy-MM-dd &nbsp;&nbsp;')}">
+                                                </td>
+                                                <td th:text="${history.deliveringMasterCreater}"></td>
+                                                <td th:text="${history.deliveringMasterConfirmer}"></td>
+                                                <td>
+                                                    <button data-toggle="modal"  id="author_staff"
+                                                            class="btn btn-info btn-xs staff_autor"  type="button"
+                                                    th:onclick="'getDetails(' + ${history.deliveringMasterId} + ')'">详情
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+
+
+                                            </tbody>
+                                        </table>
+
+                                     <div class=" pagination pagination-lg pull-left" id="datetimepicker">
+                                         查询时间:&nbsp;&nbsp;&nbsp;<input th:id="'startTime' + ${unit.unitId}"
+                                                   class="input-medium search-query"
+                                                   type="text"/> &nbsp;至&nbsp;&nbsp;
+                                            <input id="endTime" th:id="'endTime' + ${unit.unitId}"
+                                                   class="input-medium search-query"
+                                                   type="text"/>
+                                         <button  id="add_staff"
+                                                 class=" btn-mini btn_search" type="button" th:onclick="'search('+ ${unit.unitId} +')'">确定
+                                         </button>
+                                     </div>
+                                        <ul class=" pagination pagination-lg pull-right">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#" >1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
 
 
@@ -454,10 +488,10 @@
 <script src="/assets/js/jquery-1.10.2.js"></script>
 <!-- Bootstrap Js -->
 <script src="/assets/js/bootstrap.min.js"></script>
-
+<script src="/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <!-- Metis Menu Js -->
 <script src="/assets/js/jquery.metisMenu.js"></script>
-
 
 <!-- Custom Js -->
 <script src="/assets/js/custom-scripts.js"></script>
@@ -467,6 +501,39 @@
         location.href = "/historydelivering/getdetails?deliveringId=" + deliveringId;
     }
 
+    $(function () {
+        $.fn.datetimepicker.defaults = {
+            minView: "month",
+            //默认语言
+            language: 'zh-CN',
+            //默认选择格式
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayBtn: true,
+            //选择板所在输入框位置
+            pickerPosition: "bottom"
+        };
+//
+        var picker1 = $('#startTime3').datetimepicker('setStartDate', '2018-01-01');
+        var picker2 = $("#endTime3").datetimepicker('setStartDate', '2018-01-01');
+
+    });
+
+    function search(id) {
+
+        var startTime = $("#startTime" + id).val();
+        var endTime = $("#endTime" + id).val();
+        if($.trim(startTime) == ""){
+            startTime = "2018-01-01"
+        }
+        if($.trim(endTime) == ""){
+            endTime = "2018-12-30"
+        }
+        console.log(id);
+        console.log(startTime + " - "+ endTime);
+
+
+    }
 </script>
 
 </body>
