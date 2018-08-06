@@ -28,7 +28,7 @@ public interface GroupMealContractMapper  extends Mapper<GroupMealContract>{
 
 
     /*根据单位编号查询数据*/
-    @Select("select * from groupmealcontract where GroupMealUnit_id=#{id}")
+    @Select("select * from  groupmealcontract where GroupMealUnit_id=#{id}")
     @ResultMap(value = "selectOne")
     public List<GroupMealContract> selectOneByUnitId(Integer id);
 
@@ -43,7 +43,7 @@ public interface GroupMealContractMapper  extends Mapper<GroupMealContract>{
      * @return
      */
     @Select({"select * from groupmealcontract"})
-    public List<GroupMealContract> selectAll();
+    public List<GroupMealContract> findAll();
 
     /**
      * 根据状态查询所有合同

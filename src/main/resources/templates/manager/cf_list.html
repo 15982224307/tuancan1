@@ -390,7 +390,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel1">
+                    <h4 class="modal-title" id="warnlabel">
                         友情提示！不能为空
                     </h4>
                 </div>
@@ -418,7 +418,7 @@
     <script type="text/javascript">
         $('#search').click(function () {
 
-            var cfname=$("#cfname").val();
+            var cfname=$.trim($("#cfname").val());
             if(cfname==null||cfname==""){
                //alert("不能为空");
                 $('#warning').modal('show');
@@ -431,7 +431,8 @@
                     'asyc':true,
                 },
                 error:function (error) {
-
+                    ("#warnlabel").text("糟糕！网络错误,请稍后再试");
+                    $('#warning').modal('show');
                 },
                 success:function (result) {
                     //alert("ok");
@@ -462,7 +463,9 @@
                     })
                 },
                 error:function (error) {
-                    alert("网络错误");
+                   // alert("网络错误");
+                    $("#warnlabel").text("糟糕！网络错误,请稍后再试");
+                    $('#warning').modal('show');
                 }
             });
             //$('#modal_type')
@@ -493,7 +496,9 @@
                         })
                     },
                     error:function (error) {
-                        alert("网络错误");
+                        //alert("网络错误");
+                        $("#warnlabel").text("糟糕！网络错误");
+                        $('#warning').modal('show');
                     }
                 });
             });
@@ -505,10 +510,15 @@
                 $('#modal_type').find("option").remove();
                 $('#cfId').val('');
                 $('#modal_name').val('');
-            })
+            });
+            $('#warning').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $("#warnlabel").text("友情提示！不能为空");
+            });
+
             $('#confirm_commit').click(function () {
-                var name=$('#modal_name').val();
-                var type=$('#modal_type').val();
+                var name=$.trim($('#modal_name').val());
+                var type=$.trim($('#modal_type').val());
                 if(name==""||type==""){
                     $('#warning').modal('show');
                     return;
@@ -519,10 +529,14 @@
                     type: "POST",
                     data: savedata,
                     error: function (error) {
-                        alert("网络错误");
+                        //alert("网络错误");
+                        $("#warnlabel").text("糟糕！网络错误");
+                        $('#warning').modal('show');
                     },
                     success: function (result) {
-                        alert("添加成功");
+                        //alert("添加成功");
+                        $("#warnlabel").text("操作成功");
+                        $('#warning').modal('show');
                         $('#myModal').modal('hide');
                     }
                 });

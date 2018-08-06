@@ -1,0 +1,640 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <!-- Bootstrap Styles-->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="/assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> 
+     
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>HYBRID</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right top_right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Doe</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Today</em>
+                                    </span>
+                                </div>
+                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down  top_right"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a href="ui-elements.html"><i class="fa fa-desktop"></i>用餐单位</a>
+                        <ul class="nav nav-second-level">
+                            <li class="">
+                                <a href="" th:href="@{/groupMealUnit/yes_list}">用餐单位列表<span class="fa "></span></a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/groupMealUnit/no_list}">未审核列表<span class="fa arrow"></span></a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#"><i class="fa fa-desktop"></i>团餐机构</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >团餐机构列表</a>
+                            </li>
+
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >未审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
+					<li>
+                        <a href=""><i class="fa fa-bar-chart-o"></i>菜系管理</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href=""  th:href="@{/deliveringCompany/yes_list}" >菜谱类型列表</a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材一级分类</a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材二级分类</a>
+                            </li>
+                            <li>
+                                <a href="" th:href="@{/deliveringCompany/no_list}" >食材管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href=""  th:href="@{/yes_list}" >列表</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="table.html"><i class="fa fa-table"></i>权限设置</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">设置团餐机构等级</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="form.html"><i class="fa fa-edit"></i> 处理投诉 </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">投诉列表</a>
+                            </li>
+                            <li>
+                                <a href="#">未处理列表</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 查询配送<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">xxxx</a>
+                            </li>
+                            <li>
+                                <a href="#">xxx</a>
+                            </li>
+                            <li>
+                                <a href="#">sanji<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+
+
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+
+
+						<ul class="breadcrumb" >
+                            <i style="text-align: left">合同表</i>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">用餐单位</a></li>
+                                <li class="active">合同表</li>
+
+                        </ul>
+
+                        <ul class="top_search">
+                            <div class="container-fluid">
+
+                                    <div class="span12">
+                                     <div class="row-fluid">
+                                         <form class="">
+                                             按公司名称查询： <input  class="input-medium search-query" id="dcnamesearch" type="text" />
+                                             &nbsp;&nbsp;&nbsp;<button  id="search" class="btn btn-primary" type="button">查询</button>
+                                             <!--<button class=" btn-mini btn_search" type="button">查询</button>-->
+                                         </form>
+                                         <div id="searchtable" >
+                                             <table  class="table_shadow table table-bordered table-striped table-hover ">
+                                                 <caption>团餐机构列表 </caption>
+                                                 <thead>
+                                                 <tr>
+                                                     <th scope="">序号</th>
+                                                     <th  scope="">公司名称</th>
+                                                     <th scope="">联系人</th>
+                                                     <th scope="">状态</th>
+                                                     <th scope="">地址</th>
+                                                     <th scope="">操作</th>
+                                                 </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                 <tr th:each="dc,stat : ${page.list}" th:if="${not #lists.isEmpty(page.list)}">
+                                                     <td th:text="${stat.count+(pageNum-1)*10}"></td>
+                                                     <td class="zt"><a style="color:rgb(25,166,255);" th:text=" ${dc.deliveringCompanyName}" th:href="@{'/deliveringCompany/dc_details/'+${dc.deliveringCompanyNo} }"></a></td>
+                                                     <td th:text="${dc.deliveringCompanyContact}">公司联系人</td>
+                                                     <td th:text="${dc.deliveringCompanyAddress}">地址</td>
+                                                     <td >
+                                                         <i th:text="待审核" class="text-danger" th:if="${dc?.deliveringCompanyStatus==2}"></i>
+                                                         <i th:text="审核通过" class="text-success" th:if="${dc?.deliveringCompanyStatus==3}"></i>
+                                                         <i th:text="待完善信息" class="text-info" th:if="${dc?.deliveringCompanyStatus==1}"></i>
+                                                         <i th:text="已停用"  class="text-muted" th:if="${dc?.deliveringCompanyStatus==0}"></i>
+
+                                                     </td>
+                                                     <td>
+                                                         <a class="btn btn-xs btn-primary" th:onclick="'select('+${dc.deliveringCompanyNo}+',\''+${dc.deliveringCompanyName}+'\')'"  ><i class="fa fa-edit "></i>&nbsp;选择&nbsp;</a>
+                                                     </td>
+                                                 </tr>
+                                                 </tbody>
+                                             </table>
+                                             <ul class=" pagination pagination-lg pull-right">
+
+                                                 <li data-th-classappend="*{isFirstPage} ? 'disabled' : ''">
+                                                     <a href="javascript:void(0);" th:if="*{isFirstPage eq true}">&laquo;</a>
+                                                     <a href="javascript:void(0);" th:onclick="'Page('+${pageNum-1}+')'" th:if="*{isFirstPage eq false}">&laquo;</a>
+
+                                                 </li>
+                                                 <li  data-th-classappend="${pageNum eq pageNum} ? 'active' : ''">
+                                                     <a  href="javascript:void(0);">
+                                                         <span th:text="${pageNum}"></span>
+                                                     </a>
+                                                 </li>
+                                                 <li  data-th-classappend="*{isLastPage} ? 'disabled' : ''">
+                                                     <a href="javascript:void(0);" th:if="*{isLastPage}">&raquo;</a>
+                                                     <a href="javascript:void(0);" th:onclick="'Page('+${pageNum+1}+')'" th:if="*{!isLastPage}">&raquo;</a>
+                                                 </li>
+
+                                             </ul>
+                                         </div>
+                                        <br>
+
+                                     </div>
+                                    </div>
+                            </div>
+                        </ul>
+                        <hr>
+                        <ul class="top_search">
+                            <div class="container-fluid">
+
+                                <div class="span12">
+                                    <div class="row-fluid">
+                                        <form class="form-horizontal" role="form" id="savecontract" action="/groupMealContract/save" type="post">
+                                        <div class="col-lg-6">
+                                            <input type="hidden" name="deliveringCompanyNo" id="dcno" th:value="${dm?.deliveringMasterId}">
+
+                                            <br>
+                                           <div class="row">
+                                               <label  class="col-sm-2 control-label">团餐公司名称 ：</label>
+                                               <div class="col-lg-2">
+                                                   <span class="form-control-static" th:text="${dm?.groupMealUnit?.groupMealUnitName}" id="dcname"></span>
+                                               </div>
+                                           </div>
+                                           <br>
+                                           <div class="row">
+                                               <label  class="col-sm-2 control-label">餐标名称 ：</label>
+                                               <div class="col-lg-2">
+                                                   <select  id="dcdining" name="standard.standardId">
+                                                       <option>请选择公司</option>
+                                                   </select>
+                                               </div>
+                                           </div>
+                                            <br>
+                                           <div class="row">
+
+                                            <label class="col-sm-2 control-label">荤菜个数 ：</label>
+                                            <div class="col-lg-2">
+                                                <span class="form-control-static" th:text="${dm?.groupMealUnit?.groupMealUnitName}" id="dcmealnum"></span>
+
+                                            </div>
+                                            </div>
+                                            <br>
+                                           <div class="row">
+
+                                                <label  class="col-sm-2 control-label">素菜个数 ：</label>
+                                                <div class="col-lg-2">
+                                                    <span class="form-control-static" th:text="${dm?.groupMealUnit?.groupMealUnitName}" id="dcvegenum"></span>
+
+                                                </div>
+                                            </div>
+
+                                            <br>
+                                            <div class="row">
+                                                <label for="lastname" class="col-sm-2 control-label">是否赠送汤菜 ：</label>
+                                                <div class="col-lg-2">
+                                                    <span class="form-control-static" id="freesoup"></span>
+
+                                                </div>
+
+                                            </div>
+                                           <BR>
+                                           <div class="row">
+                                               <label for="lastname" class="col-sm-2 control-label">是否赠送糕点 ：</label>
+                                               <div class="col-lg-2">
+                                                   <span class="form-control-static" id="freedessert"></span>
+
+
+                                               </div>
+                                           </div>
+                                            <br>
+                                            <div class="row">
+                                                <label for="lastname" class="col-sm-2 control-label">是否赠送水果 ：</label>
+                                                <div class="col-lg-2">
+                                                    <span class="form-control-static" id="freefruit"></span>
+
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <div class="row">
+
+                                                <label for="lastname" class="col-sm-2 control-label">单价 ：</label>
+                                                <div class="col-lg-2">
+                                                    <input type="text" name=""  id="price"></input>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <br>
+
+                             </div>
+                                <div class="col-lg-6">
+                                        <br>
+                                        <div class="row">
+                                            <label for="lastname" class="col-sm-2 control-label">用餐公司名称 ：</label>
+                                            <div class="col-lg-2">
+                                                <span class="form-control-static" th:text="${dm?.groupMealUnit?.groupMealUnitName}" id="firstname"></span>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+
+                                            <label for="lastname" class="col-sm-2 control-label">合同名称 ：</label>
+                                            <div class="col-lg-2">
+                                                <input type="text" name="gMlContractName" th:value="${#dates.format(dm?.deliveringMasterDelivedate,'yyyy-MM-dd HH:mm:ss')}" class="form-control " id="lastname" placeholder="无">
+                                            </div>
+                                        </div>
+                                            <br>
+                                        <div class="row">
+
+                                            <label for="lastname" class="col-sm-2 control-label">合同期限 ：</label>
+                                            <div class="col-lg-2">
+                                                <input type="text" name="datenum" class="form-control " id="lastname" placeholder="无">
+
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <input type="hidden" name="monthoryear"  class="form-control " id="monthoryear">
+                                                <div class="btn-toolbar" role="toolbar" >
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btnselect" th:text="月" lang="0" data-th-classappend="${dm?.deliveringMasterIsEmergency==0?'btn-success':'btn-default'}">否</button>
+                                                        <button type="button" class="btn btnselect" th:text="年" lang="1" data-th-classappend="${dm?.deliveringMasterIsEmergency==1?'btn-success':'btn-default'}">是</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <label for="lastname" class="col-sm-2 control-label">荤菜数量 ：</label>
+                                                    <div class="col-lg-2">
+                                                        <input type="text" name="gMContractMeatnumber" th:value="${1}" class="form-control" id="lastname" placeholder="无">
+                                                    </div>
+
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <label for="lastname" class="col-sm-2 control-label">素菜数量 ：</label>
+                                                    <div class="col-lg-2">
+                                                        <input type="text" name="gMlContractVegetablenumber" th:value="${1}" class="form-control" id="lastname" placeholder="无">
+
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <label for="lastname" class="col-sm-2 control-label">甲方签名 ：</label>
+                                                    <div class="col-lg-2">
+                                                        <input type="text" name="gMlContractGroupA" th:value="${#dates.format(dm?.deliveringMasterDelivedate,'yyyy-MM-dd HH:mm:ss')}" class="form-control" id="lastname" placeholder="无">
+                                                    </div>
+
+                                                </div>
+                                                <br>
+                                                <div class="row">
+
+                                                    <label for="lastname" class="col-sm-2 control-label">合同描述 ：</label>
+                                                    <div class="col-lg-2">
+                                                        <textarea  name="gMlContractDisc" rows="5" cols="40" style="resize: none"  th:text="${dm?.deliveringMasterMemo}"></textarea>
+                                                    </div>
+
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-sm-offset-2 col-lg-4">
+                                                        <input type="submit" class="btn btn-primary" value="提交">
+                                                        &nbsp;&nbsp;
+                                                        <a id="back" href="javascript:void(0);" class="btn btn-primary ">&nbsp;返回&nbsp;</a>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                        <div class="text_data">
+
+
+
+                               <div id="succAlert" hidden class="alert alert-success">
+                                   <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                   <strong>提交成功！</strong>。
+                               </div>
+                               <div id="warnAlert" hidden="" class="alert alert-warning">
+                                   <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                   <strong>错误！</strong>您的网络连接有问题。
+                               </div>
+
+                            </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+        <!--<div class="foot_div">-->
+            <!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
+
+        <!--</div>-->
+        <!--隐藏框-->
+
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <!--<script src="/assets/js/jquery-1.10.2.js"></script>-->
+    <script src="/webjars/jquery/3.3.0/jquery.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!--<script src="/webjars/bootstrap/4.1.1/js/bootstrap.js"></script>-->
+    <!-- Metis Menu Js -->
+    <script src="/assets/js/jquery.metisMenu.js"></script>
+
+	
+    <!-- Custom Js -->
+    <script src="/assets/js/custom-scripts.js"></script>
+    <script type="text/javascript">
+
+        function Page(pagenum) {
+
+            $.ajax({
+                url:"/groupMealContract/yes_list/"+pagenum,
+                type:"POST",
+                data:{},
+                success:function (data) {
+                    $('#searchtable').html(data);
+                },
+                error:function (error) {
+                    alert(error);
+                }
+            });
+        }
+        var dinings;
+        function select(dcno,dcname) {
+            $('#dcdining').find("option").remove();
+            $.ajax({
+                url:"/groupMealContract/getdining",
+                type:"POST",
+                data:{
+                    'dcno':dcno,
+                },
+                success:function (data) {
+                    console.log(">>>"+data.length);
+                    dinings=new Array(data.length);
+                    $.each(data,function (i,e) {
+                        $('#dcdining').append("<option value='"+e.standardId+"'>"+e.standardName+"</option>");
+                        dinings[i]=e;
+                       if(i==0){
+
+                           $('#dcname').text(dcname);
+                           $('#dcmealnum').text(e.standardMeatnumber);
+                           $('#dcvegenum').text(e.standardVegetablenumber);
+                           $('#freesoup').text((e.standardIsFreeSoup==0)?'否':'是');
+                           $('#freedessert').text((e.standardIsFreeDessert==0)?'否':'是');
+                           $('#freefruit').text((e.standardIsFreeFruit==0)?'否':'是');
+                           $('#price').val(e.standardPrice);
+
+                       }
+                    });
+                },
+                error:function (error) {
+                    alert("error");
+                }
+            });
+        };
+        $('#dcdining').change(function () {
+         var index=document.getElementById("dcdining").selectedIndex;
+         alert(index);
+         console.log(dinings[index]);
+            $('#dcmealnum').text(dinings[index].standardMeatnumber);
+            $('#dcvegenum').text(dinings[index].standardVegetablenumber);
+            $('#freesoup').text((dinings[index].standardIsFreeSoup==0)?'否':'是');
+            $('#freedessert').text((dinings[index].standardIsFreeDessert==0)?'否':'是');
+            $('#freefruit').text((dinings[index].standardIsFreeFruit==0)?'否':'是');
+            $('#price').val(dinings[index].standardPrice);
+        });
+        $('.btnselect').click(function () {
+            var check=$(this).hasClass("btn-success");
+            if (check){
+                $(this).removeClass("btn-success");
+                $(this).addClass("btn-default");
+                $(this).siblings('button').addClass("btn-success");
+            }else {
+                $(this).removeClass("btn-default");
+                $(this).addClass("btn-success");
+                $(this).siblings('button').removeClass("btn-success");
+            }
+            $("#monthoryear").val($(this).attr("lang"));
+        });
+        $("#back").click(function () {
+            history.back();
+        });
+    </script>
+
+</body>
+
+</html>

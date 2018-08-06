@@ -19,6 +19,9 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
+/**
+ * @author xiao
+ */
 @Controller
 @Slf4j
 @RequestMapping("/complaint")
@@ -49,7 +52,7 @@ public class ComplaintController {
             pageNum=1;
         }
         Page<Object> page = PageHelper.startPage(pageNum, 9);
-        List<Complaint> complaints = complaintService.selectAllByManagerId(null);
+        List<Complaint> complaints = complaintService.selectNULL();
         PageInfo<Complaint> pageInfo = new PageInfo<Complaint>(complaints);
 
         log.info(JsonUtil.toJson(page.getResult()));

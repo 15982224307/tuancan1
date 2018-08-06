@@ -434,7 +434,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel1">
+                    <h4 class="modal-title" id="warnlabel">
                         友情提示！不能为空
                     </h4>
                 </div>
@@ -457,7 +457,7 @@
         /*搜索*/
         $('#search').click(function () {
 
-            var typename=$("#typename").val();
+            var typename=$.trim($("#typename").val());
             if(typename==null||typename==""){
                 $('#warning').modal('show');
                 return;
@@ -521,10 +521,14 @@
                 $('#typeId').val('');
                 $('#modal_name').val('');
                 $('#modal_desc').val('');
-            })
+            });
+            $('#warning').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                $("#warnlabel").text("友情提示！不能为空");
+            });
             $('#confirm_commit').click(function () {
-                var name=$('#modal_name').val();
-                if (name==""){
+                var name=$.trim($('#modal_name').val());
+                if (name==""||name==null){
                     $('#warning').modal('show');
                     return;
                 }
@@ -535,12 +539,16 @@
                     type:"POST",
                     data:savedata,
                     error:function (error) {
-                        alert("网络错误");
+                      //  alert("网络错误");
+                        $("#warnlabel").text("糟糕！网络错误");
+                        $('#warning').modal('show');
                     },
                     success:function (result) {
                         //alert("ok");
-                        $('#search').click();
+                       // $('#search').click();
                         $('#myModal').modal('hide');
+                        $("#warnlabel").text("成功");
+                        $('#warning').modal('show');
                         // location.reload();
 
                     }

@@ -29,7 +29,7 @@ public class GroupMealContractServiceimplTest {
 
     @Test
     public void selectAll() throws Exception {
-        List<GroupMealContract> groupMealContracts = service.selectAll();
+        List<GroupMealContract> groupMealContracts = service.findAll();
         System.out.println(JsonUtil.toJson(groupMealContracts));
     }
 
