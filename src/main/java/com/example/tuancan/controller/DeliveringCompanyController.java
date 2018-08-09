@@ -1,6 +1,7 @@
 package com.example.tuancan.controller;
 
 import com.example.tuancan.enums.StatusEnum;
+import com.example.tuancan.model.CompanyGrade;
 import com.example.tuancan.model.DeliveringCompany;
 import com.example.tuancan.service.DeliveringCompanyService;
 import com.example.tuancan.utils.JsonUtil;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -139,4 +141,38 @@ public class DeliveringCompanyController {
         }
         return "/manager/dc_list :: #searchtable";
     }
+
+    /*机构信息*/
+    @RequestMapping("info")
+    public String info(Model model, HttpServletRequest httpServletRequest){
+
+        Integer companyId = (Integer) httpServletRequest.getSession().getAttribute("companyId");
+        DeliveringCompany company = deliveringCompanyService.selectByIdWithGrade(companyId);
+        model.addAttribute("company",company);
+
+//        System.out.println(JsonUtil.toJson(model));
+        return "/groupmanager/updatecompany";
+    }
+
+
+    /*更新信息*/
+    @RequestMapping("updatecompany")
+    public String updateInfo( DeliveringCompany company, HttpServletRequest httpServletRequest){
+
+        Integer companyId = (Integer) httpServletRequest.getSession().getAttribute("companyId");
+        DeliveringCompany deliveringCompany = deliveringCompanyService.selectByIdWithGrade(companyId);
+
+        if(StringUtils.isEmpty(company.getDeliveringCompanyLicense())){
+            company.setDeliveringCompanyLicense(deliveringCompany.getDeliveringCompanyLicense());
+        }
+
+        CompanyGrade companyGrade = deliveringCompany.getCompanyGrade();
+        company.setCompanyGrade(companyGrade);
+        company.setDeliveringCompanyNo(companyId);
+        deliveringCompanyService.updateOne(company);
+
+//        System.out.println(JsonUtil.toJson(company));
+        return "redirect:/groupmanager/updatecompany";
+    }
+
 }

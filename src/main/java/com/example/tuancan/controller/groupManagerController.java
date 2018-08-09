@@ -2,6 +2,7 @@ package com.example.tuancan.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/groupmanager")
@@ -59,4 +60,14 @@ public class groupManagerController {
         return "redirect:/settledelivering/all";
     }
 
+    /*投诉页面*/
+    @RequestMapping("/complaint")
+    public String complaint(){
+        return "redirect:/complaint/new";
+    }
+    /*完善公司信息页面*/
+    @RequestMapping("/updatecompany")
+    public String updateCompany(){
+        return "redirect:/deliveringCompany/info";
+    }
 }

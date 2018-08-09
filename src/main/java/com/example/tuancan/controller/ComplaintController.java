@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -125,6 +126,32 @@ public class ComplaintController {
             return "/manager/cp_list";
         }
         return "/manager/cp_list :: #searchtable";
+    }
+
+    /*主页*/
+    @RequestMapping("/new")
+    public String newComplaint() {
+
+
+        return "/groupmanager/complaint";
+    }
+
+    /*新建*/
+    @ResponseBody
+    @RequestMapping("/creat")
+    public String creatComplaint(@RequestParam("text") String text, @RequestParam("name") String name) {
+        log.info("text:" + text + " name:" + name);
+
+        Complaint complaint = new Complaint();
+        complaint.setComplainter(name);
+        complaint.setComplaintContent(text);
+        Date date = new Date();
+        complaint.setComplaintDate(date);
+
+        complaintService.insertOne(complaint);
+//        System.out.println(JsonUtil.toJson(complaint));
+        return "SUCCESS";
+
     }
 
 }

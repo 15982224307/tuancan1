@@ -43,7 +43,7 @@ public class DeliveringCompanyStaffControl {
         List<DeliveringCompanyStaff> deliveringCompanyStaffs = deliveringCompanyStaffService.selecyStaffByLikeName(id, name);
 
         model.addAttribute("staff_list",deliveringCompanyStaffs);
-       // return "/groupmanager/companystaff_list";
+        // return "/groupmanager/companystaff_list";
         return  "/groupmanager/companystaff_list :: #table_staff";
     }
     /*添加员工*/

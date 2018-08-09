@@ -9,11 +9,17 @@
     <link href="/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FontAwesome Styles-->
     <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+    <link href="/assets/css/zTreeStyle/metroStyle.css" rel="stylesheet">
     <!-- Custom Styles-->
     <link href="/assets/css/custom-styles.css" rel="stylesheet"/>
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
-
+    <style>
+        .table > tbody > tr > td {
+            border: 0px;
+        }
+    </style>
 </head>
 
 <body>
@@ -270,7 +276,6 @@
                         <li>
                             <a href="/groupmanager/historydelivering">查询配送单</a>
                         </li>
-
                         <li>
                             <a href="/groupmanager/settledelivering">结算配送单</a>
                         </li>
@@ -279,24 +284,24 @@
                 <!--食谱与餐标-->
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> 食谱与餐标<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <ul class="nav nav-second-level collapse ">
                         <li>
                             <a href="/groupmanager/recipe">定义食谱</a>
                         </li>
                         <li>
-                            <a href="/groupmanager/standard">定义餐标</a>
+                            <a href="/groupmanager/standard" >定义餐标</a>
                         </li>
                     </ul>
                 </li>
                 <!--管理与授权 -->
                 <li>
-                    <a href="" class="active-menu"><i class="fa fa-qrcode"></i> 管理与授权</a>
+                    <a href="/companystaff/manager "><i class="fa fa-qrcode"></i> 管理与授权</a>
                 </li>
 
                 <!--其他操作-->
                 <li>
                     <a href="#" active-menu><i class="fa fa-table"></i> 其他操作<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <ul class="nav nav-second-level collapse in" aria-expanded="true">
                         <li>
                             <a href="#">确认合同</a>
                         </li>
@@ -304,7 +309,7 @@
                             <a href="/groupmanager/complaint">平台投诉</a>
                         </li>
                         <li>
-                            <a href="/groupmanager/updatecompany">完善基本信息</a>
+                            <a href="#" class="active-menu">完善基本信息</a>
                         </li>
                     </ul>
                 </li>
@@ -314,7 +319,7 @@
         </div>
 
     </nav>
-    <!-- /. NAV SIDE  -->
+    <!--&lt;!&ndash; /. NAV SIDE  &ndash;&gt;-->
 
 
     <div id="page-wrapper">
@@ -324,251 +329,128 @@
 
 
                     <ul class="breadcrumb">
-                        <i style="text-align: left">员工列表</i>
+                        <i style="text-align: left">完善信息</i>
                         <li><a href="/groupmanager/index">首页</a></li>
-                        <li class="active">管理与授权</li>
+                        <li class="active">其他操作</li>
+                        <li class="active">完善基本信息</li>
 
                     </ul>
-
                     <ul class="top_search">
 
-
                         <div class="container-fluid">
-
-
                             <div class="span12">
                                 <div class="row-fluid">
-                                    <form class="">
-                                        按账号 <span class="text-info">(手机号)</span> 查询： <input id="search_input"
-                                                                                            class="input-medium search-query"
-                                                                                            type="text"/>
-                                        <button id="search_name" class=" btn-mini btn_search" type="button">查询</button>
-                                        <button data-toggle="modal" data-target="#myModal" id="add_staff"
-                                                class=" btn-mini btn_search" type="button">添加
-                                        </button>
+
+                                    <form class="form-horizontal"  id="form" action="/deliveringCompany/updatecompany" >
+                                        <input  hidden="hidden" name="deliveringCompanyStatus"  th:value="${company.deliveringCompanyStatus}">
+                                        <br>
+                                        <div class="row">
+                                            <label for="firstname" class="col-sm-2 control-label">公司名称 ：</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" name="deliveringCompanyName" class="form-control" id="firstname" th:value="${company.deliveringCompanyName}">
+                                            </div>
+
+                                            <label for="lastname" class="col-sm-2 control-label">开户行 ：</label>
+                                            <div class="col-lg-3">
+                                                <select name="deliveringCompanyBank" class="form-control">
+                                                    <option selected style="display: none"
+                                                            th:value="${company.deliveringCompanyBank}" th:if="${company.deliveringCompanyBank} == 中国银行" th:text="中国银行"></option>
+                                                    <option selected style="display: none"
+                                                            th:value="${company.deliveringCompanyBank}" th:if="${company.deliveringCompanyBank} == 建设银行" th:text="建设银行"></option>
+                                                    <option selected style="display: none"
+                                                            th:value="${company.deliveringCompanyBank}" th:if="${company.deliveringCompanyBank} == 农业银行" th:text="农业银行"></option>
+                                                    <option selected style="display: none"
+                                                            th:value="${company.deliveringCompanyBank}" th:if="${company.deliveringCompanyBank} == XX银行" th:text="XX银行"></option>
+                                                    <option value="中国银行" >中国银行</option>
+                                                    <option value="建设银行" >建设银行</option>
+                                                    <option value="农业银行" >农业银行</option>
+                                                    <option value="XX银行" >XX银行</option>
+                                                    <option value="XX银行" >XX银行</option>
+                                                    <option value="XX银行" >XX银行</option>
+                                                    <option value="XX银行" >XX银行</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+
+
+                                        <div class="row">
+                                            <label for="lastname" class="col-sm-2 control-label">公司联系人 ：</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" name="deliveringCompanyContact"class="form-control" th:value="${company.deliveringCompanyContact}">
+                                            </div>
+
+                                            <label for="lastname" class="col-sm-2 control-label">开户账号 ：</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" name="deliveringCompanyAccount" class="form-control"  th:value="${company.deliveringCompanyAccount}">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <label for="lastname" class="col-sm-2 control-label">联系方式（手机）：</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" name="deliveringCompanyMobile" class="form-control"  th:value="${company.deliveringCompanyMobile}">
+                                            </div>
+
+                                            <label for="lastname" class="col-sm-2 control-label">办公电话 ：</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" name="deliveringCompanyTel" class="form-control" th:value="${company.deliveringCompanyTel}">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <label for="lastname" class="col-sm-2 control-label">地址 ：</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" name="deliveringCompanyAddress"  class="form-control" id="lastname" th:value="${company.deliveringCompanyAddress}">
+                                            </div>
+
+                                            <label for="lastname" class="col-sm-2 control-label">营业执照 ：</label>
+                                            <div class="col-lg-3">
+                                                <input name="deliveringCompanyLicense" type="file" id="inputfile">
+                                                <br>
+                                                <span style="color: #6149ff" th:text="'已有数据：'+ ${company.deliveringCompanyLicense} + '&nbsp;&nbsp;&nbsp;&nbsp;(重新选择进行修改)'" ></span>
+                                            </div>
+
+
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="row">
+
+
+                                            <label for="lastname" class="col-sm-2 control-label">公司简介 ：</label>
+                                            <div class="col-lg-3">
+                                                <textarea style="resize: none" name="deliveringCompanyDisc" rows="3" cols="80"   th:text="${company.deliveringCompanyDisc}"></textarea>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div class="row pull-right">
+                                            <button type="button" id="Sub" class="btn btn-info pull-right" onclick="sub()">确认</button>
+
+                                        </div>
+                                        <br>
+
                                     </form>
+
+
                                 </div>
                             </div>
                         </div>
+
+
                     </ul>
-
-
-                    <div class="text_data ">
-
-                        <table id="table_staff" class="table table-hover  table-striped table-bordered table_shadow">
-
-                            <thead>
-                            <tr>
-                                <th>编号</th>
-                                <th>账号</th>
-                                <th>手机号</th>
-                                <th>职务</th>
-                                <th>默认</th>
-                                <th>状态</th>
-                                <th>创建日期</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-
-                            <tr th:each="staff,count:${staff_list}">
-                                <td th:text="${count.count}"></td>
-                                <td class="login_name" th:text="${staff.dCompanyStaffLoginname}"></td>
-                                <td th:text="${staff.dCompanyStaffMobile}"></td>
-                                <td th:text="${staff.dCompanyStaffPosition}"></td>
-                                <td th:text="${staff.dCompanyStaffAuthority}" id="staff_authority" hidden="hidden"></td>
-                                <td>
-                                    <span th:if="${staff.dCompanyStaffDefault} == 0" class="text-danger">否</span>
-                                    <span th:if="${staff.dCompanyStaffDefault} == 1" class="text-primary">是</span>
-                                </td>
-                                <td>
-                                    <a  th:href="@{'/companystaff/updatestatus?name=' + ${staff.dCompanyStaffLoginname}+'&id=' + ${staff.deliveringCompany.deliveringCompanyNo} }" th:if="${staff.dCompanyStaffStatus} == 0" class="text-danger">已停用</a>
-                                    <a th:href="@{'/companystaff/updatestatus?name=' + ${staff.dCompanyStaffLoginname}+'&id=' + ${staff.deliveringCompany.deliveringCompanyNo} }"  th:if="${staff.dCompanyStaffStatus} == 1" class="text-success">启用</a>
-
-                                </td>
-                                <td th:text="${#dates.format(staff.dCompanyStaffCreatedate,'yyyy-MM-dd &nbsp;&nbsp;  HH:mm:ss')}">
-                                </td>
-                                <td>
-
-                                    <button data-toggle="modal"  id="author_staff"
-                                            class="btn btn-info btn-xs staff_autor"  type="button"
-                                    th:onclick="'getMessage('+ this +')'">授权
-
-                                    </button>
-
-                                </td>
-                            </tr>
-
-
-                            </tbody>
-                        </table>
-
-
-                        <ul class=" pagination pagination-lg pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#" >1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-
-                    </div>
                 </div>
-            </div>
-
-
+             </div>
         </div>
-        <!-- /. PAGE INNER  -->
+    <!-- /. PAGE INNER  -->
     </div>
-    <!-- /. PAGE WRAPPER  -->
-    <!--<div class="foot_div">-->
-    <!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
 
-    <!--</div>-->
+<!-- /. PAGE WRAPPER  -->
+<!--<div class="foot_div">-->
+<!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
 
-</div>
-
-<!--添加员工的表单页面-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    添加员工
-                </h4>
-            </div>
-            <div class="modal-body">
-
-                <form role="form">
-                    <div class="form-group">
-                        <label>账号</label>
-                        <input id="staff_name" type="text" class="form-control " placeholder="员工手机号作为账号">
-                    </div>
-                    <label>职务</label>
-                    <div>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked>
-                            选项 1
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 选项 2
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 选项 3
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 选项 4
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 选项 5
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 选项 6
-                        </label>
-
-                        </label>
-                    </div>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                </button>
-                <button id="staff_submit" type="button" class="btn btn-primary">
-                    提交
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-
-
-<div class="modal fade" id="author" tabindex="-1" role="dialog" aria-labelledby="authorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="authorModalLabel">
-                    员工授权
-                </h4>
-            </div>
-            <div class="modal-body">
-
-                <form role="form">
-                    <div class="form-group">
-                        <label>账号</label>
-                        <input id="sta_name" type="text" class="form-control" disabled placeholder="员工手机号作为账号">
-                    </div>
-                    <label>权限</label>
-                    <div>
-                        <label class="checkbox-inline">
-                            <input name="auth" type="checkbox"  id="inlineCheckbox1" value="厨师"> 厨师
-                        </label>
-                        <label class="checkbox-inline">
-                            <input  name="auth" type="checkbox" id="inlineCheckbox2" value="员工"> 员工
-                        </label>
-                        <label class="checkbox-inline">
-                            <input  name="auth" type="checkbox" id="inlineCheckbox3" value="option3"> 选项 3
-                        </label>
-                        <label class="checkbox-inline">
-                            <input  name="auth" type="checkbox" id="inlineCheckbox2" value="option2"> 选项 2
-                        </label>
-                        <label class="checkbox-inline">
-                            <input  name="auth" type="checkbox" id="inlineCheckbox3" value="option3"> 选项 3
-                        </label>
-                        <label class="checkbox-inline">
-                            <input  name="auth"  type="checkbox" id="inlineCheckbox2" value="option2"> 选项 2
-                        </label>
-                        <label class="checkbox-inline">
-                            <input  name="auth" type="checkbox" id="inlineCheckbox3" value="option3"> 选项 3
-                        </label>
-                    </div>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                </button>
-                <button id="author_submit" type="button" class="btn btn-primary">
-                    提交
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-
-<!--提示框-->
-<div class="modal fade" id="status_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="message">
-                    <span class="glyphicon glyphicon-exclamation-sign"></span>提示
-                </h4>
-            </div>
-            <div class="modal-body text-danger">
-                你是否要停用此账号!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                </button>
-                <button type="button" class="btn btn-primary">
-                    确认
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
 </div>
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
@@ -586,118 +468,10 @@
 
 <script th:inline="javascript">
 
-    //    /*授权表单回显*/
-    function getMessage(obj){
-
-        var name =$(obj).parent().siblings().eq(1);
-        $("#sta_name").val(name.text());
-
-        var text = $(obj).parent().siblings().eq(4).text();
-        var $au = text.split(",");
-        for (i=0;i < $au.length;i ++){
-            $("input:checkbox[value='"+$au[i]+"']").prop('checked',true);
-        }
-        $('#author').modal('show');
+    function sub() {
+        $("#form").submit();
+        alert("修改成功!");
     }
-    //        ajax查询staff
-    $(function () {
-        $("#search_name").click(function () {
-            var name = $("#search_input").val();
-            var id = [[${session.companyId}]];
-            $.ajax({
-                url: "/companystaff/search",
-                type: "POST",
-                data: {"id": id, "name": name},
-                success: function (result) {
-                    $("#table_staff").html(result);
-                },
-                error: function (result) {
-                    alert("搜索失败!");
-                }
-            });
-        });
-    });
-
-    /*提交添加员工*/
-    $(function () {
-        $("#staff_submit").click(function () {
-            var name = $("#staff_name").val();
-            if(name == null||name ==undefined||name==""){
-                name = 0;
-            }
-            var zhiwu = $('input[name="optionsRadiosinline"]:checked').val();
-            var id = [[${session.companyId}]];
-
-            var names = [];
-            $(".login_name").each(function () {
-                names.push($(this).text());
-            });
-            if($.inArray(name,names) > -1){
-                alert("账号存在，重新输入!");
-            }else{
-                if(name == 0 ){
-                    alert("不能为空，重新输入!");
-                }else {
-                    $.ajax({
-                        url: "/companystaff/addstaff",
-                        type: "POST",
-                        data: {"name": name, "zhiwu": zhiwu, "id": id},
-                        success: function (result) {
-                            $('#myModal').modal('hide');
-                            location.reload();
-                        },
-                        error: function (result) {
-                            alert("添加失败!");
-                        }
-                    });
-                }
-            }
-        });
-
-    });
-
-
-
-
-    $(function () {
-        $('#author').on('hide.bs.modal', function () {
-            $('input[name="auth"]').each(function(){
-                $(this).prop("checked",false);
-            });
-
-        })
-    });
-
-    /*确认授权*/
-    $(function () {
-       $("#author_submit").click(function () {
-
-           var name = $("#sta_name").val();
-           var id = [[${session.companyId}]];
-           var authors = "";
-           $.each($('input:checkbox:checked'),function(){
-               authors = authors + $(this).val() +",";
-           });
-
-           $.ajax({
-               url: "/companystaff/updatestaff",
-               type: "POST",
-               data: {"name": name, "authors": authors, "id": id},
-               success: function (result) {
-                   alert("Success!");
-                   $('#author').modal('hide');
-                   location.reload();
-               },
-               error: function (result) {
-                   alert("授权失败!");
-               }
-           });
-
-//           var $btns = $(".login_name");
-       });
-    });
-
-
 </script>
 
 </body>

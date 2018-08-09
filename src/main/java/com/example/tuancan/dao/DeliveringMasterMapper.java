@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -38,6 +39,9 @@ public interface DeliveringMasterMapper extends Mapper<DeliveringMaster>{
     @Select({"select * from deliveringmaster where GroupMealUnit_id=#{unitid} and DeliveringCompany_no = #{companyid} order by DeliveringMaster_delivedate DESC"})
     public List<DeliveringMaster> selectByDeliverdate(@Param("unitid") Integer unitid,@Param("companyid")Integer companyid);
 
+    /*时间范围搜索*/
+    @Select({"select * from deliveringmaster where GroupMealUnit_id=#{unitid} and DeliveringCompany_no = #{companyid} and DeliveringMaster_delivedate > #{startTime} and DeliveringMaster_delivedate < #{endTime}"})
+    public List<DeliveringMaster> selectByUnitAndCompanyAndByDeliverdate(@Param("unitid") Integer unitid, @Param("companyid")Integer companyid, @Param("startTime") Date startTime, @Param("endTime")Date endTime);
 
     @Select({"select * from deliveringmaster where GroupMealUnit_id=#{unitid} and DeliveringCompany_no = #{companyid} order by DeliveringMaster_delivedate DESC"})
     @ResultMap(value = "selectOneById")

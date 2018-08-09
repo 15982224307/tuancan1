@@ -67,7 +67,7 @@ public class GroupMealUnitController {
         }else {
             log.info(""+unitId);
             GroupMealUnit groupMealUnit = groupMealUnitService.selectOneById(unitId);
-            model.addAttribute("unit",groupMealUnit);
+            model.addAttribute("unitVO",groupMealUnit);
             return "/manager/gmu_update";
 
         }

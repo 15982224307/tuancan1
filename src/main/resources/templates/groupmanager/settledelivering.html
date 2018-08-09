@@ -312,10 +312,10 @@
                             <a href="#">确认合同</a>
                         </li>
                         <li>
-                            <a href="#">平台投诉</a>
+                            <a href="/groupmanager/complaint">平台投诉</a>
                         </li>
                         <li>
-                            <a href="#">完善基本信息</a>
+                            <a href="/groupmanager/updatecompany">完善基本信息</a>
                         </li>
                     </ul>
                 </li>
@@ -347,24 +347,34 @@
                                 <p>公司</p>
                                 <ul class="nav nav-tabs">
                                     <li class="active">
-                                        <a  href="#index" data-toggle="tab" aria-expanded="true">首页</a>
+                                        <a  href="#index" data-toggle="tab"  class="top_tab" aria-expanded="true">首页</a>
                                     </li>
 
                                     <li th:each="unit,count:${mealUnit}" ><!--data-th-classappend="${count.count == 1}?'active':''"-->
-                                        <a th:href="'#' + ${unit.UnitName}" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true"></a>
+                                        <a th:href="'#' + ${unit.UnitName}" class="top_tab" th:text="${unit.UnitName}"  data-toggle="tab" aria-expanded="true"></a>
                                     </li>
                                 </ul>
 
                                 <div class="tab-content">
 
                                     <!--首页-->
-                                    <div class="tab-pane fade active in" id="index" style="height: 260px">
+                                    <div class="tab-pane fade active in" id="index">
                                         <p class="text-info">点击单位查看结算</p>
                                     </div>
 
+                                    <div class=" pagination pagination-lg pull-left" id="datetimepicker" style="display: none">
+                                    查询时间:&nbsp;&nbsp;&nbsp;
+                                        <input id="startTime" class="input-medium search-query" type="text"/> &nbsp;至&nbsp;&nbsp;
+                                        <input id="endTime" class="input-medium search-query" type="text"/>
+                                   </div>
+
                                     <div th:each="unit,count:${mealUnit}" class="tab-pane fade " th:id="${unit.UnitName}"> <!--data-th-classappend="${count.count == 1}?'active in':''"-->
 
-                                        <table id="table_staff" class="table table-hover  table-striped table-bordered ">
+                                        <button  id="add_staff" style="margin-top: 18px"
+                                        class=" btn-mini btn_search" type="button" th:onclick="'search('+ ${unit.unitId} +')'">确定
+                                        </button>
+
+                                        <table th:id="${'list' + unit.unitId}" class="table table-hover  table-striped table-bordered ">
 
                                             <thead>
                                             <tr>
@@ -372,6 +382,7 @@
                                                 <th>单价</th>
                                                 <th>份数</th>
                                                 <th>配送时间</th>
+                                                <th>合计</th>
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
@@ -382,22 +393,15 @@
                                                 <td th:text="${count.count}">
                                                 </td>
 
-                                                <td>
-                                                    <span th:if="${history.deliveringMasterStatus} == 0" class="text-primary">新建</span>
-                                                    <span th:if="${history.deliveringMasterStatus} == 1" class="text-info">确认</span>
-                                                    <span th:if="${history.deliveringMasterStatus} == 2" class="text-success">已支付</span>
-
+                                                <td th:text="${history.deliveringMasterPrice}">
                                                 </td>
-                                                <td>
-                                                    <span th:if="${history.deliveringMasterIsEmergency} == 0" class="text-primary">不是</span>
-                                                    <span th:if="${history.deliveringMasterIsEmergency} == 1" class="text-danger">是</span>
+                                                <td th:text="${history.deliveringMasterAmount}">
                                                 </td>
-
 
                                                 <td th:text="${#dates.format(history.deliveringMasterDelivedate,'yyyy-MM-dd &nbsp;&nbsp;')}">
                                                 </td>
-                                                <td th:text="${history.deliveringMasterCreater}"></td>
-                                                <td th:text="${history.deliveringMasterConfirmer}"></td>
+                                                <td th:text="${history.deliveringMasterPrice} * ${history.deliveringMasterAmount}">
+                                                </td>
                                                 <td>
                                                     <button data-toggle="modal"  id="author_staff"
                                                             class="btn btn-info btn-xs staff_autor"  type="button"
@@ -411,17 +415,7 @@
                                             </tbody>
                                         </table>
 
-                                     <div class=" pagination pagination-lg pull-left" id="datetimepicker">
-                                         查询时间:&nbsp;&nbsp;&nbsp;<input th:id="'startTime' + ${unit.unitId}"
-                                                   class="input-medium search-query"
-                                                   type="text"/> &nbsp;至&nbsp;&nbsp;
-                                            <input id="endTime" th:id="'endTime' + ${unit.unitId}"
-                                                   class="input-medium search-query"
-                                                   type="text"/>
-                                         <button  id="add_staff"
-                                                 class=" btn-mini btn_search" type="button" th:onclick="'search('+ ${unit.unitId} +')'">确定
-                                         </button>
-                                     </div>
+
                                         <ul class=" pagination pagination-lg pull-right">
                                             <li><a href="#">&laquo;</a></li>
                                             <li><a href="#" >1</a></li>
@@ -432,6 +426,8 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
+
+
                                 </div>
 
 
@@ -452,36 +448,6 @@
 <!--<div class="foot_div">-->
 <!--<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
 
-</div>
-
-<div class="modal fade" id="finish_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="message">
-                    <span class="glyphicon "></span>提示
-                </h4>
-            </div>
-            <div hidden="hidden" id="foodid_message"></div>
-            <div hidden="hidden" id="unitid"></div>
-            <div class="modal-body text-success" id="text_message">
-                <label>创建人</label>
-                <input id="sta_name" type="text" class="form-control"  placeholder="请输入您的名字">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                </button>
-                <button type="button" class="btn btn-primary" id="submit_Choice">
-                    确认
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
 <!-- jQuery Js -->
@@ -514,26 +480,49 @@
             pickerPosition: "bottom"
         };
 //
-        var picker1 = $('#startTime3').datetimepicker('setStartDate', '2018-01-01');
-        var picker2 = $("#endTime3").datetimepicker('setStartDate', '2018-01-01');
+        var picker1 = $('#startTime').datetimepicker('setStartDate', '2018-01-01');
+        var picker2 = $("#endTime").datetimepicker('setStartDate', '2018-01-01');
 
     });
 
     function search(id) {
 
-        var startTime = $("#startTime" + id).val();
-        var endTime = $("#endTime" + id).val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
         if($.trim(startTime) == ""){
             startTime = "2018-01-01"
         }
         if($.trim(endTime) == ""){
             endTime = "2018-12-30"
         }
-        console.log(id);
-        console.log(startTime + " - "+ endTime);
+        $.ajax({
+            type:"POST",
+            url:"/settledelivering/search",
+            data:{"id":id,"startTime1":startTime,"endTime1":endTime},
+            success:function (result) {
+                $("#table_staff").html(result);
+//                console.log(result);
+
+            },
+            error:function () {
+                alert("查询出错!");
+            }
+        });
 
 
     }
+
+    $(function () {
+        $(".top_tab").click(function () {
+            if($(this).text() == "首页"){
+                $(".pagination").hide();
+            }
+            else {
+                $(".pagination").show();
+            }
+
+        });
+    });
 </script>
 
 </body>

@@ -6,6 +6,7 @@ import com.example.tuancan.service.DeliveringMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -60,6 +61,13 @@ public class DeliveringMasterServiceImpl implements DeliveringMasterService {
     @Override
     public List<DeliveringMaster> selectByIsEmergency(DeliveringMaster deliveringMaster) {
         return deliveringMasterMapper.selectByIsEmergency(deliveringMaster);
+    }
+    /*按时间搜索*/
+
+    @Override
+    public List<DeliveringMaster> selectByUnitAndCompanyAndByDeliverdate(Integer unitid, Integer companyid, java.util.Date startTime, java.util.Date endTime) {
+        return deliveringMasterMapper.selectByUnitAndCompanyAndByDeliverdate(unitid, companyid, startTime, endTime);
+
     }
 
     /**

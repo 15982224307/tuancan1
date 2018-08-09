@@ -110,7 +110,7 @@ public class DeliveringMasterController {
         pageFun(model,deliveringMasters,"/deliveringMaster/unitlist");
 
         GroupMealUnit groupMealUnit = groupMealUnitService.selectOneById(unitID);
-        model.addAttribute("unit",groupMealUnit);
+        model.addAttribute("unitVO",groupMealUnit);
 
         return "/unitmealmanager/dm_unit_list";
     }
