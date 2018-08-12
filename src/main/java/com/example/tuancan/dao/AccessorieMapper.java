@@ -21,10 +21,17 @@ public interface AccessorieMapper extends Mapper<Accessorie> {
     })
     public Accessorie selectOneByNo(Integer id);
 
-    /*  根据食材编号查询结果*/
+    /*  根据食材编号查询结果
+    * */
     @Select("select * from accessorie where Foodmaterial_id =#{id}")
     @ResultMap(value = "getone")
     public List<Accessorie> selectOneByFoodId(Integer id);
+
+//    /*  根据食材编号查询结果
+//   * */
+//    @Select("select * from accessorie where Foodmaterial_id =#{id}")
+//    @ResultMap(value = "getone")
+//    public List<Accessorie> selectOneByFoodId(Integer id);
 
     /*  所有结果*/
     @Select("select * from accessorie ")
