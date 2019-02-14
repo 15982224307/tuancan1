@@ -8,7 +8,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan(value = "com.example.tuancan.dao")
 public class TuancanApplication {
 
-	/*哈哈哈哈哈哈*/
+//	ji
 	public static void main(String[] args) {
 		SpringApplication.run(TuancanApplication.class, args);
 	}
