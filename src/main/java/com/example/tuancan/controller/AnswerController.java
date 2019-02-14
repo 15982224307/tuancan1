@@ -53,9 +53,7 @@ public class AnswerController {
     }
 
     @RequestMapping("/groupmanager")
-    public  String getGroupManager(HttpServletRequest httpServletRequest){
-
-        httpServletRequest.getSession().setAttribute("companyId",2);
+    public  String getGroupManager(){
         return "/groupmanager/index";
     }
 
